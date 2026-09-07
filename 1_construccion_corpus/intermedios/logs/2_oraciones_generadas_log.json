@@ -1,0 +1,26 @@
+[
+  {
+    "categoria": "SAL",
+    "solicitadas": 85,
+    "obtenidas": 85,
+    "timestamp": "2026-05-14T23:43:35.345839"
+  },
+  {
+    "categoria": "EMO",
+    "solicitadas": 79,
+    "obtenidas": 79,
+    "timestamp": "2026-05-14T23:44:14.126302"
+  },
+  {
+    "categoria": "AFI",
+    "solicitadas": 91,
+    "obtenidas": 91,
+    "timestamp": "2026-05-14T23:44:40.657118"
+  },
+  {
+    "categoria": "NEG",
+    "solicitadas": 86,
+    "obtenidas": 86,
+    "timestamp": "2026-05-14T23:45:15.735093"
+  }
+]

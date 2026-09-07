@@ -1,0 +1,22 @@
+,feature,categoria,cobertura_categoria,cobertura_resto,riesgo_shortcut
+0,signo ¿,PRG,1.0,0.026,ALTO
+2,signo ?,PRG,1.0,0.026,ALTO
+5,signo ¡,EMO,0.1571,0.0377,BAJO
+10,signo !,EMO,0.1571,0.0377,BAJO
+16,enunciado de 1 palabra,PRG,0.4507,0.3522,insignificante
+20,enunciado de 1 palabra,DES,0.4225,0.357,insignificante
+17,enunciado de 1 palabra,REQUEST,0.4143,0.3585,insignificante
+19,enunciado de 1 palabra,NEG,0.4,0.3608,insignificante
+14,enunciado de 1 palabra,SAL,0.3099,0.3759,insignificante
+15,enunciado de 1 palabra,EMO,0.3,0.3774,insignificante
+18,enunciado de 1 palabra,AFI,0.2676,0.383,insignificante
+1,signo ¿,REQUEST,0.1571,0.1675,insignificante
+3,signo ?,REQUEST,0.1571,0.1675,insignificante
+8,signo ¡,DES,0.0845,0.0496,insignificante
+13,signo !,DES,0.0845,0.0496,insignificante
+6,signo ¡,REQUEST,0.0714,0.0519,insignificante
+11,signo !,REQUEST,0.0714,0.0519,insignificante
+4,signo ¡,SAL,0.0563,0.0544,insignificante
+9,signo !,SAL,0.0563,0.0544,insignificante
+7,signo ¡,NEG,0.0143,0.0613,insignificante
+12,signo !,NEG,0.0143,0.0613,insignificante

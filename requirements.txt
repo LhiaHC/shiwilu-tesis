@@ -1,0 +1,5 @@
+# Entorno completo (ambas fases).
+# Para instalar solo una fase, usar directamente requirements/fase1.txt o
+# requirements/fase2.txt.
+-r requirements/fase1.txt
+-r requirements/fase2.txt
