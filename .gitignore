@@ -1,0 +1,36 @@
+# Secretos y configuracion local
+.env
+.env.local
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+build/
+dist/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Materiales fuente de terceros (no redistribuibles)
+1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf
+
+# Salidas temporales del pipeline
+1_construccion_corpus/intermedios/_*.txt
+*.tmp
+
+# IDE y herramientas
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

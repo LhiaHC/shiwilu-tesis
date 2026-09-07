@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: >-
+  Corpus de intenciones para el shiwilu (jebero, ISO 639-3: jeb)
+message: Si usas este corpus, por favor citalo como se indica a continuacion.
+type: dataset
+authors:
+  - family-names: Hurtado Claros
+    given-names: Lhía Antonella
+    affiliation: Pontificia Universidad Católica del Perú
+abstract: >-
+  Primer corpus digital anotado de la lengua shiwilu (jebero), lengua amazonica
+  peruana en peligro critico de extincion hablada en el distrito de Jeberos,
+  Loreto. Contiene 700 pares bilingues espanol-shiwilu etiquetados con siete
+  categorias de intencion comunicativa derivadas de la taxonomia de actos
+  ilocucionarios de Searle (1975).
+keywords:
+  - shiwilu
+  - jebero
+  - lenguas amazonicas
+  - lenguas en peligro
+  - clasificacion de intenciones
+  - corpus bilingue
+  - procesamiento de lenguaje natural
+license: CC-BY-4.0
+version: "1.0.0"
+date-released: "2026-09-07"

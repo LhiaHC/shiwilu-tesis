@@ -1,0 +1,34 @@
+# Licencia de los datos
+
+El corpus (`corpus/corpus_shiwilu_final.csv`), los productos intermedios de
+`1_construccion_corpus/intermedios/` y las tablas de `2_analisis_corpus/resultados/`
+se distribuyen bajo **Creative Commons Atribucion 4.0 Internacional (CC BY 4.0)**.
+
+Texto completo de la licencia: https://creativecommons.org/licenses/by/4.0/deed.es
+
+## Atribucion
+
+Al reutilizar estos datos, citar como:
+
+> Hurtado Claros, L. A. (2026). Corpus de intenciones para el shiwilu
+> (jebero, ISO 639-3: jeb) [Conjunto de datos]. Pontificia Universidad
+> Catolica del Peru.
+
+## Excepciones
+
+Los siguientes materiales **no** estan cubiertos por esta licencia y no se
+redistribuyen en este repositorio:
+
+- `1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf` — textos narrativos de
+  terceros, excluido del control de versiones.
+- `1_construccion_corpus/datos/flashcards2.csv` — material de origen
+  comunitario. Verificar las condiciones de uso con la comunidad de Jeberos
+  antes de redistribuirlo por separado.
+
+## Nota sobre datos de lenguas indigenas
+
+Este corpus documenta una lengua en peligro critico de extincion. Se pide a
+quien lo reutilice que respete los principios CARE para la gobernanza de datos
+de pueblos indigenas (Beneficio Colectivo, Autoridad para Controlar,
+Responsabilidad, Etica) y reconozca a la comunidad shiwilu de Jeberos, Loreto,
+como origen del conocimiento lingüistico aqui recogido.

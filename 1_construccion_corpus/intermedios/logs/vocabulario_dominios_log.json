@@ -1,0 +1,14 @@
+{
+  "modelo": "claude-haiku-4-5-20251001",
+  "timestamp": "2026-05-14T10:13:04.890279",
+  "palabras_por_dominio": {
+    "D1_Naturaleza": 9,
+    "D2_Cuerpo": 7,
+    "D3_Familia": 12,
+    "D4_Alimentos": 10,
+    "D5_Lugar": 9,
+    "D6_Tiempo": 10,
+    "D7_Actividades": 25,
+    "D8_Social": 14
+  }
+}

@@ -1,0 +1,7 @@
+# Fase 2 — analisis del corpus (2_analisis_corpus/)
+# No requiere clave de API: parte del corpus ya construido en corpus/.
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+scikit-learn>=1.3.0
+jupyter>=1.0.0
