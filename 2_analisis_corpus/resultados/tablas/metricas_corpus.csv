@@ -1,0 +1,21 @@
+metrica,valor
+Total de pares,700
+Categorías de intención,7
+Pares por categoría,100
+Fuente: flashcards,359
+Fuente: api_generada,341
+Longitud media español (palabras),2.18
+Longitud media shiwilu (palabras),1.66
+Longitud media español (caracteres),13.04
+Longitud media shiwilu (caracteres),15.6
+Caracteres por palabra español,5.98
+Caracteres por palabra shiwilu,9.41
+Ratio de compresión ES:SH (palabras),1.32
+Tokens español,1525
+Tokens shiwilu,1171
+Tipos español,609
+Tipos shiwilu,675
+TTR español,0.399
+TTR shiwilu,0.576
+Traducciones shiwilu únicas,672
+Enunciados con oclusiva glotal (%),85.6%
