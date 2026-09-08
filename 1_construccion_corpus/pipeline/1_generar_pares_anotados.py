@@ -81,7 +81,7 @@ def seleccionar_100(df: pd.DataFrame) -> pd.DataFrame:
             .reset_index(drop=True))
 
 
-def crear_excel(df: pd.DataFrame):
+def crear_excel(df: pd.DataFrame): # por revisión manual
     FORZAR_REQUEST = [
         "FL2_0028","FL2_0027","FL2_0607","FL2_0606","FL2_0605",
         "FL2_0604","FL2_0603","FL2_0601","FL2_0600","FL2_0599",
