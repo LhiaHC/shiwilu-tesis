@@ -36,8 +36,17 @@ FIGURAS    = RESULTADOS / "figuras"
 # Alias historico: las etapas 0-2 escriben sus productos intermedios aqui.
 SALIDA = INTERMEDIOS
 
+# --- Fase 3: baselines de generacion espanol-shiwilu (OE2, R4) -----------
+FASE3           = RAIZ / "3_generacion_baselines"
+BASELINE1_DIR   = FASE3 / "baseline1_nmt_lora"
+BASELINE1_REPO  = BASELINE1_DIR / "tesis_spa_jeb"          # clon externo, no versionado
+BASELINE1_SALIDA = BASELINE1_DIR / "salidas"
+BASELINE2_DIR   = FASE3 / "baseline2_llm_claude"
+BASELINE2_SALIDA = BASELINE2_DIR / "salidas"
+MARCADORES_CSV  = TABLAS / "analisis_marcadores_documentados.csv"
+
 
 def preparar_directorios() -> None:
     """Crea los directorios de salida que el pipeline necesita."""
-    for d in (INTERMEDIOS, LOGS, CORPUS_DIR):
+    for d in (INTERMEDIOS, LOGS, CORPUS_DIR, BASELINE1_SALIDA, BASELINE2_SALIDA):
         d.mkdir(parents=True, exist_ok=True)

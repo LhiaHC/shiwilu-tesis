@@ -1,0 +1,11 @@
+# Fase 3 — baselines de generacion espanol-shiwilu (3_generacion_baselines/)
+# Baseline 1 (NLLB-200 + LoRA) requiere GPU para entrenar en tiempo razonable.
+# Baseline 2 (Claude few-shot) requiere ANTHROPIC_API_KEY.
+pandas>=2.0.0
+torch>=2.0.0
+transformers>=4.40.0
+peft>=0.11.0
+accelerate>=0.30.0
+sentencepiece>=0.2.0
+anthropic>=0.40.0
+python-dotenv>=1.0.0
