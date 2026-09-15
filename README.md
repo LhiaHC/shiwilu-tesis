@@ -40,6 +40,10 @@ trabajos de tesis, con el corpus como frontera explícita entre ambas.
 │   ├── notebooks/
 │   └── resultados/             tablas/ y figuras/
 │
+├── 3_generacion_baselines/   ◆ FASE 3 — baselines de generación (OE2, R4)
+│   ├── baseline1_nmt_lora/     NLLB-200 + LoRA (reentrenado, ver README)
+│   └── baseline2_llm_claude/   LLM few-shot (Claude, sin ajuste fino)
+│
 ├── docs/                     Metodología de construcción del corpus
 └── tests/                    Pruebas de las reglas de anotación
 ```
@@ -51,6 +55,7 @@ trabajos de tesis, con el corpus como frontera explícita entre ambas.
 | `1_construccion_corpus/` | `datos/`, `shiwilu/` | `intermedios/` y `corpus/` |
 | `corpus/` | — | *solo la Etapa 3 de la Fase 1* |
 | `2_analisis_corpus/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
+| `3_generacion_baselines/` | `corpus/`, `2_analisis_corpus/resultados/`, `shiwilu/` | `salidas/` de cada baseline |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
@@ -88,24 +93,27 @@ git clone <url-del-repositorio>
 cd <nombre-del-repositorio>
 
 pip install -e .                        # deja importable el paquete `shiwilu`
-pip install -r requirements.txt          # o solo requirements/fase1.txt / fase2.txt
+pip install -r requirements.txt          # o solo requirements/fase1.txt / fase2.txt / fase3.txt
 ```
 
 `pip install -e .` es opcional: los scripts y notebooks localizan la raíz del
 repositorio por su cuenta. Instalarlo hace los imports más limpios.
 
-**Solo para reproducir la Fase 1** hace falta una clave de API:
+**Para reproducir la Fase 1 o el Baseline 2 de la Fase 3** hace falta una clave de API:
 
 ```bash
 cp .env.example .env      # y colocar la clave real
 ```
 
-La Fase 2 no requiere clave: parte del corpus ya construido.
+La Fase 2 no requiere clave: parte del corpus ya construido. El Baseline 1 de
+la Fase 3 no requiere clave, pero sí GPU para reentrenar (ver su propio
+README).
 
 ## Uso
 
 - Reproducir la construcción del corpus → [`1_construccion_corpus/README.md`](1_construccion_corpus/README.md)
 - Reproducir el análisis → [`2_analisis_corpus/README.md`](2_analisis_corpus/README.md)
+- Generar traducciones con los baselines → [`3_generacion_baselines/README.md`](3_generacion_baselines/README.md)
 
 ---
 

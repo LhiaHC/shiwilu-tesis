@@ -21,6 +21,13 @@ dist/
 # Materiales fuente de terceros (no redistribuibles)
 1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf
 
+# Baseline 1: repositorio externo de F. Prado, clonado localmente (ver
+# 3_generacion_baselines/baseline1_nmt_lora/README.md) — no se vendoriza.
+3_generacion_baselines/baseline1_nmt_lora/tesis_spa_jeb/
+
+# Checkpoints y traducciones generadas por los baselines (pesados / reproducibles)
+3_generacion_baselines/*/salidas/
+
 # Salidas temporales del pipeline
 1_construccion_corpus/intermedios/_*.txt
 *.tmp

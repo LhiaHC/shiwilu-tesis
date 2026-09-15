@@ -31,6 +31,16 @@ fase2 = [
     "scikit-learn>=1.3.0",
     "jupyter>=1.0.0",
 ]
+# Fase 3 — baselines de generacion espanol-shiwilu (OE2, R4)
+fase3 = [
+    "torch>=2.0.0",
+    "transformers>=4.40.0",
+    "peft>=0.11.0",
+    "accelerate>=0.30.0",
+    "sentencepiece>=0.2.0",
+    "anthropic>=0.40.0",
+    "python-dotenv>=1.0.0",
+]
 
 [tool.setuptools]
 packages = ["shiwilu"]
