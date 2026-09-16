@@ -37,6 +37,17 @@ fase3 = [
     "matplotlib>=3.7.0",
     "sentence-transformers>=3.0.0",
 ]
+# Fase 4 — tecnicas de aumento de datos (OE2, R5/R6)
+fase4 = [
+    "numpy>=1.24.0",
+    "anthropic>=0.40.0",
+    "python-dotenv>=1.0.0",
+    "sentence-transformers>=3.0.0",
+    "sentencepiece>=0.2.0",
+    "transformers>=4.40.0",
+    "peft>=0.11.0",
+    "torch>=2.0.0",
+]
 
 [tool.setuptools]
 packages = ["shiwilu"]
