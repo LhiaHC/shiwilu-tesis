@@ -40,8 +40,14 @@ trabajos de tesis, con el corpus como frontera explícita entre ambas.
 │   ├── notebooks/
 │   └── resultados/             tablas/ y figuras/
 │
-├── 3_baseline_clasificacion/ ◆ FASE 3 — baseline de clasificación (R4)
-│   └── baseline.py             LaBSE congelado + Regresión Logística, sin aumento
+├── 3_baseline_clasificacion/ ◆ FASE 3 — baselines de clasificación (R4)
+│   ├── baseline.py             LaBSE / mBERT / XLM-R congelados + Regresión Logística
+│   └── correr_todos.py         corre los 3 y compara
+│
+├── 4_aumento_datos/          ◆ FASE 4 — técnicas de aumento de datos (R5/R6)
+│   ├── mixup.py                Interpolación de embeddings (misma categoría)
+│   ├── generate_then_refine.py Generación con LLM + filtros de calidad
+│   └── retrotraduccion.py      Helsinki-NLP + NMT de F. Prado + filtros de calidad
 │
 ├── docs/                     Metodología de construcción del corpus
 └── tests/                    Pruebas de las reglas de anotación
@@ -55,6 +61,7 @@ trabajos de tesis, con el corpus como frontera explícita entre ambas.
 | `corpus/` | — | *solo la Etapa 3 de la Fase 1* |
 | `2_analisis_corpus/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
 | `3_baseline_clasificacion/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
+| `4_aumento_datos/` | `corpus/`, `2_analisis_corpus/resultados/`, `shiwilu/` | `salidas/` únicamente |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
@@ -111,7 +118,8 @@ un minuto.
 
 - Reproducir la construcción del corpus → [`1_construccion_corpus/README.md`](1_construccion_corpus/README.md)
 - Reproducir el análisis → [`2_analisis_corpus/README.md`](2_analisis_corpus/README.md)
-- Correr el baseline de clasificación → [`3_baseline_clasificacion/README.md`](3_baseline_clasificacion/README.md)
+- Correr los baselines de clasificación → [`3_baseline_clasificacion/README.md`](3_baseline_clasificacion/README.md)
+- Generar datos aumentados → [`4_aumento_datos/README.md`](4_aumento_datos/README.md)
 
 ---
 

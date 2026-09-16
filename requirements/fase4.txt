@@ -1,0 +1,13 @@
+# Fase 4 — tecnicas de aumento de datos (4_aumento_datos/)
+# Generate-then-Refine requiere ANTHROPIC_API_KEY.
+# Retrotraduccion requiere ademas clonar y entrenar el repo de F. Prado
+# (ver 4_aumento_datos/README.md) para el checkpoint NLLB+LoRA.
+pandas>=2.0.0
+numpy>=1.24.0
+anthropic>=0.40.0
+python-dotenv>=1.0.0
+sentence-transformers>=3.0.0
+sentencepiece>=0.2.0
+transformers>=4.40.0
+peft>=0.11.0
+torch>=2.0.0

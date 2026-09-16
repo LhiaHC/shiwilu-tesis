@@ -40,8 +40,21 @@ SALIDA = INTERMEDIOS
 FASE3               = RAIZ / "3_baseline_clasificacion"
 BASELINE_RESULTADOS = FASE3 / "resultados"
 
+# --- Fase 4: tecnicas de aumento de datos (OE2, R5/R6) --------------------
+FASE4          = RAIZ / "4_aumento_datos"
+AUMENTO_SALIDA = FASE4 / "salidas"
+
+# Repo externo (F. Prado) clonado localmente para la tecnica de retrotraduccion
+# — no se vendoriza, ver 4_aumento_datos/README.md
+NMT_REPO_EXTERNO = FASE4 / "tesis_spa_jeb"
+
+MARCADORES_CSV              = TABLAS / "analisis_marcadores_documentados.csv"
+PALABRAS_CARACTERISTICAS_CSV = TABLAS / "analisis_palabras_caracteristicas.csv"
+SECUENCIAS_INICIALES_CSV    = TABLAS / "analisis_secuencias_iniciales.csv"
+SECUENCIAS_FINALES_CSV      = TABLAS / "analisis_secuencias_finales.csv"
+
 
 def preparar_directorios() -> None:
     """Crea los directorios de salida que el pipeline necesita."""
-    for d in (INTERMEDIOS, LOGS, CORPUS_DIR, BASELINE_RESULTADOS):
+    for d in (INTERMEDIOS, LOGS, CORPUS_DIR, BASELINE_RESULTADOS, AUMENTO_SALIDA):
         d.mkdir(parents=True, exist_ok=True)
