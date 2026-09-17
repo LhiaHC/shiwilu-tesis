@@ -1,0 +1,13 @@
+{
+  "modelo_embeddings": "bert-base-multilingual-cased",
+  "clasificador": "LogisticRegression",
+  "tecnica_aumento": "generate_then_refine",
+  "n_train_original": 490,
+  "n_train_aumento_aprobado": 86,
+  "n_train_aumentado": 576,
+  "n_dev": 105,
+  "n_test": 105,
+  "f1_macro": 0.7719850553951936,
+  "f1_ponderado": 0.7719850553951937,
+  "exactitud": 0.7714285714285715
+}
