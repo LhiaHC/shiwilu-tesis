@@ -19,14 +19,14 @@ dist/
 .ipynb_checkpoints/
 
 # Materiales fuente de terceros (no redistribuibles)
-1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf
+1_objetivo1_corpus/datos/II_TEXTOS_SHIWILU.pdf
 
 # Repositorio externo de F. Prado, clonado localmente para retrotraduccion
-# (ver 4_aumento_datos/README.md) — no se vendoriza.
-4_aumento_datos/tesis_spa_jeb/
+# (ver 3_baselines_y_aumento_datos/tecnicas_aumento/README.md) — no se vendoriza.
+3_baselines_y_aumento_datos/tecnicas_aumento/tesis_spa_jeb/
 
 # Salidas temporales del pipeline
-1_construccion_corpus/intermedios/_*.txt
+1_objetivo1_corpus/intermedios/_*.txt
 *.tmp
 
 # IDE y herramientas

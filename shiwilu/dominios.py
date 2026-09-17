@@ -6,7 +6,7 @@ oraciones (Etapa 2) y para clasificar cada par por campo semantico.
 
 Las listas de `semillas` se ampliaron con el vocabulario extraido de los textos
 narrativos en la Etapa 0. El resultado completo de esa extraccion vive en
-`1_construccion_corpus/intermedios/vocabulario_dominios.json`.
+`1_objetivo1_corpus/intermedios/vocabulario_dominios.json`.
 """
 
 COLOR_DOM = {

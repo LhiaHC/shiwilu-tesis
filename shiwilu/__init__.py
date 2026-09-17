@@ -1,8 +1,8 @@
 """
 Nucleo compartido del proyecto: lo que cruza la frontera entre las dos fases.
 
-La Fase 1 (`1_construccion_corpus/`) lo usa para construir el corpus; la Fase 2
-(`2_analisis_corpus/`) lo usa para analizarlo. Manteniendo la taxonomia y las
+La Fase 1 (`1_objetivo1_corpus/`) lo usa para construir el corpus; la Fase 2
+(`3_baselines_y_aumento_datos/analisis_intrinseco/`) lo usa para analizarlo. Manteniendo la taxonomia y las
 reglas de anotacion en un unico lugar se evita que ambas fases trabajen sobre
 definiciones divergentes.
 

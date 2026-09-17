@@ -17,55 +17,52 @@ digital anotado para esta lengua.
 
 ## Organización del repositorio
 
-El repositorio está organizado en **dos fases**, que corresponden a los dos
-trabajos de tesis, con el corpus como frontera explícita entre ambas.
+El repositorio está organizado por **objetivo específico de la tesis**
+(ver Entregable 1), con el corpus como frontera explícita entre la
+construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 
 ```
-├── shiwilu/                  ◆ Núcleo compartido — lo que cruza la frontera
-│   ├── taxonomia.py            Intenciones, tipos de Searle, descripciones
-│   ├── anotacion.py            Reglas de anotación (baseline de la Fase 2)
-│   ├── dominios.py             Dominios semánticos y vocabulario semilla
-│   ├── excel.py                Formato de los reportes Excel
-│   └── rutas.py                Rutas ancladas a la raíz del repositorio
+├── shiwilu/                       ◆ Núcleo compartido — lo que cruza la frontera
+│   ├── taxonomia.py                 Intenciones, tipos de Searle, descripciones
+│   ├── anotacion.py                 Reglas de anotación (baseline de OE1)
+│   ├── dominios.py                  Dominios semánticos y vocabulario semilla
+│   ├── excel.py                     Formato de los reportes Excel
+│   └── rutas.py                     Rutas ancladas a la raíz del repositorio
 │
-├── 1_construccion_corpus/    ◆ FASE 1 — construir el corpus
-│   ├── datos/                  Materiales fuente
-│   ├── pipeline/               Etapas 0 a 3
-│   └── intermedios/            Productos intermedios y logs de la API
+├── 1_objetivo1_corpus/            ◆ OE1 (R1-R3) — construir el corpus
+│   ├── datos/                       Materiales fuente
+│   ├── pipeline/                    Etapas 0 a 3
+│   └── intermedios/                 Productos intermedios y logs de la API
 │
-├── corpus/                   ★ FRONTERA — salida de la Fase 1, entrada de la Fase 2
+├── corpus/                        ★ FRONTERA — salida de OE1, entrada de OE2
 │   └── corpus_shiwilu_final.csv
 │
-├── 2_analisis_corpus/        ◆ FASE 2 — analizar el corpus
-│   ├── notebooks/
-│   └── resultados/             tablas/ y figuras/
+├── 2_baselines/                   ◆ OE2 (R4) — baselines de clasificación
+│   ├── baseline.py                  LaBSE / mBERT / XLM-R congelados + Regresión Logística
+│   └── correr_todos.py              corre los 3 y compara
 │
-├── 3_baseline_clasificacion/ ◆ FASE 3 — baselines de clasificación (R4)
-│   ├── baseline.py             LaBSE / mBERT / XLM-R congelados + Regresión Logística
-│   └── correr_todos.py         corre los 3 y compara
+├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
+│   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)
+│   └── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
 │
-├── 4_aumento_datos/          ◆ FASE 4 — técnicas de aumento de datos (R5/R6)
-│   ├── mixup.py                Interpolación de embeddings (misma categoría)
-│   ├── generate_then_refine.py Generación con LLM + filtros de calidad
-│   └── retrotraduccion.py      Helsinki-NLP + NMT de F. Prado + filtros de calidad
-│
-├── docs/                     Metodología de construcción del corpus
-└── tests/                    Pruebas de las reglas de anotación
+├── docs/                          Metodología de construcción del corpus
+└── tests/                         Pruebas de las reglas de anotación
 ```
 
 ### Quién escribe dónde
 
 | Zona | Lee de | Escribe en |
 |---|---|---|
-| `1_construccion_corpus/` | `datos/`, `shiwilu/` | `intermedios/` y `corpus/` |
-| `corpus/` | — | *solo la Etapa 3 de la Fase 1* |
-| `2_analisis_corpus/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
-| `3_baseline_clasificacion/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
-| `4_aumento_datos/` | `corpus/`, `2_analisis_corpus/resultados/`, `shiwilu/` | `salidas/` únicamente |
+| `1_objetivo1_corpus/` | `datos/`, `shiwilu/` | `intermedios/` y `corpus/` |
+| `corpus/` | — | *solo la Etapa 3 de OE1* |
+| `2_baselines/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
+| `3_baselines_y_aumento_datos/analisis_intrinseco/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
+| `3_baselines_y_aumento_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `2_baselines/`, `shiwilu/` | `salidas/` únicamente |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
-regenerar `2_analisis_corpus/resultados/` sin tocar nada más.
+regenerar `3_baselines_y_aumento_datos/analisis_intrinseco/resultados/` sin
+tocar nada más.
 
 ---
 
@@ -105,30 +102,31 @@ pip install -r requirements.txt          # o solo requirements/fase1.txt / fase2
 `pip install -e .` es opcional: los scripts y notebooks localizan la raíz del
 repositorio por su cuenta. Instalarlo hace los imports más limpios.
 
-**Solo para reproducir la Fase 1** hace falta una clave de API:
+**Solo para reproducir OE1 o Generate-then-Refine** hace falta una clave de API:
 
 ```bash
 cp .env.example .env      # y colocar la clave real
 ```
 
-Las Fases 2 y 3 no requieren clave ni GPU: la Fase 3 corre en CPU en menos de
-un minuto.
+Los baselines (OE2/R4) y el análisis intrínseco no requieren clave ni GPU —
+corren en CPU en minutos. Retrotraducción sí requiere GPU para entrenar el
+checkpoint NMT una vez (ver su propio README).
 
 ## Uso
 
-- Reproducir la construcción del corpus → [`1_construccion_corpus/README.md`](1_construccion_corpus/README.md)
-- Reproducir el análisis → [`2_analisis_corpus/README.md`](2_analisis_corpus/README.md)
-- Correr los baselines de clasificación → [`3_baseline_clasificacion/README.md`](3_baseline_clasificacion/README.md)
-- Generar datos aumentados → [`4_aumento_datos/README.md`](4_aumento_datos/README.md)
+- Reproducir la construcción del corpus (OE1) → [`1_objetivo1_corpus/README.md`](1_objetivo1_corpus/README.md)
+- Correr los baselines de clasificación (OE2/R4) → [`2_baselines/README.md`](2_baselines/README.md)
+- Reproducir el análisis intrínseco (OE2/R5) → [`3_baselines_y_aumento_datos/analisis_intrinseco/README.md`](3_baselines_y_aumento_datos/analisis_intrinseco/README.md)
+- Generar datos aumentados (OE2/R6) → [`3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](3_baselines_y_aumento_datos/tecnicas_aumento/README.md)
 
 ---
 
 ## Materiales fuente
 
-`1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf`, usado en la Etapa 0 para la
+`1_objetivo1_corpus/datos/II_TEXTOS_SHIWILU.pdf`, usado en la Etapa 0 para la
 extracción de dominios semánticos, **no se incluye** en este repositorio por
 tratarse de material de terceros. El vocabulario extraído de ese material sí está
-disponible en `1_construccion_corpus/intermedios/vocabulario_dominios.json`.
+disponible en `1_objetivo1_corpus/intermedios/vocabulario_dominios.json`.
 
 ---
 

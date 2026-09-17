@@ -1,4 +1,4 @@
-# Fase 2 — analisis del corpus (2_analisis_corpus/)
+# Fase 2 — analisis del corpus (3_baselines_y_aumento_datos/analisis_intrinseco/)
 # No requiere clave de API: parte del corpus ya construido en corpus/.
 pandas>=2.0.0
 numpy>=1.24.0
