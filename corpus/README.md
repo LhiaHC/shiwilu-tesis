@@ -2,9 +2,9 @@
 
 Esta carpeta contiene el **producto de la Fase 1** y el **insumo de la Fase 2**.
 
-> **Regla:** solo la Etapa 3 de `1_construccion_corpus/pipeline/` escribe aquí.
+> **Regla:** solo la Etapa 3 de `1_objetivo1_corpus/pipeline/` escribe aquí.
 > La Fase 2 lee este archivo pero nunca lo modifica; sus salidas van a
-> `2_analisis_corpus/resultados/`.
+> `3_baselines_y_aumento_datos/analisis_intrinseco/resultados/`.
 
 ## `corpus_shiwilu_final.csv`
 

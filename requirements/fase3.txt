@@ -1,4 +1,4 @@
-# Fase 3 — baseline de clasificacion (3_baseline_clasificacion/)
+# Fase 3 — baseline de clasificacion (2_baselines/)
 # LaBSE congelado + Regresion Logistica. No requiere GPU ni clave de API.
 pandas>=2.0.0
 scikit-learn>=1.3.0

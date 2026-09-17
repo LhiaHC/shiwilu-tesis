@@ -3,7 +3,7 @@ MIT License
 Copyright (c) 2026 Lhía Antonella Hurtado Claros
 
 Esta licencia cubre el CODIGO de este repositorio (el paquete `shiwilu/`, el
-pipeline de `1_construccion_corpus/` y los notebooks de `2_analisis_corpus/`).
+pipeline de `1_objetivo1_corpus/` y los notebooks de `3_baselines_y_aumento_datos/analisis_intrinseco/`).
 El corpus y los datos se distribuyen bajo una licencia distinta: ver
 LICENSE-DATOS.
 

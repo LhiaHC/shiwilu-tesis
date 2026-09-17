@@ -1,4 +1,4 @@
-# Fase 1 — construccion del corpus (1_construccion_corpus/)
+# Fase 1 — construccion del corpus (1_objetivo1_corpus/)
 # Las etapas 0 y 2 requieren ANTHROPIC_API_KEY; las etapas 1 y 3 no.
 anthropic>=0.40.0
 pandas>=2.0.0

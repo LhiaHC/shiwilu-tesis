@@ -1,7 +1,7 @@
 # Licencia de los datos
 
 El corpus (`corpus/corpus_shiwilu_final.csv`), los productos intermedios de
-`1_construccion_corpus/intermedios/` y las tablas de `2_analisis_corpus/resultados/`
+`1_objetivo1_corpus/intermedios/` y las tablas de `3_baselines_y_aumento_datos/analisis_intrinseco/resultados/`
 se distribuyen bajo **Creative Commons Atribucion 4.0 Internacional (CC BY 4.0)**.
 
 Texto completo de la licencia: https://creativecommons.org/licenses/by/4.0/deed.es
@@ -19,9 +19,9 @@ Al reutilizar estos datos, citar como:
 Los siguientes materiales **no** estan cubiertos por esta licencia y no se
 redistribuyen en este repositorio:
 
-- `1_construccion_corpus/datos/II_TEXTOS_SHIWILU.pdf` — textos narrativos de
+- `1_objetivo1_corpus/datos/II_TEXTOS_SHIWILU.pdf` — textos narrativos de
   terceros, excluido del control de versiones.
-- `1_construccion_corpus/datos/flashcards2.csv` — material de origen
+- `1_objetivo1_corpus/datos/flashcards2.csv` — material de origen
   comunitario. Verificar las condiciones de uso con la comunidad de Jeberos
   antes de redistribuirlo por separado.
 
