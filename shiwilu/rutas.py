@@ -64,6 +64,10 @@ PALABRAS_CARACTERISTICAS_CSV = TABLAS / "analisis_palabras_caracteristicas.csv"
 SECUENCIAS_INICIALES_CSV    = TABLAS / "analisis_secuencias_iniciales.csv"
 SECUENCIAS_FINALES_CSV      = TABLAS / "analisis_secuencias_finales.csv"
 
+# --- Objetivo 3: caracterizacion de embeddings (R7-R8) --------------------
+FASE5 = RAIZ / "4_caracterizacion_embeddings"
+CARACTERIZACION_RESULTADOS = FASE5 / "resultados"
+
 
 def preparar_directorios() -> None:
     """Crea los directorios de salida que el pipeline necesita."""
