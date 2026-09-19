@@ -68,6 +68,12 @@ SECUENCIAS_FINALES_CSV      = TABLAS / "analisis_secuencias_finales.csv"
 FASE5 = RAIZ / "4_caracterizacion_embeddings"
 CARACTERIZACION_RESULTADOS = FASE5 / "resultados"
 
+# --- Objetivo 4: sintesis comparativa final (R9) ---------------------------
+# Cruza lo extrinseco (R4-R6: F1 de clasificacion) con lo intrinseco (R7-R8:
+# calidad de agrupamiento) para identificar la "configuracion optima".
+FASE6 = RAIZ / "5_sintesis_r9"
+SINTESIS_RESULTADOS = FASE6 / "resultados"
+
 
 def preparar_directorios() -> None:
     """Crea los directorios de salida que el pipeline necesita."""
