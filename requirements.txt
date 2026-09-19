@@ -1,7 +1,9 @@
 # Entorno completo (todas las fases).
 # Para instalar solo una fase, usar directamente requirements/fase1.txt,
-# requirements/fase2.txt, requirements/fase3.txt o requirements/fase4.txt.
+# requirements/fase2.txt, requirements/fase3.txt, requirements/fase4.txt o
+# requirements/fase5.txt.
 -r requirements/fase1.txt
 -r requirements/fase2.txt
 -r requirements/fase3.txt
 -r requirements/fase4.txt
+-r requirements/fase5.txt

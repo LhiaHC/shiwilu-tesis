@@ -43,7 +43,16 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 │
 ├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
 │   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)
-│   └── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
+│   ├── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
+│   └── resumen_experimentos.py      Consolida los 12 experimentos (3 modelos x 4 config.)
+│
+├── 4_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — caracterización de embeddings
+│   └── caracterizacion.py           4 estrategias de pooling x 3 modelos, métricas
+│                                     intrínsecas (silueta, DB, CH) y proyecciones t-SNE/UMAP,
+│                                     sobre el corpus original y los aumentados por R6
+│
+├── 5_sintesis_r9/                 ◆ OE4 (R9) — síntesis comparativa final
+│   └── sintesis.py                  Cruza lo extrínseco (R4-R6) con lo intrínseco (R7-R8)
 │
 ├── docs/                          Metodología de construcción del corpus
 └── tests/                         Pruebas de las reglas de anotación
@@ -58,6 +67,8 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 | `2_baselines/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
 | `3_baselines_y_aumento_datos/analisis_intrinseco/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
 | `3_baselines_y_aumento_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `2_baselines/`, `shiwilu/` | `salidas/` únicamente |
+| `4_caracterizacion_embeddings/` | `corpus/`, `tecnicas_aumento/salidas/`, `2_baselines/`, `shiwilu/` | `resultados/` únicamente |
+| `5_sintesis_r9/` | `resumen_experimentos.csv`, `4_caracterizacion_embeddings/resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
@@ -118,6 +129,8 @@ checkpoint NMT una vez (ver su propio README).
 - Correr los baselines de clasificación (OE2/R4) → [`2_baselines/README.md`](2_baselines/README.md)
 - Reproducir el análisis intrínseco (OE2/R5) → [`3_baselines_y_aumento_datos/analisis_intrinseco/README.md`](3_baselines_y_aumento_datos/analisis_intrinseco/README.md)
 - Generar datos aumentados (OE2/R6) → [`3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](3_baselines_y_aumento_datos/tecnicas_aumento/README.md)
+- Caracterizar los embeddings (OE3/R7-R8) → [`4_caracterizacion_embeddings/README.md`](4_caracterizacion_embeddings/README.md)
+- Ver la síntesis comparativa final (OE4/R9) → [`5_sintesis_r9/README.md`](5_sintesis_r9/README.md)
 
 ---
 
