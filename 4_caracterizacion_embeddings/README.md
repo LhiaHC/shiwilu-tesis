@@ -85,12 +85,14 @@ síntesis de este contraste está en
 ### Efecto del aumento de datos (R6) sobre la calidad intrínseca
 
 Correr `caracterizacion.py` sobre los corpus aumentados por las 2 técnicas
-de texto (retrotraducción y Generate-then-Refine) muestra que **ambas
-degradan la separabilidad intrínseca en los 3 modelos** (silueta más baja
-que en el corpus original; mBERT y XLM-R llegan a silueta negativa con
-retrotraducción). Es decir, agregar las oraciones sintéticas hace más
-difuso el espacio de embeddings — aunque, paradójicamente, algunas de esas
-mismas combinaciones mejoran el F1 de clasificación (ver
+de texto (retrotraducción y Generate-then-Refine) muestra que **casi
+siempre degradan la separabilidad intrínseca** (silueta más baja que en el
+corpus original; mBERT y XLM-R llegan a silueta negativa con
+retrotraducción) — la única excepción es LaBSE con Generate-then-Refine,
+donde la silueta sube ligeramente (+0.0015, un cambio pequeño, no
+concluyente). Es decir, agregar las oraciones sintéticas casi siempre hace
+más difuso el espacio de embeddings — aunque, paradójicamente, algunas de
+esas mismas combinaciones mejoran el F1 de clasificación (ver
 [`5_sintesis_r9/`](../5_sintesis_r9/README.md)): un clasificador supervisado
 puede aprovechar datos más diversos/ruidosos para generalizar mejor, aun
 cuando el agrupamiento no supervisado de esos mismos embeddings se vuelva
@@ -101,6 +103,11 @@ menos limpio.
 | LaBSE | retrotraducción | 0.0493 | 0.0191 | -0.0302 |
 | mBERT | retrotraducción | 0.0303 | -0.0048 | -0.0350 |
 | XLM-R | retrotraducción | 0.0151 | -0.0099 | -0.0249 |
-| LaBSE | generate_then_refine | 0.0493 | 0.0449 | -0.0045 |
-| mBERT | generate_then_refine | 0.0303 | 0.0111 | -0.0192 |
-| XLM-R | generate_then_refine | 0.0151 | 0.0104 | -0.0047 |
+| LaBSE | generate_then_refine | 0.0493 | 0.0508 | +0.0015 |
+| mBERT | generate_then_refine | 0.0303 | 0.0166 | -0.0136 |
+| XLM-R | generate_then_refine | 0.0151 | 0.0067 | -0.0084 |
+
+*(Retrotraducción no se regeneró tras la corrección de fuga de datos de
+2026-09-21 — ver nota en
+[`../3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md) —
+así que su fila usa el corpus generado con el filtro semántico anterior.)

@@ -7,9 +7,9 @@
   "n_train_original": 490,
   "n_train_sinteticos": 490,
   "n_train_aumentado": 980,
-  "n_dev": 105,
-  "n_test": 105,
-  "f1_macro": 0.7602296718060266,
-  "f1_ponderado": 0.7602296718060264,
-  "exactitud": 0.7619047619047619
+  "n_dev": 106,
+  "n_test": 104,
+  "f1_macro": 0.8048455745934737,
+  "f1_ponderado": 0.8042511410158468,
+  "exactitud": 0.8076923076923077
 }

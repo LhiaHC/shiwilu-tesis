@@ -5,9 +5,9 @@
   "n_train_original": 490,
   "n_train_aumento_aprobado": 414,
   "n_train_aumentado": 904,
-  "n_dev": 105,
-  "n_test": 105,
-  "f1_macro": 0.8205505413140414,
-  "f1_ponderado": 0.8205505413140413,
-  "exactitud": 0.819047619047619
+  "n_dev": 106,
+  "n_test": 104,
+  "f1_macro": 0.7334272766850596,
+  "f1_ponderado": 0.7340945426094028,
+  "exactitud": 0.7403846153846154
 }

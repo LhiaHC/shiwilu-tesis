@@ -54,12 +54,25 @@ def cargar_corpus(corpus_csv=CORPUS_CSV) -> pd.DataFrame:
 
 
 def dividir_train_dev_test(df: pd.DataFrame):
-    train, resto = train_test_split(
-        df, test_size=PROP_DEV_TEST, stratify=df["intencion"], random_state=SEMILLA,
+    """Divide train/dev/test agrupando por texto en shiwilu.
+
+    El corpus tiene oraciones tan cortas que 28 textos en shiwilu se repiten
+    con distinta glosa en espanol (ej. "MUPALLI"). Dividir por fila suelta
+    podia mandar el mismo texto shiwilu a train Y a test a la vez, y el
+    clasificador "adivinaba" esas filas de memoria en vez de generalizar.
+    Agrupar por texto antes de dividir asegura que cada oracion en shiwilu
+    caiga entera en un solo split.
+    """
+    grupos = df.groupby("shiwilu", as_index=False)["intencion"].first()
+    train_g, resto_g = train_test_split(
+        grupos, test_size=PROP_DEV_TEST, stratify=grupos["intencion"], random_state=SEMILLA,
     )
-    dev, test = train_test_split(
-        resto, test_size=0.5, stratify=resto["intencion"], random_state=SEMILLA,
+    dev_g, test_g = train_test_split(
+        resto_g, test_size=0.5, stratify=resto_g["intencion"], random_state=SEMILLA,
     )
+    train = df[df["shiwilu"].isin(train_g["shiwilu"])]
+    dev = df[df["shiwilu"].isin(dev_g["shiwilu"])]
+    test = df[df["shiwilu"].isin(test_g["shiwilu"])]
     return train, dev, test
 
 
@@ -125,7 +138,10 @@ def evaluar(clf: LogisticRegression, X_test, y_test) -> dict:
         y_test, y_pred, labels=INTENCIONES, output_dict=True, zero_division=0,
     )
     matriz = confusion_matrix(y_test, y_pred, labels=INTENCIONES)
-    return {"metricas": metricas, "reporte": reporte, "matriz": matriz, "y_pred": y_pred}
+    return {
+        "metricas": metricas, "reporte": reporte, "matriz": matriz,
+        "y_test": np.asarray(y_test), "y_pred": y_pred,
+    }
 
 
 def guardar_resultados(carpeta, titulo: str, info_extra: dict, resultado: dict) -> None:
@@ -137,6 +153,12 @@ def guardar_resultados(carpeta, titulo: str, info_extra: dict, resultado: dict) 
 
     pd.DataFrame(resultado["reporte"]).T.to_csv(
         carpeta / "reporte_clasificacion.csv", encoding="utf-8"
+    )
+
+    # una fila por oracion de test: insumo para el bootstrap de intervalos
+    # de confianza (ver bootstrap_ic.py), sin tener que reentrenar nada.
+    pd.DataFrame({"real": resultado["y_test"], "prediccion": resultado["y_pred"]}).to_csv(
+        carpeta / "predicciones.csv", index=False, encoding="utf-8"
     )
 
     disp = ConfusionMatrixDisplay(resultado["matriz"], display_labels=INTENCIONES)

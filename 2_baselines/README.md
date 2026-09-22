@@ -21,6 +21,10 @@ caracterización de embeddings (OE3).
   columna `shiwilu`, dividido 70/15/15 (train/dev/test) estratificado por
   categoría de intención — sin ninguna técnica de aumento aplicada. Misma
   división para los tres modelos, para que los resultados sean comparables.
+  La división se hace agrupando por texto en shiwilu (`comun.dividir_train_dev_test`):
+  el corpus tiene 28 oraciones muy cortas que se repiten con distinta glosa
+  en español, y antes de este ajuste un mismo texto podía caer en train y en
+  test a la vez.
 
 ## Uso
 
@@ -50,13 +54,15 @@ necesidad de Colab.
 
 | Modelo | F1 macro | F1 ponderado | Exactitud |
 |---|---|---|---|
-| LaBSE | 0.7565 | 0.7565 | 0.7619 |
-| mBERT | 0.7514 | 0.7514 | 0.7524 |
-| XLM-R | 0.7828 | 0.7828 | 0.7810 |
+| XLM-R | 0.7756 | 0.7770 | 0.7788 |
+| mBERT | 0.7681 | 0.7675 | 0.7692 |
+| LaBSE | 0.6940 | 0.6961 | 0.7019 |
 
-XLM-R salió mejor de los tres en esta corrida, lo cual no era lo esperado a
-priori (LaBSE está optimizado específicamente para similitud semántica
-entre idiomas). Con un conjunto de prueba de solo 105 oraciones, esta
-diferencia de ~3 puntos puede reflejar tanto una diferencia real como
-variabilidad por tamaño de muestra — interpretar con cautela antes de
-generalizar.
+XLM-R y mBERT quedan cerca entre sí; LaBSE queda claramente atrás en este
+baseline sin aumento, a pesar de estar optimizado para similitud semántica
+entre idiomas. Con un conjunto de prueba de ~104 oraciones, el intervalo de
+confianza (bootstrap, ver
+[`../3_baselines_y_aumento_datos/bootstrap_ic.py`](../3_baselines_y_aumento_datos/bootstrap_ic.py))
+de cada modelo es de ±0.04-0.05 en F1 — las diferencias entre XLM-R y mBERT
+no son estadísticamente concluyentes con esta muestra; la de LaBSE sí es más
+clara. Interpretar con cautela antes de generalizar.
