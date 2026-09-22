@@ -7,8 +7,19 @@ contra ellos.
 | Técnica | Generador | Estado |
 |---|---|---|
 | **Mixup** | Ninguno — interpola embeddings de oraciones shiwilu existentes de la misma categoría | ✅ Probado — [`mixup.py`](mixup.py) |
-| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (140 oraciones, 86 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
+| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (140 oraciones, 85 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
 | **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (419 oraciones, 414 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
+
+**Nota de metodología (2026-09-21):** Generate-then-Refine y Retrotraducción
+usaban ejemplos few-shot y el centroide del filtro semántico calculados
+sobre el corpus **completo** (train+dev+test), lo que dejaba que información
+de dev/test influyera en qué texto sintético se generaba y aprobaba. Se
+corrigió para usar solo train (ver `cargar_ejemplos_por_categoria` en
+`generate_then_refine.py` y el parámetro `corpus_train` en `refinar()` de
+`retrotraduccion.py`). Generate-then-Refine ya se regeneró con la corrección;
+Retrotraducción no, porque requiere el checkpoint NLLB+LoRA entrenado en
+Colab (no disponible localmente) — queda pendiente para la próxima vez que
+haya acceso a ese checkpoint.
 
 ## Mixup
 
@@ -25,15 +36,20 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/mixup.py --modelo labse
 python 3_baselines_y_aumento_datos/tecnicas_aumento/mixup.py --modelo labse --alpha 0.4 --multiplicador 1.0
 ```
 
-### Resultado de referencia (LaBSE, ya ejecutado)
+### Resultado de referencia (ya ejecutado)
 
-| | F1 macro | F1 ponderado | Exactitud |
+| Modelo | Sin aumento | Mixup | Delta |
 |---|---|---|---|
-| Baseline (sin aumento) | 0.7565 | 0.7565 | 0.7619 |
-| Mixup | 0.7582 | 0.7582 | 0.7619 |
+| LaBSE | 0.6940 | 0.6848 | -0.0092 |
+| mBERT | 0.7681 | **0.8048** | +0.0367 |
+| XLM-R | 0.7756 | 0.7547 | -0.0209 |
 
-Mejora mínima (+0.0017) — dentro del margen de ruido esperable con un
-conjunto de prueba de 105 oraciones.
+mBERT + Mixup es la mejor combinación de las 12 evaluadas en toda la matriz
+(ver [`../resumen_experimentos.csv`](../resumen_experimentos.csv)). Con
+todo, el intervalo de confianza bootstrap de mBERT+Mixup es
+[0.7223, 0.8764] — se solapa con el de varios baselines sin aumento, así que
+esta mejora no es concluyente con un conjunto de prueba de ~104 oraciones
+(ver [`../bootstrap_ic.py`](../bootstrap_ic.py)).
 
 ## Generate-then-Refine
 
@@ -73,8 +89,8 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/generate_then_refine.py --ca
 
 Requiere `ANTHROPIC_API_KEY` en `.env` (ver `.env.example` en la raíz del
 repositorio). Ya probado sobre las 7 categorías (20 por categoría): 140
-oraciones generadas, 86 aprobadas. Tasa de aprobación muy dispareja por
-categoría — SAL y DES casi perfectas (20/20), PRG y REQUEST muy bajas (6/20
+oraciones generadas, 85 aprobadas. Tasa de aprobación muy dispareja por
+categoría — SAL y DES perfectas (20/20), PRG y REQUEST muy bajas (8/20
 y 2/20), probablemente porque dependen de morfología verbal (conjugación
 imperativa, partículas interrogativas) que un LLM sin ajuste fino reproduce
 peor que los marcadores léxicos simples de SAL/DES.

@@ -38,6 +38,7 @@ import argparse
 import json
 import os
 import re
+import sys
 
 import numpy as np
 import pandas as pd
@@ -50,7 +51,6 @@ import anthropic
 import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 from shiwilu.rutas import (
     AUMENTO_SALIDA,
-    CORPUS_CSV,
     MARCADORES_CSV,
     PALABRAS_CARACTERISTICAS_CSV,
     SECUENCIAS_FINALES_CSV,
@@ -74,8 +74,10 @@ UMBRAL_SIMILITUD_MAX = 0.995  # por encima: posible duplicado casi exacto
 # Carga de contexto linguistico (R5) y del corpus
 # ---------------------------------------------------------------------------
 
-def cargar_ejemplos_por_categoria(corpus_csv=CORPUS_CSV) -> dict[str, list[tuple[str, str]]]:
-    df = pd.read_csv(corpus_csv)
+def cargar_ejemplos_por_categoria(df: pd.DataFrame) -> dict[str, list[tuple[str, str]]]:
+    """Ejemplos few-shot para el prompt. Recibe el DataFrame ya filtrado a
+    train — nunca pasarle dev/test, o el LLM generaria texto sintetico
+    "inspirado" en oraciones que despues se usan para evaluar."""
     ejemplos: dict[str, list[tuple[str, str]]] = {}
     for _, fila in df.iterrows():
         ejemplos.setdefault(fila["intencion"], []).append((fila["espanol"], fila["shiwilu"]))
@@ -259,6 +261,10 @@ def refinar(
     from comun import extraer_embeddings  # reutiliza la extraccion LaBSE
 
     marcadores = marcadores_por_categoria.get(categoria, [])
+    antes = len(candidatos)
+    candidatos = [c for c in candidatos if "espanol" in c and "shiwilu" in c]
+    if len(candidatos) < antes:
+        print(f"  aviso: {antes - len(candidatos)} candidato(s) del LLM sin 'espanol'/'shiwilu', descartados")
     shiwilu_textos = [c["shiwilu"] for c in candidatos]
     embeddings_generados = extraer_embeddings(shiwilu_textos, "labse")
 
@@ -310,12 +316,14 @@ def main() -> int:
     preparar_directorios()
     client = anthropic.Anthropic(api_key=API_KEY)
 
-    ejemplos_por_categoria = cargar_ejemplos_por_categoria()
+    sys.path.insert(0, str(_ruta_raiz.RAIZ / "2_baselines"))
+    from comun import cargar_corpus, dividir_train_dev_test
+    train, _dev, _test = dividir_train_dev_test(cargar_corpus())
+
+    ejemplos_por_categoria = cargar_ejemplos_por_categoria(train)
     marcadores_por_categoria = cargar_marcadores_validados()
     candidatos_por_categoria = cargar_patrones_candidatos()
 
-    import sys
-    sys.path.insert(0, str(_ruta_raiz.RAIZ / "2_baselines"))
     from comun import extraer_embeddings
 
     todas_las_filas = []

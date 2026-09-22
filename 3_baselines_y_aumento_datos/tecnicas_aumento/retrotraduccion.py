@@ -44,7 +44,7 @@ import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "2_baselines"))
 from comun import extraer_embeddings  # noqa: E402  (reutiliza la extraccion LaBSE)
 
-from shiwilu.rutas import AUMENTO_SALIDA, CORPUS_CSV, NMT_REPO_EXTERNO, preparar_directorios  # noqa: E402
+from shiwilu.rutas import AUMENTO_SALIDA, NMT_REPO_EXTERNO, preparar_directorios  # noqa: E402
 
 MODELO_ES_EN = "Helsinki-NLP/opus-mt-es-en"
 MODELO_EN_ES = "Helsinki-NLP/opus-mt-en-es"
@@ -176,10 +176,13 @@ def filtro_semantico(embedding_generado: np.ndarray, embeddings_categoria: np.nd
     return UMBRAL_SIMILITUD_MIN <= sim <= UMBRAL_SIMILITUD_MAX, sim
 
 
-def refinar(df: pd.DataFrame, corpus: pd.DataFrame) -> pd.DataFrame:
+def refinar(df: pd.DataFrame, corpus_train: pd.DataFrame) -> pd.DataFrame:
+    """corpus_train debe ser SOLO el split de entrenamiento: el centroide del
+    filtro semantico no debe calcularse con oraciones de dev/test, o el
+    filtro terminaria "sabiendo" cosas del conjunto de prueba."""
     filas = []
     for categoria, grupo in df.groupby("intencion"):
-        ejemplos_reales = corpus.loc[corpus["intencion"] == categoria, "shiwilu"].astype(str).tolist()
+        ejemplos_reales = corpus_train.loc[corpus_train["intencion"] == categoria, "shiwilu"].astype(str).tolist()
         embeddings_categoria = extraer_embeddings(ejemplos_reales, "labse")
         embeddings_generados = extraer_embeddings(grupo["shiwilu"].astype(str).tolist(), "labse")
 
@@ -219,8 +222,6 @@ def main() -> int:
     preparar_directorios()
 
     print("Cargando corpus...")
-    corpus = pd.read_csv(CORPUS_CSV)
-
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "2_baselines"))
     from comun import cargar_corpus, dividir_train_dev_test
     train, _dev, _test = dividir_train_dev_test(cargar_corpus())
@@ -247,7 +248,7 @@ def main() -> int:
     df["fuente"] = "retrotraduccion"
 
     print("Paso 3/3: refinando (filtro de idioma + filtro semantico LaBSE)...")
-    resultado = refinar(df, corpus)
+    resultado = refinar(df, train)
     resultado.insert(0, "id", [f"RT_{i:04d}" for i in range(len(resultado))])
 
     salida = args.salida or (AUMENTO_SALIDA / "retrotraduccion.csv")

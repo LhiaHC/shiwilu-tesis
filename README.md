@@ -44,7 +44,8 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 ├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
 │   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)
 │   ├── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
-│   └── resumen_experimentos.py      Consolida los 12 experimentos (3 modelos x 4 config.)
+│   ├── resumen_experimentos.py      Consolida los 12 experimentos (3 modelos x 4 config.)
+│   └── bootstrap_ic.py              Intervalo de confianza del F1 macro (bootstrap)
 │
 ├── 4_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — caracterización de embeddings
 │   └── caracterizacion.py           4 estrategias de pooling x 3 modelos, métricas
