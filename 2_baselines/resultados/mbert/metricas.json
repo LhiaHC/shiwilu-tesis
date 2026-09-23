@@ -2,10 +2,10 @@
   "modelo_embeddings": "bert-base-multilingual-cased",
   "clasificador": "LogisticRegression",
   "aumento_de_datos": false,
-  "n_train": 490,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.7680999085851351,
-  "f1_ponderado": 0.7674726641164024,
-  "exactitud": 0.7692307692307693
+  "n_train": 497,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.69773046703993,
+  "f1_ponderado": 0.6948344298727931,
+  "exactitud": 0.696969696969697
 }

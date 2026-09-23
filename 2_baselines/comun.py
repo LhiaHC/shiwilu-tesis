@@ -11,6 +11,7 @@ cambia es como se extraen los embeddings.
 from __future__ import annotations
 
 import json
+import re
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -53,26 +54,43 @@ def cargar_corpus(corpus_csv=CORPUS_CSV) -> pd.DataFrame:
     return df
 
 
-def dividir_train_dev_test(df: pd.DataFrame):
-    """Divide train/dev/test agrupando por texto en shiwilu.
+_RE_NO_ALFANUMERICO = re.compile(r"[^a-z0-9áéíóúñ’']")
 
-    El corpus tiene oraciones tan cortas que 28 textos en shiwilu se repiten
-    con distinta glosa en espanol (ej. "MUPALLI"). Dividir por fila suelta
-    podia mandar el mismo texto shiwilu a train Y a test a la vez, y el
-    clasificador "adivinaba" esas filas de memoria en vez de generalizar.
-    Agrupar por texto antes de dividir asegura que cada oracion en shiwilu
-    caiga entera en un solo split.
+
+def _normalizar_shiwilu(texto: str) -> str:
+    """Normaliza may/min, puntuacion y espacios para detectar cuasi-duplicados.
+
+    El corpus repite la misma raiz shiwilu con variantes de puntuacion o
+    espaciado ("PANTE'CHEK" / "�PANTE'CHEK!" / "pante'chek"): son la MISMA
+    oracion para efectos de fuga de datos, aunque el texto crudo no coincida
+    caracter por caracter.
     """
-    grupos = df.groupby("shiwilu", as_index=False)["intencion"].first()
+    return _RE_NO_ALFANUMERICO.sub("", str(texto).lower())
+
+
+def dividir_train_dev_test(df: pd.DataFrame):
+    """Divide train/dev/test agrupando por texto en shiwilu NORMALIZADO.
+
+    El corpus tiene oraciones tan cortas que se repiten con distinta glosa en
+    espanol, mayusculas o puntuacion (ej. "MUPALLI", "�PANTE'CHEK!" vs.
+    "pante'chek"). Dividir por fila suelta (o por texto exacto sin normalizar)
+    podia mandar la misma oracion a train Y a test a la vez, y el
+    clasificador "adivinaba" esas filas de memoria en vez de generalizar.
+    Agrupar por texto normalizado antes de dividir asegura que cada oracion
+    en shiwilu (con sus variantes de puntuacion) caiga entera en un solo split.
+    """
+    df = df.copy()
+    df["_shiwilu_norm"] = df["shiwilu"].map(_normalizar_shiwilu)
+    grupos = df.groupby("_shiwilu_norm", as_index=False)["intencion"].first()
     train_g, resto_g = train_test_split(
         grupos, test_size=PROP_DEV_TEST, stratify=grupos["intencion"], random_state=SEMILLA,
     )
     dev_g, test_g = train_test_split(
         resto_g, test_size=0.5, stratify=resto_g["intencion"], random_state=SEMILLA,
     )
-    train = df[df["shiwilu"].isin(train_g["shiwilu"])]
-    dev = df[df["shiwilu"].isin(dev_g["shiwilu"])]
-    test = df[df["shiwilu"].isin(test_g["shiwilu"])]
+    train = df[df["_shiwilu_norm"].isin(train_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
+    dev = df[df["_shiwilu_norm"].isin(dev_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
+    test = df[df["_shiwilu_norm"].isin(test_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
     return train, dev, test
 
 

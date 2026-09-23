@@ -2,10 +2,10 @@
   "modelo_embeddings": "sentence-transformers/LaBSE",
   "clasificador": "LogisticRegression",
   "aumento_de_datos": false,
-  "n_train": 490,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.6939933679565016,
-  "f1_ponderado": 0.696087626531175,
-  "exactitud": 0.7019230769230769
+  "n_train": 497,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.6943474825827767,
+  "f1_ponderado": 0.6929631491722995,
+  "exactitud": 0.696969696969697
 }

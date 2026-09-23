@@ -2,12 +2,12 @@
   "modelo_embeddings": "sentence-transformers/LaBSE",
   "clasificador": "LogisticRegression",
   "tecnica_aumento": "retrotraduccion",
-  "n_train_original": 490,
+  "n_train_original": 497,
   "n_train_aumento_aprobado": 416,
-  "n_train_aumentado": 906,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.6795403898236411,
-  "f1_ponderado": 0.6833013430534982,
-  "exactitud": 0.6923076923076923
+  "n_train_aumentado": 913,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.6251946565289893,
+  "f1_ponderado": 0.6263602872419676,
+  "exactitud": 0.6262626262626263
 }

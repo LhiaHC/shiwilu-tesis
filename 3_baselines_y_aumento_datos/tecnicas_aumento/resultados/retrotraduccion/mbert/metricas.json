@@ -2,12 +2,12 @@
   "modelo_embeddings": "bert-base-multilingual-cased",
   "clasificador": "LogisticRegression",
   "tecnica_aumento": "retrotraduccion",
-  "n_train_original": 490,
+  "n_train_original": 497,
   "n_train_aumento_aprobado": 416,
-  "n_train_aumentado": 906,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.7095882750916122,
-  "f1_ponderado": 0.7088354816994277,
-  "exactitud": 0.7115384615384616
+  "n_train_aumentado": 913,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.5858591032593894,
+  "f1_ponderado": 0.584001778572626,
+  "exactitud": 0.5959595959595959
 }

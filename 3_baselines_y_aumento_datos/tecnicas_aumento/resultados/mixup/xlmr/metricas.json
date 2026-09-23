@@ -4,12 +4,12 @@
   "tecnica_aumento": "mixup",
   "alpha": 0.4,
   "multiplicador": 1.0,
-  "n_train_original": 490,
-  "n_train_sinteticos": 490,
-  "n_train_aumentado": 980,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.7546721136006849,
-  "f1_ponderado": 0.7566838209867055,
-  "exactitud": 0.7596153846153846
+  "n_train_original": 497,
+  "n_train_sinteticos": 497,
+  "n_train_aumentado": 994,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.7373110355253213,
+  "f1_ponderado": 0.7371385815830261,
+  "exactitud": 0.7373737373737373
 }
