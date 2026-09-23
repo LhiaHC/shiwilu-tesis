@@ -39,7 +39,8 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 │
 ├── 2_baselines/                   ◆ OE2 (R4) — baselines de clasificación
 │   ├── baseline.py                  LaBSE / mBERT / XLM-R congelados + Regresión Logística
-│   └── correr_todos.py              corre los 3 y compara
+│   ├── correr_todos.py              corre los 3 y compara
+│   └── baseline_trivial.py          piso sin embeddings (mayoria, solapamiento de palabras)
 │
 ├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
 │   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)

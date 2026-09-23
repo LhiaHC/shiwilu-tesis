@@ -2,10 +2,10 @@
   "modelo_embeddings": "xlm-roberta-base",
   "clasificador": "LogisticRegression",
   "aumento_de_datos": false,
-  "n_train": 490,
-  "n_dev": 106,
-  "n_test": 104,
-  "f1_macro": 0.7756017791732077,
-  "f1_ponderado": 0.7769574175824177,
-  "exactitud": 0.7788461538461539
+  "n_train": 497,
+  "n_dev": 104,
+  "n_test": 99,
+  "f1_macro": 0.7223330241187383,
+  "f1_ponderado": 0.7241413048231229,
+  "exactitud": 0.7272727272727273
 }

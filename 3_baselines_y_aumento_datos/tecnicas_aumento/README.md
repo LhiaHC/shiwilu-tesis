@@ -10,15 +10,20 @@ contra ellos.
 | **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (140 oraciones, 85 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
 | **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (420 oraciones, 416 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
 
-**Nota de metodología (2026-09-21):** Generate-then-Refine y Retrotraducción
-usaban ejemplos few-shot y el centroide del filtro semántico calculados
-sobre el corpus **completo** (train+dev+test), lo que dejaba que información
-de dev/test influyera en qué texto sintético se generaba y aprobaba. Se
-corrigió para usar solo train (ver `cargar_ejemplos_por_categoria` en
-`generate_then_refine.py` y el parámetro `corpus_train` en `refinar()` de
-`retrotraduccion.py`). Ambas técnicas ya se regeneraron con la corrección
-(retrotraducción reutilizando el mismo checkpoint NLLB+LoRA ya entrenado en
-Colab, sin necesidad de reentrenarlo).
+**Notas de metodología (2026-09-21/22):**
+- Generate-then-Refine y Retrotraducción usaban ejemplos few-shot y el
+  centroide del filtro semántico calculados sobre el corpus **completo**
+  (train+dev+test), lo que dejaba que información de dev/test influyera en
+  qué texto sintético se generaba y aprobaba. Se corrigió para usar solo
+  train (`cargar_ejemplos_por_categoria` en `generate_then_refine.py` y el
+  parámetro `corpus_train` en `refinar()` de `retrotraduccion.py`). Ambas
+  técnicas ya se regeneraron con la corrección.
+- La división train/dev/test (`comun.dividir_train_dev_test`) agrupaba por
+  texto shiwilu **exacto**, pero el corpus repite la misma raíz con variantes
+  de mayúsculas/puntuación (`"PANTE'CHEK"` / `"¡pante'chek!"`). Ahora agrupa
+  por texto **normalizado** (sin mayúsculas ni puntuación), cerrando esa fuga
+  también. Ver [`../../2_baselines/README.md`](../../2_baselines/README.md)
+  para el detalle y los números finales de los 12 experimentos.
 
 ## Mixup
 
@@ -39,16 +44,15 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/mixup.py --modelo labse --al
 
 | Modelo | Sin aumento | Mixup | Delta |
 |---|---|---|---|
-| LaBSE | 0.6940 | 0.6848 | -0.0092 |
-| mBERT | 0.7681 | **0.8048** | +0.0367 |
-| XLM-R | 0.7756 | 0.7547 | -0.0209 |
+| LaBSE | 0.6943 | 0.6632 | -0.0311 |
+| mBERT | 0.6977 | 0.6937 | -0.0040 |
+| XLM-R | 0.7223 | 0.7373 | +0.0150 |
 
-mBERT + Mixup es la mejor combinación de las 12 evaluadas en toda la matriz
-(ver [`../resumen_experimentos.csv`](../resumen_experimentos.csv)). Con
-todo, el intervalo de confianza bootstrap de mBERT+Mixup es
-[0.7223, 0.8764] — se solapa con el de varios baselines sin aumento, así que
-esta mejora no es concluyente con un conjunto de prueba de ~104 oraciones
-(ver [`../bootstrap_ic.py`](../bootstrap_ic.py)).
+Mejora pequeña en XLM-R, prácticamente sin cambio en mBERT, y una caída en
+LaBSE — ver [`../resumen_experimentos.csv`](../resumen_experimentos.csv) para
+la matriz completa y [`../bootstrap_ic.py`](../bootstrap_ic.py) para los
+intervalos de confianza (se solapan bastante entre configuraciones, así que
+ninguna de estas diferencias es concluyente con ~99 oraciones de prueba).
 
 ## Generate-then-Refine
 
@@ -93,6 +97,18 @@ categoría — SAL y DES perfectas (20/20), PRG y REQUEST muy bajas (8/20
 y 2/20), probablemente porque dependen de morfología verbal (conjugación
 imperativa, partículas interrogativas) que un LLM sin ajuste fino reproduce
 peor que los marcadores léxicos simples de SAL/DES.
+
+| Modelo | Sin aumento | Generate-then-Refine | Delta |
+|---|---|---|---|
+| LaBSE | 0.6943 | 0.6830 | -0.0113 |
+| mBERT | 0.6977 | 0.6833 | -0.0144 |
+| XLM-R | 0.7223 | **0.7410** | +0.0187 |
+
+XLM-R + Generate-then-Refine es la mejor de las 12 combinaciones evaluadas
+en toda la matriz — aunque su intervalo de confianza bootstrap ([0.6422,
+0.8209]) se solapa casi por completo con el de XLM-R sin aumento ([0.6253,
+0.8057]), así que no hay una "mejor técnica" concluyente para XLM-R con
+~99 oraciones de prueba.
 
 ### Salida
 
@@ -152,15 +168,16 @@ los filtros y 4 marcadas `revisar_hablante_nativo`.
 
 | Modelo | Sin aumento | Retrotraducción | Delta |
 |---|---|---|---|
-| LaBSE | 0.6940 | 0.6795 | -0.0145 |
-| mBERT | 0.7681 | 0.7096 | -0.0585 |
-| XLM-R | 0.7756 | **0.7879** | +0.0123 |
+| LaBSE | 0.6943 | 0.6252 | -0.0691 |
+| mBERT | 0.6977 | 0.5859 | -0.1118 |
+| XLM-R | 0.7223 | 0.7323 | +0.0100 |
 
-XLM-R + Retrotraducción es la segunda mejor combinación de las 12 (detrás de
-mBERT + Mixup, F1=0.8048), y sus intervalos de confianza bootstrap se
-solapan bastante ([0.7001, 0.8568] vs. [0.7223, 0.8764]) — no hay un ganador
-estadísticamente claro entre ambas. En mBERT y LaBSE, en cambio,
-retrotraducción empeora el F1 frente al baseline sin aumento.
+Retrotraducción es la técnica que más empeora a mBERT y LaBSE de las 3
+evaluadas — no está claro por qué, pero es consistente con que el paso de
+parafraseo en español (Helsinki-NLP) introduce variación léxica que el
+NMT de F. Prado no siempre traduce de forma fiel al shiwilu (ver
+`similitud_labse` en `salidas/retrotraduccion.csv` para los casos límite).
+En XLM-R la mejora es marginal y dentro del margen de incertidumbre.
 
 ### Salida
 
