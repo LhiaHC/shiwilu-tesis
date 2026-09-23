@@ -38,22 +38,22 @@ aumento de datos sobre la calidad intrínseca).
 
 ## Resultado (ya ejecutado)
 
-*Actualizado 2026-09-21 tras corregir una fuga de datos en la división
+*Actualizado 2026-09-22 tras corregir una fuga de datos en la división
 train/dev/test (ver [`../2_baselines/README.md`](../2_baselines/README.md))
-y en Generate-then-Refine (ver
+y en Generate-then-Refine/Retrotraducción (ver
 [`../3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md)).
 Los números y el modelo ganador cambiaron respecto a una versión anterior.*
 
 | Modelo | F1 sin aumento | Mejor técnica | F1 mejor config | Rank extr. | Mejor estrategia intrínseca | Silueta | Rank intr. |
 |---|---|---|---|---|---|---|---|
 | mBERT | 0.7681 | mixup | **0.8048** | **1** | mean_pooling | 0.0303 | 2 |
-| XLM-R | 0.7756 | (ninguna mejora) | 0.7756 | 2 | max_pooling | 0.0151 | 3 |
+| XLM-R | 0.7756 | retrotraducción | 0.7879 | 2 | max_pooling | 0.0151 | 3 |
 | LaBSE | 0.6940 | (ninguna mejora) | 0.6940 | 3 | cls | **0.0493** | **1** |
 
 Con el bootstrap de intervalos de confianza
 ([`../3_baselines_y_aumento_datos/bootstrap_ic.py`](../3_baselines_y_aumento_datos/bootstrap_ic.py)),
-el IC95% de mBERT+Mixup es [0.7223, 0.8764] y el de XLM-R sin aumento es
-[0.6877, 0.8468] — se solapan bastante, así que el "1er lugar" extrínseco no
+el IC95% de mBERT+Mixup es [0.7223, 0.8764] y el de XLM-R+Retrotraducción es
+[0.7001, 0.8568] — se solapan bastante, así que el "1er lugar" extrínseco no
 es una diferencia estadísticamente contundente con ~104 oraciones de
 prueba. LaBSE sí queda claramente por debajo en el eje extrínseco.
 
@@ -61,11 +61,11 @@ prueba. LaBSE sí queda claramente por debajo en el eje extrínseco.
 
 **Los dos criterios divergen.** mBERT + Mixup es la configuración con mejor
 F1 de clasificación (0.8048, la más alta de las 12 combinaciones evaluadas
-en R6, aunque dentro del margen de incertidumbre frente a XLM-R). Pero si el
-criterio fuera la calidad intrínseca de los embeddings — qué tan bien se
-agrupan las categorías sin ningún clasificador encima —, LaBSE con el vector
-`[CLS]` gana con claridad (silueta = 0.0493, muy por encima de mBERT en
-0.0303).
+en R6, aunque dentro del margen de incertidumbre frente a XLM-R+Retrotraducción,
+0.7879). Pero si el criterio fuera la calidad intrínseca de los embeddings —
+qué tan bien se agrupan las categorías sin ningún clasificador encima —,
+LaBSE con el vector `[CLS]` gana con claridad (silueta = 0.0493, muy por
+encima de mBERT en 0.0303).
 
 Esto es evidencia directa de que **la calidad intrínseca de un embedding no
 garantiza el mejor desempeño en la tarea de clasificación final**: LaBSE
@@ -77,7 +77,7 @@ de decisión específica.
 
 **Recomendación práctica:**
 - Para clasificación de intenciones → **mBERT + Mixup** (con la salvedad de
-  que XLM-R sin aumento queda dentro del mismo rango de incertidumbre).
+  que XLM-R + Retrotraducción queda dentro del mismo rango de incertidumbre).
 - Para un uso no supervisado de los embeddings (agrupamiento, búsqueda por
   similitud semántica, exploración del corpus) → **LaBSE + `[CLS]`**.
 
