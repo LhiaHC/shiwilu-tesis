@@ -8,7 +8,7 @@ contra ellos.
 |---|---|---|
 | **Mixup** | Ninguno — interpola embeddings de oraciones shiwilu existentes de la misma categoría | ✅ Probado — [`mixup.py`](mixup.py) |
 | **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (140 oraciones, 85 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
-| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (419 oraciones, 414 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
+| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (420 oraciones, 416 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
 
 **Nota de metodología (2026-09-21):** Generate-then-Refine y Retrotraducción
 usaban ejemplos few-shot y el centroide del filtro semántico calculados
@@ -16,10 +16,9 @@ sobre el corpus **completo** (train+dev+test), lo que dejaba que información
 de dev/test influyera en qué texto sintético se generaba y aprobaba. Se
 corrigió para usar solo train (ver `cargar_ejemplos_por_categoria` en
 `generate_then_refine.py` y el parámetro `corpus_train` en `refinar()` de
-`retrotraduccion.py`). Generate-then-Refine ya se regeneró con la corrección;
-Retrotraducción no, porque requiere el checkpoint NLLB+LoRA entrenado en
-Colab (no disponible localmente) — queda pendiente para la próxima vez que
-haya acceso a ese checkpoint.
+`retrotraduccion.py`). Ambas técnicas ya se regeneraron con la corrección
+(retrotraducción reutilizando el mismo checkpoint NLLB+LoRA ya entrenado en
+Colab, sin necesidad de reentrenarlo).
 
 ## Mixup
 
@@ -147,9 +146,21 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py \
 python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --checkpoint ... --categorias DES NEG --limite 20
 ```
 
-Ya probado de punta a punta: 419 oraciones generadas (de 490 de train — el
-resto eran paráfrasis idénticas al original, descartadas), 414 aprobadas por
-los filtros y 5 marcadas `revisar_hablante_nativo`.
+Ya probado de punta a punta: 420 oraciones generadas (de 490 de train — el
+resto eran paráfrasis idénticas al original, descartadas), 416 aprobadas por
+los filtros y 4 marcadas `revisar_hablante_nativo`.
+
+| Modelo | Sin aumento | Retrotraducción | Delta |
+|---|---|---|---|
+| LaBSE | 0.6940 | 0.6795 | -0.0145 |
+| mBERT | 0.7681 | 0.7096 | -0.0585 |
+| XLM-R | 0.7756 | **0.7879** | +0.0123 |
+
+XLM-R + Retrotraducción es la segunda mejor combinación de las 12 (detrás de
+mBERT + Mixup, F1=0.8048), y sus intervalos de confianza bootstrap se
+solapan bastante ([0.7001, 0.8568] vs. [0.7223, 0.8764]) — no hay un ganador
+estadísticamente claro entre ambas. En mBERT y LaBSE, en cambio,
+retrotraducción empeora el F1 frente al baseline sin aumento.
 
 ### Salida
 
