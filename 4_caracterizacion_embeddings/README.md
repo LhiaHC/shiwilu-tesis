@@ -89,8 +89,7 @@ de texto (retrotraducción y Generate-then-Refine) muestra que **casi
 siempre degradan la separabilidad intrínseca** (silueta más baja que en el
 corpus original; mBERT y XLM-R llegan a silueta negativa con
 retrotraducción) — la única excepción es LaBSE con Generate-then-Refine,
-donde la silueta sube ligeramente (+0.0015, un cambio pequeño, no
-concluyente). Es decir, agregar las oraciones sintéticas casi siempre hace
+donde la silueta sube ligeramente (+0.0059, un cambio pequeño, no concluyente). Es decir, agregar las oraciones sintéticas casi siempre hace
 más difuso el espacio de embeddings — aunque, paradójicamente, algunas de
 esas mismas combinaciones mejoran el F1 de clasificación (ver
 [`5_sintesis_r9/`](../5_sintesis_r9/README.md)): un clasificador supervisado
@@ -100,9 +99,9 @@ menos limpio.
 
 | Modelo | Técnica | Silueta original | Silueta aumentada | Delta |
 |---|---|---|---|---|
-| LaBSE | retrotraducción | 0.0493 | 0.0183 | -0.0311 |
-| mBERT | retrotraducción | 0.0303 | -0.0091 | -0.0394 |
+| LaBSE | retrotraducción | 0.0493 | 0.0206 | -0.0288 |
+| mBERT | retrotraducción | 0.0303 | -0.0071 | -0.0374 |
 | XLM-R | retrotraducción | 0.0151 | -0.0098 | -0.0249 |
-| LaBSE | generate_then_refine | 0.0493 | 0.0508 | +0.0015 |
-| mBERT | generate_then_refine | 0.0303 | 0.0166 | -0.0136 |
-| XLM-R | generate_then_refine | 0.0151 | 0.0067 | -0.0084 |
+| LaBSE | generate_then_refine | 0.0493 | 0.0553 | +0.0059 |
+| mBERT | generate_then_refine | 0.0303 | 0.0222 | -0.0081 |
+| XLM-R | generate_then_refine | 0.0151 | 0.0097 | -0.0054 |

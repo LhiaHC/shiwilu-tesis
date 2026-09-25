@@ -3,11 +3,11 @@
   "clasificador": "LogisticRegression",
   "tecnica_aumento": "retrotraduccion",
   "n_train_original": 497,
-  "n_train_aumento_aprobado": 416,
-  "n_train_aumentado": 913,
+  "n_train_aumento_aprobado": 421,
+  "n_train_aumentado": 918,
   "n_dev": 104,
   "n_test": 99,
-  "f1_macro": 0.6251946565289893,
-  "f1_ponderado": 0.6263602872419676,
-  "exactitud": 0.6262626262626263
+  "f1_macro": 0.674896928468357,
+  "f1_ponderado": 0.6721992653810835,
+  "exactitud": 0.6767676767676768
 }
