@@ -17,16 +17,30 @@ disponibles para shiwilu fuera del que aqui se reutiliza):
      (filtro de idioma + filtro semantico via LaBSE), pues ambas tecnicas
      comparten el riesgo de producir enunciados sinteticos erroneos.
 
+Se corre en DOS etapas, porque solo la ultima depende del split train/dev/test:
+
+  --etapa generar  (pasos 1 y 2; requiere GPU y el checkpoint, se corre en Colab)
+      Parafrasea y traduce las 700 oraciones del corpus y guarda un CATALOGO
+      (`retrotraduccion_pool.csv`) con una fila por oracion, indicando de cual
+      viene (`id_origen`). Cada fila depende solo de su oracion de origen, asi
+      que el catalogo sirve para cualquier reparto train/dev/test (o folds de
+      validacion cruzada) sin volver a correr el Colab.
+
+  --etapa filtrar  (paso 3; local, sin GPU)
+      Toma del catalogo solo las filas cuya oracion de origen esta en TRAIN
+      (split congelado) y aplica los filtros con el centroide del train. Dev y
+      test nunca participan. Exige --salida para no pisar por accidente el
+      retrotraduccion.csv que ya se uso en los experimentos.
+
 Solo se aumenta el conjunto de ENTRENAMIENTO; dev y test se mantienen sin
 modificar.
 
 Entrada: corpus/corpus_shiwilu_final.csv
-Salida:  3_baselines_y_aumento_datos/tecnicas_aumento/salidas/retrotraduccion.csv
+Salida:  salidas/retrotraduccion_pool.csv (generar) / --salida (filtrar)
 
 Uso:
-    python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py \
-        --checkpoint ruta/al/checkpoint/nllb_bidi_lora_v2_1b_loraplus_xl
-    python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --checkpoint ... --categorias DES NEG --limite 20
+    python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py         --etapa generar --checkpoint ruta/al/checkpoint/nllb_bidi_lora_v2_1b_loraplus_xl
+    python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py         --etapa filtrar --salida salidas/retrotraduccion_split.csv
 """
 
 from __future__ import annotations
@@ -207,55 +221,96 @@ def refinar(df: pd.DataFrame, corpus_train: pd.DataFrame) -> pd.DataFrame:
 # Main
 # ---------------------------------------------------------------------------
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--checkpoint", required=True, type=Path,
-                     help="Carpeta del checkpoint NLLB+LoRA entrenado (ver README.md).")
-    ap.add_argument("--categorias", nargs="+", default=None,
-                     help="Categorias a aumentar (por defecto: todas).")
-    ap.add_argument("--limite", type=int, default=None,
-                     help="Maximo de oraciones de train a retrotraducir por categoria (por defecto: todas).")
-    ap.add_argument("--repo", type=Path, default=NMT_REPO_EXTERNO)
-    ap.add_argument("--salida", type=Path, default=None)
-    args = ap.parse_args()
-
+def generar(args) -> int:
+    """Etapa 1 (Colab): parafrasea y traduce las 700 oraciones. Sin filtros."""
+    if args.checkpoint is None:
+        raise SystemExit("--checkpoint es obligatorio en la etapa 'generar'.")
     preparar_directorios()
 
     print("Cargando corpus...")
     sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "2_baselines"))
-    from comun import cargar_corpus, dividir_train_dev_test
-    train, _dev, _test = dividir_train_dev_test(cargar_corpus())
-
+    from comun import cargar_corpus
+    corpus = cargar_corpus()
     if args.categorias:
-        train = train[train["intencion"].isin(args.categorias)]
+        corpus = corpus[corpus["intencion"].isin(args.categorias)]
     if args.limite:
-        train = train.groupby("intencion", group_keys=False).head(args.limite)
-    print(f"Retrotraduciendo {len(train)} oraciones de entrenamiento...")
+        corpus = corpus.groupby("intencion", group_keys=False).head(args.limite)
+    print(f"Retrotraduciendo {len(corpus)} oraciones (todo el corpus, sin filtrar por split)...")
 
-    print("Paso 1/3: parafraseando en espanol (Helsinki-NLP, es->en->es)...")
-    parafrasis = parafrasear_espanol(train["espanol"].astype(str).tolist())
+    print("Paso 1/2: parafraseando en espanol (Helsinki-NLP, es->en->es)...")
+    parafrasis = parafrasear_espanol(corpus["espanol"].astype(str).tolist())
 
+    df = pd.DataFrame({
+        "id_origen": corpus.index.to_numpy(),
+        "espanol_original": corpus["espanol"].astype(str).to_numpy(),
+        "espanol": parafrasis,
+        "intencion": corpus["intencion"].to_numpy(),
+    })
     # descarta paráfrasis identicas al original (no aportan nada nuevo)
-    df = train[["espanol", "intencion"]].copy()
-    df["espanol_parafraseado"] = parafrasis
-    df = df[df["espanol_parafraseado"].str.strip().str.lower() != df["espanol"].str.strip().str.lower()]
-    print(f"  {len(df)}/{len(train)} paráfrasis distintas del original")
+    df = df[df["espanol"].str.strip().str.lower() != df["espanol_original"].str.strip().str.lower()].copy()
+    print(f"  {len(df)}/{len(corpus)} paráfrasis distintas del original")
 
-    print("Paso 2/3: traduciendo la paráfrasis al shiwilu (NLLB+LoRA de F. Prado)...")
-    df["shiwilu"] = traducir_a_shiwilu(df["espanol_parafraseado"].tolist(), args.checkpoint, args.repo)
-    df["espanol"] = df["espanol_parafraseado"]
-    df = df.drop(columns=["espanol_parafraseado"])
+    print("Paso 2/2: traduciendo la paráfrasis al shiwilu (NLLB+LoRA de F. Prado)...")
+    df["shiwilu"] = traducir_a_shiwilu(df["espanol"].tolist(), args.checkpoint, args.repo)
     df["fuente"] = "retrotraduccion"
+    df = df[["id_origen", "espanol_original", "espanol", "shiwilu", "intencion", "fuente"]]
 
-    print("Paso 3/3: refinando (filtro de idioma + filtro semantico LaBSE)...")
-    resultado = refinar(df, train)
+    salida = args.salida or (AUMENTO_SALIDA / "retrotraduccion_pool.csv")
+    df.to_csv(salida, index=False, encoding="utf-8")
+    print(f"\nCatalogo: {len(df)} filas -> {salida}")
+    print(df.groupby("intencion").size().to_string())
+    return 0
+
+
+def filtrar(args) -> int:
+    """Etapa 2 (local): filtra el catalogo con el train del split congelado."""
+    if args.salida is None:
+        raise SystemExit("--salida es obligatorio en la etapa 'filtrar' (para no pisar el "
+                         "retrotraduccion.csv ya usado en los experimentos).")
+    ruta_pool = args.pool or (AUMENTO_SALIDA / "retrotraduccion_pool.csv")
+    if not ruta_pool.exists():
+        raise SystemExit(f"No se encontro el catalogo {ruta_pool}. Corre primero --etapa generar.")
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "2_baselines"))
+    from comun import cargar_corpus, dividir_train_dev_test
+    corpus = cargar_corpus()
+    train, _dev, _test = dividir_train_dev_test(corpus)
+
+    pool = pd.read_csv(ruta_pool)
+    desajuste = pool["espanol_original"].to_numpy() != corpus.loc[pool["id_origen"], "espanol"].astype(str).to_numpy()
+    if desajuste.any():
+        raise SystemExit(f"{desajuste.sum()} filas del catalogo no coinciden con el corpus actual "
+                         "(cambio el corpus despues de generar el catalogo): regeneralo.")
+
+    en_train = pool["id_origen"].isin(train.index)
+    print(f"Catalogo: {len(pool)} filas; {en_train.sum()} vienen de oraciones de train (se usan), "
+          f"{(~en_train).sum()} de dev/test (se descartan).")
+    pool = pool[en_train].copy()
+
+    print("Refinando (filtro de idioma + filtro semantico LaBSE, centroide del train)...")
+    resultado = refinar(pool, train)
     resultado.insert(0, "id", [f"RT_{i:04d}" for i in range(len(resultado))])
-
-    salida = args.salida or (AUMENTO_SALIDA / "retrotraduccion.csv")
-    resultado.to_csv(salida, index=False, encoding="utf-8")
-    print(f"\nTotal: {len(resultado)} filas -> {salida}")
+    resultado.to_csv(args.salida, index=False, encoding="utf-8")
+    print(f"\nTotal: {len(resultado)} filas -> {args.salida}")
     print(resultado["estado_filtro"].value_counts().to_string())
     return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--etapa", choices=["generar", "filtrar"], default="generar")
+    ap.add_argument("--checkpoint", type=Path, default=None,
+                     help="Carpeta del checkpoint NLLB+LoRA entrenado (etapa generar; ver README.md).")
+    ap.add_argument("--categorias", nargs="+", default=None,
+                     help="(generar) Categorias a procesar (por defecto: todas).")
+    ap.add_argument("--limite", type=int, default=None,
+                     help="(generar) Maximo de oraciones por categoria, para pruebas rapidas.")
+    ap.add_argument("--repo", type=Path, default=NMT_REPO_EXTERNO)
+    ap.add_argument("--pool", type=Path, default=None,
+                     help="(filtrar) Catalogo a filtrar (por defecto: salidas/retrotraduccion_pool.csv).")
+    ap.add_argument("--salida", type=Path, default=None)
+    args = ap.parse_args()
+    return generar(args) if args.etapa == "generar" else filtrar(args)
 
 
 if __name__ == "__main__":
