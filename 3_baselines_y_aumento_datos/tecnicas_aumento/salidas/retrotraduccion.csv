@@ -1,421 +1,430 @@
 id,espanol,intencion,shiwilu,fuente,estado_filtro,detalle_filtro,similitud_labse
-RT_0000,Sí.,AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0001,Cierto.,AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0002,Bien. Y entonces ya hablamos.,AFI,ipa'linchi ipa' lunllidek.,retrotraduccion,aprobado,,0.4227
-RT_0003,Obviamente.,AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0004,"Seguro. ""Ladrones.",AFI,"tekinchi. ""ladru'lusa'.",retrotraduccion,aprobado,,0.4731
-RT_0005,Vamos.,AFI,pa'awa',retrotraduccion,aprobado,,0.7177
-RT_0006,"Ya, ya. . ¿Ya fue así?",AFI,- ipa'la. . ¿ ipa' nu'tulek?,retrotraduccion,aprobado,,0.3171
-RT_0007,Aceptada!,AFI,¡paker'!,retrotraduccion,aprobado,,0.4723
-RT_0008,Es verdad,AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0009,"Pero a mí también, a nosotros.",AFI,"kuanta' kuanta', kuda.",retrotraduccion,aprobado,,0.4236
-RT_0010,Eso es. Bueno...,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.8137
-RT_0011,Bien.,AFI,mupalli,retrotraduccion,aprobado,,0.5712
-RT_0012,Como lo hicimos!,AFI,¡ma'pu'si'pa' nu'tulek!,retrotraduccion,aprobado,,0.415
-RT_0013,Entendido.,AFI,lachek'apalli,retrotraduccion,aprobado,,0.7636
-RT_0014,Vale. Todo... esto es demasiado. ¿Lo ves?,AFI,enpu'ni. iñer... asu' enpu'nipa'. ¿li'apala?,retrotraduccion,aprobado,,0.3808
-RT_0015,Con gozo.,AFI,sakeksu'lek,retrotraduccion,aprobado,,0.7054
-RT_0016,"Sí, seguro. Me dijo:",AFI,tekinchi. itulli:,retrotraduccion,aprobado,,0.4158
-RT_0017,Sí,AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0018,"Sí, lo tengo.",AFI,tekinchiapalek,retrotraduccion,aprobado,,0.6348
-RT_0019,- Sí.. - Listo... - Ya está,AFI,- enpu'si'pa' - ipa'la,retrotraduccion,aprobado,,0.6097
-RT_0020,"Sí, claro.",AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0021,"Sí, lo recuerdo.",AFI,tekinchi'nek,retrotraduccion,aprobado,,0.6767
-RT_0022,"Sí, ya veo.",AFI,ipa' lli'apalek,retrotraduccion,aprobado,,0.8061
-RT_0023,- Genial.,AFI,- u'chimuinchi,retrotraduccion,aprobado,,0.6161
-RT_0024,"Sí, por supuesto, por supuesto.",AFI,"tekinchi, tekinchi",retrotraduccion,aprobado,,0.5649
-RT_0025,Seguro. - Demonios. En serio.,AFI,- a'chimu.,retrotraduccion,aprobado,,0.3683
-RT_0026,"Sí, lo confirmo.",AFI,tekinchipalek,retrotraduccion,aprobado,,0.6296
-RT_0027,"Sí, lo quiero.",AFI,tekinchilek,retrotraduccion,aprobado,,0.6056
-RT_0028,"- Si, de acuerdo.",AFI,- tekinchi,retrotraduccion,aprobado,,0.5325
-RT_0029,"Si, mucho gusto.",AFI,tekinchi ñapalek,retrotraduccion,aprobado,,0.6426
-RT_0030,"Sí, lo sé.",AFI,ñinchitulek,retrotraduccion,aprobado,,0.6302
-RT_0031,"- Sí, me lo has dicho bien.",AFI,"-ma'sha, musu' tullun.",retrotraduccion,aprobado,,0.32
-RT_0032,"Sí, lo había logrado.",AFI,tekinchi ñapawinek,retrotraduccion,aprobado,,0.6451
-RT_0033,"Sí, así es.",AFI,tekinchi nuka'a,retrotraduccion,aprobado,,0.7005
-RT_0034,"Sí, se acabó.",AFI,tekinchili.,retrotraduccion,aprobado,,0.418
-RT_0035,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.8137
-RT_0036,Ya vale.,AFI,ipa' mupalli,retrotraduccion,aprobado,,0.7546
-RT_0037,Por supuesto. Ya esta.,AFI,ipa'la. ipa' ñapalli.,retrotraduccion,aprobado,,0.5286
-RT_0038,Lo sé.,AFI,ñinchitulek,retrotraduccion,aprobado,,0.6302
-RT_0039,Puedo entenderlo.,AFI,yennitulek lachek'ak,retrotraduccion,aprobado,,0.7675
-RT_0040,Hemos acabado.,AFI,ta'wantullidek,retrotraduccion,aprobado,,0.5466
-RT_0041,"Esta bien, esto se ve bien.",AFI,"mu'chun, asu' musu' lli'apalli.",retrotraduccion,aprobado,,0.4049
-RT_0042,He prestado todo.,AFI,iñer' luwer'tulek,retrotraduccion,aprobado,,0.6897
-RT_0043,Ya está hervido.,AFI,ipa' uksu' ñapalli,retrotraduccion,aprobado,,0.7929
-RT_0044,Llegó el agua.,AFI,dek'ler uk'lli,retrotraduccion,aprobado,,0.6981
-RT_0045,Se acabó todo.,AFI,iñer' ta'wantulli,retrotraduccion,aprobado,,0.8226
-RT_0046,El fuego está ahí misma.,AFI,pen nanek ñapalli.,retrotraduccion,aprobado,,0.343
-RT_0047,"El maíz, aquí está.",AFI,"ma'i, asek ñapalli.",retrotraduccion,aprobado,,0.3117
-RT_0048,Estando en forma.,AFI,musu' ñapawinek,retrotraduccion,aprobado,,0.7829
-RT_0049,Así es como luzcamos.,AFI,nu'su' nu'su' llipu'llidek.,retrotraduccion,aprobado,,0.4234
-RT_0050,Bien hecho y dicho.,AFI,mu'chimu nuka'a.,retrotraduccion,aprobado,,0.4805
-RT_0051,"Creo, ¿verdad? Me entiendes, mamá. Como me dijiste.",AFI,"¿yennitulek? lachekapala, mamá. itudekllima.",retrotraduccion,revisar_hablante_nativo,semantico(sim=0.142),0.1424
-RT_0052,Por ahí.,AFI,nanalupa',retrotraduccion,aprobado,,0.6901
-RT_0053,Así sólo.,AFI,nu'su' ñapalli,retrotraduccion,aprobado,,0.8027
-RT_0054,Okay.,AFI,muek'ka,retrotraduccion,aprobado,,0.744
-RT_0055,Ya lo sé.,AFI,ipa' ñinchitulek,retrotraduccion,aprobado,,0.8271
-RT_0056,"Yo, en verdad sé nadar.",AFI,"kua, tekkinchi ñinchitapalek idun'ak",retrotraduccion,aprobado,,0.4152
-RT_0057,Estoy listo.,AFI,insek'diperpi ñapalek,retrotraduccion,aprobado,,0.5906
-RT_0058,Perfecto...,AFI,u'chimu...,retrotraduccion,aprobado,,0.5175
-RT_0059,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.8137
-RT_0060,"Si, seguro.",AFI,tekinchi,retrotraduccion,aprobado,,0.6085
-RT_0061,¡Socorro!,DES,¡katu'pa'!,retrotraduccion,aprobado,,0.3663
-RT_0062,¡Socorro!,DES,¡katu'pa'!,retrotraduccion,aprobado,,0.3663
-RT_0063,¡Ayuda!,DES,¡katu'pa'!,retrotraduccion,aprobado,,0.3663
-RT_0064,Gané!,DES,¡kana'tulek!,retrotraduccion,aprobado,,0.348
-RT_0065,"¡Ay, no!",DES,"¡ma'sha, ma'sha!",retrotraduccion,aprobado,,0.2522
-RT_0066,¡Lo tengo!,DES,¡a'ñapalek!,retrotraduccion,aprobado,,0.3556
-RT_0067,Escapá.,DES,tekker',retrotraduccion,aprobado,,0.4581
-RT_0068,Perdió. (opuestas ganadores...,DES,kana'lli.,retrotraduccion,aprobado,,0.2079
-RT_0069,- Tom salto.,DES,- tom indek'lli,retrotraduccion,aprobado,,0.3165
-RT_0070,Tom te lo agradecerá.,DES,tom yuspeinchen,retrotraduccion,aprobado,,0.3594
-RT_0071,Puedo ganar.,DES,yennitulek kana'tak,retrotraduccion,aprobado,,0.4528
-RT_0072,Nos divirtimos.,DES,sakek'wa'su',retrotraduccion,aprobado,,0.5311
-RT_0073,Sí podemos hacerlo también.,DES,nu'wa' nu'tapallidek nu'tak,retrotraduccion,aprobado,,0.4709
-RT_0074,Lo conseguimos.,DES,kana'tulekwa',retrotraduccion,aprobado,,0.4349
-RT_0075,"Tenemos que ir, ¿dónde están?",DES,"pa'a'kawa', ¿enñupa'cha ñapalama'?",retrotraduccion,aprobado,,0.244
-RT_0076,¡Fracasaremos!,DES,¡a'per'chi'nchidek!,retrotraduccion,aprobado,,0.3869
-RT_0077,Ya llegamos.,DES,ipa' ektu'llidek,retrotraduccion,aprobado,,0.5288
-RT_0078,Estamos hartas.,DES,ñapalek saka'tusu',retrotraduccion,aprobado,,0.4944
-RT_0079,Estamos débiles. No podemos.,DES,wichi'su' ñapallidek. ñinchichi'ñidek.,retrotraduccion,aprobado,,0.2662
-RT_0080,Confíe conmigo.,DES,latek'ker' kua,retrotraduccion,aprobado,,0.5262
-RT_0081,TermINA esto.,DES,a'ta'wanter asu',retrotraduccion,aprobado,,0.4763
-RT_0082,¡Está envejezca!,DES,¡taserpi ñapalli!,retrotraduccion,aprobado,,0.2885
-RT_0083,¡Está aquí!,DES,¡asek ñapalli!,retrotraduccion,aprobado,,0.3106
-RT_0084,Es el vino que viene contigo.,DES,vinu' nuka'a kenmalek.,retrotraduccion,aprobado,,0.2837
-RT_0085,Le gustaba.,DES,iyatuwinek,retrotraduccion,aprobado,,0.3352
-RT_0086,Finge que come.,DES,imbu'lli weran,retrotraduccion,aprobado,,0.2932
-RT_0087,¡Así se hace!,DES,¡masu' nu'tulek!,retrotraduccion,aprobado,,0.3729
-RT_0088,Es suficiente.,DES,nanasa',retrotraduccion,aprobado,,0.4509
-RT_0089,Yo cocinero,DES,kua kalu'pek',retrotraduccion,aprobado,,0.5299
-RT_0090,¡Estoy leyendo!,DES,¡latukapalek!,retrotraduccion,aprobado,,0.3109
-RT_0091,Lo merqué.,DES,mapa'lek,retrotraduccion,aprobado,,0.4787
-RT_0092,Yo puedo eso.,DES,kua ñinchitapalek nana,retrotraduccion,aprobado,,0.358
-RT_0093,Puedo compartirlo solo por mí.,DES,yennitulek a'ña'kasu'ku.,retrotraduccion,aprobado,,0.3049
-RT_0094,El pan.,DES,tanta',retrotraduccion,aprobado,,0.4019
-RT_0095,Con fruta como la suya.,DES,ka'apalek ka'apalli kenna',retrotraduccion,aprobado,,0.4452
-RT_0096,Estaba hecha de frío.,DES,sanek'san ñapawinek,retrotraduccion,aprobado,,0.5001
-RT_0097,Me enfapé conmigo.,DES,ñapalek kualek,retrotraduccion,aprobado,,0.4089
-RT_0098,Tengo noticias.,DES,kulliker'wantulek,retrotraduccion,aprobado,,0.4
-RT_0099,Yo tengo tiempo. Me da trabajo.,DES,kua luwantulek. saka'tulli,retrotraduccion,aprobado,,0.416
-RT_0100,Tengo vinos.,DES,a'ñapalek vinu',retrotraduccion,aprobado,,0.5472
-RT_0101,Lo oí.,DES,lauk'lek,retrotraduccion,aprobado,,0.4603
-RT_0102,Le quería.,DES,luwantuwinek,retrotraduccion,aprobado,,0.3701
-RT_0103,Tengo que esconderme.,DES,yumu'a'kasu' ñapalli,retrotraduccion,aprobado,,0.5339
-RT_0104,Lo necesito.,DES,luwantulek,retrotraduccion,aprobado,,0.3557
-RT_0105,Huelo al gas.,DES,lanerapalek gas,retrotraduccion,aprobado,,0.2578
-RT_0106,Quiero uno.,DES,ala'sa' luwantulek,retrotraduccion,aprobado,,0.4823
-RT_0107,- Pero no fue muy bien. Está desnudo.,DES,- enpu'ni musu' u'chimuchi'ñi.,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.199),0.1994
-RT_0108,Yo estaba cansado.,DES,kua saka'tusu' ñapawinek,retrotraduccion,aprobado,,0.5018
-RT_0109,Soy pastelero.,DES,pastelero' nuka'ka,retrotraduccion,aprobado,,0.4434
-RT_0110,Soy una mujer.,DES,ku'aper nuka'ka,retrotraduccion,aprobado,,0.4604
-RT_0111,Estoy comprometido.,DES,ñapalek saka'tusu',retrotraduccion,aprobado,,0.4944
-RT_0112,Tengo enfermedad.,DES,kaluwi'su' ñapalek,retrotraduccion,aprobado,,0.5701
-RT_0113,Me traicionas.,DES,wa'danpilalun,retrotraduccion,aprobado,,0.382
-RT_0114,No hemos caído en el polvo!,DES,ku'la anu'pi'ñiner'kudek!,retrotraduccion,aprobado,,0.3416
-RT_0115,Pasa.,DES,enka'ker',retrotraduccion,aprobado,,0.5275
-RT_0116,"Puedes decírnoslo,",DES,"yennitula winta'mudek,",retrotraduccion,aprobado,,0.2557
-RT_0117,Estás triste.,DES,we'inutusu' ñapala,retrotraduccion,aprobado,,0.5387
-RT_0118,Durmías.,DES,wichi'pala,retrotraduccion,aprobado,,0.4831
-RT_0119,Todos ellos escaparon.,DES,iñer' nawa' chi'lekllina',retrotraduccion,aprobado,,0.529
-RT_0120,Odia huir.,DES,luyu'lli teka'ak,retrotraduccion,aprobado,,0.4111
-RT_0121,¡Bravo!,EMO,¡mupalli!,retrotraduccion,aprobado,,0.455
-RT_0122,"Oh, ¡No!",EMO,¡ma'sha!,retrotraduccion,aprobado,,0.3823
-RT_0123,Encantada.,EMO,u'chimuinchi,retrotraduccion,aprobado,,0.6951
-RT_0124,No sabes lo que le doy por el amor.,EMO,ñinchichi'na ma'pu'si'pa' u'chimuen.,retrotraduccion,aprobado,,0.4233
-RT_0125,Así que me duele. - Oh.,EMO,nu'amu ikerlli.,retrotraduccion,aprobado,,0.2831
-RT_0126,Estoy muy encantada.,EMO,ñapalek saka'dek'apalek,retrotraduccion,aprobado,,0.6839
-RT_0127,¡Es una lástima!,EMO,¡u'chimuinchipa'!,retrotraduccion,aprobado,,0.6041
-RT_0128,Qué sustos.,EMO,embu'ni lli'inupa',retrotraduccion,aprobado,,0.8333
-RT_0129,- Me alegro.,EMO,- musu' ñapalek,retrotraduccion,aprobado,,0.5489
-RT_0130,No puedes ser tan humillante.,EMO,ñi ma'pu'si'pa' wichi'nek.,retrotraduccion,aprobado,,0.4862
-RT_0131,¡Lo echo de menos!...,EMO,¡lu'wanpalek!,retrotraduccion,aprobado,,0.5037
-RT_0132,¡Ten paciencia!,EMO,¡wa'tenker' wa'tenker'!,retrotraduccion,aprobado,,0.4707
-RT_0133,-Me fascina.,EMO,-luwantulek,retrotraduccion,aprobado,,0.4517
-RT_0134,¡Qué gusto!,EMO,¡enpu'ni ñapalek!,retrotraduccion,aprobado,,0.4818
-RT_0135,¡Pobrecito!,EMO,¡mapu'lusa'!,retrotraduccion,aprobado,,0.5502
-RT_0136,Qué ridículo... ¡no ha quedado la verdad!,EMO,¡enpu'ni a'pimu'si'la... ¡i'na awa' ñinchi'ñi!,retrotraduccion,aprobado,,0.3073
-RT_0137,"Oh, que fea.",EMO,¡empu'ni we'inutapa'!,retrotraduccion,aprobado,,0.5922
-RT_0138,¡ Qué horror!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5069
-RT_0139,¡Amaporrachas!,EMO,¡wa'danlusa'!,retrotraduccion,aprobado,,0.5531
-RT_0140,Estoy sorprendido.,EMO,imanantusu' ñapalek,retrotraduccion,aprobado,,0.735
-RT_0141,¡Menuda tristeza!,EMO,¡embu'ni we'inutusu'!,retrotraduccion,aprobado,,0.6064
-RT_0142,Fuiste muy preocupado de ti.,EMO,luwantusu' ñapala kenma.,retrotraduccion,aprobado,,0.4368
-RT_0143,- Estoy incómoda.,EMO,- ñapalek iker'su',retrotraduccion,aprobado,,0.6773
-RT_0144,¡Qué orgullo!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5069
-RT_0145,¡¿Al igual que me asusta? !,EMO,¿a'chimu a'chimu'su'?,retrotraduccion,aprobado,,0.3766
-RT_0146,"Oh, que rabia.",EMO,¡ma'nen yupa'ipa'!,retrotraduccion,aprobado,,0.6012
-RT_0147,Me da vergüenza.,EMO,a'cha'itulek,retrotraduccion,aprobado,,0.6875
-RT_0148,Que iguas de piruleta!,EMO,¡enpu'ni pekku'lusa'!,retrotraduccion,aprobado,,0.5538
-RT_0149,Te amo.,EMO,luantullien,retrotraduccion,aprobado,,0.4505
-RT_0150,Cómo me duele el corazón!,EMO,¡enpu'ni iker'palek!,retrotraduccion,aprobado,,0.4499
-RT_0151,¡Qué bonito!,EMO,¡embu'ni u'chimusha!,retrotraduccion,aprobado,,0.5081
-RT_0152,Estoy desesperado.,EMO,ñapalek saka'tusu',retrotraduccion,aprobado,,0.755
-RT_0153,Cuán una verguenza!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5069
-RT_0154,¡Qué feliz es esa muchacha.,EMO,¡enpu'ni musu' nana wilakuaper!,retrotraduccion,aprobado,,0.4097
-RT_0155,"Oh, qué pereza. ¿Te crees tú?",EMO,¡ma'nen wa'danpi'na. ¿kenma lateklapala?,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.171),0.1706
-RT_0156,Me preocupa....,EMO,luwantulek...,retrotraduccion,aprobado,,0.4369
-RT_0157,Eso es bueno!,EMO,¡mapu' nuka'a!,retrotraduccion,aprobado,,0.4676
-RT_0158,¡Qué aburrido!,EMO,¡enpu'ni u'chimu!,retrotraduccion,aprobado,,0.4884
-RT_0159,No me dejo nada por esto; estoy tan contenta del pueblo,EMO,ma'pu'si'na ma'pu'si'pu' weichi'nek; ñinanlu'pu'su' sakeksu'.,retrotraduccion,aprobado,,0.4443
-RT_0160,¡Siento ser guapa!,EMO,¡u'chinchinpalek musu' nuka'ka!,retrotraduccion,aprobado,,0.4727
-RT_0161,¡Qué feliz están... los maiz de malle!,EMO,¡enpu'ni musu' ñapallina' chi'leklusa'!,retrotraduccion,aprobado,,0.5065
-RT_0162,¡Qué hambre!,EMO,¡embu'ni uki'la!,retrotraduccion,aprobado,,0.4297
-RT_0163,¡Cómo me alegro de la cosecha!,EMO,¡enpu'ni sakeksu' ñapalek tar'ik!,retrotraduccion,aprobado,,0.3199
-RT_0164,- ¡Qué ingrata la cosa!,EMO,- ¡ma'nen a'cha suker'ipa'!,retrotraduccion,aprobado,,0.3958
-RT_0165,Cuanto falta la chacra!,EMO,¡enpu'ni wa'danwanpalli!,retrotraduccion,aprobado,,0.4346
-RT_0166,Me molesta.,EMO,ñapalek,retrotraduccion,aprobado,,0.4914
-RT_0167,"¡Oh, eso es injusto!",EMO,¡ma'sha! ¡naker'i'na!,retrotraduccion,aprobado,,0.3645
-RT_0168,"Oh, que belleza!",EMO,¡embu'ni u'chimusha!,retrotraduccion,aprobado,,0.5081
-RT_0169,"- La muerte de él me entristece \""que te mueras / \3?'",EMO,- nana dee'su' a'mapu'tulek chiminpu'a'su'.,retrotraduccion,aprobado,,0.3479
-RT_0170,"¡Oh, eso es magnífico!",EMO,¡ma'sha u'chimuinchi nuka'a!,retrotraduccion,aprobado,,0.3918
-RT_0171,"Me feliz, y es el amanecer.",EMO,"musu' ñapalek, ukllin uklli.",retrotraduccion,aprobado,,0.3818
-RT_0172,(El Señor quiere el sueno),EMO,wa'dan luwantulli,retrotraduccion,aprobado,,0.6408
-RT_0173,Gracias.,EMO,yuspeinet'echun,retrotraduccion,aprobado,,0.7181
-RT_0174,- Gracias.,EMO,- yuspeinet'echun,retrotraduccion,aprobado,,0.6003
-RT_0175,Qué encanto.,EMO,embu'ni mulunsha,retrotraduccion,aprobado,,0.7163
-RT_0176,¡Qué terrible!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5069
-RT_0177,Eso es extraño!,EMO,¡napu' nuka'a!,retrotraduccion,aprobado,,0.5059
-RT_0178,Qué aburrimiento.,EMO,embu'ni we'nyusu',retrotraduccion,aprobado,,0.8373
-RT_0179,Eso está bien!,EMO,¡mupalli!,retrotraduccion,aprobado,,0.455
-RT_0180,Eso es raro.,EMO,nana nuka'a,retrotraduccion,aprobado,,0.5875
-RT_0181,Me pertenecen de cerca.,EMO,nawa'ku ñapallinerku.,retrotraduccion,aprobado,,0.3667
-RT_0182,Qué porquería.,EMO,embu'ni enpu'nipa',retrotraduccion,aprobado,,0.8031
-RT_0183,¿Está bien? Ajá.,EMO,¿mupalan'cha? weker',retrotraduccion,aprobado,,0.5767
-RT_0184,¡Eso es inteligente!,EMO,¡mapu' nuka'a!,retrotraduccion,aprobado,,0.4676
-RT_0185,¡Qué humillación!,EMO,¡embu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5052
-RT_0186,- Es interesante.,EMO,- muyusu' nuka'a,retrotraduccion,aprobado,,0.6368
-RT_0187,Imposible.,NEG,ñinchichi'nek,retrotraduccion,aprobado,,0.8075
-RT_0188,No entiendo.,NEG,ñinchichi'nek,retrotraduccion,aprobado,,0.8075
-RT_0189,Nadie llamo.,NEG,ñiden peklu'pi'nek,retrotraduccion,aprobado,,0.8601
-RT_0190,¡Yo no sálvolos...! Sí...!,NEG,¡kuanta' ku'la di'penchi'nek!,retrotraduccion,aprobado,,0.3959
-RT_0191,No me sigo.,NEG,ku'la tupi'nek,retrotraduccion,aprobado,,0.7644
-RT_0192,Nunca.,NEG,ku'la,retrotraduccion,aprobado,,0.5905
-RT_0193,Nada de agua.,NEG,ku'la dek'i'ñi,retrotraduccion,aprobado,,0.8328
-RT_0194,"Nada de yucas,",NEG,"ma'pu'lusa' yakula,",retrotraduccion,aprobado,,0.5945
-RT_0195,No hay fuego.,NEG,ku'la pen'i'ñi,retrotraduccion,aprobado,,0.8747
-RT_0196,Vamos,NEG,pa'awa,retrotraduccion,aprobado,,0.4608
-RT_0197,Nada de maíz.,NEG,ñiden ñiden,retrotraduccion,aprobado,,0.6296
-RT_0198,"Ni hablar, por casualidad.",NEG,"ku'la lunpi'nek, enpu'nichi.",retrotraduccion,aprobado,,0.2567
-RT_0199,- Tengo poca agua.,NEG,- dek'dek a'ñapalek,retrotraduccion,aprobado,,0.6016
-RT_0200,¡Qué falta de aceite!,NEG,¡enpu'ni luwer'chi'ñi!,retrotraduccion,aprobado,,0.3809
-RT_0201,Me resulta difícil hacerlo.,NEG,ku'la saka'deksu' nu'tak,retrotraduccion,aprobado,,0.7186
-RT_0202,Te Extraño la Yucca. ¿Sí?,NEG,- luwanpalek la'la'. ¿ta'cha?,retrotraduccion,aprobado,,0.3218
-RT_0203,Quién lo sepa.,NEG,¿den ñinchitapalli?,retrotraduccion,aprobado,,0.3721
-RT_0204,Pero no vendrá nadie.,NEG,ñimi'na ñiden uk'i'ñi,retrotraduccion,aprobado,,0.7965
-RT_0205,Nadie planta.,NEG,ñiden tera'i'ñi,retrotraduccion,aprobado,,0.8691
-RT_0206,Nadie remueve cosas?,NEG,¿den a'pinta' pekker'chi'ñi?,retrotraduccion,aprobado,,0.346
-RT_0207,- Nadie nos ha enseñado nada.,NEG,- ñiden a'lek'chi'ñiwi'ñinerkenmu'wa'.,retrotraduccion,aprobado,,0.3469
-RT_0208,Todo nunca llegará.,NEG,iñer' ku'la ektu'pi'ñi,retrotraduccion,aprobado,,0.8382
-RT_0209,No se siembra nunca.,NEG,ku'la tera'pi'ñi enpi',retrotraduccion,aprobado,,0.7985
-RT_0210,Siempre hay luz de pronto.,NEG,nerpi'pu' ilulusa' wiuksu' ñapalli,retrotraduccion,aprobado,,0.6467
-RT_0211,El nunca enseño.,NEG,nana ku'la a'lekchi'ñi,retrotraduccion,aprobado,,0.728
-RT_0212,Nunca morderías,NEG,ñinchichi'nek,retrotraduccion,aprobado,,0.8075
-RT_0213,"Él se ido. ""No se ha.",NEG,nana pa'lli.,retrotraduccion,aprobado,,0.3761
-RT_0214,Ya se acabó.,NEG,ipa' ta'wantulli,retrotraduccion,aprobado,,0.7133
-RT_0215,La he perdido,NEG,wer'lek,retrotraduccion,aprobado,,0.6197
-RT_0216,Yo no pez nunca más. Ya tengo un buen buen plato.,NEG,kua ku'la samer'pi'nek ipa'la. ipa' ala'sa' mupalli sennan.,retrotraduccion,aprobado,,0.2383
-RT_0217,Es eso.,NEG,nana nuka'a,retrotraduccion,aprobado,,0.589
-RT_0218,No hay leña. - ¿Qué ha pasado?,NEG,- ma'nen a'ñapalli. - ¿ma'nen a'pinta'lli?,retrotraduccion,aprobado,,0.2783
-RT_0219,A ti no te toca.,NEG,kenma ku'la pata'pi'ñi,retrotraduccion,aprobado,,0.7306
-RT_0220,Porque no hay nada de comida.,NEG,ñiden ñinchichi'ñi weran,retrotraduccion,aprobado,,0.7658
-RT_0221,"Oh, no tienes chicha.",NEG,- ¡ma'sha a'cha a'ñapala!,retrotraduccion,aprobado,,0.2169
-RT_0222,"¡Qué puedo, no voy!",NEG,"¡ma'pu'si'pa' ñinchitulek, ñi pa'i'nek!",retrotraduccion,aprobado,,0.2752
-RT_0223,"¡No iré, carajo!",NEG,"¡ku'la pa'echek, ¡chi'lek!",retrotraduccion,aprobado,,0.2675
-RT_0224,No hablo showilu.,NEG,ku'la lunpi'nek showilu,retrotraduccion,aprobado,,0.5463
-RT_0225,Yo no cuelo.,NEG,kua ku'la wichi'nek,retrotraduccion,aprobado,,0.7013
-RT_0226,-No bebo.,NEG,-ku'la u'ñi,retrotraduccion,aprobado,,0.6523
-RT_0227,No pudo. Ya fue bastante... Por su vida.,NEG,ñinchichi'ñi. ipa' enpu'nipa' ... nanpimulek.,retrotraduccion,aprobado,,0.5337
-RT_0228,Nada de marihuana.,NEG,ñiden ñi'ñi marijuana,retrotraduccion,aprobado,,0.5208
-RT_0229,- No existen semillas.,NEG,- ku'la lanera'pi'ñina',retrotraduccion,aprobado,,0.5798
-RT_0230,No tienen baten.,NEG,ku'la ekpa'ñina'.,retrotraduccion,aprobado,,0.6019
-RT_0231,"No hay problema con lo del coche, por amor a ti es un buen perro.",NEG,"ñi enpu'nipa' ekpa'su' ekpa'su', a'pinta' musu' ñiñi ñiñiñi.",retrotraduccion,aprobado,,0.4943
-RT_0232,El maíz es malo para mí.,NEG,wa'dan u'chimu nuka'a kua,retrotraduccion,aprobado,,0.6633
-RT_0233,No estoy sana.,NEG,ku'la sansa'pi'nek,retrotraduccion,aprobado,,0.7132
-RT_0234,Nadie se ocupó de ellos.,NEG,ñiden luwer'chi'ñi nawa',retrotraduccion,aprobado,,0.7652
-RT_0235,Nadie tiene descendencia.,NEG,ñidenlu' wichi'ñi.,retrotraduccion,aprobado,,0.6599
-RT_0236,Y nadie recupera.,NEG,ñiden iyui'ñi.,retrotraduccion,aprobado,,0.5827
-RT_0237,- Nadie me manda agua.,NEG,- ñiden a'uk'i'ñiner'ku dekpa',retrotraduccion,aprobado,,0.5105
-RT_0238,Nadie se propaga,NEG,ñiden u'chi'ñi,retrotraduccion,aprobado,,0.8537
-RT_0239,Yo jamás saligo de tus lágrimas.,NEG,kui'na ku'la yunpenpi'nek la'la'penma'.,retrotraduccion,aprobado,,0.4147
-RT_0240,No volverá nunca.,NEG,ku'la adenpi'ñi,retrotraduccion,aprobado,,0.8278
-RT_0241,Él nunca trabaja.,NEG,nana ku'la saka'tapi'ñi,retrotraduccion,aprobado,,0.719
-RT_0242,¿Okey?,PRG,¿mupalli?,retrotraduccion,aprobado,,0.5262
-RT_0243,¿De verdad?,PRG,¿tekinchi?,retrotraduccion,aprobado,,0.5562
-RT_0244,¿Pero que sabe el que tienes que admitir? - ¡Sí!,PRG,- ¿ma'nen ñinchichi'na a'ña'su' a'ña'? - ¡a'cha!,retrotraduccion,aprobado,,0.4766
-RT_0245,¿Quién corría?,PRG,¿den teka'lli?,retrotraduccion,aprobado,,0.6482
-RT_0246,Quién gana?,PRG,¿den kana'tulli?,retrotraduccion,aprobado,,0.6638
-RT_0247,¿Me encuentro gorda?,PRG,¿weipensu' ñapalek?,retrotraduccion,aprobado,,0.664
-RT_0248,¿Está muerto...?,PRG,¿chimiñi...?,retrotraduccion,aprobado,,0.5986
-RT_0249,¿Es grave?,PRG,¿musu' nuka'a?,retrotraduccion,aprobado,,0.6779
-RT_0250,¿es alta? (de alto por encima de),PRG,¿shipen a'cha?,retrotraduccion,aprobado,,0.6469
-RT_0251,¿Ha llegado el momento?,PRG,¿wa'tulli?,retrotraduccion,aprobado,,0.6653
-RT_0252,¿Estás allí?,PRG,¿nanek ñapala?,retrotraduccion,aprobado,,0.6696
-RT_0253,¿ Es seguro?,PRG,¿tekinchi'cha?,retrotraduccion,aprobado,,0.6518
-RT_0254,¿Fue divertido?,PRG,¿musu' ñiwiñi?,retrotraduccion,aprobado,,0.7277
-RT_0255,Que grito?,PRG,¿ma'lek lamapu'?,retrotraduccion,aprobado,,0.71
-RT_0256,Está enojado?,PRG,¿yusu' ñapala?,retrotraduccion,aprobado,,0.6779
-RT_0257,¿Puedo empezar?,PRG,¿yennitulek tenmiansu'ak?,retrotraduccion,aprobado,,0.6503
-RT_0258,- ¿Juegas a los bolos?,PRG,- ¿intekllitapala bola'lusa'?,retrotraduccion,aprobado,,0.5047
-RT_0259,¿Hay viento?,PRG,¿wa'tan a'cha?,retrotraduccion,aprobado,,0.6903
-RT_0260,"¡Oh, sí! ¿Que pasa?",PRG,¡a'cha! ¿ma'nen'cha?,retrotraduccion,aprobado,,0.5432
-RT_0261,¿No hay noticias?,PRG,¿na'wichi'ñi la'la'sa'?,retrotraduccion,aprobado,,0.6354
-RT_0262,¿Tienes hielo?,PRG,¿a'ñapala sanek'la?,retrotraduccion,aprobado,,0.6982
-RT_0263,¿Estás sorda?,PRG,¿luuk'su' ñapala?,retrotraduccion,aprobado,,0.7428
-RT_0264,"Oh, ¿Eres listo?",PRG,¿inapi ñapala?,retrotraduccion,aprobado,,0.6436
-RT_0265,¿Te lastimaste?,PRG,¿yusu' ñapalli?,retrotraduccion,aprobado,,0.6777
-RT_0266,¿Estais perdidos?,PRG,¿wer'su' ñapalama'?,retrotraduccion,aprobado,,0.7182
-RT_0267,Por favor.,PRG,ta'itupiter',retrotraduccion,aprobado,,0.2391
-RT_0268,¿Seguro?,PRG,¿tekinchi'cha?,retrotraduccion,aprobado,,0.6518
-RT_0269,"Pero, ¿sabe nadar? , eso lo dice la historia",PRG,"¿yennitula idun'a'cha? , nana tansi'na",retrotraduccion,aprobado,,0.5277
-RT_0270,"- Sí, ¿que si ha viajado Tom a la ciudad?",PRG,"- ma'sha, ma'pu'si'pa' tom pa'lli ñinanluk?",retrotraduccion,aprobado,,0.4795
-RT_0271,Tom ayudó.,PRG,tom katu'pa'tulli,retrotraduccion,aprobado,,0.2263
-RT_0272,¿Te ayudaste?,PRG,¿ katu'pa'tula?,retrotraduccion,aprobado,,0.6734
-RT_0273,¿Lo firmaron?,PRG,¿llia'tullina'?,retrotraduccion,aprobado,,0.6517
-RT_0274,¿Estoy buena?,PRG,¿musu' ñapalek?,retrotraduccion,aprobado,,0.6373
-RT_0275,¿Ha fumado algo?,PRG,¿ma'nen u'wa'tapala?,retrotraduccion,aprobado,,0.718
-RT_0276,¿Quiere fumar?,PRG,¿yunanpala?,retrotraduccion,aprobado,,0.4948
-RT_0277,¿Roncaste? ¡Está bien!,PRG,¿kana'tula? ¡mupalli!,retrotraduccion,aprobado,,0.5384
-RT_0278,¿Roncas?,PRG,¿pilli'tula?,retrotraduccion,aprobado,,0.6101
-RT_0279,- ¿Le hace daño?,PRG,- ¿kaluwi'lli?,retrotraduccion,aprobado,,0.629
-RT_0280,¿ Está roto?,PRG,¿sakek'su' ñapala?,retrotraduccion,aprobado,,0.718
-RT_0281,¿Le parece eso suficiente?,PRG,¿i'nchu nana nanasa'?,retrotraduccion,aprobado,,0.6762
-RT_0282,¿Me oyeron?,PRG,¿lauk'lliner'ku?,retrotraduccion,aprobado,,0.6615
-RT_0283,¿Le gustó qué?,PRG,¿yennitulli ma'nen?,retrotraduccion,aprobado,,0.6044
-RT_0284,"¿Ah, sí?",PRG,¿ma'sha?,retrotraduccion,aprobado,,0.5684
-RT_0285,¿Estás comiendo carne?,PRG,¿ka'apala flesh?,retrotraduccion,aprobado,,0.5803
-RT_0286,¿la conoce?,PRG,¿luwer'chapala?,retrotraduccion,aprobado,,0.6269
-RT_0287,¿Le conoces?,PRG,¿luwer'chapala?,retrotraduccion,aprobado,,0.6269
-RT_0288,¿Te acuerdas?,PRG,¿lli'inutapala?,retrotraduccion,aprobado,,0.6634
-RT_0289,¿Cree?,PRG,¿luwer'la?,retrotraduccion,aprobado,,0.6022
-RT_0290,¿Lo quedes de tu lado? Te...,PRG,¿kenma a'pinta'la? kenma...,retrotraduccion,aprobado,,0.4481
-RT_0291,¿Me conoces?,PRG,¿luwer'chapalun?,retrotraduccion,aprobado,,0.5983
-RT_0292,"Son lecciones, ¿verdad en casa?",PRG,"ñinchitapallina', ¿tekinchi pidek?",retrotraduccion,aprobado,,0.4722
-RT_0293,Estas satisfecho aquí?,PRG,¿asek ñapala?,retrotraduccion,aprobado,,0.6304
-RT_0294,¿Es envenenador? No.,PRG,¿u'chimu' nuka'a? no.,retrotraduccion,aprobado,,0.6467
-RT_0295,¿Estaba llorando?,PRG,¿welliek'apawiñi?,retrotraduccion,aprobado,,0.6611
-RT_0296,-¿Qué dijo?,PRG,- ¿ma'nen itulli?,retrotraduccion,aprobado,,0.6375
-RT_0297,¿Qué es lo que les falta?,PRG,¿ma'nen luwantapallina'?,retrotraduccion,aprobado,,0.6726
-RT_0298,-¿Endónde se terminó?,PRG,-¿enñu ta'wan'tulli?,retrotraduccion,aprobado,,0.6329
-RT_0299,¿Cuándo te fugas?,PRG,¿enpi'pu'su' chi'pa'tula?,retrotraduccion,aprobado,,0.708
-RT_0300,- ¿Quién ha hecho esto? ¿Quién ha ayudado?,PRG,- ¿den nu'tulli asu'? ¿den katu'pa'tulli?,retrotraduccion,aprobado,,0.5381
-RT_0301,¿De verdad es eso ?,PRG,¿tekinchi'na nana?,retrotraduccion,aprobado,,0.6365
-RT_0302,Vamos.,REQUEST,pa'awa',retrotraduccion,aprobado,,0.52
-RT_0303,Corre!,REQUEST,teka'ker',retrotraduccion,aprobado,,0.5772
-RT_0304,¡Alto!,REQUEST,¡wanerker'!,retrotraduccion,aprobado,,0.4763
-RT_0305,"¿Cómo que usted era ""?",REQUEST,¿ma'pu'si'na kenma a'cha?,retrotraduccion,aprobado,,0.2799
-RT_0306,Sonríe,REQUEST,yamerker',retrotraduccion,aprobado,,0.517
-RT_0307,Levántate.,REQUEST,yunsanker',retrotraduccion,aprobado,,0.5366
-RT_0308,Abrázame. ¿Cómo te llamas?,REQUEST,a'pinta'u. ¿ma'pu'su' llillinen?,retrotraduccion,aprobado,,0.2978
-RT_0309,Vaya lento.,REQUEST,paker' uti'la,retrotraduccion,aprobado,,0.4351
-RT_0310,- Adelante.,REQUEST,- da'kerker',retrotraduccion,aprobado,,0.466
-RT_0311,- No te preocupes.,REQUEST,-yaitututa,retrotraduccion,aprobado,,0.2881
-RT_0312,Suéltame.,REQUEST,ta'itula'u,retrotraduccion,aprobado,,0.4402
-RT_0313,Mantenme pendiente de mí.,REQUEST,llia'ter'u kua.,retrotraduccion,aprobado,,0.3319
-RT_0314,Mira.,REQUEST,lli'ker',retrotraduccion,aprobado,,0.5631
-RT_0315,Y les vigilamos,REQUEST,a'lli'dekllidek,retrotraduccion,aprobado,,0.4232
-RT_0316,"¡No llores!""",REQUEST,¡yawellektama'!,retrotraduccion,aprobado,,0.4727
-RT_0317,No dormí dos.,REQUEST,ku'la wichi'nek katu'ta',retrotraduccion,aprobado,,0.4851
-RT_0318,No mienta.,REQUEST,yatumu'ta,retrotraduccion,aprobado,,0.4165
-RT_0319,Esperar aquí.,REQUEST,wa'tenker' asek,retrotraduccion,aprobado,,0.5252
-RT_0320,¿En la cocina grande?,REQUEST,¿kinek a'cha?,retrotraduccion,aprobado,,0.3478
-RT_0321,Sé feliz.,REQUEST,musu' ñaper',retrotraduccion,aprobado,,0.5675
-RT_0322,Tomaron vino.,REQUEST,u'ñina' vinu',retrotraduccion,aprobado,,0.5803
-RT_0323,Toma esto.,REQUEST,ma'ta asu',retrotraduccion,aprobado,,0.4548
-RT_0324,Venga sola.,REQUEST,wek'ker' kenmasu',retrotraduccion,aprobado,,0.5034
-RT_0325,Venid anticipada.,REQUEST,wencher' musu',retrotraduccion,aprobado,,0.5484
-RT_0326,"Oh, no grites...",REQUEST,"Oh, yamapu'ta...",retrotraduccion,aprobado,,0.2432
-RT_0327,Mira esto.,REQUEST,lli'ker' asu',retrotraduccion,aprobado,,0.565
-RT_0328,Ya puede irse.,REQUEST,ipa' yennitula pa'a'mak,retrotraduccion,aprobado,,0.4682
-RT_0329,Especifique más.,REQUEST,a'pinta' lli'ker',retrotraduccion,aprobado,,0.5628
-RT_0330,Tú entiendes.,REQUEST,kenma lachek'la,retrotraduccion,aprobado,,0.4434
-RT_0331,No temas. ¡Ok!,REQUEST,¡yawa'ta yatek'ta! ¡mupalli!,retrotraduccion,aprobado,,0.3142
-RT_0332,¿Puedes hacer eso ?,REQUEST,¿yennitula nu'ta'mak nana?,retrotraduccion,aprobado,,0.3203
-RT_0333,¿Puedes ayudarme?,REQUEST,¿yennitula katu'pa'a'muk?,retrotraduccion,aprobado,,0.3288
-RT_0334,¿Sabes leer los mensajes?,REQUEST,¿yennitula lun'apala luntu'lusa'?,retrotraduccion,aprobado,,0.3003
-RT_0335,Puedes ir andando?,REQUEST,¿yennitula dekkunta'mak?,retrotraduccion,aprobado,,0.3038
-RT_0336,¡Espérense bien!,REQUEST,¡wa'tenku' musu'!,retrotraduccion,aprobado,,0.494
-RT_0337,Traédle aquí.,REQUEST,kencher' asek,retrotraduccion,aprobado,,0.4555
-RT_0338,¡Llámame ya!,REQUEST,¡peklu'u ipa'la!,retrotraduccion,aprobado,,0.3275
-RT_0339,"Ven mañana. Lo haré esta noche, amigo, ¿verdad?",REQUEST,"wek'ker' eklli. ipa'la ipa'la ipa'la nuka'a, nuka'cha?",retrotraduccion,aprobado,,0.2193
-RT_0340,No calmes para hacerlo.,REQUEST,yalenmekta nu'ta'mak,retrotraduccion,aprobado,,0.4538
-RT_0341,Dáselo a mí.,REQUEST,enka'u,retrotraduccion,aprobado,,0.4612
-RT_0342,Dame algo.,REQUEST,enka'u ma'pinta',retrotraduccion,aprobado,,0.4933
-RT_0343,Rómpeme aquéllos.,REQUEST,a'pinta'u nana,retrotraduccion,aprobado,,0.4006
-RT_0344,Espera aquí.,REQUEST,wa'tenker' asek,retrotraduccion,aprobado,,0.5252
-RT_0345,Déjame intentarlo.,REQUEST,ta'itula'u inlli'echek,retrotraduccion,aprobado,,0.3666
-RT_0346,Vamos a hacerlo.,REQUEST,nu'tawa',retrotraduccion,aprobado,,0.5384
-RT_0347,Vamos a comer fuera.,REQUEST,adipi ka'awa',retrotraduccion,aprobado,,0.546
-RT_0348,-¿Puedes quitarme un buen descanso?,REQUEST,- ¿yennitula a'musu' neria'a'mak?,retrotraduccion,aprobado,,0.2985
-RT_0349,¿Estás listo para verlo?,REQUEST,¿ñinchitapala lli'ater'?,retrotraduccion,aprobado,,0.3945
-RT_0350,Déjenlo ahora.,REQUEST,ta'ituler' ipa'la,retrotraduccion,aprobado,,0.3983
-RT_0351,Sigo buscando.,REQUEST,inpaleri'nek,retrotraduccion,aprobado,,0.3758
-RT_0352,¡Déjame en paz!,REQUEST,¡ta'itula'u ta'itula'u!,retrotraduccion,aprobado,,0.3163
-RT_0353,Déjame explicarte.,REQUEST,ta'itula'u wintechek,retrotraduccion,aprobado,,0.3821
-RT_0354,"""Déjame luchar""",REQUEST,"""ta'itula'u idenma'su'",retrotraduccion,aprobado,,0.5235
-RT_0355,Escucha con cuidado.,REQUEST,lau'ker' musu',retrotraduccion,aprobado,,0.5641
-RT_0356,Escucha esto!,REQUEST,lauk'ker' asu',retrotraduccion,aprobado,,0.5279
-RT_0357,Puedes vernos?,REQUEST,¿yennitula lli'a'mudek?,retrotraduccion,aprobado,,0.3141
-RT_0358,No es nada porque el cuerpo se aíslo el mío.,REQUEST,ma'sha ma'pu'si'pu' ma'pu'si'ma a'pinta'pi'ñi ku'la.,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.187),0.1871
-RT_0359,¿Puedes oirnos?,REQUEST,¿yennitula lauk'a'mudek?,retrotraduccion,aprobado,,0.3115
-RT_0360,"- ¿Puede usted ayudarme o no, mi señor?",REQUEST,"- ¿yennitula katu'pa'a'mu, señor?",retrotraduccion,aprobado,,0.2801
-RT_0361,Escriba esto.,REQUEST,llinser'ker' asu',retrotraduccion,aprobado,,0.4906
-RT_0362,Respira con normalidad.,REQUEST,neriker' u'chimu,retrotraduccion,aprobado,,0.5614
-RT_0363,Continuaré excavando.,REQUEST,tupi'chek'echek,retrotraduccion,aprobado,,0.4985
-RT_0364,"¡Eh, eh!",SAL,"¡en,en!",retrotraduccion,aprobado,,0.3632
-RT_0365,"¡Hola, Hasta luego!",SAL,"¡u'cha, pantek'chek!",retrotraduccion,aprobado,,0.4385
-RT_0366,¡Adiós!,SAL,¡pante'chek!,retrotraduccion,aprobado,,0.5163
-RT_0367,"- Y me voy. -Adiós, ¿en serio?",SAL,- ¡enchek pa'echek!,retrotraduccion,aprobado,,0.3421
-RT_0368,¡Bienvenidos!,SAL,¡wencha'ku'!,retrotraduccion,aprobado,,0.5882
-RT_0369,Feliz Pascua...,SAL,musu' paskua',retrotraduccion,aprobado,,0.8293
-RT_0370,- ¡Feliz Semana Santa!,SAL,¡musu' Semana Santa!,retrotraduccion,aprobado,,0.4093
-RT_0371,¡Feliz Año Nuevo !,SAL,¡pu'si'la musu' kañinpu'!,retrotraduccion,aprobado,,0.5113
-RT_0372,Hola Abuaní.,SAL,lli'taa' abuani,retrotraduccion,aprobado,,0.7061
-RT_0373,Oh! hola madres. .,SAL,¡u'cha! awa'lusa'.,retrotraduccion,aprobado,,0.3798
-RT_0374,"Adiós, Mami.",SAL,"pantekchek, mamá",retrotraduccion,aprobado,,0.5192
-RT_0375,"-Adiós, papá. -Adiós.",SAL,"- pantekchek, tata.",retrotraduccion,aprobado,,0.3287
-RT_0376,Nos vemos mañana.,SAL,lli'ater' eklli,retrotraduccion,aprobado,,0.7431
-RT_0377,Hasta mañana.,SAL,ek'chek,retrotraduccion,aprobado,,0.7172
-RT_0378,Descansa.,SAL,neriker',retrotraduccion,aprobado,,0.7095
-RT_0379,Restándole bien,SAL,mudin,retrotraduccion,aprobado,,0.4622
-RT_0380,Buenos días.,SAL,muuklli,retrotraduccion,aprobado,,0.5588
-RT_0381,Hola abuelas.,SAL,lli'taa amiku'lusa',retrotraduccion,aprobado,,0.6513
-RT_0382,Hasta luego.,SAL,pantek'chek,retrotraduccion,aprobado,,0.7188
-RT_0383,Buenos díasseñor.,SAL,u'chimu señor,retrotraduccion,aprobado,,0.5445
-RT_0384,Pasadlo bien.,SAL,musu',retrotraduccion,aprobado,,0.7064
-RT_0385,Pasa.,SAL,enka'ker',retrotraduccion,aprobado,,0.7976
-RT_0386,"Buenos días, chicas.",SAL,"muuklli, wilalusa'",retrotraduccion,aprobado,,0.7067
-RT_0387,"Hola, chicos.",SAL,lli'taa' wilalusa',retrotraduccion,aprobado,,0.7118
-RT_0388,"- De acuerdo. ¡Adiós, hija!",SAL,"- muetchek. ¡mupalli, wilaku' !",retrotraduccion,aprobado,,0.4525
-RT_0389,Nos vemos.,SAL,lli'ater',retrotraduccion,aprobado,,0.6859
-RT_0390,- Que tengas unos buenos días.,SAL,- a'punta' a'pinta' musu',retrotraduccion,aprobado,,0.5814
-RT_0391,Hola otra vez.,SAL,lli'taa',retrotraduccion,aprobado,,0.6873
-RT_0392,"Adiós, vecino.",SAL,"pantekchek, wa'danpi",retrotraduccion,aprobado,,0.556
-RT_0393,"Adiós, señora.",SAL,"pantekchek, senñula'",retrotraduccion,aprobado,,0.6666
-RT_0394,Cuídate.,SAL,inluukter',retrotraduccion,aprobado,,0.663
-RT_0395,Cuídate.,SAL,inluukter',retrotraduccion,aprobado,,0.663
-RT_0396,Cuídese muy bien.,SAL,inluukter' musu',retrotraduccion,aprobado,,0.7746
-RT_0397,-Adiós,SAL,pantekchek,retrotraduccion,aprobado,,0.5372
-RT_0398,Nos vemos luego.,SAL,pante'chek nanek,retrotraduccion,aprobado,,0.723
-RT_0399,Hola amigo.,SAL,lli'taa' paker',retrotraduccion,aprobado,,0.777
-RT_0400,"- Adiós hermana. Un segundo, viejo pendejo.",SAL,"- pantekchek kaicha. un'ak, taserpi.",retrotraduccion,aprobado,,0.2756
-RT_0401,Eres muy bueno.,SAL,u'chimu nuka'ma,retrotraduccion,aprobado,,0.7196
-RT_0402,Bienvenido a casa.,SAL,muwencha'ku pidek'kek,retrotraduccion,aprobado,,0.7302
-RT_0403,No debes habernos encontrado bien.,SAL,a'pinta' musu' kanpi'ñinerkenmu'wa'.,retrotraduccion,aprobado,,0.4667
-RT_0404,"Estáis aquí, pues aquí estarás, ¿sí?",SAL,"asek ñapala, ñapala asek ñapala, ¿ta'cha?",retrotraduccion,aprobado,,0.2223
-RT_0405,- ¿Cómo es que no te las arregle? Está usted cuando le paso un problema en el pueblo...,SAL,- ¿ma'pu'si'na a'pinta' a'ka tekchi'nchi'npu'? kenma ñinanluk ala'sa' a'pinta' a'pinta' ñinanluk...,retrotraduccion,aprobado,,0.2114
-RT_0406,Están allí.,SAL,nanek ñapallina',retrotraduccion,aprobado,,0.8077
-RT_0407,Por fin estás aquí.,SAL,tekna' asek ñapala,retrotraduccion,aprobado,,0.5245
-RT_0408,Hasta entonces.,SAL,ipa'linchi,retrotraduccion,aprobado,,0.6995
-RT_0409,Me voy.,SAL,pa'echek,retrotraduccion,aprobado,,0.7136
-RT_0410,Nos Abandonamos.,SAL,pa'llidek,retrotraduccion,aprobado,,0.6024
-RT_0411,Ahora me marcho.,SAL,ipa'la pa'echek,retrotraduccion,aprobado,,0.7927
-RT_0412,Nosotros vamos ahora.,SAL,kuda pa'ater'wa' ipa'la,retrotraduccion,aprobado,,0.7034
-RT_0413,¡Paren el buen día!,SAL,¡ta'itula'ku ukllin u'chimu!,retrotraduccion,aprobado,,0.3832
-RT_0414,Que lo mejor.,SAL,u'chimuinchi,retrotraduccion,aprobado,,0.679
-RT_0415,Que tengan buen gusto.,SAL,musu' sakeksu',retrotraduccion,aprobado,,0.8136
-RT_0416,"Para el día 20, ab.",SAL,"20 ukllik, ab.",retrotraduccion,aprobado,,0.2299
-RT_0417,Buenas noches.,SAL,muunanpilli,retrotraduccion,aprobado,,0.5225
-RT_0418,"Buenas noches, niños .",SAL,muder'ka wilalusa'.,retrotraduccion,aprobado,,0.5393
-RT_0419,- Hasta mañana.,SAL,-enchi'lek eklli,retrotraduccion,aprobado,,0.574
+RT_0000,Bueno.,AFI,mu'chun,retrotraduccion,aprobado,,0.6766
+RT_0001,- Perfecto.,AFI,- u'chimu,retrotraduccion,aprobado,,0.6304
+RT_0002,- Sí ..,AFI,- tekinchi,retrotraduccion,aprobado,,0.543
+RT_0003,Sí.,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0004,Obviamente. Y entonces ya hablamos.,AFI,ipa'linchi lunñidek.,retrotraduccion,aprobado,,0.482
+RT_0005,"¡Vamos, vamos!",AFI,"¡paker', paker'!",retrotraduccion,aprobado,,0.3998
+RT_0006,La atrapé.,AFI,pilli'tulek,retrotraduccion,aprobado,,0.6379
+RT_0007,Aceptadas,AFI,tekka'tulli,retrotraduccion,aprobado,,0.77
+RT_0008,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.7962
+RT_0009,Eso es correcto.,AFI,nanasa' ñapalli,retrotraduccion,aprobado,,0.6921
+RT_0010,Está es cierto.,AFI,ñapalli tekinchi,retrotraduccion,aprobado,,0.6176
+RT_0011,"No, gracias, dense prisa.",AFI,"ma'sha, yuspeinetchu, wiuksu'",retrotraduccion,aprobado,,0.5606
+RT_0012,Es verdad,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0013,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.7962
+RT_0014,Bien.,AFI,mupalli,retrotraduccion,aprobado,,0.6217
+RT_0015,Buen dicho.,AFI,mukankan nuka'a,retrotraduccion,aprobado,,0.6766
+RT_0016,Cómo lo dices?,AFI,¿ma'pu'sin?,retrotraduccion,aprobado,,0.4597
+RT_0017,Justo así.,AFI,nu'su' nu'su',retrotraduccion,aprobado,,0.6653
+RT_0018,- Lo entiendo.,AFI,lachek'apalek,retrotraduccion,aprobado,,0.7535
+RT_0019,Bien,AFI,mu'chun,retrotraduccion,aprobado,,0.6766
+RT_0020,Lo sé.,AFI,ñinchitulek,retrotraduccion,aprobado,,0.6335
+RT_0021,Estamos bien.,AFI,mupallidek,retrotraduccion,aprobado,,0.6242
+RT_0022,Encantada. (Anuarios),AFI,u'chimu,retrotraduccion,aprobado,,0.7204
+RT_0023,Lo tomaré.,AFI,pilli'echek,retrotraduccion,aprobado,,0.6865
+RT_0024,Sí.,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0025,"Sí, claro.",AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0026,"- Sí, realmente.",AFI,- tekinchi,retrotraduccion,aprobado,,0.543
+RT_0027,"Si, perfecto.",AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0028,"Sí, exacto...",AFI,- tekinchi...,retrotraduccion,aprobado,,0.4221
+RT_0029,"¿No tenemos que ir? Sí, lo recibí. - Estoy bien.",AFI,"- ¿pa'a'kawa'su' a'cha? - a'cha, katu'nek.",retrotraduccion,aprobado,,0.2175
+RT_0030,Pues claro.,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0031,"Sí, cierto. La verdad.",AFI,tekinchi. tekinchi,retrotraduccion,aprobado,,0.5447
+RT_0032,Si bueno.,AFI,u'chimu,retrotraduccion,aprobado,,0.7204
+RT_0033,Debió.,AFI,a'ñapalli,retrotraduccion,aprobado,,0.7285
+RT_0034,Sí.,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0035,Sí. Ya estoy seguro de ello.,AFI,ipa' ñapalek ñapalek lateksu'.,retrotraduccion,aprobado,,0.3832
+RT_0036,Por su bien...,AFI,lli'inu...,retrotraduccion,aprobado,,0.5055
+RT_0037,"Sí, es justo aquí.",AFI,ma'sha asek ñapalli,retrotraduccion,aprobado,,0.614
+RT_0038,"- Sí, encantado.",AFI,- tekinchian,retrotraduccion,aprobado,,0.5402
+RT_0039,"Sí, Io sé. Y ahora...",AFI,ipa'la ñinchitulek. ipa'la...,retrotraduccion,aprobado,,0.4338
+RT_0040,"- Sí, está bien.",AFI,- tekinchi nuka'a,retrotraduccion,aprobado,,0.568
+RT_0041,"Si, bien dicho.",AFI,tekinchi nuka'a,retrotraduccion,aprobado,,0.683
+RT_0042,- Así era. Así era.,AFI,- nu'su' ñiwiñi. nu'su' ñiwiñi,retrotraduccion,aprobado,,0.4656
+RT_0043,Así es,AFI,nu'su' ñi,retrotraduccion,aprobado,,0.7982
+RT_0044,Es cierto.,AFI,tekinchi nuka'a,retrotraduccion,aprobado,,0.683
+RT_0045,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.7962
+RT_0046,Así es.,AFI,nu'su' nuka'a,retrotraduccion,aprobado,,0.7962
+RT_0047,Lo sé.,AFI,ñinchitulek,retrotraduccion,aprobado,,0.6335
+RT_0048,Lo entiéndanme.,AFI,lachek'u,retrotraduccion,aprobado,,0.7304
+RT_0049,"Yo ya lo quería, ¿sí?",AFI,"kua ipa' luwantulek, ¿ta'cha?",retrotraduccion,aprobado,,0.3195
+RT_0050,Arreglado.,AFI,a'pinta',retrotraduccion,aprobado,,0.6852
+RT_0051,He terminado.,AFI,a'ta'wantulek,retrotraduccion,aprobado,,0.7267
+RT_0052,He brindis.,AFI,panwalalek,retrotraduccion,aprobado,,0.6537
+RT_0053,Ya está hervido.,AFI,ipa' uksu' ñapalli,retrotraduccion,aprobado,,0.7917
+RT_0054,Ya llegó el agua.,AFI,ipa' dek'lli deklli,retrotraduccion,aprobado,,0.6755
+RT_0055,El fuego ahí está.,AFI,pen nanek ñapalli,retrotraduccion,aprobado,,0.5688
+RT_0056,Se nos ve así.,AFI,lli'apalekwa' nu'su'.,retrotraduccion,aprobado,,0.4704
+RT_0057,Como tú dijiste.,AFI,kenma tinma'su',retrotraduccion,aprobado,,0.6985
+RT_0058,Así nada más.,AFI,nu'su' ma'pu'si'la,retrotraduccion,aprobado,,0.7601
+RT_0059,Correcto.,AFI,tekinchi,retrotraduccion,aprobado,,0.6109
+RT_0060,. Puedo correr - No!,AFI,¡yennitulek teka'ak!,retrotraduccion,aprobado,,0.3481
+RT_0061,Puedo leer.,AFI,yennitulek lun'ak,retrotraduccion,aprobado,,0.7358
+RT_0062,Están listos.,AFI,insek'diperpi ñapalama',retrotraduccion,aprobado,,0.5733
+RT_0063,Es perfecta.,AFI,u'chimu nuka'a,retrotraduccion,aprobado,,0.749
+RT_0064,"Cierto, bien.",AFI,"tekinchi, musu'",retrotraduccion,aprobado,,0.7253
+RT_0065,"- Sí, estoy seguro - Si.",AFI,- tekinchi ñinchitulek.,retrotraduccion,aprobado,,0.2938
+RT_0066,¡Ayúdeme!,DES,¡katu'pa'u!,retrotraduccion,aprobado,,0.2661
+RT_0067,¡Ayuda!,DES,¡katu'pa'!,retrotraduccion,aprobado,,0.3423
+RT_0068,¡Lloré!,DES,¡welliek'lek!,retrotraduccion,aprobado,,0.2854
+RT_0069,¡Ataquen!,DES,¡pilli'ter'!,retrotraduccion,aprobado,,0.3884
+RT_0070,¡Yo pago!,DES,kua panwilektulek,retrotraduccion,aprobado,,0.3912
+RT_0071,Me liberé.,DES,yan'wantulek,retrotraduccion,aprobado,,0.503
+RT_0072,"Yo yo perdí todo. Ahora, he perdido mi vida.",DES,kui'na kua iñer wer'lek. ipa'li'na ku'la nanpi'nek.,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.043),0.0428
+RT_0073,Tom ha saltado,DES,tom indek'lli,retrotraduccion,aprobado,,0.3256
+RT_0074,- Lo conseguimos.,DES,- kananer'wa',retrotraduccion,aprobado,,0.46
+RT_0075,Hemos tenido que marcharnos.,DES,pa'a'kawa'su' ñapallidek,retrotraduccion,aprobado,,0.5569
+RT_0076,Venir aquí,DES,wencher' asek,retrotraduccion,aprobado,,0.4657
+RT_0077,- Somos más débiles... - Vamos,DES,wa'danpindek a'pinta' ... - pa'awa',retrotraduccion,aprobado,,0.375
+RT_0078,Termínalos de una vez....,DES,a'ta'wanter' enta'la...,retrotraduccion,aprobado,,0.3766
+RT_0079,Termina con ello.,DES,a'ta'wanter nanalek,retrotraduccion,aprobado,,0.4391
+RT_0080,Él es viejo.,DES,nana taserpiku',retrotraduccion,aprobado,,0.5101
+RT_0081,Tienen vino.,DES,vinu' a'ñapallina',retrotraduccion,aprobado,,0.5772
+RT_0082,Estaba feliz....,DES,musu' ñapawinek...,retrotraduccion,aprobado,,0.3839
+RT_0083,Le gustaba.,DES,iyatuwinek,retrotraduccion,aprobado,,0.3286
+RT_0084,Está simulando que come.,DES,luwer'apalli ka'apalli,retrotraduccion,aprobado,,0.4588
+RT_0085,Ya llegamos:,DES,ipa' ektu'llidek:,retrotraduccion,aprobado,,0.3432
+RT_0086,Me gustan y cocinero.,DES,iyatulek a'ñinchitulek.,retrotraduccion,aprobado,,0.2138
+RT_0087,Estoy leyendo.,DES,lunpalek,retrotraduccion,aprobado,,0.2998
+RT_0088,Puedo hacerlo yo.,DES,yennitulek nu'tak,retrotraduccion,aprobado,,0.4054
+RT_0089,- Confesé el honor.,DES,- luwantulek honra',retrotraduccion,aprobado,,0.3936
+RT_0090,-Como un pan.,DES,-ka'apalek ala'sa' pan,retrotraduccion,aprobado,,0.3659
+RT_0091,Como la fruta..,DES,ka'apalek wayupi,retrotraduccion,aprobado,,0.3674
+RT_0092,Tengo nuevas noticias.,DES,a'ñapalek tawa'su',retrotraduccion,aprobado,,0.5263
+RT_0093,Lo escucho.,DES,lauk'apalek,retrotraduccion,aprobado,,0.4401
+RT_0094,Me llaman.,DES,peklu'tulek,retrotraduccion,aprobado,,0.385
+RT_0095,la he amado.,DES,tantenlek,retrotraduccion,aprobado,,0.3498
+RT_0096,"Le perdí, amigo",DES,"a'wer'lek, wila",retrotraduccion,aprobado,,0.4535
+RT_0097,Tengo que esconderme.,DES,yumu'a'kasu' ñapalli,retrotraduccion,aprobado,,0.5502
+RT_0098,Leo los comentarios de nuestros padres.,DES,lunpalek tataweklusa' tuluner'kasu',retrotraduccion,aprobado,,0.3804
+RT_0099,- Quiero más.,DES,a'pinta' luwantulek,retrotraduccion,aprobado,,0.5383
+RT_0100,Estaba despierta.,DES,nanpiladasu' ñapawinek,retrotraduccion,aprobado,,0.5451
+RT_0101,Estaba mareaso.,DES,ñapawinek ñapawinek,retrotraduccion,aprobado,,0.324
+RT_0102,estaba cansada.,DES,saka'tusu' ñapawinek,retrotraduccion,aprobado,,0.5553
+RT_0103,Me equivoqué.,DES,aper'su' ñapalek,retrotraduccion,aprobado,,0.5352
+RT_0104,Soy finlandesa.,DES,finlandis nuka'ka,retrotraduccion,aprobado,,0.4056
+RT_0105,Soy turco.,DES,turku nuka'ka,retrotraduccion,aprobado,,0.43
+RT_0106,"Me llamo ""Pandilla"".",DES,"llillinwek ""pandilla"".",retrotraduccion,aprobado,,0.2325
+RT_0107,Me llamo mujer.,DES,llillinwek ku'aper.,retrotraduccion,aprobado,,0.2318
+RT_0108,Estoy casada.,DES,sadasu' ñapalek,retrotraduccion,aprobado,,0.5283
+RT_0109,Ahora estoy un vivo entusiasmo.,DES,ipa'la ñapalek musu' ñapalek.,retrotraduccion,aprobado,,0.2574
+RT_0110,Ayuno. Estoy ayunando.,DES,ayuno. ayuno'apalek.,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.145),0.1453
+RT_0111,Estoy saludada.,DES,lli'tusu' ñapalek,retrotraduccion,aprobado,,0.5437
+RT_0112,- Ustedes me traicionaron.,DES,- kenmama' wa'danpilalun,retrotraduccion,aprobado,,0.4623
+RT_0113,"No puedes creerme. - Usted la ha traicionado. No, no me lo has traicionado a mí ni me parece así.",DES,"- kenma u'chimuinpu'la. ma'i, ku'la u'chimuinpu'la a'chimuinpu'la'u, nu'su' lli'inpu'su'.",retrotraduccion,revisar_hablante_nativo,semantico(sim=0.191),0.1913
+RT_0114,Puedes pasar ustedes.,DES,kenmama' ku'la nakulli kenmama',retrotraduccion,aprobado,,0.4519
+RT_0115,Usted puede decirnos.,DES,kenma yennitula winta'mudek,retrotraduccion,aprobado,,0.3426
+RT_0116,Estás tan triste.,DES,u'chimu we'inutusu' ñapala,retrotraduccion,aprobado,,0.5311
+RT_0117,- Deberías dormir.,DES,- wichi'masu' ñapalli,retrotraduccion,aprobado,,0.4553
+RT_0118,Deberían quedárselo.,DES,kananer'kasu' ñapalli,retrotraduccion,aprobado,,0.5103
+RT_0119,Han escapado.,DES,chi'lek'llina',retrotraduccion,aprobado,,0.5464
+RT_0120,- No se atreve.,DES,-yatencha'ta,retrotraduccion,aprobado,,0.3557
+RT_0121,¡Bravo!,EMO,¡mupalli!,retrotraduccion,aprobado,,0.4562
+RT_0122,"- Oh, ¡no!",EMO,- ¡ma'sha!,retrotraduccion,aprobado,,0.3451
+RT_0123,Me contento.,EMO,sakeksu' ñapalek,retrotraduccion,aprobado,,0.7936
+RT_0124,Eso es triste.,EMO,nu'su' nuka'a,retrotraduccion,aprobado,,0.7546
+RT_0125,El lo siente como si yo me fuera.,EMO,nana lli'i'su' kua pa'apalek.,retrotraduccion,aprobado,,0.3267
+RT_0126,Ha sentido dolor.,EMO,iker'lli,retrotraduccion,aprobado,,0.5598
+RT_0127,Por que estás contento!,EMO,¡ma'ki musu' ñapala!,retrotraduccion,aprobado,,0.4651
+RT_0128,Te amo. Tengo gran tristeza.,EMO,luantullien. wapu' yennipalek.,retrotraduccion,aprobado,,0.3608
+RT_0129,"¡Ay, qué sueno!",EMO,¡ma'sha! ¡enpu'ni lli'inupa'!,retrotraduccion,aprobado,,0.4608
+RT_0130,Me alegro.,EMO,musu' ñapalek,retrotraduccion,aprobado,,0.7197
+RT_0131,¡Qué humillante! ¡Hola!,EMO,¡embu'ni enpu'nipa'! lli'au!,retrotraduccion,aprobado,,0.4914
+RT_0132,Qué suerte!,EMO,¡embu'ni mulli'ipa'!,retrotraduccion,aprobado,,0.5593
+RT_0133,¿Qué tan contento estoy!,EMO,¡embu'ni musu' ñapalek!,retrotraduccion,aprobado,,0.4864
+RT_0134,Me asusta.,EMO,imanantusu',retrotraduccion,aprobado,,0.7461
+RT_0135,Eso me duele mucho.,EMO,nana musu' ikerlli,retrotraduccion,aprobado,,0.7006
+RT_0136,¡Eso está feo!,EMO,¡nasu' u'chimu!,retrotraduccion,aprobado,,0.5359
+RT_0137,Me divierte.,EMO,sakek'su',retrotraduccion,aprobado,,0.7851
+RT_0138,Pero de verdad qué horror. Pero el chico te puso bien delante al pie de la letra.,EMO,tekkinchima enpu'ni enpu'nipa' enpu'nipa' nana wila u'chimu lli'inupa'lli.,retrotraduccion,aprobado,,0.4423
+RT_0139,¡Que triste es esta sensación... mi dolor!,EMO,¡enpu'ni lli'inutapa' asu' sensación... ikerpi'lek!,retrotraduccion,aprobado,,0.3191
+RT_0140,No tengo ningún sueño.,EMO,ku'la ala'sa' wa'lata'pi'nek,retrotraduccion,aprobado,,0.7422
+RT_0141,¡ Qué alegría!,EMO,¡embu'ni sakeksu'!,retrotraduccion,aprobado,,0.5559
+RT_0142,Me preocupo bastante un par de kilómetros.,EMO,a'pinta' luwek'apalek ala'sa' kilometr.,retrotraduccion,aprobado,,0.2631
+RT_0143,"¡Ay, qué frío!",EMO,"¡u'chimu, empu'ni sanek'ipa'!",retrotraduccion,aprobado,,0.4052
+RT_0144,¡No puedo dormir en eso! Yo estoy incómodo.,EMO,¡yennitulek wichi'nek! kua iker'su' ñapalek.,retrotraduccion,aprobado,,0.2577
+RT_0145,¡Qué orgullo!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5112
+RT_0146,"¡Ay, qué ira!",EMO,¡ma'sha! ¡enpu'ni pilli'pa'!,retrotraduccion,aprobado,,0.4218
+RT_0147,Qué mal me siento. Mira qué extraño...,EMO,enpu'ni ñapalek. lli'ker' enpu'ni u'chimu...,retrotraduccion,aprobado,,0.3853
+RT_0148,Qué pena!,EMO,¡embu'ni ñinchitulek!,retrotraduccion,aprobado,,0.4562
+RT_0149,Eso me aflige.,EMO,nana luwek'apalek,retrotraduccion,aprobado,,0.7258
+RT_0150,¡Cuánto me lastima!,EMO,¡embu'ni ñinchichi'nek!,retrotraduccion,aprobado,,0.4767
+RT_0151,"¡Oh, eso es bonito!",EMO,¡ma'sha u'chimusha!,retrotraduccion,aprobado,,0.4704
+RT_0152,Estoy desesperada.,EMO,ñapalek ñapalek,retrotraduccion,aprobado,,0.5098
+RT_0153,¡Me alegra mucho mucho verlo!,EMO,¡enpu'ni imbu'ni sakeksu' lli'amu!,retrotraduccion,aprobado,,0.3692
+RT_0154,"¡Oh, qué me alegro de la niña!",EMO,¡enpu'ni daker'i'na wilakuaper!,retrotraduccion,aprobado,,0.3393
+RT_0155,estoy preocupada.,EMO,worried ñapalek,retrotraduccion,aprobado,,0.4559
+RT_0156,¡Qué interesante!,EMO,¡enpu'ni musu'pa'!,retrotraduccion,aprobado,,0.593
+RT_0157,"Ay, ¡me alegro!",EMO,¡ma'sha sakeksu'!,retrotraduccion,aprobado,,0.515
+RT_0158,¿Por qué quieres que asista de tu vida?,EMO,¿ma'ki'na luwantulek nanpipen?,retrotraduccion,revisar_hablante_nativo,semantico(sim=0.156),0.1555
+RT_0159,¡Qué feliz estoy con la gente ah!,EMO,¡enpu'ni musu' ñapalek antu'lek ah!,retrotraduccion,aprobado,,0.4171
+RT_0160,Qué bonito.,EMO,embu'ni mulunsha,retrotraduccion,aprobado,,0.7211
+RT_0161,¡¿Me alegro tanto de tu mazote? !,EMO,¿musu'cha sakek'su' a'cha?,retrotraduccion,aprobado,,0.2589
+RT_0162,Estoy emocionada.,EMO,ñapalek sakeksu',retrotraduccion,aprobado,,0.7732
+RT_0163,Qué peligro.,EMO,embu'ni enpu'ni u'chimu,retrotraduccion,aprobado,,0.7844
+RT_0164,¡Cuánto extraño al chacra!,EMO,¡enpu'ni a'cha luwanpalek menmik!,retrotraduccion,aprobado,,0.4168
+RT_0165,Y a mí tengo mis peras con esto.,EMO,kua a'ñapalusa' asu'lek wa'danpinta'.,retrotraduccion,aprobado,,0.436
+RT_0166,"¡Que contenta, esa guisada!",EMO,¡enpu'ni musu' nana panwala!,retrotraduccion,aprobado,,0.433
+RT_0167,"¡Oh, qué belleza!",EMO,¡enpu'ni u'chimusha!,retrotraduccion,aprobado,,0.5072
+RT_0168,¡Me contagió abuela!,EMO,¡a'kaluwiñun amisha!,retrotraduccion,aprobado,,0.4614
+RT_0169,¡Lo miedo es la muerte!,EMO,¡ateklusa' chimiñi!,retrotraduccion,aprobado,,0.5018
+RT_0170,"- ¡Músgico, genial!",EMO,"- ¡muñin, u'chimu!",retrotraduccion,aprobado,,0.3898
+RT_0171,Como al día siguiente es el amanecer.,EMO,uklli ukllin ukllin uklli.,retrotraduccion,aprobado,,0.2244
+RT_0172,¡Qué alegre estoy con los shiwilu!,EMO,¡embu'ni sakeksu' ñapalek shiwilu'lusa'lek!,retrotraduccion,aprobado,,0.3249
+RT_0173,Oh. ¡Qué confusión!,EMO,¡ma'nen luwer'chi'ñi!,retrotraduccion,aprobado,,0.4728
+RT_0174,Que encanto,EMO,enpu'ni u'chimusha,retrotraduccion,aprobado,,0.8419
+RT_0175,¡Eso es curioso!,EMO,¡nasu' nuka'a!,retrotraduccion,aprobado,,0.4785
+RT_0176,¡Qué triste!,EMO,¡embu'ni we'inutusu'!,retrotraduccion,aprobado,,0.614
+RT_0177,- Eso es lindo !,EMO,- ¡mupalli nuka'a !,retrotraduccion,aprobado,,0.3749
+RT_0178,Eso sí que es gracioso.,EMO,nana' u'chimusha nuka'a,retrotraduccion,aprobado,,0.7877
+RT_0179,Un montón de cosas curiosas.,EMO,enpu'nipa' musu' ñinchitusu' ñapalli.,retrotraduccion,aprobado,,0.4689
+RT_0180,¡Que peso!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5112
+RT_0181,¡Qué horror!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion,aprobado,,0.5112
+RT_0182,¡Que romántica!,EMO,¡enpu'ni u'chimusha!,retrotraduccion,aprobado,,0.5072
+RT_0183,-¡Eso es lo mejor!,EMO,-Nasu' nuka'a!,retrotraduccion,aprobado,,0.3683
+RT_0184,¡Es fantástico!,EMO,¡u'chimuinchi nuka'a!,retrotraduccion,aprobado,,0.4663
+RT_0185,Que fiasco!,EMO,¡embu'ni ma'nenpa'!,retrotraduccion,aprobado,,0.5534
+RT_0186,- Que alivio.,EMO,- embu'ni ñapalek,retrotraduccion,aprobado,,0.5643
+RT_0187,Esa es una pena.,EMO,nana nu'su' ñapalli,retrotraduccion,aprobado,,0.6999
+RT_0188,-¡Es muy humillante! -¡Es cierto!,EMO,- ¡enpu'ni u'chimuinchi nuka'a!,retrotraduccion,aprobado,,0.3611
+RT_0189,"Sí, nada.",NEG,tekinchi,retrotraduccion,aprobado,,0.5093
+RT_0190,No comeré.,NEG,weranpi'nek,retrotraduccion,aprobado,,0.6649
+RT_0191,No hemos habla dido jamás sobre ello.,NEG,ñi lunpi'ñidek ñi enpi' nanalek.,retrotraduccion,aprobado,,0.453
+RT_0192,No he elegido.,NEG,ku'la tekchi'nek,retrotraduccion,aprobado,,0.6526
+RT_0193,No lo entiendo.,NEG,ñinchichi'nek,retrotraduccion,aprobado,,0.7961
+RT_0194,No ha niido un grito.,NEG,ñi ala'sa' lamapu'ñi.,retrotraduccion,aprobado,,0.5579
+RT_0195,No tiene agua.,NEG,ku'la dek'ñi,retrotraduccion,aprobado,,0.8121
+RT_0196,"No, no,no, no,no,noNo,no,no,no,no,no,no,no,noNo no, no, no,no,no",NEG,"ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha, ma'sha",retrotraduccion,aprobado,,0.278
+RT_0197,- Nada de maíz.,NEG,- ñi ma'i'ñi,retrotraduccion,aprobado,,0.6286
+RT_0198,Ni hablar.,NEG,ku'la lunpi'nek,retrotraduccion,aprobado,,0.7732
+RT_0199,no hay pescados.,NEG,ku'la samer'wanpi'ñi,retrotraduccion,aprobado,,0.7576
+RT_0200,No soy nada abuelos.,NEG,ñi enpu'ni papinku'lusa'.,retrotraduccion,aprobado,,0.5359
+RT_0201,Para mí es muy grave.,NEG,kualek enpu'ni ikersu' nuka'a,retrotraduccion,aprobado,,0.6138
+RT_0202,Estoy extrañando a la yuca.,NEG,luwer'wanpalek ker',retrotraduccion,aprobado,,0.6737
+RT_0203,Alguien viene aquí.,NEG,ala'sa' uk'apilelli asek,retrotraduccion,aprobado,,0.6512
+RT_0204,¿Quién lo sabe?,NEG,¿den ñinchitapalli?,retrotraduccion,aprobado,,0.3637
+RT_0205,Nadie vendrá,NEG,ñiden uk'i'ñi,retrotraduccion,aprobado,,0.8832
+RT_0206,Nadie va a pescar. Que la pelota entre en la pista.,NEG,ñiden pur'i'nchu. a'pinta' panwala pistak.,retrotraduccion,aprobado,,0.3783
+RT_0207,Nadie siembra..,NEG,ñiden tera'i'ñi,retrotraduccion,aprobado,,0.8852
+RT_0208,Aquí nadie muele.,NEG,asek ñiden pek'i'ñi.,retrotraduccion,aprobado,,0.5052
+RT_0209,nadie esta de puntas.,NEG,ñiden u'chi'ñi.,retrotraduccion,aprobado,,0.6528
+RT_0210,Él nunca siembra.,NEG,nana ku'la tera'pi'ñi,retrotraduccion,aprobado,,0.7584
+RT_0211,"Sí, no, no está a punto ninguna luz.",NEG,"- ma'sha, ma'sha, a'pintapi'ñi ninchi'ñi.",retrotraduccion,aprobado,,0.2817
+RT_0212,Yo nunca voy.,NEG,kua ku'la pa'api'nek,retrotraduccion,aprobado,,0.7697
+RT_0213,Nunca mastique.,NEG,ñinpi' peklu'pi'nek,retrotraduccion,aprobado,,0.874
+RT_0214,Ya no hay más.,NEG,a'pinta' ñapawi'ñi.,retrotraduccion,aprobado,,0.63
+RT_0215,Se ha ido.,NEG,pa'lli,retrotraduccion,aprobado,,0.5402
+RT_0216,Es asunto cerrado.,NEG,ku'la unku' nuka'a,retrotraduccion,aprobado,,0.7209
+RT_0217,Ha perdido.,NEG,kana'lli,retrotraduccion,aprobado,,0.5914
+RT_0218,No estoy más pescando más.,NEG,ñi a'pinta' pur'apalek ya'pinta'.,retrotraduccion,aprobado,,0.4873
+RT_0219,Eso hace todo.,NEG,nana nu'tapalli iñer',retrotraduccion,aprobado,,0.6669
+RT_0220,No siembra ya.,NEG,ku'la tera'pi'ñi ipa',retrotraduccion,aprobado,,0.8027
+RT_0221,De momento está en el hospital.,NEG,ipa'la kaluwi'palli,retrotraduccion,aprobado,,0.738
+RT_0222,"No llueve, me está dando problemas.",NEG,"u'lanpi'ñi, a'pinta'pallinerku.",retrotraduccion,aprobado,,0.3923
+RT_0223,Esto es todo.,NEG,asu' iñer',retrotraduccion,aprobado,,0.7378
+RT_0224,Sin pescado.,NEG,samer'wanek,retrotraduccion,aprobado,,0.6713
+RT_0225,No es de mandioca.,NEG,ma'i'na panwalalupa'.,retrotraduccion,aprobado,,0.5137
+RT_0226,Si no hay chicha.,NEG,a'pinta' ñapalli.,retrotraduccion,aprobado,,0.625
+RT_0227,Yo no copio.,NEG,kua ku'la copi'i'nek,retrotraduccion,aprobado,,0.7049
+RT_0228,Ya no es una siembra.,NEG,ñi a'pinta' tera'su'.,retrotraduccion,aprobado,,0.5934
+RT_0229,Hoy no es que lo pesque.,NEG,ipa'la samer'i'ñi.,retrotraduccion,aprobado,,0.477
+RT_0230,No bebo.,NEG,ku'la u'ñi,retrotraduccion,aprobado,,0.7915
+RT_0231,- No puede. - ¿Y entonces quién eres?,NEG,- ma'pu'si'ñi. - ¿den ipa'la ¿den a'cha?,retrotraduccion,aprobado,,0.279
+RT_0232,Ni fardo.,NEG,ninchi'nek,retrotraduccion,aprobado,,0.6291
+RT_0233,¡No chacras!,NEG,¡yataka'ta!,retrotraduccion,aprobado,,0.2703
+RT_0234,Yo tengo poco maíz.,NEG,kua luwanpalek ma'nen'apalek,retrotraduccion,aprobado,,0.6999
+RT_0235,Me falta poder.,NEG,luwanwantulek iyapa'su',retrotraduccion,aprobado,,0.7655
+RT_0236,No estoy sano.,NEG,ku'la sansa'pi'nek,retrotraduccion,aprobado,,0.7105
+RT_0237,Me negaré a irme.,NEG,luwanchi'nek pa'echek,retrotraduccion,aprobado,,0.6641
+RT_0238,Nadie se cria.,NEG,ñiden wichi'ñi,retrotraduccion,aprobado,,0.8504
+RT_0239,Nadea despierta.,NEG,damer' nanpiladasu',retrotraduccion,aprobado,,0.7339
+RT_0240,Nadie da el suministro de agua.,NEG,ñiden u'chi'ñi dekkunta'su'.,retrotraduccion,aprobado,,0.5637
+RT_0241,Nadie recolecta.,NEG,ñiden pek'chi'ñi,retrotraduccion,aprobado,,0.909
+RT_0242,Pero nunca coeo.,NEG,ñi'na ku'la ekpi'pi'nek,retrotraduccion,aprobado,,0.8084
+RT_0243,Yo nunca sano.,NEG,kua ku'la kaluwi'pi'nek,retrotraduccion,aprobado,,0.7799
+RT_0244,Nunca volverá.,NEG,ku'la adanta'pi'ñi,retrotraduccion,aprobado,,0.8583
+RT_0245,"""Jamás aprendié la mierda, yo mismo, tú mismo."" y tu sabes, nunca aprendí.",NEG,"- ñinchichi'nek ñinchichi'nek, kua, kenma.",retrotraduccion,aprobado,,0.3234
+RT_0246,La tienes?,PRG,¿a'ñapala?,retrotraduccion,aprobado,,0.6276
+RT_0247,¿De verdad? - Sí. Gracias...,PRG,¿tekinchi? - yes. yuspein...,retrotraduccion,aprobado,,0.3865
+RT_0248,¿Quién huyo?,PRG,¿den chipe'lli?,retrotraduccion,aprobado,,0.6074
+RT_0249,¿ Quién ganó?,PRG,¿den kana'tulli?,retrotraduccion,aprobado,,0.6605
+RT_0250,Â¿Estoy gorda o qué?,PRG,¿weipensu' ñapalek ma'nen?,retrotraduccion,aprobado,,0.6072
+RT_0251,¿Está murió? Sí.,PRG,¿chimiñi?,retrotraduccion,aprobado,,0.544
+RT_0252,- Si. ¿Se mide?,PRG,- ¡a'cha! ¿tekinchi'cha?,retrotraduccion,aprobado,,0.5346
+RT_0253,¿Es alta?,PRG,¿shipen a'cha?,retrotraduccion,aprobado,,0.652
+RT_0254,"Bien, claro, bueno ... No, no veo una idea.",PRG,"- enpu'ni, tekinchi, enpu'ni... ma'sha, ñi lli'inuta'nek ala'sa' i'la.",retrotraduccion,revisar_hablante_nativo,semantico(sim=0.175),0.175
+RT_0255,Es eso?,PRG,¿nu'a'cha?,retrotraduccion,aprobado,,0.6538
+RT_0256,¿Venimos aquí?,PRG,¿asek wencha'awa'?,retrotraduccion,aprobado,,0.6625
+RT_0257,- ¿En serio?,PRG,¿tekinchi?,retrotraduccion,aprobado,,0.5496
+RT_0258,¿Es esto?,PRG,¿asu' a'cha?,retrotraduccion,aprobado,,0.6484
+RT_0259,¿Fué divertido?,PRG,¿musu' ñiwiñi?,retrotraduccion,aprobado,,0.7234
+RT_0260,¡No! ¿Dónde estoy? .,PRG,¡ma'sha! ¿enñupa'cha ñapalek?,retrotraduccion,aprobado,,0.5398
+RT_0261,- Llamaste?,PRG,¿peklu'tula?,retrotraduccion,aprobado,,0.6194
+RT_0262,"¡¿Vamos, vamos? !",PRG,"- ¡enchu, enchu!",retrotraduccion,aprobado,,0.3176
+RT_0263,Estoy pensando y en mí misma. Está hablando de todos tus sueños.,PRG,"lli'inupalek, kualek. lupa'palli iñer wa'lata'penma'.",retrotraduccion,revisar_hablante_nativo,semantico(sim=0.060),0.0597
+RT_0264,Está usted enojado?,PRG,¿yusu' ñapala?,retrotraduccion,aprobado,,0.6747
+RT_0265,Oh... puedo empezar con algo ?,PRG,¿yennitulek tenmiansu'ak ala'sa'lek?,retrotraduccion,aprobado,,0.5819
+RT_0266,- ¿Podemos hablar?,PRG,¿yennitulekwa' lun'ak?,retrotraduccion,aprobado,,0.6783
+RT_0267,¿Podemos hablar?,PRG,¿yennitulekwa' lun'ak?,retrotraduccion,aprobado,,0.6783
+RT_0268,¿Tú ganaste? Y ¿por asi qué?,PRG,¿kenma kana'tula? ¿ma'ki'na?,retrotraduccion,aprobado,,0.647
+RT_0269,¿Juegas bolos?,PRG,¿indekllitapala bola'sa'?,retrotraduccion,aprobado,,0.5368
+RT_0270,¿Qué pasa?,PRG,¿ma'nen'cha?,retrotraduccion,aprobado,,0.6647
+RT_0271,¿Todo es tuyo?,PRG,¿kenma kenma' nuka'a?,retrotraduccion,aprobado,,0.6261
+RT_0272,¿Eso es todo?,PRG,¿nu'su' ñapalli?,retrotraduccion,aprobado,,0.6949
+RT_0273,¿Ninguno moderno?,PRG,¿niñinpu' modern?,retrotraduccion,aprobado,,0.583
+RT_0274,Tienes frío ?,PRG,¿sanek'wanpala?,retrotraduccion,aprobado,,0.6986
+RT_0275,Están sordos?,PRG,¿luwek'su' ñapalama'?,retrotraduccion,aprobado,,0.6941
+RT_0276,¿Tienes algo? - De acuerdo.,PRG,- ¿ma'nen a'ñapala?,retrotraduccion,aprobado,,0.6434
+RT_0277,- ¿Estás seguro?,PRG,- ¿tekinchi'cha?,retrotraduccion,aprobado,,0.6174
+RT_0278,Estás segura?,PRG,¿tekinchi'cha?,retrotraduccion,aprobado,,0.6466
+RT_0279,¿Estás segura?,PRG,¿tekinchi'cha' ñapala?,retrotraduccion,aprobado,,0.6885
+RT_0280,¿ Puedo intentar?,PRG,¿yennitulek inpaleriak?,retrotraduccion,aprobado,,0.6062
+RT_0281,¿Fue Tom?,PRG,¿tom ñiwiñi?,retrotraduccion,aprobado,,0.5777
+RT_0282,¿Le atendiste?,PRG,¿lachek'tula?,retrotraduccion,aprobado,,0.6659
+RT_0283,- ¿Firmó usted?,PRG,- ¿kenma tenmu'tulla?,retrotraduccion,aprobado,,0.6404
+RT_0284,¿Me verá bien?,PRG,¿musu' lli'echu?,retrotraduccion,aprobado,,0.6819
+RT_0285,¿Usted fuma?,PRG,¿kenma u'wa'tapala?,retrotraduccion,aprobado,,0.7064
+RT_0286,¿Roncas?,PRG,¿pilli'tula?,retrotraduccion,aprobado,,0.6014
+RT_0287,- ¿Roña?,PRG,- ¿wilen'lli?,retrotraduccion,aprobado,,0.5909
+RT_0288,¿Dorry?,PRG,¿wichi'la?,retrotraduccion,aprobado,,0.6027
+RT_0289,¿Queda arruinada?,PRG,¿wer'su' ñapalli?,retrotraduccion,aprobado,,0.7139
+RT_0290,¿Así bastara?,PRG,¿nanasa' a'cha?,retrotraduccion,aprobado,,0.7006
+RT_0291,¿Puedo provétírmemelos?,PRG,¿yennitulek lata'ak?,retrotraduccion,aprobado,,0.6342
+RT_0292,Claro. - ¿Lo podemos demostrar?,PRG,- ¿yennitulek a'lli'tak?,retrotraduccion,aprobado,,0.6155
+RT_0293,¡Oírmelo! ... ¡Ah!,PRG,¡lau'u! ... ¡a'cha!,retrotraduccion,aprobado,,0.3067
+RT_0294,¿Entonces le gustó?,PRG,¿nu'su' iyatulli?,retrotraduccion,aprobado,,0.6953
+RT_0295,¿Come carne ?,PRG,¿luwer'apalli flesh?,retrotraduccion,aprobado,,0.5676
+RT_0296,¿No estuvo bien en eso?,PRG,¿musu'chi'ñi nana?,retrotraduccion,aprobado,,0.7037
+RT_0297,- ¿La conoces? - Sí.,PRG,- ¿luwer'chapala?,retrotraduccion,aprobado,,0.5967
+RT_0298,¿La conocéis?,PRG,¿luwer'chapala?,retrotraduccion,aprobado,,0.6166
+RT_0299,- ¿Lo recuerdo bien?,PRG,- ¿luwer'inutapalek musu'?,retrotraduccion,aprobado,,0.6061
+RT_0300,¿Eso piensas? ¿Estás mal?,PRG,¿nu'tula? ¿musu' ñapala?,retrotraduccion,aprobado,,0.6854
+RT_0301,Usted lo ama?,PRG,¿kenma tanten'pala?,retrotraduccion,aprobado,,0.6807
+RT_0302,¿Ya me conoces?,PRG,¿ipa' luwer'chapalama?,retrotraduccion,aprobado,,0.6113
+RT_0303,- ¿Es maestro?,PRG,- ¿a'lektutek'a'cha?,retrotraduccion,aprobado,,0.6533
+RT_0304,estás satisfecha?,PRG,¿musu' ñapala?,retrotraduccion,aprobado,,0.6783
+RT_0305,¡Es un veneno!,PRG,¡pilu' nuka'a!,retrotraduccion,aprobado,,0.234
+RT_0306,¿Cómo dijo él?,PRG,¿ma'pu'si'pa' tulli nana?,retrotraduccion,aprobado,,0.6562
+RT_0307,Hola... ¿Cuál ha sido su plan?,PRG,- lli'a'cha... ¿ma'nen i'la'su' llia'lli?,retrotraduccion,aprobado,,0.5367
+RT_0308,¿Qué es lo que me falta?,PRG,¿ma'nen luwanpalek?,retrotraduccion,aprobado,,0.625
+RT_0309,¿Cuándo huirás?,PRG,¿enpi'pu'cha teka'chu?,retrotraduccion,aprobado,,0.7081
+RT_0310,¿Como qué ayudó?,PRG,¿ma'nen katu'pa'tulli?,retrotraduccion,aprobado,,0.6847
+RT_0311,¿Usted es de verdad?,PRG,¿tekinchi'na kenmama'?,retrotraduccion,aprobado,,0.6808
+RT_0312,Vamos.,REQUEST,pa'awa',retrotraduccion,aprobado,,0.5257
+RT_0313,Aguarda.,REQUEST,wa'tenker',retrotraduccion,aprobado,,0.5637
+RT_0314,sonriente.,REQUEST,yamerladaker',retrotraduccion,aprobado,,0.5325
+RT_0315,Sonria,REQUEST,yamerladalli,retrotraduccion,aprobado,,0.3012
+RT_0316,Levantar. (un objeto),REQUEST,yunsanker',retrotraduccion,aprobado,,0.5419
+RT_0317,Levántate.,REQUEST,yunsanker',retrotraduccion,aprobado,,0.5419
+RT_0318,Oíd.,REQUEST,lau'ter',retrotraduccion,aprobado,,0.5751
+RT_0319,Escucha.,REQUEST,lau'ter',retrotraduccion,aprobado,,0.5751
+RT_0320,- Vete.,REQUEST,- paker',retrotraduccion,aprobado,,0.4642
+RT_0321,Pasa.,REQUEST,enka'ker',retrotraduccion,aprobado,,0.6
+RT_0322,No entre.,REQUEST,ku'la yada'pi'ta,retrotraduccion,aprobado,,0.4518
+RT_0323,Quédate vigilándome.,REQUEST,llia'ker' lli'ker',retrotraduccion,aprobado,,0.5082
+RT_0324,Mírame.,REQUEST,lli'ker'u,retrotraduccion,aprobado,,0.5201
+RT_0325,Ocúpeles.,REQUEST,enka'ker',retrotraduccion,aprobado,,0.6
+RT_0326,No lloren!,REQUEST,¡yawellektama'!,retrotraduccion,aprobado,,0.4621
+RT_0327,No llores.,REQUEST,yawellektama',retrotraduccion,aprobado,,0.5904
+RT_0328,Espera aquí.,REQUEST,wa'tenker' asek,retrotraduccion,aprobado,,0.5226
+RT_0329,¡No te detengas!,REQUEST,¡yawa'tetcha!,retrotraduccion,aprobado,,0.3502
+RT_0330,"- Da gusto. - ¡Dios mío, gracias!",REQUEST,- ¡u'chimu! - ¡Dios ta'ituninger!,retrotraduccion,aprobado,,0.2545
+RT_0331,Habla en serio.,REQUEST,lunker' musu',retrotraduccion,aprobado,,0.5048
+RT_0332,Ten esto.,REQUEST,asu' a'ñapalli,retrotraduccion,aprobado,,0.4567
+RT_0333,Venga solo.,REQUEST,wencher' kenmasu',retrotraduccion,aprobado,,0.5115
+RT_0334,Vaya temprano.,REQUEST,paker' dasu'la,retrotraduccion,aprobado,,0.4712
+RT_0335,Y no les llames.,REQUEST,ku'la peklu'ta'ta',retrotraduccion,aprobado,,0.476
+RT_0336,Toma. Mira esto. En cuanto a la mueca y el ajo. ¡No !,REQUEST,ma'sha. lli'ker' asu'. ma'pu'si'na wa'dan. ¡ma'ni!,retrotraduccion,aprobado,,0.2046
+RT_0337,Mira.,REQUEST,lli'ker',retrotraduccion,aprobado,,0.5596
+RT_0338,Especifique más.,REQUEST,a'pinta' lli'ker',retrotraduccion,aprobado,,0.5551
+RT_0339,¿Lo haces tú?,REQUEST,¿kenma nu'ta'pala?,retrotraduccion,aprobado,,0.3333
+RT_0340,¿Pueden ayudarnos?,REQUEST,¿yennitulama katu'pa'a'mudek?,retrotraduccion,aprobado,,0.3106
+RT_0341,- ¿Qué? Lo sabe leer.,REQUEST,- ¿ma'nen? ñinchitapalli lun'ak,retrotraduccion,aprobado,,0.2864
+RT_0342,¿Puede ir andando?,REQUEST,¿yennitula dekkunta'a'mak?,retrotraduccion,aprobado,,0.3533
+RT_0343,Respóndenos.,REQUEST,na'pi'kudek,retrotraduccion,aprobado,,0.5481
+RT_0344,- T que este aqui?,REQUEST,- ¿asek a'cha?,retrotraduccion,aprobado,,0.3513
+RT_0345,- ¿Puedes dormir?,REQUEST,¿yennitula wichi'a'mak?,retrotraduccion,aprobado,,0.3352
+RT_0346,Ven mañana.,REQUEST,wencher' eklli,retrotraduccion,aprobado,,0.4977
+RT_0347,- Hazlo rápido.,REQUEST,- wiuksu' nu'ter',retrotraduccion,aprobado,,0.5237
+RT_0348,Hágalo conmigo.,REQUEST,kualek nu'ter',retrotraduccion,aprobado,,0.5985
+RT_0349,No se gorbilice.,REQUEST,ku'la wa'danpi'ñi,retrotraduccion,aprobado,,0.5085
+RT_0350,"Dame algo. ¿Qué tienes, mamá?",REQUEST,"- enka'u ma'nen'a. ¿ma'nen'a'cha, mamá?",retrotraduccion,aprobado,,0.2912
+RT_0351,Esperaremos allí.,REQUEST,nanek wa'tentaterwa',retrotraduccion,aprobado,,0.4627
+RT_0352,Guárdate esa.,REQUEST,sekdiperker' nana,retrotraduccion,aprobado,,0.5205
+RT_0353,Voy a intentarlo.,REQUEST,tekle'echek,retrotraduccion,aprobado,,0.5211
+RT_0354,Vamos a hacerlo.,REQUEST,nu'tawa',retrotraduccion,aprobado,,0.54
+RT_0355,Comamos acá.,REQUEST,weranwa' asek,retrotraduccion,aprobado,,0.4425
+RT_0356,¿Puedes ver?,REQUEST,¿yennitula lli'a'mak?,retrotraduccion,aprobado,,0.3623
+RT_0357,Siento atragantos entre mujeres y niños.,REQUEST,"wilalusa' lanpi'nek, wilalusa'lek.",retrotraduccion,revisar_hablante_nativo,semantico(sim=0.132),0.1321
+RT_0358,No funcionó,REQUEST,ku'la saka'chi'ñi,retrotraduccion,aprobado,,0.5526
+RT_0359,Olvídalo ahora.,REQUEST,ipa'la pinanerker',retrotraduccion,aprobado,,0.5146
+RT_0360,Llévamelo contigo.,REQUEST,ek'ker' kenmalek,retrotraduccion,aprobado,,0.5358
+RT_0361,Sigue intentándolo.,REQUEST,intekler'i'la,retrotraduccion,aprobado,,0.4842
+RT_0362,Déjenme en paz! ¡No sea eso!,REQUEST,¡ta'itula'u kua ta'itula'u! ¡na nana!,retrotraduccion,aprobado,,0.2244
+RT_0363,Dejadme sentirlo.,REQUEST,ta'itula'u lauk'echek,retrotraduccion,aprobado,,0.3355
+RT_0364,"Por ti, déjame ellos pelear.",REQUEST,kenmalek ta'itula'u nawa' idenma',retrotraduccion,aprobado,,0.4342
+RT_0365,- Es algo. Vamos a comer aquí. A comer a comer.,REQUEST,- ma'pu'su'. asek ka'awa'. ka'awa'.,retrotraduccion,aprobado,,0.305
+RT_0366,"¡Oh, está todo!",REQUEST,"¡ma'sha, iñer' ñapalli!",retrotraduccion,aprobado,,0.2646
+RT_0367,¿Lo encuentras?,REQUEST,¿panpala?,retrotraduccion,aprobado,,0.2419
+RT_0368,¡Es... me oyes... no la escucho...!,REQUEST,¡ma'sha... lauk'apalli... ku'la lauk'api'nek...!,retrotraduccion,aprobado,,0.2606
+RT_0369,Pueden escucharnos. No se muevan.,REQUEST,Yennitullina' lauk'llidek. Yennitullina'.,retrotraduccion,aprobado,,0.2262
+RT_0370,¿Puede ayudarme?,REQUEST,¿yennitula katu'pa'a'muk?,retrotraduccion,aprobado,,0.3351
+RT_0371,Puedes mostrarme?,REQUEST,¿yennitula a'lli'a'muk?,retrotraduccion,aprobado,,0.3485
+RT_0372,Continúa mi examen.,REQUEST,tupiter'er' ku'la'ku,retrotraduccion,aprobado,,0.5086
+RT_0373,Oye.,SAL,lli'ker',retrotraduccion,aprobado,,0.7068
+RT_0374,¡Les veo después!,SAL,¡a'lli'lek ipa'lin!,retrotraduccion,aprobado,,0.3836
+RT_0375,¡Adiós!,SAL,¡pante'chek!,retrotraduccion,aprobado,,0.495
+RT_0376,Te veo mejor.,SAL,lli'apallien u'chimu,retrotraduccion,aprobado,,0.5594
+RT_0377,Los veré luego.,SAL,nanekla lli'echek,retrotraduccion,aprobado,,0.6807
+RT_0378,[Sacamos música especial] bienvenidas.,SAL,muwencha'ku',retrotraduccion,aprobado,,0.7951
+RT_0379,Bienvenidos.,SAL,muwencha'ku',retrotraduccion,aprobado,,0.7951
+RT_0380,"Buenos días, señora.",SAL,"muuklli, senñula'",retrotraduccion,aprobado,,0.7208
+RT_0381,¡Feliz Semana Santa!,SAL,¡musu' Semana Santa!,retrotraduccion,aprobado,,0.404
+RT_0382,Gracias por ti.,SAL,yuspeinet'echun,retrotraduccion,aprobado,,0.6841
+RT_0383,"Hola, cuñada.",SAL,"lli'taa, awinecha",retrotraduccion,aprobado,,0.5788
+RT_0384,Hola mamá.,SAL,lli'taa' awa,retrotraduccion,aprobado,,0.6952
+RT_0385,Hasta mañana.,SAL,ek'chek,retrotraduccion,aprobado,,0.7013
+RT_0386,Descanse un rato.,SAL,neria'ker' nanek,retrotraduccion,aprobado,,0.7128
+RT_0387,Deja que descansen.,SAL,ta'ituler' neria'kek,retrotraduccion,aprobado,,0.6902
+RT_0388,Buenos días.,SAL,muuklli,retrotraduccion,aprobado,,0.5612
+RT_0389,Buenos días.,SAL,muuklli,retrotraduccion,aprobado,,0.5612
+RT_0390,"Hola, abuelitas.",SAL,"lli'taa, amiku'lusa'",retrotraduccion,aprobado,,0.5844
+RT_0391,Nos vemos después.,SAL,nanekla lli'echu,retrotraduccion,aprobado,,0.5555
+RT_0392,Hola Señorita.,SAL,"lli'taa, señorita",retrotraduccion,aprobado,,0.3977
+RT_0393,"Tú entre, hágale frente...",SAL,"kenma da'encher', musu' ...",retrotraduccion,aprobado,,0.506
+RT_0394,"Pase, por favor.",SAL,da'kerker' please,retrotraduccion,aprobado,,0.6656
+RT_0395,"Buenos días, hermanas.",SAL,"muuklla, sha'wa'lusa'",retrotraduccion,aprobado,,0.7131
+RT_0396,"Hola, muchachos.",SAL,"lli'taa, wilalusa'",retrotraduccion,aprobado,,0.6739
+RT_0397,Hasta bien. Oh mi amor.,SAL,pantek'chek.,retrotraduccion,aprobado,,0.5521
+RT_0398,"Hasta el anochecer,",SAL,"dasu'walek,",retrotraduccion,aprobado,,0.5178
+RT_0399,Que tengan un buen mañana.,SAL,a'kawiner' musu' eklli,retrotraduccion,aprobado,,0.7899
+RT_0400,Nos vemos.,SAL,lli'ater',retrotraduccion,aprobado,,0.6678
+RT_0401,¿Hola?,SAL,¿hallo?,retrotraduccion,aprobado,,0.2933
+RT_0402,- Hola también.,SAL,- lli'taa',retrotraduccion,aprobado,,0.5858
+RT_0403,Adiós al prójimo.,SAL,pantekchek ali'la,retrotraduccion,aprobado,,0.6573
+RT_0404,"Adiós, señora.",SAL,"pantekchek, senñula'",retrotraduccion,aprobado,,0.6661
+RT_0405,Cuídate.,SAL,inluukter',retrotraduccion,aprobado,,0.6585
+RT_0406,Adiós.,SAL,pantekchek,retrotraduccion,aprobado,,0.5192
+RT_0407,Le veré luego.,SAL,nanekla lli'echek,retrotraduccion,aprobado,,0.6807
+RT_0408,Chao abuelos.,SAL,chao papinkuku'lusa',retrotraduccion,aprobado,,0.7823
+RT_0409,Adiósabuela...,SAL,pantekchek...,retrotraduccion,aprobado,,0.4239
+RT_0410,"Hola, vecino.",SAL,"lli'taa, wa'danpi",retrotraduccion,aprobado,,0.5641
+RT_0411,Es Vd. Tan bueno...,SAL,kenma nuka'a. Enpu'ni mukankan...,retrotraduccion,aprobado,,0.3187
+RT_0412,Bienvenido al pueblo.,SAL,muwencha'ker' ñinanlu',retrotraduccion,aprobado,,0.8158
+RT_0413,Bienvenidos al pueblo.,SAL,muwencha'ku' ñinanluk,retrotraduccion,aprobado,,0.846
+RT_0414,"¡Bienvenidos al pueblo, Sr. Pesse!",SAL,"¡wencha'ku' ñinanluk, señor Pesse!",retrotraduccion,aprobado,,0.2373
+RT_0415,Bienvenido a Jeberos.,SAL,muwencha'ker' shiwilu,retrotraduccion,aprobado,,0.7868
+RT_0416,¿De verdad quiere que se lo digas a la chica.,SAL,¿tekinchi yañinchitulek wila kuaper.,retrotraduccion,revisar_hablante_nativo,semantico(sim=-0.020),-0.0198
+RT_0417,Bienvenido a casa.,SAL,muwencha'ku pidek'kek,retrotraduccion,aprobado,,0.7457
+RT_0418,Bienvenido a casa.,SAL,muwencha'ku pidek'kek,retrotraduccion,aprobado,,0.7457
+RT_0419,No sólo me duele que llegas bien.,SAL,ñinchisu' a'ka'deklek musu' ektu'kerka.,retrotraduccion,aprobado,,0.4326
+RT_0420,"Estás usted aquí, OK.",SAL,"kenma asek ñapala, ok",retrotraduccion,aprobado,,0.4453
+RT_0421,Estás aquí.,SAL,asek' ñapala,retrotraduccion,aprobado,,0.744
+RT_0422,nos quisimos ver.,SAL,lli'tulekwa',retrotraduccion,aprobado,,0.7376
+RT_0423,Me marcho.,SAL,pa'echek,retrotraduccion,aprobado,,0.6967
+RT_0424,Que tengan buena.,SAL,a'ñapalusa' musu'.,retrotraduccion,aprobado,,0.6498
+RT_0425,Teneduna bien.,SAL,musu' a'pinta',retrotraduccion,aprobado,,0.8041
+RT_0426,"Hasta mañana, Padrea.",SAL,"uklli, amisha",retrotraduccion,aprobado,,0.5077
+RT_0427,Hasta hoy.,SAL,ipa'lalek,retrotraduccion,aprobado,,0.7435
+RT_0428,Te veo bien,SAL,lli'apalli musu',retrotraduccion,aprobado,,0.7654

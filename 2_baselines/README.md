@@ -25,8 +25,7 @@ caracterización de embeddings (OE3).
   (`comun.dividir_train_dev_test`/`_normalizar_shiwilu`): el corpus tiene
   oraciones muy cortas que se repiten con distinta glosa en español,
   mayúsculas o puntuación (`"MUPALLI"`, `"¡PANTE'CHEK!"` vs. `"pante'chek"`),
-  y antes de este ajuste una misma oración podía caer en train y en test a
-  la vez.
+  y antes de este ajuste una misma oración podía caer en train y en test a la vez. El split se calculó una sola vez y quedó **congelado** en `split_fijo.csv`: todos los scripts lo leen de ahí en vez de recalcularlo (así ningún cambio de código o de versión de librerías lo reordena y contamina las técnicas de aumento generadas a partir de train).
 
 ## Uso
 

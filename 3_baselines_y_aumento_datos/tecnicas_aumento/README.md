@@ -7,8 +7,8 @@ contra ellos.
 | Técnica | Generador | Estado |
 |---|---|---|
 | **Mixup** | Ninguno — interpola embeddings de oraciones shiwilu existentes de la misma categoría | ✅ Probado — [`mixup.py`](mixup.py) |
-| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (140 oraciones, 85 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
-| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (420 oraciones, 416 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
+| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (138 oraciones, 81 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
+| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (429 oraciones, 421 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
 
 **Notas de metodología (2026-09-21/22):**
 - Generate-then-Refine y Retrotraducción usaban ejemplos few-shot y el
@@ -24,6 +24,11 @@ contra ellos.
   por texto **normalizado** (sin mayúsculas ni puntuación), cerrando esa fuga
   también. Ver [`../../2_baselines/README.md`](../../2_baselines/README.md)
   para el detalle y los números finales de los 12 experimentos.
+- El split quedó **congelado** en `2_baselines/split_fijo.csv`. Ambas técnicas
+  se regeneraron desde ese split final (Retrotraducción en Colab, con el mismo
+  checkpoint), así que ninguna oración de dev/test participó en generar ni
+  filtrar texto sintético. Si algún día se recalcula el split, hay que
+  regenerar las dos técnicas.
 
 ## Mixup
 
@@ -91,24 +96,18 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/generate_then_refine.py --ca
 ```
 
 Requiere `ANTHROPIC_API_KEY` en `.env` (ver `.env.example` en la raíz del
-repositorio). Ya probado sobre las 7 categorías (20 por categoría): 140
-oraciones generadas, 85 aprobadas. Tasa de aprobación muy dispareja por
-categoría — SAL y DES perfectas (20/20), PRG y REQUEST muy bajas (8/20
-y 2/20), probablemente porque dependen de morfología verbal (conjugación
+repositorio). Ya probado sobre las 7 categorías (20 por categoría): 138 oraciones generadas (2 candidatos del LLM llegaron mal formados y se descartaron), 81 aprobadas. Tasa de aprobación muy dispareja por
+categoría — SAL y DES casi perfectas (19/19 y 20/20), PRG y REQUEST muy bajas (7/20 y 2/20), probablemente porque dependen de morfología verbal (conjugación
 imperativa, partículas interrogativas) que un LLM sin ajuste fino reproduce
 peor que los marcadores léxicos simples de SAL/DES.
 
 | Modelo | Sin aumento | Generate-then-Refine | Delta |
 |---|---|---|---|
-| LaBSE | 0.6943 | 0.6830 | -0.0113 |
-| mBERT | 0.6977 | 0.6833 | -0.0144 |
-| XLM-R | 0.7223 | **0.7410** | +0.0187 |
+| LaBSE | 0.6943 | 0.7046 | +0.0103 |
+| mBERT | 0.6977 | 0.6652 | -0.0325 |
+| XLM-R | 0.7223 | **0.7607** | +0.0384 |
 
-XLM-R + Generate-then-Refine es la mejor de las 12 combinaciones evaluadas
-en toda la matriz — aunque su intervalo de confianza bootstrap ([0.6422,
-0.8209]) se solapa casi por completo con el de XLM-R sin aumento ([0.6253,
-0.8057]), así que no hay una "mejor técnica" concluyente para XLM-R con
-~99 oraciones de prueba.
+XLM-R + Generate-then-Refine es la mejor de las 12 combinaciones evaluadas en toda la matriz. Su intervalo de confianza bootstrap ([0.6695, 0.8378]) se solapa bastante con el de XLM-R sin aumento ([0.6253, 0.8057]), así que la mejora es una tendencia, no una diferencia concluyente con ~99 oraciones de prueba. En mBERT la técnica empeora el F1 y en LaBSE lo mejora apenas.
 
 ### Salida
 
@@ -141,7 +140,12 @@ Este script **no** entrena nada — necesita el checkpoint ya entrenado. Ver
 notebook completo (clona su repo y reentrena su configuración campeona
 `v2.1b LoRA+` en Colab, ya que no se distribuyen los pesos originales; ya
 verificado: chrF++ promedio = 43.19, consistente con lo reportado por el
-autor). Resumen de los comandos:
+autor). El notebook asume que el checkpoint ya está guardado en Drive
+(`shiwilu_checkpoint/`) y solo lo copia y corre `retrotraduccion.py`; el
+reentrenamiento queda como paso opcional. Hay que volver a correrlo cada vez
+que cambie el split (las paráfrasis salen de las oraciones de train), y el
+repo debe estar en GitHub con `2_baselines/split_fijo.csv` incluido.
+Resumen de los comandos para entrenar desde cero:
 
 ```bash
 git clone https://github.com/fapi19/Tesis_Spa-Jeb.git 3_baselines_y_aumento_datos/tecnicas_aumento/tesis_spa_jeb
@@ -162,22 +166,16 @@ python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py \
 python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --checkpoint ... --categorias DES NEG --limite 20
 ```
 
-Ya probado de punta a punta: 420 oraciones generadas (de 490 de train — el
-resto eran paráfrasis idénticas al original, descartadas), 416 aprobadas por
-los filtros y 4 marcadas `revisar_hablante_nativo`.
+Ya probado de punta a punta: 429 oraciones generadas (de 497 de train — el
+resto eran paráfrasis idénticas al original, descartadas), 421 aprobadas por los filtros y 8 marcadas `revisar_hablante_nativo`.
 
 | Modelo | Sin aumento | Retrotraducción | Delta |
 |---|---|---|---|
-| LaBSE | 0.6943 | 0.6252 | -0.0691 |
-| mBERT | 0.6977 | 0.5859 | -0.1118 |
-| XLM-R | 0.7223 | 0.7323 | +0.0100 |
+| LaBSE | 0.6943 | 0.6749 | -0.0194 |
+| mBERT | 0.6977 | 0.6202 | -0.0775 |
+| XLM-R | 0.7223 | 0.6546 | -0.0677 |
 
-Retrotraducción es la técnica que más empeora a mBERT y LaBSE de las 3
-evaluadas — no está claro por qué, pero es consistente con que el paso de
-parafraseo en español (Helsinki-NLP) introduce variación léxica que el
-NMT de F. Prado no siempre traduce de forma fiel al shiwilu (ver
-`similitud_labse` en `salidas/retrotraduccion.csv` para los casos límite).
-En XLM-R la mejora es marginal y dentro del margen de incertidumbre.
+Retrotraducción empeora el F1 de los 3 modelos frente al baseline sin aumento (de -0.02 a -0.08), y es la técnica con peor resultado de las 3. No está claro por qué, pero es consistente con que el paso de parafraseo en español (Helsinki-NLP) introduce variación léxica que el NMT de F. Prado no siempre traduce de forma fiel al shiwilu (ver `similitud_labse` en `salidas/retrotraduccion.csv` para los casos límite). Las diferencias en LaBSE están dentro del margen de incertidumbre; en mBERT y XLM-R la caída es más marcada.
 
 ### Salida
 
