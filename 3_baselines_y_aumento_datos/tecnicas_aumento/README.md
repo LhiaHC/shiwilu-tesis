@@ -121,7 +121,7 @@ Opera sobre el componente en **español** del corpus (no existe
 retrotraducción directa shiwilu→shiwilu, pues no hay sistemas de traducción
 automática disponibles para shiwilu fuera del que aquí se reutiliza):
 
-1. **Paráfrasis en español:** cada oración de entrenamiento se retrotraduce
+1. **Paráfrasis en español** (etapa `generar`, en Colab, sobre las 700 oraciones del corpus): cada oración se retrotraduce
    español→inglés→español con Helsinki-NLP (Opus-MT), obteniendo una
    paráfrasis nueva pero semánticamente equivalente. Se descartan las
    paráfrasis idénticas al original.
@@ -129,7 +129,7 @@ automática disponibles para shiwilu fuera del que aquí se reutiliza):
    sistema NMT (NLLB-200 + LoRA) desarrollado por **F. Prado** en su propia
    tesis (comunicación personal, 14 de septiembre de 2026;
    <https://github.com/fapi19/Tesis_Spa-Jeb>).
-3. **Refinamiento:** mismo protocolo que Generate-then-Refine (filtro de
+3. **Refinamiento** (etapa `filtrar`, en local, solo con las filas cuya oración de origen está en train): mismo protocolo que Generate-then-Refine (filtro de
    idioma + filtro semántico vía LaBSE) — ambas técnicas comparten el riesgo
    de producir enunciados sintéticos erróneos, según la metodología (Cap. 2.2.8).
 
@@ -143,9 +143,7 @@ verificado: chrF++ promedio = 43.19, consistente con lo reportado por el
 autor). El notebook asume que el checkpoint ya está guardado en Drive
 (`shiwilu_checkpoint/`) y solo lo copia y corre `retrotraduccion.py`; el
 reentrenamiento queda como paso opcional. Hay que volver a correrlo cada vez
-que cambie el split (las paráfrasis salen de las oraciones de train), y el
-repo debe estar en GitHub con `2_baselines/split_fijo.csv` incluido.
-Resumen de los comandos para entrenar desde cero:
+que cambie el corpus, no el split: el notebook genera un catálogo de las 700 oraciones (`salidas/retrotraduccion_pool.csv`, con `id_origen`) y el filtro que depende del train se aplica después, en local, con `--etapa filtrar`. Resumen de los comandos para entrenar desde cero:
 
 ```bash
 git clone https://github.com/fapi19/Tesis_Spa-Jeb.git 3_baselines_y_aumento_datos/tecnicas_aumento/tesis_spa_jeb
@@ -163,7 +161,8 @@ vendoriza, ver `.gitignore`).
 ```bash
 python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py \
     --checkpoint 3_baselines_y_aumento_datos/tecnicas_aumento/tesis_spa_jeb/models/nmt/nllb_bidi_lora_v2_1b_loraplus_xl
-python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --checkpoint ... --categorias DES NEG --limite 20
+python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --checkpoint ... --categorias DES NEG --limite 20   # prueba rapida
+python 3_baselines_y_aumento_datos/tecnicas_aumento/retrotraduccion.py --etapa filtrar --salida salidas/retrotraduccion_split.csv   # local, tras tener el catalogo
 ```
 
 Ya probado de punta a punta: 429 oraciones generadas (de 497 de train — el
