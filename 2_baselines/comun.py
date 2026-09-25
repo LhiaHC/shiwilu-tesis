@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import re
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,6 +34,7 @@ from shiwilu.taxonomia import INTENCIONES
 SEMILLA = 42
 PROP_DEV_TEST = 0.30   # 70% train, 15% dev, 15% test
 VALORES_C = [0.01, 0.1, 1.0, 3.0, 10.0]   # grilla de ajuste sobre el dev
+SPLIT_FIJO_CSV = Path(__file__).resolve().parent / "split_fijo.csv"
 
 # Modelos de embeddings soportados: nombre corto -> (id de HuggingFace, tipo)
 #   "sentence_transformers": el modelo ya trae su propio pooling de oracion.
@@ -68,30 +70,62 @@ def _normalizar_shiwilu(texto: str) -> str:
     return _RE_NO_ALFANUMERICO.sub("", str(texto).lower())
 
 
-def dividir_train_dev_test(df: pd.DataFrame):
-    """Divide train/dev/test agrupando por texto en shiwilu NORMALIZADO.
+def _asignar_split(df: pd.DataFrame) -> pd.DataFrame:
+    """Calcula el split 70/15/15 por GRUPO de texto shiwilu normalizado.
 
-    El corpus tiene oraciones tan cortas que se repiten con distinta glosa en
-    espanol, mayusculas o puntuacion (ej. "MUPALLI", "�PANTE'CHEK!" vs.
-    "pante'chek"). Dividir por fila suelta (o por texto exacto sin normalizar)
-    podia mandar la misma oracion a train Y a test a la vez, y el
-    clasificador "adivinaba" esas filas de memoria en vez de generalizar.
-    Agrupar por texto normalizado antes de dividir asegura que cada oracion
-    en shiwilu (con sus variantes de puntuacion) caiga entera en un solo split.
+    Devuelve un DataFrame (shiwilu_norm, split) con una fila por grupo.
     """
-    df = df.copy()
-    df["_shiwilu_norm"] = df["shiwilu"].map(_normalizar_shiwilu)
-    grupos = df.groupby("_shiwilu_norm", as_index=False)["intencion"].first()
+    claves = df["shiwilu"].map(_normalizar_shiwilu)
+    grupos = (
+        pd.DataFrame({"shiwilu_norm": claves, "intencion": df["intencion"]})
+        .groupby("shiwilu_norm", as_index=False)["intencion"].first()
+    )
     train_g, resto_g = train_test_split(
         grupos, test_size=PROP_DEV_TEST, stratify=grupos["intencion"], random_state=SEMILLA,
     )
     dev_g, test_g = train_test_split(
         resto_g, test_size=0.5, stratify=resto_g["intencion"], random_state=SEMILLA,
     )
-    train = df[df["_shiwilu_norm"].isin(train_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
-    dev = df[df["_shiwilu_norm"].isin(dev_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
-    test = df[df["_shiwilu_norm"].isin(test_g["_shiwilu_norm"])].drop(columns="_shiwilu_norm")
-    return train, dev, test
+    return pd.concat([
+        pd.DataFrame({"shiwilu_norm": train_g["shiwilu_norm"], "split": "train"}),
+        pd.DataFrame({"shiwilu_norm": dev_g["shiwilu_norm"], "split": "dev"}),
+        pd.DataFrame({"shiwilu_norm": test_g["shiwilu_norm"], "split": "test"}),
+    ], ignore_index=True)
+
+
+def dividir_train_dev_test(df: pd.DataFrame):
+    """Devuelve (train, dev, test) leyendo el split CONGELADO de `split_fijo.csv`.
+
+    El split se calcula una sola vez (agrupando por texto shiwilu normalizado,
+    para que una misma oracion con variantes de mayusculas/puntuacion no caiga
+    en dos splits) y se guarda en `split_fijo.csv`. A partir de ahi todos los
+    scripts leen ese archivo en vez de recalcularlo.
+
+    Esto importa porque retrotraduccion y Generate-then-Refine generan texto
+    sintetico a partir de las oraciones de train: si el split cambiara despues
+    (por un cambio de codigo, de version de sklearn, etc.), oraciones que
+    fueron train al generar podrian pasar a ser test, y el aumento quedaria
+    contaminado. Para recalcular el split a proposito, borrar `split_fijo.csv`
+    — y entonces hay que REGENERAR las tecnicas de aumento y re-correr todo.
+    """
+    if SPLIT_FIJO_CSV.exists():
+        asignacion = pd.read_csv(SPLIT_FIJO_CSV, encoding="utf-8", dtype=str, keep_default_na=False)
+    else:
+        asignacion = _asignar_split(df)
+        asignacion.to_csv(SPLIT_FIJO_CSV, index=False, encoding="utf-8")
+        print(f"[split] calculado y guardado en {SPLIT_FIJO_CSV}")
+
+    mapa = dict(zip(asignacion["shiwilu_norm"], asignacion["split"]))
+    claves = df["shiwilu"].map(_normalizar_shiwilu)
+    sin_asignar = claves[~claves.isin(mapa)]
+    if len(sin_asignar):
+        raise SystemExit(
+            f"{len(sin_asignar)} oraciones del corpus no estan en {SPLIT_FIJO_CSV.name} "
+            "(el corpus cambio despues de congelar el split). Si fue a proposito, borra "
+            "ese archivo, regenera las tecnicas de aumento y re-corre los experimentos."
+        )
+    split = claves.map(mapa)
+    return df[split == "train"], df[split == "dev"], df[split == "test"]
 
 
 def _mean_pooling(model_output, attention_mask):
