@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -26,7 +27,7 @@ from sklearn.metrics import (
     confusion_matrix,
     f1_score,
 )
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedGroupKFold, train_test_split
 
 from shiwilu.rutas import CORPUS_CSV
 from shiwilu.taxonomia import INTENCIONES
@@ -35,6 +36,8 @@ SEMILLA = 42
 PROP_DEV_TEST = 0.30   # 70% train, 15% dev, 15% test
 VALORES_C = [0.01, 0.1, 1.0, 3.0, 10.0]   # grilla de ajuste sobre el dev
 SPLIT_FIJO_CSV = Path(__file__).resolve().parent / "split_fijo.csv"
+FOLDS_FIJOS_CSV = Path(__file__).resolve().parent / "folds_fijos.csv"
+N_FOLDS = 5
 
 # Modelos de embeddings soportados: nombre corto -> (id de HuggingFace, tipo)
 #   "sentence_transformers": el modelo ya trae su propio pooling de oracion.
@@ -68,6 +71,30 @@ def _normalizar_shiwilu(texto: str) -> str:
     caracter por caracter.
     """
     return _RE_NO_ALFANUMERICO.sub("", str(texto).lower())
+
+
+def _normalizar_estricto(texto: str) -> str:
+    """Como `_normalizar_shiwilu` pero tambien ignora tildes y la n con tilde
+    ("ipa' ñinchitulek" == "ipa' ninchitulek"). Se usa para deduplicar texto sintetico
+    contra el test y como criterio de agrupacion de los folds (ver `cargar_folds`).
+    """
+    sin_marcas = "".join(c for c in unicodedata.normalize("NFD", str(texto).lower())
+                         if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-z0-9’']", "", sin_marcas)
+
+
+def quitar_puntuacion(texto: str, minusculas: bool = True) -> str:
+    """Deja solo las palabras (con sus apostrofes), separadas por un espacio.
+
+    Con `minusculas=True` (por defecto) tambien pasa todo a minusculas. Ambas
+    cosas importan porque son atajos del corpus: los signos `¿?` delatan PRG y
+    las oraciones TODAS EN MAYUSCULAS son el 100% de DES, PRG y REQUEST (contra
+    10-21% en las demas categorias).
+    """
+    t = str(texto)
+    if minusculas:
+        t = t.lower()
+    return " ".join(re.findall(r"[^\W_]+(?:'[^\W_]+)*", t))
 
 
 def _asignar_split(df: pd.DataFrame) -> pd.DataFrame:
@@ -134,6 +161,12 @@ def _mean_pooling(model_output, attention_mask):
     return torch.sum(token_embeddings * mask, 1) / torch.clamp(mask.sum(1), min=1e-9)
 
 
+# Los modelos se cargan una sola vez por proceso: recargar LaBSE en cada llamada
+# (Generate-then-Refine lo hace varias veces por categoria) acumula memoria y
+# termino en un "segmentation fault".
+_CACHE_MODELOS: dict = {}
+
+
 def extraer_embeddings(oraciones: list[str], nombre_modelo: str) -> np.ndarray:
     """Extrae embeddings de oracion, congelados (sin ajuste fino)."""
     if nombre_modelo not in MODELOS:
@@ -143,15 +176,18 @@ def extraer_embeddings(oraciones: list[str], nombre_modelo: str) -> np.ndarray:
     if tipo == "sentence_transformers":
         from sentence_transformers import SentenceTransformer
 
-        modelo = SentenceTransformer(hf_id)
-        return modelo.encode(oraciones, convert_to_numpy=True, show_progress_bar=True)
+        if hf_id not in _CACHE_MODELOS:
+            _CACHE_MODELOS[hf_id] = SentenceTransformer(hf_id)
+        return _CACHE_MODELOS[hf_id].encode(oraciones, convert_to_numpy=True, show_progress_bar=True)
 
     # tipo == "mean_pooling": mBERT / XLM-R, sin cabeza de embedding de oracion
     from transformers import AutoModel, AutoTokenizer
 
-    tokenizer = AutoTokenizer.from_pretrained(hf_id)
-    modelo = AutoModel.from_pretrained(hf_id)
-    modelo.eval()
+    if hf_id not in _CACHE_MODELOS:
+        modelo_hf = AutoModel.from_pretrained(hf_id)
+        modelo_hf.eval()
+        _CACHE_MODELOS[hf_id] = (AutoTokenizer.from_pretrained(hf_id), modelo_hf)
+    tokenizer, modelo = _CACHE_MODELOS[hf_id]
 
     vectores = []
     batch_size = 16
@@ -224,3 +260,32 @@ def guardar_resultados(carpeta, titulo: str, info_extra: dict, resultado: dict) 
     print(f"F1 macro={m['f1_macro']:.4f}  F1 ponderado={m['f1_ponderado']:.4f}  "
           f"Exactitud={m['exactitud']:.4f}")
     print(f"Resultados guardados en {carpeta}")
+
+
+def cargar_folds(df: pd.DataFrame) -> np.ndarray:
+    """Fold (0..N_FOLDS-1) de cada fila del corpus, para validacion cruzada.
+
+    Igual que el split unico: se agrupa por texto shiwilu NORMALIZADO (una misma
+    oracion con variantes de mayusculas/puntuacion cae siempre en el mismo fold)
+    y se estratifica por categoria. Se calcula una sola vez y queda congelado en
+    `folds_fijos.csv`; para recalcularlo a proposito hay que borrar ese archivo
+    y regenerar las tecnicas de aumento que dependen del train de cada fold.
+    """
+    claves = df["shiwilu"].map(_normalizar_shiwilu)
+    claves_estrictas = df["shiwilu"].map(_normalizar_estricto)
+    if FOLDS_FIJOS_CSV.exists():
+        asignacion = pd.read_csv(FOLDS_FIJOS_CSV, encoding="utf-8", dtype=str, keep_default_na=False)
+    else:
+        cv = StratifiedGroupKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEMILLA)
+        fold = np.full(len(df), -1)
+        for k, (_, idx_test) in enumerate(cv.split(df, df["intencion"], groups=claves_estrictas)):
+            fold[idx_test] = k
+        asignacion = pd.DataFrame({"shiwilu_norm": claves.to_numpy(), "fold": fold}).drop_duplicates("shiwilu_norm")
+        asignacion.to_csv(FOLDS_FIJOS_CSV, index=False, encoding="utf-8")
+        print(f"[folds] calculados y guardados en {FOLDS_FIJOS_CSV}")
+    mapa = dict(zip(asignacion["shiwilu_norm"], asignacion["fold"].astype(int)))
+    faltan = int((~claves.isin(mapa)).sum())
+    if faltan:
+        raise SystemExit(f"{faltan} oraciones no estan en {FOLDS_FIJOS_CSV.name}: el corpus cambio; "
+                         "borra ese archivo y regenera las tecnicas de aumento.")
+    return claves.map(mapa).to_numpy()

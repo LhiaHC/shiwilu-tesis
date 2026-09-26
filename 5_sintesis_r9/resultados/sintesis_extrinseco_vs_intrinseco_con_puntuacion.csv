@@ -1,0 +1,4 @@
+modelo,f1_macro_sin_aumento,mejor_tecnica_extrinseca,f1_macro_mejor_config,mejor_estrategia_intrinseca,silueta_coseno_mejor_estrategia,rank_extrinseco,rank_intrinseco
+xlmr,0.7583086262733858,generate_then_refine,0.7685326359922852,max_pooling,-0.0349818095564842,1,3
+mbert,0.757673861691756,generate_then_refine,0.7623155411286889,combinacion_capas,-0.0054114968515932,2,1
+labse,0.7450696338645599,sin_aumento,0.7450696338645599,combinacion_capas,-0.0201767552644014,3,2

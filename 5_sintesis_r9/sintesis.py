@@ -5,9 +5,10 @@ No entrena ni mide nada nuevo: cruza dos evaluaciones que ya existen por
 separado para responder la pregunta de R9, "cual es la configuracion
 optima", desde dos angulos que pueden no coincidir:
 
-  EXTRINSECO (R4-R6, 3_baselines_y_aumento_datos/resumen_experimentos.csv)
+  EXTRINSECO (R4-R6, 3_baselines_y_aumento_datos/validacion_cruzada_resumen[_sin_puntuacion].csv)
       Que tan bien clasifica un modelo de embeddings + Regresion Logistica,
-      con o sin cada tecnica de aumento de datos. Metrica: F1 macro (test).
+      con o sin cada tecnica de aumento de datos. Metrica: F1 macro sobre las 700
+      predicciones de una validacion cruzada de 5 folds.
 
   INTRINSECO (R7-R8, 4_caracterizacion_embeddings/resultados/<corpus>/
       metricas_intrinsecas.csv)
@@ -23,7 +24,7 @@ tambien reporta si el aumento de datos de R6 mejora o empeora la calidad
 intrinseca de los embeddings (pregunta distinta de si mejora el F1).
 
 Entrada:
-    3_baselines_y_aumento_datos/resumen_experimentos.csv
+    3_baselines_y_aumento_datos/validacion_cruzada_resumen.csv
     4_caracterizacion_embeddings/resultados/original/metricas_intrinsecas.csv
     4_caracterizacion_embeddings/resultados/<retrotraduccion|generate_then_refine>/
         metricas_intrinsecas.csv   (opcional, si ya se corrieron)
@@ -45,15 +46,25 @@ import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 
 from shiwilu.rutas import CARACTERIZACION_RESULTADOS, FASE_AUMENTO, SINTESIS_RESULTADOS  # noqa: E402
 
-RESUMEN_EXTRINSECO_CSV = FASE_AUMENTO / "resumen_experimentos.csv"
+# El analisis intrinseco (OE3) se calcula SIEMPRE sobre texto normalizado (minusculas, sin
+# puntuacion); por eso la comparacion principal cruza contra el F1 de la validacion
+# cruzada en esa misma condicion. El F1 con el texto crudo se reporta solo como referencia.
+CONDICIONES_EXTRINSECAS = {
+    "sin_puntuacion": ("validacion_cruzada_resumen_sin_puntuacion.csv", "sintesis_extrinseco_vs_intrinseco.csv"),
+    "con_puntuacion": ("validacion_cruzada_resumen.csv", "sintesis_extrinseco_vs_intrinseco_con_puntuacion.csv"),
+}
 TECNICAS_TEXTO = ["retrotraduccion", "generate_then_refine"]
 
 
-def cargar_extrinseco() -> pd.DataFrame:
-    if not RESUMEN_EXTRINSECO_CSV.exists():
-        raise SystemExit(f"No se encontro {RESUMEN_EXTRINSECO_CSV}. "
-                          "Corre primero 3_baselines_y_aumento_datos/resumen_experimentos.py")
-    return pd.read_csv(RESUMEN_EXTRINSECO_CSV)
+def cargar_extrinseco(nombre_csv: str) -> pd.DataFrame:
+    """F1 macro agrupado (700 predicciones) de la validacion cruzada de 5 folds."""
+    ruta = FASE_AUMENTO / nombre_csv
+    if not ruta.exists():
+        raise SystemExit(f"No se encontro {ruta}. Corre primero "
+                          "3_baselines_y_aumento_datos/validacion_cruzada.py [--sin-puntuacion]")
+    cv = pd.read_csv(ruta)
+    cv = cv[cv["modelo"] != "-"]   # quita los baselines triviales
+    return cv.rename(columns={"f1_macro_agrupado": "f1_macro"})[["modelo", "tecnica", "f1_macro"]]
 
 
 def cargar_intrinseco(corpus: str) -> pd.DataFrame | None:
@@ -112,10 +123,26 @@ def construir_efecto_aumento(modelos: list[str]) -> pd.DataFrame:
     return pd.DataFrame(filas)
 
 
+def informe(extrinseco: pd.DataFrame, intrinseco: pd.DataFrame, nombre_salida: str, titulo: str) -> None:
+    tabla = construir_sintesis(extrinseco, intrinseco)
+    salida = SINTESIS_RESULTADOS / nombre_salida
+    tabla.to_csv(salida, index=False, encoding="utf-8")
+
+    print(f"=== R9 ({titulo}): extrinseco (clasificacion) vs. intrinseco (agrupamiento), por modelo ===")
+    print(tabla.to_string(index=False))
+    print(f"Guardado en {salida}")
+
+    ganador_extrinseco = tabla.loc[tabla["rank_extrinseco"] == 1, "modelo"].iloc[0]
+    ganador_intrinseco = tabla.loc[tabla["rank_intrinseco"] == 1, "modelo"].iloc[0]
+    if ganador_extrinseco == ganador_intrinseco:
+        print(f"  '{ganador_extrinseco}' gana en AMBOS criterios (mejor F1 y mejor silueta).\n")
+    else:
+        print(f"  Los criterios DIVERGEN: extrinseco '{ganador_extrinseco}', intrinseco '{ganador_intrinseco}'.\n")
+
+
 def main() -> int:
     SINTESIS_RESULTADOS.mkdir(parents=True, exist_ok=True)
 
-    extrinseco = cargar_extrinseco()
     intrinseco = cargar_intrinseco("original")
     if intrinseco is None:
         raise SystemExit(
@@ -123,49 +150,23 @@ def main() -> int:
             "Corre primero: python 4_caracterizacion_embeddings/caracterizacion.py"
         )
 
-    tabla = construir_sintesis(extrinseco, intrinseco)
-    salida = SINTESIS_RESULTADOS / "sintesis_extrinseco_vs_intrinseco.csv"
-    tabla.to_csv(salida, index=False, encoding="utf-8")
+    modelos = None
+    for condicion, (csv_extrinseco, csv_salida) in CONDICIONES_EXTRINSECAS.items():
+        extrinseco = cargar_extrinseco(csv_extrinseco)
+        modelos = sorted(extrinseco["modelo"].unique())
+        informe(extrinseco, intrinseco, csv_salida, condicion.replace("_", " "))
 
-    print("=== R9: extrinseco (clasificacion) vs. intrinseco (agrupamiento), por modelo ===")
-    print(tabla.to_string(index=False))
-    print(f"\nGuardado en {salida}")
-
-    ganador_extrinseco = tabla.loc[tabla["rank_extrinseco"] == 1, "modelo"].iloc[0]
-    ganador_intrinseco = tabla.loc[tabla["rank_intrinseco"] == 1, "modelo"].iloc[0]
-
-    print("\n=== Conclusion ===")
-    if ganador_extrinseco == ganador_intrinseco:
-        print(f"'{ganador_extrinseco}' es la configuracion optima en ambos criterios: "
-              "mejor F1 de clasificacion Y mejor separabilidad intrinseca de sus embeddings.")
-    else:
-        fila_extr = tabla[tabla["modelo"] == ganador_extrinseco].iloc[0]
-        fila_intr = tabla[tabla["modelo"] == ganador_intrinseco].iloc[0]
-        print(f"Los dos criterios DIVERGEN, evidencia de que la calidad intrinseca de un "
-              f"embedding no garantiza el mejor desempeno en la tarea de clasificacion:")
-        print(f"  - Ganador EXTRINSECO (mejor F1 macro): '{ganador_extrinseco}' "
-              f"({fila_extr['mejor_tecnica_extrinseca']}, F1={fila_extr['f1_macro_mejor_config']:.4f})")
-        print(f"  - Ganador INTRINSECO (mejor silueta):  '{ganador_intrinseco}' "
-              f"({fila_intr['mejor_estrategia_intrinseca']}, "
-              f"silueta={fila_intr['silueta_coseno_mejor_estrategia']:.4f})")
-        print(f"  Recomendacion practica para la tarea de clasificacion de intenciones: "
-              f"'{ganador_extrinseco}'. '{ganador_intrinseco}' queda como el mas indicado "
-              f"si el objetivo fuera un uso no supervisado de los embeddings (agrupamiento, "
-              f"busqueda por similitud) en vez de clasificacion.")
-
-    efecto = construir_efecto_aumento(sorted(extrinseco["modelo"].unique()))
+    efecto = construir_efecto_aumento(modelos)
     if not efecto.empty:
         salida_efecto = SINTESIS_RESULTADOS / "efecto_aumento_en_intrinseco.csv"
         efecto.to_csv(salida_efecto, index=False, encoding="utf-8")
-        print("\n=== Efecto del aumento de datos (R6) sobre la calidad intrinseca (R7-R8) ===")
+        print("=== Efecto del aumento de datos (R6) sobre la calidad intrinseca (R7-R8) ===")
         print("(silueta coseno, mejor estrategia de pooling por modelo; delta = aumentado - original)")
         print(efecto.to_string(index=False))
         print(f"\nGuardado en {salida_efecto}")
     else:
-        print("\n(No se encontraron corpus aumentados ya caracterizados: corre "
-              "'caracterizacion.py --corpus retrotraduccion' y/o "
-              "'--corpus generate_then_refine' para incluir esa comparacion.)")
-
+        print("(No se encontraron corpus aumentados ya caracterizados: corre "
+              "'caracterizacion.py --corpus retrotraduccion' y/o '--corpus generate_then_refine'.)")
     return 0
 
 
