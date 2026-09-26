@@ -5,15 +5,14 @@ separado** para responder la pregunta de R9, "cuál es la configuración
 óptima", desde dos ángulos que pueden no coincidir.
 
 - **Extrínseco** (R4-R6,
-  [`3_baselines_y_aumento_datos/resumen_experimentos.csv`](../3_baselines_y_aumento_datos/resumen_experimentos.csv)):
+  [`3_baselines_y_aumento_datos/validacion_cruzada_resumen_sin_puntuacion.csv`](../3_baselines_y_aumento_datos/validacion_cruzada_resumen_sin_puntuacion.csv)):
   qué tan bien clasifica un modelo de embeddings + Regresión Logística, con
-  o sin cada técnica de aumento de datos. Métrica: F1 macro sobre el
-  conjunto de prueba.
+  o sin cada técnica de aumento de datos. Métrica: F1 macro sobre las 700 predicciones de una validación cruzada de 5 folds.
 - **Intrínseco** (R7-R8,
   [`4_caracterizacion_embeddings/resultados/`](../4_caracterizacion_embeddings/README.md)):
   qué tan bien separan las categorías los embeddings crudos, sin
   clasificador, con cada una de las 4 estrategias de pooling. Métrica:
-  coeficiente de silueta (distancia coseno), sobre el corpus original.
+  coeficiente de silueta (distancia coseno), sobre el corpus original en texto normalizado (minúsculas, sin puntuación).
 
 ## Uso
 
@@ -21,7 +20,7 @@ separado** para responder la pregunta de R9, "cuál es la configuración
 python 5_sintesis_r9/sintesis.py
 ```
 
-Requiere haber corrido antes `3_baselines_y_aumento_datos/resumen_experimentos.py`
+Requiere haber corrido antes `3_baselines_y_aumento_datos/validacion_cruzada.py`
 y `4_caracterizacion_embeddings/caracterizacion.py` (al menos con
 `--corpus original`; si además se corrió con `--corpus retrotraduccion` y/o
 `--corpus generate_then_refine`, la síntesis incluye también el efecto del
@@ -38,60 +37,52 @@ aumento de datos sobre la calidad intrínseca).
 
 ## Resultado (ya ejecutado)
 
-*Actualizado 2026-09-22 tras corregir una fuga de datos en la división
-train/dev/test — primero por texto exacto, luego por texto normalizado (ver
-[`../2_baselines/README.md`](../2_baselines/README.md)) — y en
-Generate-then-Refine/Retrotraducción (ver
-[`../3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md)).
-Los números cambiaron respecto a versiones anteriores, pero la conclusión
-central (divergencia extrínseco/intrínseco) se mantiene estable a través de
-las 3 correcciones.*
+*Actualizado 2026-09-26. El eje intrínseco se calcula siempre sobre **texto normalizado**
+(minúsculas, sin puntuación), porque el corpus tiene dos atajos: los signos de
+puntuación (`¿?` delatan PRG) y las mayúsculas (DES, PRG y REQUEST están 100% en
+MAYÚSCULAS). Para comparar lo mismo con lo mismo, el eje extrínseco principal es la
+validación cruzada de 5 folds **en esa misma condición**
+([`../3_baselines_y_aumento_datos/validacion_cruzada.py`](../3_baselines_y_aumento_datos/validacion_cruzada.py)
+`--sin-puntuacion`): cada una de las 700 oraciones es test una vez y el aumento de cada
+fold se genera solo con su train.*
 
-| Modelo | F1 sin aumento | Mejor técnica | F1 mejor config | Rank extr. | Mejor estrategia intrínseca | Silueta | Rank intr. |
+**Comparación principal (texto normalizado en ambos ejes):**
+
+| Modelo | F1 sin aumento | Mejor config. | F1 mejor config | Rank extr. | Mejor estrategia intrínseca | Silueta | Rank intr. |
 |---|---|---|---|---|---|---|---|
-| XLM-R | 0.7223 | generate_then_refine | **0.7607** | **1** | max_pooling | 0.0151 | 3 |
-| LaBSE | 0.6943 | generate_then_refine | 0.7046 | 2 | cls | **0.0493** | **1** |
-| mBERT | 0.6977 | (ninguna mejora) | 0.6977 | 3 | mean_pooling | 0.0303 | 2 |
-
-Con el bootstrap de intervalos de confianza
-([`../3_baselines_y_aumento_datos/bootstrap_ic.py`](../3_baselines_y_aumento_datos/bootstrap_ic.py)),
-el IC95% de XLM-R+Generate-then-Refine es [0.6695, 0.8378] y el de XLM-R sin
-aumento es [0.6253, 0.8057] — muy solapados, así que ni siquiera dentro del propio XLM-R hay una "mejor técnica" estadísticamente concluyente. Los 3 modelos sí quedan
-razonablemente cerca entre sí en el eje extrínseco tras la corrección (ver
-también los [baselines triviales](../2_baselines/README.md) para
-contextualizar qué tan altos son estos F1 en términos absolutos).
+| mBERT | 0.6378 | generate_then_refine | 0.6417 | 1 | Combinación de capas | -0.0054 | 1 |
+| XLM-R | 0.6080 | sin aumento | 0.6080 | 2 | Max pooling | -0.0350 | 3 |
+| LaBSE | 0.5816 | generate_then_refine | 0.5984 | 3 | Combinación de capas | -0.0202 | 2 |
 
 ### Conclusión
 
-**Los dos criterios divergen.** XLM-R es la configuración con mejor F1 de
-clasificación (0.7607 con Generate-then-Refine, la más alta de las 12 combinaciones evaluadas en R6, aunque dentro del margen de incertidumbre frente a su propio 0.7223 sin aumento). Pero si el criterio fuera la calidad intrínseca de los
-embeddings — qué tan bien se agrupan las categorías sin ningún clasificador
-encima —, LaBSE con el vector `[CLS]` gana con claridad (silueta = 0.0493,
-muy por encima de XLM-R en 0.0151, que de hecho queda último de los 3 en
-este eje).
+- **Los dos ejes coinciden en el mejor modelo: mBERT.** Tiene el mejor F1
+  (0.638 sin aumento) y la mejor silueta
+  (-0.0054). Pero el margen es
+  chico: en F1, mBERT − LaBSE = +0.056 (IC95% [+0.019, +0.094]) es la única diferencia entre modelos
+  distinguible de cero; XLM-R − mBERT = -0.030 (IC95% [-0.064, +0.005]) no lo es. Y todas las siluetas son ≈ 0 o negativas.
+- **Los embeddings crudos no organizan las categorías por sí solos.** Sobre texto normalizado la
+  silueta de todas las combinaciones es ≈ 0 o negativa, y el clasificador (Regresión Logística
+  con ~560 oraciones) solo llega a F1 ≈ 0.58-0.64, unos 0.10-0.16 por encima del baseline por
+  palabras (0.48). Es una señal real pero débil.
+- **La "divergencia" que aparecía antes era un artefacto.** Con el texto crudo, LaBSE + CLS
+  ganaba en silueta (+0.049) y XLM-R en F1, lo que sugería que "un embedding bien
+  organizado no clasifica mejor". Esa silueta de LaBSE venía de los `¿?` y las mayúsculas,
+  no de las palabras; al quitarlos desaparece. Con esa cautela, la tabla de referencia
+  (F1 con el texto crudo contra silueta normalizada, **no comparable como par**):
 
-Esto es evidencia directa de que **la calidad intrínseca de un embedding no
-garantiza el mejor desempeño en la tarea de clasificación final**: LaBSE
-está optimizado para similitud semántica cross-lingüe (lo que favorece un
-espacio bien organizado y separable), mientras que XLM-R parece beneficiarse
-más de la capacidad de ajuste del clasificador (Regresión Logística) sobre
-una representación menos organizada pero más informativa para esa frontera
-de decisión específica.
+| Modelo | F1 sin aumento | Mejor config. | F1 mejor config | Rank extr. | Mejor estrategia intrínseca | Silueta | Rank intr. |
+|---|---|---|---|---|---|---|---|
+| XLM-R | 0.7583 | generate_then_refine | 0.7685 | 1 | Max pooling | -0.0350 | 3 |
+| mBERT | 0.7577 | generate_then_refine | 0.7623 | 2 | Combinación de capas | -0.0054 | 1 |
+| LaBSE | 0.7451 | sin aumento | 0.7451 | 3 | Combinación de capas | -0.0202 | 2 |
 
-**Recomendación práctica:**
-- Para clasificación de intenciones → **XLM-R** (con o sin Generate-then-Refine,
-  la diferencia no es concluyente con esta muestra).
-- Para un uso no supervisado de los embeddings (agrupamiento, búsqueda por
-  similitud semántica, exploración del corpus) → **LaBSE + `[CLS]`**.
+- **Ninguna técnica de aumento mejora el F1** de forma distinguible en ninguna condición
+  ([`comparacion_pareada`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md)), y su efecto en la silueta es
+  ≈ 0 (≤ 0.01). Retrotraducción y Mixup empeoran el F1 en varios casos.
 
-### Efecto del aumento de datos: mejora el F1, pero no siempre la separabilidad intrínseca
-
-El caso de XLM-R + Generate-then-Refine ilustra una segunda divergencia: esa
-técnica mejora el F1 de clasificación de XLM-R (0.7223 → 0.7607) pero **degrada** su silueta intrínseca (0.0151 → 0.0097, ver
-[`4_caracterizacion_embeddings/README.md`](../4_caracterizacion_embeddings/README.md)).
-Agregar oraciones sintéticas suele hacer el espacio de embeddings menos
-"limpio" para un agrupamiento no supervisado, pero le da al clasificador
-supervisado algo más de variedad para generalizar. Son preguntas distintas —
-"¿se organizan mejor los embeddings?" vs. "¿clasifica mejor un modelo
-entrenado sobre ellos?" — y R9 es precisamente el capítulo donde ese matiz
-se documenta en vez de perderse.
+**Recomendación práctica:** no afirmar un "mejor modelo" más allá de que mBERT queda
+nominalmente primero y de forma significativa por encima de LaBSE sin los atajos; reportar
+siempre las dos condiciones de texto con sus baselines triviales; y presentar el resultado
+central como negativo y bien medido (ni las técnicas de aumento ni la elección de modelo
+cambian de forma clara el desempeño con un corpus de 700 oraciones tan repetitivo).

@@ -1,4 +1,4 @@
 modelo,f1_macro_sin_aumento,mejor_tecnica_extrinseca,f1_macro_mejor_config,mejor_estrategia_intrinseca,silueta_coseno_mejor_estrategia,rank_extrinseco,rank_intrinseco
-xlmr,0.7223330241187383,generate_then_refine,0.7607305461369501,max_pooling,0.0150881027802824,1,3
-labse,0.6943474825827767,generate_then_refine,0.7045878770016701,cls,0.0493465848267078,2,1
-mbert,0.69773046703993,sin_aumento,0.69773046703993,mean_pooling,0.0302617736160755,3,2
+mbert,0.6377645547490555,generate_then_refine,0.6416985980642357,combinacion_capas,-0.0054114968515932,1,1
+xlmr,0.6079806037072238,sin_aumento,0.6079806037072238,max_pooling,-0.0349818095564842,2,3
+labse,0.581591411630895,generate_then_refine,0.5984171024082959,combinacion_capas,-0.0201767552644014,3,2

@@ -51,7 +51,27 @@ necesidad de Colab.
 - `matriz_confusion.png` — matriz de confusión sobre el conjunto de prueba.
 - `reporte_clasificacion.csv` — métricas desagregadas por categoría de intención.
 
-## Resultado de referencia (ya ejecutado)
+## Resultado principal: validación cruzada de 5 folds
+
+Los scripts de esta carpeta (`baseline.py`, `correr_todos.py`) usan el split
+único 70/15/15, cuyo test de ~99 oraciones da un F1 con ±0.09 de incertidumbre.
+La evaluación principal de la tesis es la validación cruzada de
+[`../3_baselines_y_aumento_datos/validacion_cruzada.py`](../3_baselines_y_aumento_datos/validacion_cruzada.py)
+(folds congelados en `folds_fijos.csv`, agrupados por texto normalizado), en dos
+condiciones de texto porque el corpus tiene dos atajos: los signos de puntuación
+(`¿?` delatan PRG) y las mayúsculas (DES, PRG y REQUEST están 100% en MAYÚSCULAS):
+
+| Modelo (sin aumento) | Con puntuación | IC95% | Sin puntuación | IC95% |
+|---|---|---|---|---|
+| XLM-R | 0.7583 | [0.727, 0.789] | 0.6080 | [0.571, 0.639] |
+| mBERT | 0.7577 | [0.726, 0.789] | 0.6378 | [0.602, 0.670] |
+| LaBSE | 0.7451 | [0.713, 0.776] | 0.5816 | [0.547, 0.617] |
+
+Los 3 modelos quedan muy parejos: con puntuación, XLM-R − LaBSE = +0.013 (IC95% [-0.020, +0.046]);
+sin puntuación, mBERT − LaBSE = +0.056 (IC95% [+0.019, +0.094]) (la única diferencia entre
+modelos distinguible de cero).
+
+## Resultado con split único (referencia)
 
 | Modelo | F1 macro | F1 ponderado | Exactitud |
 |---|---|---|---|
@@ -84,11 +104,13 @@ python 2_baselines/baseline_trivial.py
 
 | Baseline | F1 macro | Qué mide |
 |---|---|---|
-| Mayoría (siempre predice `DES`) | 0.0309 | Piso absoluto — cualquier modelo real debe superarlo con margen. |
-| 1-vecino-más-cercano por palabras compartidas (sin embeddings) | 0.3830 | Cuánto se puede clasificar solo por solapamiento léxico exacto, sin ninguna noción de significado. |
+| Mayoría (siempre predice `DES`) | 0.0309 (CV: 0.0753) | Piso absoluto — cualquier modelo real debe superarlo con margen. |
+| 1-vecino-más-cercano por palabras compartidas (sin embeddings) | 0.3830 (CV: 0.5176 con puntuación, 0.4825 sin ella) | Cuánto se puede clasificar solo por solapamiento léxico exacto, sin ninguna noción de significado. |
 
 Los 3 modelos reales (0.69-0.72) superan claramente el 0.38 del vecino más
 cercano por palabras — así que sí hay señal más allá de la simple
 repetición léxica, pero la brecha (~0.3-0.35 puntos de F1) no es enorme para
 un problema de 7 clases. Es una llamada a interpretar los resultados de OE2
 con cautela, no evidencia de que estén invalidados.
+
+Con la validación cruzada el vecino por palabras sube a 0.5176 con puntuación (0.4825 sin ella): el test único de 99 oraciones resultó ser particularmente "difícil" léxicamente. Sin los atajos de puntuación y mayúsculas, los modelos superan a la coincidencia de palabras por solo ~0.10-0.15 puntos de F1.

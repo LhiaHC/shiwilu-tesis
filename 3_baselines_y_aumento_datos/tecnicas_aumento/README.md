@@ -30,7 +30,118 @@ contra ellos.
   filtrar texto sintético. Si algún día se recalcula el split, hay que
   regenerar las dos técnicas.
 
+
+## Evaluación principal: validación cruzada de 5 folds
+
+Con un solo split, el test tiene ~99 oraciones y el intervalo de confianza del
+F1 es de ±0.09. Por eso la evaluación principal es una **validación cruzada de
+5 folds** ([`../validacion_cruzada.py`](../validacion_cruzada.py)): cada una de
+las 700 oraciones se usa como test una vez (folds agrupados por texto shiwilu
+normalizado —mayúsculas, puntuación, espacios, tildes y ñ— y estratificados,
+congelados en `2_baselines/folds_fijos.csv`), y el aumento de cada fold se genera
+**solo a partir de su train**. El intervalo de confianza resulta ~2.8 veces más
+angosto (±0.031 en promedio), y un análisis con 30 splits aleatorios
+confirmó que no está inflado.
+
+### Dos condiciones de texto (los 12 experimentos en ambas)
+
+El corpus tiene **dos atajos superficiales**: (1) los signos de puntuación (los `¿?`
+delatan la categoría PRG) y (2) las mayúsculas (las oraciones de DES, PRG y REQUEST
+están 100% TODAS EN MAYÚSCULAS; las otras categorías, 10-21%). Por eso todos los
+experimentos se reportan en dos condiciones.
+
+**Con puntuación** (texto tal cual está en el corpus), F1 macro sobre las 700 predicciones:
+
+| Modelo | Sin aumento | Mixup | Generate-then-Refine | Retrotraducción |
+|---|---|---|---|---|
+| XLM-R | 0.7583 | 0.7388 | **0.7685** | 0.7383 |
+| mBERT | 0.7577 | 0.7491 | **0.7623** | 0.7214 |
+| LaBSE | **0.7451** | 0.7195 | 0.7333 | 0.7091 |
+
+Baselines triviales: mayoría 0.0753, vecino por palabras 0.5176.
+
+**Sin puntuación** (texto en minúsculas y sin signos; `--sin-puntuacion`):
+
+| Modelo | Sin aumento | Mixup | Generate-then-Refine | Retrotraducción |
+|---|---|---|---|---|
+| XLM-R | **0.6080** | 0.5980 | 0.5798 | 0.5940 |
+| mBERT | 0.6378 | 0.6391 | **0.6417** | 0.6144 |
+| LaBSE | 0.5816 | 0.5740 | **0.5984** | 0.5737 |
+
+Baselines triviales: mayoría 0.0753, vecino por palabras 0.4825.
+Sin los atajos, los modelos superan a la coincidencia de palabras por solo
+0.10 (LaBSE) a 0.16 (mBERT) puntos de F1.
+
+**Cuánto pesa cada atajo** (sin aumento, F1 macro):
+
+| Modelo | Texto original | Solo minúsculas | Solo sin puntuación | Ambos |
+|---|---|---|---|---|
+| XLM-R | 0.7583 | 0.6877 | 0.6693 | 0.6080 |
+| mBERT | 0.7577 | 0.7153 | 0.7076 | 0.6378 |
+| LaBSE | 0.7451 | 0.6862 | 0.6409 | 0.5816 |
+
+Los dos atajos pesan de forma parecida (cada uno ~0.04-0.10 de F1) y se suman. La
+categoría PRG pasa de F1 ≈ 0.97-0.99 a ≈ 0.50-0.54 al quitar la puntuación.
+
+### Efecto de cada técnica frente a "sin aumento"
+
+Diferencia pareada de F1 sobre las mismas 700 oraciones
+([`../comparacion_pareada.py`](../comparacion_pareada.py)); en negrita, las
+diferencias cuyo IC95% no incluye 0.
+
+Con puntuación:
+
+| Técnica | LaBSE | mBERT | XLM-R |
+|---|---|---|---|
+| Mixup | **-0.026** | -0.009 | **-0.019** |
+| Generate-then-Refine | -0.012 | +0.005 | +0.010 |
+| Retrotraducción | **-0.036** | **-0.036** | -0.020 |
+
+Sin puntuación:
+
+| Técnica | LaBSE | mBERT | XLM-R |
+|---|---|---|---|
+| Mixup | -0.008 | +0.001 | -0.010 |
+| Generate-then-Refine | +0.017 | +0.004 | **-0.028** |
+| Retrotraducción | -0.008 | -0.023 | -0.014 |
+
+**Conclusión:** ninguna técnica mejora el F1 de forma distinguible de cero en
+ninguna de las dos condiciones; varias lo empeoran (Mixup y Retrotraducción, sobre
+todo con puntuación). Entre modelos (sin aumento), con puntuación
+XLM-R − LaBSE = +0.013 (IC95% [-0.020, +0.046]); sin puntuación mBERT − LaBSE = +0.056 (IC95% [+0.019, +0.094]), la única
+diferencia entre modelos distinguible de cero. Las tablas por técnica de más abajo
+corresponden al split único y quedan como referencia.
+
+Cómo se genera el aumento para la validación cruzada:
+- **Retrotraducción:** un único catálogo de las 700 oraciones
+  (`salidas/retrotraduccion_pool.csv`, con `id_origen`); cada fold usa las filas
+  cuya oración de origen está en su train y las filtra con el centroide de ese
+  train (`retrotraduccion.py --etapa generar` en Colab, una sola vez).
+- **Generate-then-Refine:** un CSV por fold
+  (`salidas/generate_then_refine_fold<N>.csv`, `generate_then_refine.py --fold N`).
+- **Deduplicación contra el test:** en cada fold se descartan las filas sintéticas
+  cuyo texto normalizado (sin mayúsculas, puntuación ni tildes) coincide con una
+  oración de su test. Motivo: los datos con los que F. Prado entrenó su NMT
+  incluyen el 55% de las oraciones de este corpus (46% en su train; ambos parten de
+  `flashcards2`) y el modelo las memorizó: el 15% de las traducciones del catálogo
+  reproduce una oración real del corpus.
+- **Limitación conocida:** los "patrones candidatos" que se le pasan a Claude en
+  Generate-then-Refine vienen del análisis R5, calculado con el corpus completo
+  (incluye oraciones de test). Es una fuga débil y agregada (8 patrones por
+  categoría), no corregida.
+
+### Otras comprobaciones ([`../auditoria_optimismo.py`](../auditoria_optimismo.py))
+- 30 splits aleatorios 70/15/15 dan un F1 promedio de 0.751-0.760, igual que la
+  validación cruzada con puntuación. El split único (semilla 42) fue una tirada
+  difícil (percentil 7-20; su baseline por palabras, 0.383, quedó por debajo de los
+  30 splits).
+- Cuando una oración de test no comparte ninguna palabra con el train (37% de los
+  casos), la exactitud baja a ~0.65 (0.79-0.81 con solapamiento parcial, ~0.95 con
+  solapamiento alto).
+
 ## Mixup
+
+
 
 Interpola los vectores de dos oraciones shiwilu existentes de la **misma**
 categoría de intención (`x_sintetico = λx_i + (1-λ)x_j`, `λ ~ Beta(α, α)`),

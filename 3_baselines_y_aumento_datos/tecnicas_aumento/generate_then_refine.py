@@ -304,7 +304,12 @@ def main() -> int:
     ap.add_argument("--cantidad", type=int, default=20,
                      help="Cuantas oraciones nuevas generar por categoria.")
     ap.add_argument("--salida", default=None,
-                     help="CSV de salida (por defecto: salidas/generate_then_refine.csv)")
+                     help="CSV de salida (por defecto: salidas/generate_then_refine.csv, "
+                          "o generate_then_refine_fold<N>.csv con --fold)")
+    ap.add_argument("--fold", type=int, default=None,
+                     help="Validacion cruzada: usa como 'train' todas las oraciones que NO estan "
+                          "en este fold (ver 2_baselines/folds_fijos.csv). Sin --fold se usa el "
+                          "train del split unico.")
     args = ap.parse_args()
 
     if not API_KEY:
@@ -317,8 +322,13 @@ def main() -> int:
     client = anthropic.Anthropic(api_key=API_KEY)
 
     sys.path.insert(0, str(_ruta_raiz.RAIZ / "2_baselines"))
-    from comun import cargar_corpus, dividir_train_dev_test
-    train, _dev, _test = dividir_train_dev_test(cargar_corpus())
+    from comun import cargar_corpus, cargar_folds, dividir_train_dev_test
+    corpus = cargar_corpus()
+    if args.fold is None:
+        train, _dev, _test = dividir_train_dev_test(corpus)
+    else:
+        train = corpus[cargar_folds(corpus) != args.fold]
+        print(f"Fold {args.fold}: ejemplos few-shot y filtro con {len(train)} oraciones (el fold queda fuera).")
 
     ejemplos_por_categoria = cargar_ejemplos_por_categoria(train)
     marcadores_por_categoria = cargar_marcadores_validados()
@@ -348,7 +358,8 @@ def main() -> int:
     resultado = pd.concat(todas_las_filas, ignore_index=True)
     resultado.insert(0, "id", [f"GTR_{i:04d}" for i in range(len(resultado))])
 
-    salida = args.salida or (AUMENTO_SALIDA / "generate_then_refine.csv")
+    nombre = "generate_then_refine.csv" if args.fold is None else f"generate_then_refine_fold{args.fold}.csv"
+    salida = args.salida or (AUMENTO_SALIDA / nombre)
     resultado.to_csv(salida, index=False, encoding="utf-8")
     print(f"\nTotal: {len(resultado)} filas -> {salida}")
     print(resultado["estado_filtro"].value_counts().to_string())

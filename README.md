@@ -41,13 +41,18 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 │   ├── baseline.py                  LaBSE / mBERT / XLM-R congelados + Regresión Logística
 │   ├── correr_todos.py              corre los 3 y compara
 │   ├── baseline_trivial.py          piso sin embeddings (mayoria, solapamiento de palabras)
-│   └── split_fijo.csv               split train/dev/test congelado (no recalcular)
+│   ├── split_fijo.csv               split train/dev/test congelado (no recalcular)
+│   └── folds_fijos.csv              folds de la validación cruzada, congelados
 │
 ├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
 │   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)
 │   ├── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
 │   ├── resumen_experimentos.py      Consolida los 12 experimentos (3 modelos x 4 config.)
-│   └── bootstrap_ic.py              Intervalo de confianza del F1 macro (bootstrap)
+│   ├── validacion_cruzada.py        EVALUACIÓN PRINCIPAL: 12 experimentos en 5 folds
+│   ├── comparacion_pareada.py       Diferencias pareadas (técnica vs. sin aumento, modelo vs. modelo)
+│   ├── curva_aprendizaje.py         F1 según cuánto train se usa
+│   ├── auditoria_optimismo.py       Auditoría: splits aleatorios, solapamiento léxico, puntuación
+│   └── bootstrap_ic.py              Intervalo de confianza del F1 del split único
 │
 ├── 4_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — caracterización de embeddings
 │   └── caracterizacion.py           4 estrategias de pooling x 3 modelos, métricas
@@ -71,7 +76,7 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 | `3_baselines_y_aumento_datos/analisis_intrinseco/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
 | `3_baselines_y_aumento_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `2_baselines/`, `shiwilu/` | `salidas/` únicamente |
 | `4_caracterizacion_embeddings/` | `corpus/`, `tecnicas_aumento/salidas/`, `2_baselines/`, `shiwilu/` | `resultados/` únicamente |
-| `5_sintesis_r9/` | `resumen_experimentos.csv`, `4_caracterizacion_embeddings/resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
+| `5_sintesis_r9/` | `validacion_cruzada_resumen.csv`, `4_caracterizacion_embeddings/resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y

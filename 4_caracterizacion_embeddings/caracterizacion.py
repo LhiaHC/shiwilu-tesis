@@ -31,6 +31,13 @@ No hay clasificador ni "metodo ganador": las 4 estrategias se REPORTAN y
 comparan, no se filtran (mismo criterio que el resto de la tesis — ver R9,
 donde se contrasta esta evaluacion intrinseca con la extrinseca).
 
+TEXTO: todas las oraciones se pasan a minusculas y se les quita la puntuacion antes de
+extraer los embeddings (`comun.quitar_puntuacion`). Motivo: en este corpus los signos de
+pregunta delatan PRG y las oraciones TODAS EN MAYUSCULAS son el 100% de DES, PRG y REQUEST;
+con el texto crudo, parte de la "separabilidad" de las categorias vendria de esas pistas
+superficiales y no de las palabras. (Los resultados con el texto crudo quedan en el
+historial de git.)
+
 Corpus (R7 pide correr esto "sobre el corpus original y los corpus aumentados
 obtenidos en R6"), via --corpus:
   original              corpus/corpus_shiwilu_final.csv completo (default)
@@ -72,7 +79,7 @@ from sklearn.preprocessing import normalize
 import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "2_baselines"))
-from comun import MODELOS  # noqa: E402  (mismos 3 modelos que los baselines)
+from comun import MODELOS, _normalizar_estricto, quitar_puntuacion  # noqa: E402  (mismos 3 modelos que los baselines)
 
 from shiwilu.rutas import CARACTERIZACION_RESULTADOS, CORPUS_CSV, FASE4  # noqa: E402
 from shiwilu.taxonomia import COLOR_INT, INTENCIONES  # noqa: E402
@@ -153,8 +160,14 @@ def cargar_corpus_variante(variante: str) -> pd.DataFrame:
         raise SystemExit(f"No se encontro {ruta}. Corre primero la tecnica correspondiente.")
     aumento = pd.read_csv(ruta)
     aprobado = aumento[aumento["estado_filtro"] == "aprobado"][["shiwilu", "intencion"]]
-    print(f"{variante}: +{len(aprobado)}/{len(aumento)} filas aprobadas se agregan al corpus original")
-    return pd.concat([original, aprobado], ignore_index=True)
+    # Una fila sintetica identica a una oracion real (ignorando mayusculas, puntuacion y
+    # tildes) no agrega informacion nueva: el NMT de F. Prado memorizo parte del corpus
+    # y a veces la reproduce. Se descarta para no duplicar oraciones reales.
+    reales = set(original["shiwilu"].map(_normalizar_estricto))
+    es_copia = aprobado["shiwilu"].map(_normalizar_estricto).isin(reales)
+    print(f"{variante}: +{int((~es_copia).sum())} filas sinteticas nuevas se agregan al corpus original "
+          f"({len(aumento)} generadas, {len(aprobado)} aprobadas, {int(es_copia.sum())} descartadas por copiar una oracion real)")
+    return pd.concat([original, aprobado[~es_copia]], ignore_index=True)
 
 
 def proyectar_2d(X: np.ndarray, metodo: str, semilla: int = 42) -> np.ndarray | None:
@@ -236,7 +249,7 @@ def main() -> int:
 
     print(f"Cargando corpus '{args.corpus}' (analisis intrinseco, sin dividir train/dev/test)...")
     df = cargar_corpus_variante(args.corpus)
-    oraciones = df["shiwilu"].astype(str).tolist()
+    oraciones = [quitar_puntuacion(t) for t in df["shiwilu"]]   # minusculas y sin puntuacion
     etiquetas = df["intencion"].to_numpy()
     print(f"{len(df)} oraciones, {len(set(etiquetas))} categorias")
 
