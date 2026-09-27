@@ -1,0 +1,701 @@
+id,espanol,shiwilu,intencion,fuente
+AFI_NEW_001,Claro.,tekinchi,AFI,api_generada
+AFI_NEW_002,Exacto.,nanapi'la,AFI,api_generada
+AFI_NEW_003,Correcto.,musu',AFI,api_generada
+AFI_NEW_004,Verdad.,tekinchi,AFI,api_generada
+AFI_NEW_005,Perfecto.,mupalli,AFI,api_generada
+AFI_NEW_006,Ya.,ipa',AFI,api_generada
+AFI_NEW_007,Listo.,insekdiperpi,AFI,api_generada
+AFI_NEW_008,Cierto.,tekinchi,AFI,api_generada
+AFI_NEW_009,Obvio.,tekinchi,AFI,api_generada
+AFI_NEW_010,Seguro.,musu' sekdiperpi,AFI,api_generada
+AFI_NEW_011,Dale.,enka'ker,AFI,api_generada
+AFI_NEW_012,Justo.,nania'su',AFI,api_generada
+AFI_NEW_013,Confirmado.,ipa' tullina',AFI,api_generada
+AFI_NEW_014,Entendido.,lachek'lek,AFI,api_generada
+AFI_NEW_015,Aceptado.,luwantulli,AFI,api_generada
+AFI_NEW_016,Efectivamente.,mupalli,AFI,api_generada
+AFI_NEW_017,Exactamente.,nanapi'la,AFI,api_generada
+AFI_NEW_018,Así es.,nu'su' nuka'a,AFI,api_generada
+AFI_NEW_019,Así mismo.,u'su' p'la,AFI,api_generada
+AFI_NEW_020,Por supuesto.,tekinchimalek,AFI,api_generada
+AFI_NEW_021,Eso es.,nana nuka'a,AFI,api_generada
+AFI_NEW_022,Eso mismo.,nanapi'la,AFI,api_generada
+AFI_NEW_023,Está correcto.,mupalli,AFI,api_generada
+AFI_NEW_024,Todo bien.,iner' mupalli,AFI,api_generada
+AFI_NEW_025,Muy bien.,mupalli,AFI,api_generada
+AFI_NEW_026,Bien dicho.,musu' itula,AFI,api_generada
+AFI_NEW_027,Bien hecho.,musu' nu'pi,AFI,api_generada
+AFI_NEW_028,Claro que sí.,tekinchintana,AFI,api_generada
+AFI_NEW_029,Así nomás.,u'la' su',AFI,api_generada
+AFI_NEW_030,Ya entendí.,ipa' lachek'lek,AFI,api_generada
+AFI_NEW_031,Ya está.,ipa',AFI,api_generada
+AFI_NEW_032,Ya sé.,ipa' ninchitulek,AFI,api_generada
+AFI_NEW_033,Todo correcto.,iner' mupalli,AFI,api_generada
+AFI_NEW_034,Con gusto.,tantenamu katu'pa' palek,AFI,api_generada
+AFI_NEW_035,Acepto.,sek'kaper' echen,AFI,api_generada
+AFI_NEW_036,"Confirmado, sí.",tekinchi aja,AFI,api_generada
+AFI_NEW_037,"Sí, ya.",aja ipa',AFI,api_generada
+AFI_NEW_038,"Sí, correcto.",aja mupalli,AFI,api_generada
+AFI_NEW_039,"Sí, exacto.",aja nanitulli,AFI,api_generada
+AFI_NEW_040,"Sí, perfecto.",aja musalmin,AFI,api_generada
+AFI_NEW_041,"Sí, así es.",aja nu'su' nuka'a,AFI,api_generada
+AFI_NEW_042,"Sí, entendido.",aja lachek'lek,AFI,api_generada
+AFI_NEW_043,"Sí, listo.",aja insek'diperpi,AFI,api_generada
+AFI_NEW_044,"Sí, seguro.",aja tekinchi,AFI,api_generada
+AFI_NEW_045,"Sí, verdad.",aja tekinchi,AFI,api_generada
+AFI_NEW_046,"Sí, cierto.",aja tekinchi,AFI,api_generada
+AFI_NEW_047,"Sí, bien.",aja mulli,AFI,api_generada
+AFI_NEW_048,"Sí, obvio.",aja tumu'pi' nek,AFI,api_generada
+AFI_NEW_049,"Sí, dale.",aja enka'ker',AFI,api_generada
+AFI_NEW_050,"Sí, efectivamente.",aja nu'su' nuka'a,AFI,api_generada
+AFI_NEW_051,"Sí, confirmo.",aja tumu'tapi' nenma',AFI,api_generada
+AFI_NEW_052,"Sí, acepto.",aja luwante chek,AFI,api_generada
+AFI_NEW_053,"Sí, ya entendí.",aja ipa' lachek'lek,AFI,api_generada
+AFI_NEW_054,"Sí, así nomás.",aja u'la' su',AFI,api_generada
+AFI_NEW_055,"Sí, todo bien.",aja iner' musu',AFI,api_generada
+AFI_NEW_056,"Sí, con gusto.",aja sakeklek,AFI,api_generada
+AFI_NEW_057,"Sí, ya sé.",aja ipa' ninchitulek,AFI,api_generada
+AFI_NEW_058,"Sí, muy bien.",aja mushallin,AFI,api_generada
+AFI_NEW_059,"Sí, bien dicho.",aja musu' tulli,AFI,api_generada
+AFI_NEW_060,"Sí, bien hecho.",aja musu' nu'pi,AFI,api_generada
+AFI_NEW_061,"Sí, eso mismo.",aja nanapi'la,AFI,api_generada
+AFI_NEW_062,"Sí, eso es.",aja nana nuka'a,AFI,api_generada
+AFI_NEW_063,"Sí, ya está.",aja ipa' napalli,AFI,api_generada
+AFI_NEW_064,Es cierto.,nuka'a tekinchi,AFI,api_generada
+AFI_NEW_065,Es exacto.,nanisu' nuka'a,AFI,api_generada
+AFI_NEW_066,Así lo haré.,nu'su' nu'tecek,AFI,api_generada
+AFI_NEW_067,Así fue.,nu'su' niwini,AFI,api_generada
+AFI_NEW_068,Así es nomás.,nu'la' su',AFI,api_generada
+AFI_NEW_069,Ya lo sé.,ipa' ninchitulek,AFI,api_generada
+AFI_NEW_070,Ya lo entendí.,ipa' lachek'lek,AFI,api_generada
+AFI_NEW_071,Ya lo hice.,ipa' nu'tulek,AFI,api_generada
+AFI_NEW_072,Ya terminé.,ipa' a'ta' wantulek,AFI,api_generada
+AFI_NEW_073,Ya cociné.,ipa' akusutulek,AFI,api_generada
+AFI_NEW_074,Ya molí.,ipa' pek'sanek,AFI,api_generada
+AFI_NEW_075,Ya tosté.,ipa' inyalek,AFI,api_generada
+AFI_NEW_076,Ya hervió.,ipa' ukluka'lli,AFI,api_generada
+AFI_NEW_077,La yuca está.,ker' napalli,AFI,api_generada
+AFI_NEW_078,La chicha está.,uklupidek napalli,AFI,api_generada
+AFI_NEW_079,La leña está.,diuk napalli,AFI,api_generada
+AFI_NEW_080,El agua está.,dek napalli,AFI,api_generada
+AFI_NEW_081,La olla está.,ukta napalli,AFI,api_generada
+AFI_NEW_082,La comida está.,wueran napalli,AFI,api_generada
+AFI_NEW_083,El fuego está.,pen napalli,AFI,api_generada
+AFI_NEW_084,La chacra está.,menmin napalli,AFI,api_generada
+AFI_NEW_085,El maíz está.,chiter' napalli,AFI,api_generada
+AFI_NEW_086,Todo listo.,iner' insek'diperpi,AFI,api_generada
+AFI_NEW_087,Quedamos así.,llia'ter nu'su',AFI,api_generada
+AFI_NEW_088,Dicho y hecho.,tulek nu'tulek,AFI,api_generada
+AFI_NEW_089,Como dijiste.,ma'pu' su' tula,AFI,api_generada
+AFI_NEW_090,Tal cual.,nu'su' nuka'a,AFI,api_generada
+AFI_NEW_091,Justo así.,nanilli nu'su',AFI,api_generada
+FL2_0084,De acuerdo.,muetchun,AFI,flashcards
+FL2_0099,Está bien.,mupalli,AFI,flashcards
+FL2_0320,Sé correr.,ninchitapalek teka'ak',AFI,flashcards
+FL2_0519,Sé leer.,ninchitapalek lun'ak,AFI,flashcards
+FL2_0521,Sé nadar.,ninchitapalek idun'ak,AFI,flashcards
+FL2_0588,Está listo.,insek'diperpi napalli,AFI,flashcards
+FL2_1128,Está perfecto.,mupalli,AFI,flashcards
+FL2_1835,Es correcto.,mullincha',AFI,flashcards
+FL2_1893,"Sí, claro.",tekinchi,AFI,flashcards
+FL2_0008,¡Incendio!,ukenan,DES,flashcards
+FL2_0009,¡Ayuda!,katu'pa',DES,flashcards
+FL2_0010,¡Socorro! ¡Auxilio!,katu'pa' katu'pa',DES,flashcards
+FL2_0011,¡Auxilio!,katu'pa',DES,flashcards
+FL2_0016,¡He ganado!,kana'tulek,DES,flashcards
+FL2_0017,"¡Oh, no! (masculino)",shaw,DES,flashcards
+FL2_0018,"¡Oh, no! (femenino)",asha,DES,flashcards
+FL2_0021,¡Al ataque!,paku' llipu'tudek' kunku',DES,flashcards
+FL2_0024,¡Tengo!,a'napalek,DES,flashcards
+FL2_0026,Él corrió.,nana tekaklli,DES,flashcards
+FL2_0029,Me caí.,anu'lek,DES,flashcards
+FL2_0030,Salí.,yunsu'lek,DES,flashcards
+FL2_0032,Perdí. (opuesto de ganar),wer'lliek,DES,flashcards
+FL2_0660,Tom saltó.,tom indek'lli,DES,flashcards
+FL2_0676,Tom morirá.,tom chiminchu,DES,flashcards
+FL2_0677,Tom pagará.,tom panwilek'techu,DES,flashcards
+FL2_0683,Somos hombres.,enmu'pinen nuka'kudek,DES,flashcards
+FL2_0684,Podemos ganar.,yennitulekwa' kana'tak,DES,flashcards
+FL2_0685,Nos divertimos.,sakeklekwa',DES,flashcards
+FL2_0686,Nos reímos.,yamerlek'wa',DES,flashcards
+FL2_0687,Nos gusta.,iya'tulek' wa',DES,flashcards
+FL2_0688,Lo hicimos.,nu'tulek' wa',DES,flashcards
+FL2_0689,Debemos irnos.,pa'a' kawa'su' napalli,DES,flashcards
+FL2_0690,Lo queremos.,tantenlek'wa',DES,flashcards
+FL2_0691,Fracasaremos.,teka'per' aterwa',DES,flashcards
+FL2_0697,Estamos ocupados.,a'napallidek dudimpu' nu'ta' kawa'su',DES,flashcards
+FL2_0698,Terminamos.,a'ta' wantullidek,DES,flashcards
+FL2_0699,Estamos acá.,asek napallidek,DES,flashcards
+FL2_0700,Estamos perdidos.,wer'su' napallidek,DES,flashcards
+FL2_0701,Somos pobres.,kulliker'wi' nidek,DES,flashcards
+FL2_0702,Estamos hartos.,perlli'llidek,DES,flashcards
+FL2_0703,Somos débiles.,saputek nuka'kudek,DES,flashcards
+FL2_0737,Cuenta conmigo.,kua katu'pekchen,DES,flashcards
+FL2_0748,Termine esto.,a'ta' wanter asu',DES,flashcards
+FL2_0750,Terminen esto.,a'ta' wantuku' asu',DES,flashcards
+FL2_0755,Él envejeció.,nana taserpitulli,DES,flashcards
+FL2_0756,¡Ha venido!,wek'lli,DES,flashcards
+FL2_0757,Tiene vino.,vinu' a'napalli,DES,flashcards
+FL2_0758,Es feliz.,musu' nuka'a,DES,flashcards
+FL2_0759,Le gustó.,iyatulli,DES,flashcards
+FL2_0760,Está fingiendo.,intek apalli,DES,flashcards
+FL2_0761,Está fingiendo comer.,intek weranpalli,DES,flashcards
+FL2_0762,¡Aquí estamos!,asek napallidek,DES,flashcards
+FL2_0763,Aquí estamos.,asek napallidek,DES,flashcards
+FL2_0766,Soy cocinero.,kalu'tutek' nuka'ka,DES,flashcards
+FL2_0767,Estoy jodiendo.,a'perchapalek,DES,flashcards
+FL2_0768,Estoy leseando.,si'lentapalek,DES,flashcards
+FL2_0769,Lo compré.,mapa'lek,DES,flashcards
+FL2_0770,Puedo hacerlo.,yennitulek nu'tak,DES,flashcards
+FL2_0771,Puedo compartir.,yennitulek a'naniak,DES,flashcards
+FL2_0772,Confesé.,lunnek,DES,flashcards
+FL2_0774,Como pan.,ka'apalek tanta',DES,flashcards
+FL2_0775,Como fruta.,ka'apalek wayupi,DES,flashcards
+FL2_0776,Tenía frío.,sanek'wantuwinek,DES,flashcards
+FL2_0777,Te encontré.,kaper'llien,DES,flashcards
+FL2_0778,Me enfadé.,yulek,DES,flashcards
+FL2_0779,Traigo noticias.,kera'pilellek la'la' lusa',DES,flashcards
+FL2_0780,Tengo tiempo.,manennu'tapi' nek,DES,flashcards
+FL2_0781,Tengo vino.,vinu' a'napalek,DES,flashcards
+FL2_0782,Te oí.,lauk'llien,DES,flashcards
+FL2_0783,Los conozco.,luwer'chapadeklek,DES,flashcards
+FL2_0785,Vivo aquí.,asek nanpipalek,DES,flashcards
+FL2_0786,La amaba.,tantenwinek,DES,flashcards
+FL2_0787,Lo extrañaba.,lu'wanwinek,DES,flashcards
+FL2_0788,Debo esconderme.,insek'kita' kasu'napalli,DES,flashcards
+FL2_0791,Los necesito.,luwantudek'lek,DES,flashcards
+FL2_0794,Leo labios.,ninchitapalek ma'tapallinpa',DES,flashcards
+FL2_0795,Vendo autos.,uku'latapalek wa'nateka' asu',DES,flashcards
+FL2_0796,Huelo gas.,lanerapalek gas,DES,flashcards
+FL2_0797,Quiero más.,a'pinta' luwantulek,DES,flashcards
+FL2_0799,Quiero este.,asu' luwantulek,DES,flashcards
+FL2_0800,Estaba despierto.,napawinek nanpiladasu',DES,flashcards
+FL2_0801,Estaba mareado.,napawinek lupersu',DES,flashcards
+FL2_0802,Me despidieron.,usu'lliner' ku,DES,flashcards
+FL2_0803,Estaba desnudo.,inanpilatek napawinek,DES,flashcards
+FL2_0804,Estaba cansado.,saka'tusu' napawinek,DES,flashcards
+FL2_0805,Estaba equivocado.,pektunsu' napawinek,DES,flashcards
+FL2_0809,Soy finlandés.,finlandis nuka'ka,DES,flashcards
+FL2_0810,Soy turco.,turku nuka'ka,DES,flashcards
+FL2_0811,Soy turca.,turka nuka'ka,DES,flashcards
+FL2_0812,Soy panadero.,tanta' nu'tutek nuka'ka,DES,flashcards
+FL2_0813,Soy mujer.,ku'aper nuka'ka,DES,flashcards
+FL2_0814,Tengo curiosidad.,ninchidinupalek,DES,flashcards
+FL2_0815,Estoy bailando.,lansa'palek,DES,flashcards
+FL2_0816,Estoy comprometida.,napalek ala'sa' enmu'pinenlek,DES,flashcards
+FL2_0817,Estoy emocionado.,napalek sakek'su',DES,flashcards
+FL2_0818,Estoy ayunando.,weranpi'nek,DES,flashcards
+FL2_0819,Estoy saludable.,napalek mudinusu',DES,flashcards
+FL2_0820,Me voy.,pa'echek,DES,flashcards
+FL2_2173,Me traicionaste.,wa'danpilapilun,DES,flashcards
+FL2_2174,Nos traicionaste.,wa'danpilapilundek,DES,flashcards
+FL2_2175,Nos engañaste.,tumu'tulundek,DES,flashcards
+FL2_2176,Puedes entrar.,yennitulada'a' mak,DES,flashcards
+FL2_2177,Puedes decírnoslo.,yennitula winta'mudek,DES,flashcards
+FL2_2178,Pareces triste.,lli'tula we'inutusu',DES,flashcards
+FL2_2179,Deberías descansar.,neria'masu' napalli,DES,flashcards
+FL2_2180,Deberían quedarse.,llia'a' mamasu' napalli,DES,flashcards
+FL2_2181,Tú dormías.,kenma wichi'wina',DES,flashcards
+FL2_2206,Escaparon todos.,iner' chiyekllina',DES,flashcards
+FL2_2211,Odia correr.,luyu'lli teka'ak,DES,flashcards
+EMO_NEW_001,Bravo!,inllipu'itk' later',EMO,api_generada
+EMO_NEW_002,Lo siento.,lutantennen,EMO,api_generada
+EMO_NEW_003,"Ay, no!",a'pinchi,EMO,api_generada
+EMO_NEW_004,Me alegra.,a'sakek' llu,EMO,api_generada
+EMO_NEW_005,"Ay, que tristeza!",enpu'ni wueinuipa',EMO,api_generada
+EMO_NEW_006,Me da pena.,enka'lliu wue'inu,EMO,api_generada
+EMO_NEW_007,Como duele!,ma'pu' su' ikerlli,EMO,api_generada
+EMO_NEW_008,Cuanto me alegra!,enpu'nipa' a'sakeklliu,EMO,api_generada
+EMO_NEW_009,Me entristece.,a'wue' inutulliu,EMO,api_generada
+EMO_NEW_010,Que lastima!,enpu' wue'inuipa',EMO,api_generada
+EMO_NEW_011,"Ay, que susto!",enpu'nipa' tekualek,EMO,api_generada
+EMO_NEW_012,Me da gusto.,tantennen,EMO,api_generada
+EMO_NEW_013,Que humillante!,enpu'ni dakuti'pa',EMO,api_generada
+EMO_NEW_014,Cuanto lo extraño!,enpu'nipa' lu'wanek,EMO,api_generada
+EMO_NEW_015,"Ay, que dolor!",enpu'nipa' ikerlli,EMO,api_generada
+EMO_NEW_016,Me fascina.,a'sakek' kankanu,EMO,api_generada
+EMO_NEW_017,Que suerte!,kananwan,EMO,api_generada
+EMO_NEW_018,Como me alegra!,sakek'lek,EMO,api_generada
+EMO_NEW_019,"Ay, pobrecito!",wawiin,EMO,api_generada
+EMO_NEW_020,Me da miedo.,a'tekualliun,EMO,api_generada
+EMO_NEW_021,Que divertido!,wa'danpitek,EMO,api_generada
+EMO_NEW_022,Cuanto me duele!,enpu'nipa' ikerchulek,EMO,api_generada
+EMO_NEW_023,"Ay, que feo!",enpu'ni aperpipa',EMO,api_generada
+EMO_NEW_024,Me emociona.,a'sakek' lliu,EMO,api_generada
+EMO_NEW_025,Que horror!,enpu'ni aperpipa',EMO,api_generada
+EMO_NEW_026,Como me entristece!,a'wue' inutulliu,EMO,api_generada
+EMO_NEW_027,"Ay, que calor!",enpu'ni ukawanninpa',EMO,api_generada
+EMO_NEW_028,Me sorprende.,a'manantulliu,EMO,api_generada
+EMO_NEW_029,Que alegria!,enpu'ni sakek'ipa',EMO,api_generada
+EMO_NEW_030,Cuanto me preocupa!,musu' a'kakanchi' nu,EMO,api_generada
+EMO_NEW_031,"Ay, que frio!",nakusu' sanekwani,EMO,api_generada
+EMO_NEW_032,Me incomoda.,musu' a'kankanch' nu,EMO,api_generada
+EMO_NEW_033,Que orgullo!,musu' napalek,EMO,api_generada
+EMO_NEW_034,Como me asusta!,a'imanantulliu,EMO,api_generada
+EMO_NEW_035,"Ay, que rabia!",enpu'ni yuipa',EMO,api_generada
+EMO_NEW_036,Me avergüenza.,a'dakuta' lliu,EMO,api_generada
+EMO_NEW_037,Que bonita chacra!,enpu'ni mushipa' menmin,EMO,api_generada
+EMO_NEW_038,Cuanto extrano al abuelo!,lu'wanek papinku,EMO,api_generada
+EMO_NEW_039,"Ay, que pena!",enpu'ni wue'inu,EMO,api_generada
+EMO_NEW_040,Me angustia.,musu' a'kankanchi' nu,EMO,api_generada
+EMO_NEW_041,Que rico!,iyalli,EMO,api_generada
+EMO_NEW_042,Como me duele el corazon!,enpu'nipa' ikerchulek dinlupiuk,EMO,api_generada
+EMO_NEW_043,"Ay, que bonito!",enpu'ni mushipa',EMO,api_generada
+EMO_NEW_044,Me desespera.,perwa'tentulek,EMO,api_generada
+EMO_NEW_045,Cuanto me alegra verte!,enpu'dunlu' ipa' sakeklek lli'amun,EMO,api_generada
+EMO_NEW_046,"Ay, que vergüenza!",enpu'ni dakuta'ipa,EMO,api_generada
+EMO_NEW_047,Me conmueve.,a'lenmek' lliu,EMO,api_generada
+EMO_NEW_048,Como me alegra la chicha!,a'sakeklliu uklupidek,EMO,api_generada
+EMO_NEW_049,"Ay, que pereza!",perlek,EMO,api_generada
+EMO_NEW_050,Me preocupa.,musu' kankanchi'nek,EMO,api_generada
+EMO_NEW_051,Que interesante!,yalli'lek yata'ituli' nek,EMO,api_generada
+EMO_NEW_052,Cuanto me duele la cabeza!,nakusu' ikermutu'lek,EMO,api_generada
+EMO_NEW_053,"Ay, que rico!",enpu'ni iyallinpa',EMO,api_generada
+EMO_NEW_054,Me fastidia.,a'perlliu,EMO,api_generada
+EMO_NEW_055,Que aburrimiento!,musu' napi'nek,EMO,api_generada
+EMO_NEW_056,Como me alegra el pueblo!,a'sakek' lliu ninanlu',EMO,api_generada
+EMO_NEW_057,"Ay, que lindo!",enpu'ni mushipa',EMO,api_generada
+EMO_NEW_058,Me da asco.,nudu'tulek,EMO,api_generada
+EMO_NEW_059,Cuanto me alegra el maiz!,enpu'nipa' a'sakeklliu chiter',EMO,api_generada
+EMO_NEW_060,"Ay, que hambre!",uki'lalek,EMO,api_generada
+EMO_NEW_061,Me entusiasma.,a'nantapilliu,EMO,api_generada
+EMO_NEW_062,Que peligro!,tekuala'nawani,EMO,api_generada
+EMO_NEW_063,Como me alegra la cosecha!,a'sakeklliu sek'ker' cha'kasu',EMO,api_generada
+EMO_NEW_064,"Ay, que torpeza!",dakuta'tek,EMO,api_generada
+EMO_NEW_065,Me irrita.,a'yulliu,EMO,api_generada
+EMO_NEW_066,Cuanto extrano la chacra!,lu'wanek menminuk,EMO,api_generada
+EMO_NEW_067,"Ay, que tristeza tan grande!",wue'inu a'lliupi,EMO,api_generada
+EMO_NEW_068,Me inquieta.,tuyutulliu,EMO,api_generada
+EMO_NEW_069,Como me alegra la yuca!,ker' a'sakeklliu,EMO,api_generada
+EMO_NEW_070,"Ay, que injusto!",mukankan'i' ni,EMO,api_generada
+EMO_NEW_071,Me duele el alma.,ikerchulek wa'dan' uk,EMO,api_generada
+EMO_NEW_072,Cuanto extrano a mi madre!,lu'wan' nek awauk,EMO,api_generada
+EMO_NEW_073,"Ay, que belleza!",enpu'ni mushipa',EMO,api_generada
+EMO_NEW_074,Me conmueve la abuelita.,lutantenek amisha,EMO,api_generada
+EMO_NEW_075,Como me entristece la muerte!,a'wue' inutulliu chiminllin,EMO,api_generada
+EMO_NEW_076,"Ay, que maravilla!",enpu' mushipa',EMO,api_generada
+EMO_NEW_077,Me alegra el amanecer.,a'sakeklliu uklliapila'su',EMO,api_generada
+EMO_NEW_078,Cuanto me alegra el shiwilu!,enpu'nipa' a'sakek' lliu shiwilu,EMO,api_generada
+EMO_NEW_079,"Ay, que confusion!",luwer'chude' i'nek,EMO,api_generada
+FL2_0047,¡Gracias!,yuspeinet'echun,EMO,flashcards
+FL2_0048,Gracias.,yuspeinet'echun,EMO,flashcards
+FL2_0169,¡Qué encanto!,empu'ni mushipa',EMO,flashcards
+FL2_0274,¡Qué divertido!,empu'ni wa'danpintek' ipa',EMO,flashcards
+FL2_0313,¡Qué horror!,imanan empu'nipa',EMO,flashcards
+FL2_0314,¡Qué raro!,nerpi'la empu'nipa',EMO,flashcards
+FL2_0511,¡Qué aburrimiento!,musu' kankanchi'nek,EMO,flashcards
+FL2_0512,¡Qué bonito!,embu'ni mushipa',EMO,flashcards
+FL2_0764,¡Qué curioso!,empu'ni ninchidinusu'ta',EMO,flashcards
+FL2_0765,Qué raro.,empu'ni lli'inek,EMO,flashcards
+FL2_0784,Me gustan.,iyatudeklek,EMO,flashcards
+FL2_1054,¡Qué pesado!,enpu'ni saka'dek' ipa',EMO,flashcards
+FL2_1055,¡Qué horrible!,enpu'ni aperpipa',EMO,flashcards
+FL2_1056,¡Qué romántico!,enpu'ni mupenchipa',EMO,flashcards
+FL2_1382,¡Qué emocionante!,embu'nimushipa',EMO,flashcards
+FL2_1532,¡Qué listo!,dakuti'ni,EMO,flashcards
+FL2_1598,¡Qué fiasco!,enpu'ni dakuta'ipa',EMO,flashcards
+FL2_1599,¡Qué alivio!,enpu'ni mui'pa,EMO,flashcards
+FL2_1838,Qué malo.,mukankaninpu',EMO,flashcards
+FL2_1972,¡Qué humillante!,empu'ni dakuta,EMO,flashcards
+FL2_1973,¡Qué interesante!,empu'ni luyaipa',EMO,flashcards
+ FL2_2085,Nadie respondió.,niden na'pichi' ni,NEG,flashcards
+FL2_0044,¡Imposible!,saka'dek,NEG,flashcards
+FL2_0180,Me niego.,luwanchi'nek,NEG,flashcards
+FL2_0773,No como.,ka'api' nek,NEG,flashcards
+FL2_1069,No sé.,ninchichi'nek,NEG,flashcards
+FL2_1398,No estudio.,ku'la ninchitapi'nek,NEG,flashcards
+FL2_1516,Nadie llamó.,niden pek'klu' chi'ni,NEG,flashcards
+FL2_1574,Nunca hablamos.,ninpi' lunpi'nidek,NEG,flashcards
+FL2_1710,No pico.,ku'la ek'kuanpinek,NEG,flashcards
+FL2_1711,No sigo.,ku'la tupiapi'nek,NEG,flashcards
+FL2_1712,No entiendo.,ku'la lachek'i' nek,NEG,flashcards
+FL2_1721,Ni idea.,ninchichi'nek,NEG,flashcards
+FL2_1821,Nadie gritó.,niden lamapui'ni,NEG,flashcards
+FL2_1822,Nadie escucha.,niden lauk'tapi' ni,NEG,flashcards
+NEG_NEW_001,Nunca.,nienpi',NEG,api_generada
+NEG_NEW_002,Nadie.,niden,NEG,api_generada
+NEG_NEW_003,Nada.,nima'nen,NEG,api_generada
+NEG_NEW_004,Jamás.,nienpi'sha,NEG,api_generada
+NEG_NEW_005,Sin agua.,dek'lek' inpu',NEG,api_generada
+NEG_NEW_006,Sin yuca.,ker'lek' inpu',NEG,api_generada
+NEG_NEW_007,Sin fuego.,penlek'inpu',NEG,api_generada
+NEG_NEW_008,Sin leña.,diuk'lek' inpu',NEG,api_generada
+NEG_NEW_009,Sin chicha.,uklupidek'lek' inpu',NEG,api_generada
+NEG_NEW_010,Sin maíz.,chiter'lek' inpu',NEG,api_generada
+NEG_NEW_011,Sin camino.,de'kunlek' inpu',NEG,api_generada
+NEG_NEW_012,Sin peces.,samerlek'inpu',NEG,api_generada
+NEG_NEW_013,Sin comida.,wueranlek'inpu',NEG,api_generada
+NEG_NEW_014,Sin abuelos.,papinkulusa'lek' inpu',NEG,api_generada
+NEG_NEW_015,Me falta agua.,pawantulek dek,NEG,api_generada
+NEG_NEW_016,Me falta leña.,pawantulek dek,NEG,api_generada
+NEG_NEW_017,Me cuesta.,pa'tulliu,NEG,api_generada
+NEG_NEW_018,Me falta yuca.,pawantuliu ker',NEG,api_generada
+NEG_NEW_019,Nadie llega.,niden ektu'p' ni,NEG,api_generada
+NEG_NEW_020,Nadie sabe.,niden ninchichi'ni,NEG,api_generada
+NEG_NEW_021,Nadie viene.,niden uk'api' ni,NEG,api_generada
+NEG_NEW_022,Nadie pesca.,niden pur'api' ni,NEG,api_generada
+NEG_NEW_023,Nadie siembra.,niden tra'tapi' ni,NEG,api_generada
+NEG_NEW_024,Nadie habla.,niden lunpi'ni,NEG,api_generada
+NEG_NEW_025,Nadie muele.,niden peksantapi'ni,NEG,api_generada
+NEG_NEW_026,Nadie tuesta.,niden inyatapi'ni,NEG,api_generada
+NEG_NEW_027,Nadie enseña.,niden a'lektapi' ni,NEG,api_generada
+NEG_NEW_028,Nunca pescamos.,ninpi' pur'api' nidek,NEG,api_generada
+NEG_NEW_029,Nunca llega.,ninpi' ektu'pi' ni,NEG,api_generada
+NEG_NEW_030,Nunca siembra.,ninpi' tra'pi' ni,NEG,api_generada
+NEG_NEW_031,Nunca amanece.,ninpi' uklliapi'ni,NEG,api_generada
+NEG_NEW_032,Jamás voy.,ninpi'sha pa'i' chek,NEG,api_generada
+NEG_NEW_033,Nunca cocinamos.,ninpi' kalu'chi' nidek,NEG,api_generada
+NEG_NEW_034,Jamás enseña.,ninpi'sha a'lekchi' ni,NEG,api_generada
+NEG_NEW_035,Jamás mastica.,ninpi'sha uklupi'li,NEG,api_generada
+NEG_NEW_036,Nunca toma chicha.,ninpi' uapi'ni uklupidek,NEG,api_generada
+NEG_NEW_037,Ya no hay.,a'pinta' ni'ni,NEG,api_generada
+NEG_NEW_038,Ya se fue.,ipa' pa'lli,NEG,api_generada
+NEG_NEW_039,Se acabó.,ta'wantulli,NEG,api_generada
+NEG_NEW_040,Se perdió.,wuer'lli,NEG,api_generada
+NEG_NEW_041,Ya no pesca.,yanakuta,NEG,api_generada
+NEG_NEW_042,Ya no queda yuca.,ipa' llia'i' ni ker',NEG,api_generada
+NEG_NEW_043,Ya no siembra.,ipa' tra'tapi' ni,NEG,api_generada
+NEG_NEW_044,Ya no viene.,ipa' uk'api' ni,NEG,api_generada
+NEG_NEW_045,Se acabó el maíz.,ta'wantulli chiter',NEG,api_generada
+NEG_NEW_046,Ya no llueve.,ipa' u'lanpi' ni,NEG,api_generada
+NEG_NEW_047,Ya se perdió.,ipa' wuer'lli,NEG,api_generada
+NEG_NEW_048,Se acabó la chicha.,ta'wantulli uklupidek,NEG,api_generada
+NEG_NEW_049,No puedo.,yen'nichi' nek,NEG,api_generada
+NEG_NEW_050,No quiero.,luwanchi'nek,NEG,api_generada
+NEG_NEW_051,No hay peces.,ni'ni samer,NEG,api_generada
+NEG_NEW_052,No hay leña.,ni'ni diuk,NEG,api_generada
+NEG_NEW_053,No hay agua.,ni'ni dek,NEG,api_generada
+NEG_NEW_054,No hay yuca.,ni'ni ker',NEG,api_generada
+NEG_NEW_055,No hay comida.,ni'ni wueran,NEG,api_generada
+NEG_NEW_056,No hay chicha.,ni'ni uklupidek,NEG,api_generada
+NEG_NEW_057,No llego.,ektu'pi' nek,NEG,api_generada
+NEG_NEW_058,No voy.,pa'in' chek,NEG,api_generada
+NEG_NEW_059,No cocino.,akusutapi'nek,NEG,api_generada
+NEG_NEW_060,No hablo shiwilu.,lunpi'nek shiwilu,NEG,api_generada
+NEG_NEW_061,No siembro.,tra'pi' nek,NEG,api_generada
+NEG_NEW_062,No pesco hoy.,pur'api' nek iipa'la,NEG,api_generada
+NEG_NEW_063,No tomo.,uapi'nek,NEG,api_generada
+NEG_NEW_064,No pudo.,yen'nichinpu' lli,NEG,api_generada
+NEG_NEW_065,Sin olla.,uktalek'inpu',NEG,api_generada
+NEG_NEW_066,Sin semillas.,ladawi'ni,NEG,api_generada
+NEG_NEW_067,Sin batán.,pita'wi' ni,NEG,api_generada
+NEG_NEW_068,Sin afrecho.,ker'lliawi' ni,NEG,api_generada
+NEG_NEW_069,Sin chacra.,menminwi'ni,NEG,api_generada
+NEG_NEW_070,Me falta maíz.,chiter' pawantulek,NEG,api_generada
+NEG_NEW_071,Me falta fuerza.,nantapi pawantulek,NEG,api_generada
+NEG_NEW_072,Me duele la cabeza.,iker mutu'lek,NEG,api_generada
+NEG_NEW_073,Me falta salud.,mudinui'nek,NEG,api_generada
+NEG_NEW_074,Me niego a ir.,yapa'i' nek,NEG,api_generada
+NEG_NEW_075,Nadie cuida.,niden luuk'api' ni,NEG,api_generada
+NEG_NEW_076,Nadie cría.,niden pektawachi'ni,NEG,api_generada
+NEG_NEW_077,Nadie recoge.,niden mapi'ni,NEG,api_generada
+NEG_NEW_078,Nadie trae agua.,niden kerapi'ni dek,NEG,api_generada
+NEG_NEW_079,Nadie cocina.,niden akusutapi'ni,NEG,api_generada
+NEG_NEW_080,Nadie cosecha.,niden sek'ker' chapi'ni,NEG,api_generada
+NEG_NEW_081,Nadie difunde.,niden lunpi'ni,NEG,api_generada
+NEG_NEW_082,Nunca cosecho.,ninpi' sek'ker' chapi'nek,NEG,api_generada
+NEG_NEW_083,Nunca curo.,ninpi' lulentapi'nek,NEG,api_generada
+NEG_NEW_084,Jamás regresa.,ninpi' adenchinchu,NEG,api_generada
+NEG_NEW_085,Nunca aprendo.,ninpi' ninchitapi'bek,NEG,api_generada
+NEG_NEW_086,Jamás trabaja.,ninpi' saka'tapi' ni,NEG,api_generada
+FL2_0025,¿Entendiste?,lachek'la,PRG,flashcards
+FL2_0045,¿En serio?,tekinchi,PRG,flashcards
+FL2_0046,¿La verdad?,tekinchi,PRG,flashcards
+FL2_0131,¿Quién corrió?,den'ina' teka'lli,PRG,flashcards
+FL2_0132,¿Quién ganó?,den'ina' kana'tulli,PRG,flashcards
+FL2_0135,¿Estoy gordo?,weipensu' napalek,PRG,flashcards
+FL2_0570,¿Está muerto?,chimini,PRG,flashcards
+FL2_0571,¿Es alto? (estatura - masculino),shipen a'cha,PRG,flashcards
+FL2_0572,¿Es alto? (estatura - femenino),shilun a'cha,PRG,flashcards
+FL2_0573,¿Es alto? (muy arriba),musenkek a'cha,PRG,flashcards
+FL2_0574,¿Es gratis?,pa'chi' nin'cha,PRG,flashcards
+FL2_0575,¿Está bueno?,mupallin'cha,PRG,flashcards
+FL2_0576,¿Es acá?,asek a'cha,PRG,flashcards
+FL2_0577,¿Aquí?,asek,PRG,flashcards
+FL2_0578,¿Está aquí?,asek a'cha,PRG,flashcards
+FL2_0579,¿Es seguro?,tekinchi'cha,PRG,flashcards
+FL2_0580,¿Es verdad?,tekinchi'cha,PRG,flashcards
+FL2_0581,¿Es ese?,nana'cha,PRG,flashcards
+FL2_0582,¿Es así?,nu'su' nuka'a,PRG,flashcards
+FL2_0583,¿Es este?,asu' a'cha,PRG,flashcards
+FL2_0679,¿Fue divertido?,mulli'ncha',PRG,flashcards
+FL2_0680,¿Era divertido?,muwinin,PRG,flashcards
+FL2_0704,¿Qué pasa?,mapu'la,PRG,flashcards
+FL2_0705,¿Dónde estoy?,ennupa'cha napalek,PRG,flashcards
+FL2_0706,¿Quién gritó?,den lamapu'lli,PRG,flashcards
+FL2_0707,¿Llamaste?,peklu'tula,PRG,flashcards
+FL2_0716,¿Hemos terminado?,a'ta' wantulekwa',PRG,flashcards
+FL2_0717,¿Estás loco?,wa'danpindek napala,PRG,flashcards
+FL2_0718,¿Estás enfadado?,yusu' napala,PRG,flashcards
+FL2_0719,¿Eres nuevo?,naektu'kellia,PRG,flashcards
+FL2_0730,¿Puedo comenzar?,yennitulek tenmiansu'ak,PRG,flashcards
+FL2_0731,¿Podemos hablar?,yennitulekwa' lun'ak,PRG,flashcards
+FL2_0732,¿Podemos conversar?,yennitulekwa' lun'ak,PRG,flashcards
+FL2_0738,¿Ganaste?,kana'tula,PRG,flashcards
+FL2_0740,¿Juegas boliche?,indekllitapala bulichi,PRG,flashcards
+FL2_0753,¿Ha venido?,ukllin'cha,PRG,flashcards
+FL2_0833,¿Para llevar?,ekpa'ak,PRG,flashcards
+FL2_0834,¿Está ventoso?,nakusu' tanluwatulli,PRG,flashcards
+FL2_0835,¿Es suyo?,kenmakin'cha,PRG,flashcards
+FL2_0836,¿Es todo?,iner'a' cha,PRG,flashcards
+FL2_0983,¿Estoy invitado?,peklu'pi napalek,PRG,flashcards
+FL2_0984,¿Nada nuevo?,nimanen nalu,PRG,flashcards
+FL2_0985,¿Tienes frío?,sanekwantula,PRG,flashcards
+FL2_0986,¿Estás muerto?,chimipi napala,PRG,flashcards
+FL2_0987,¿Eres sordo?,luuktek' nukama,PRG,flashcards
+FL2_0988,¿Estás libre?,inapi napala,PRG,flashcards
+FL2_0989,¿Estás lleno?,mer'su' napala,PRG,flashcards
+FL2_0990,¿Estás herida?,chacha'wanpala,PRG,flashcards
+FL2_0991,¿Estás perdido?,wer'su' napala,PRG,flashcards
+FL2_0992,¿Estás enfermo?,kaluwipala,PRG,flashcards
+FL2_0993,¿Está segura?,tekinchi'cha' napala,PRG,flashcards
+FL2_0994,¿Está seguro?,tekinchi'cha' napala,PRG,flashcards
+FL2_0995,¿Están seguros?,tekinchi'cha' napalama,PRG,flashcards
+FL2_1001,¿Puedo intentar?,yennitulek inpaleriak,PRG,flashcards
+FL2_1006,¿Sabes nadar?,ninchitapala idun'ak,PRG,flashcards
+FL2_1019,¿Vino Tom?,tom wek'lli,PRG,flashcards
+FL2_1020,¿Tom ayudó?,tom katu'pa' tulli,PRG,flashcards
+FL2_1021,¿Ayudaste?,katu'pa' tula,PRG,flashcards
+FL2_1022,¿Firmaste?,llillinpen nu'tula,PRG,flashcards
+FL2_1023,¿Firmaron?,llillinpenma' nu'tulama',PRG,flashcards
+FL2_1024,¿Luzco bien?,llitapalek musu',PRG,flashcards
+FL2_1025,¿Usted fuma?,kenma u'wa' tapala,PRG,flashcards
+FL2_1026,¿Fumas?,u'wa' tapala,PRG,flashcards
+FL2_1027,¿Usted ronca?,kenma tukulu'pala,PRG,flashcards
+FL2_1028,¿Tú roncas?,kenma tukulu'pala,PRG,flashcards
+FL2_1029,¿Duele?,ikerlli,PRG,flashcards
+FL2_1119,¿Está roto?,nusha'tusu' napalli,PRG,flashcards
+FL2_1120,¿Es suficiente?,nanasa'cha iner',PRG,flashcards
+FL2_1929,¿Puedo probármelo?,yennitulek lata'ak,PRG,flashcards
+FL2_1931,¿Podemos probarlo?,yennitulekwa' lata'ak,PRG,flashcards
+FL2_1941,¿Me oíste?,lauk'lun,PRG,flashcards
+FL2_1942,¿Te gustó?,iya'tula,PRG,flashcards
+FL2_1943,¿Les gustó?,iya'tulama,PRG,flashcards
+FL2_1944,¿Me amabas?,luwantuwinun,PRG,flashcards
+FL2_1945,¿Lo hiciste?,nu'tula,PRG,flashcards
+FL2_1946,¿Me extrañaste?,lu'wan' nun,PRG,flashcards
+FL2_1948,¿Comés carne?,chuchu ka'a' pala,PRG,flashcards
+FL2_1949,¿Está mal?,napalli muin'su,PRG,flashcards
+FL2_1950,¿Tienes uno?,a'napala ala'sa',PRG,flashcards
+FL2_1951,¿La conoces?,luwer'chapala,PRG,flashcards
+FL2_1952,¿La conocen?,luwer'chapalama,PRG,flashcards
+FL2_1953,¿Le conoce?,luwer'chapalli,PRG,flashcards
+FL2_1954,¿Lo recuerdas?,lli'inutapala,PRG,flashcards
+FL2_1955,¿Tú crees?,kenma latektapala,PRG,flashcards
+FL2_1956,¿Le quieres?,luwantapala,PRG,flashcards
+FL2_1957,¿Me conoce?,luwer'chapalun,PRG,flashcards
+FL2_1974,¿Cómo terminará?,ma'pu' su' ta'wantechu,PRG,flashcards
+FL2_2037,¿Es maestro?,a'lek' tutek' nuka'a,PRG,flashcards
+FL2_2038,¿Respira?,neriapalli,PRG,flashcards
+FL2_2039,¿Está satisfecho?,musu' napalli,PRG,flashcards
+FL2_2040,¿Es venenoso?,sulliman wanpalli,PRG,flashcards
+FL2_2161,¿Estabas llorando?,welliek'apawina,PRG,flashcards
+FL2_2162,¿Qué dijo?,ma'tulli,PRG,flashcards
+FL2_2163,¿Qué hiciste?,ma'nen' nu'tula,PRG,flashcards
+FL2_2164,¿Qué falta?,ma'nenpawanpalli,PRG,flashcards
+FL2_2165,¿Cuándo acabó?,enpi'ta' wantulli,PRG,flashcards
+FL2_2166,¿Cuándo correrás?,enpi'teke' chu,PRG,flashcards
+FL2_2167,¿Quien ayudó?,den'katu' pa'tulli,PRG,flashcards
+FL2_2188,¿Eres real?,tekinchi nuka'ma,PRG,flashcards
+FL2_2189,¿Estás embarazada?,kadu'lunsu' napala,PRG,flashcards
+FL2_0001,Ve.,paker',REQUEST,flashcards
+FL2_0005,¡Corre!,tekker',REQUEST,flashcards
+FL2_0013,¡Para!,ta'ituler',REQUEST,flashcards
+FL2_0014,¡Espera!,wa'ten' ker',REQUEST,flashcards
+FL2_0015,Esperen.,wa'ten' ku',REQUEST,flashcards
+FL2_0019,Sonríe.,yamer,REQUEST,flashcards
+FL2_0020,Sonrían.,yamerku',REQUEST,flashcards
+FL2_0022,Levanta. (un objeto),usanker',REQUEST,flashcards
+FL2_0023,Levanta. (pararse),yunsanker',REQUEST,flashcards
+FL2_0028,Abrázame.,wiperi'u,REQUEST,flashcards
+FL2_0038,Escucha.,lau'ter,REQUEST,flashcards
+FL2_0040,Escuchen.,lau'tuku',REQUEST,flashcards
+FL2_0070,Vaya despacio.,paker' uti'la,REQUEST,flashcards
+FL2_0158,Entra.,da'encher',REQUEST,flashcards
+FL2_0159,Entren.,da'encha' ku',REQUEST,flashcards
+FL2_0233,No entrar.,ku'la dai'nchu,REQUEST,flashcards
+FL2_0234,Déjalo.,tai'tuler',REQUEST,flashcards
+FL2_0235,Déjame.,tai'tula' u,REQUEST,flashcards
+FL2_0268,Vigílame.,luwuk'tu' u,REQUEST,flashcards
+FL2_0269,Obsérvame.,lli'u,REQUEST,flashcards
+FL2_0270,Obsérvalos.,lli'dek' ku',REQUEST,flashcards
+FL2_0298,¡No llores!,yawellekta,REQUEST,flashcards
+FL2_0299,No lloren.,yawellektama',REQUEST,flashcards
+FL2_0300,No mientas.,yatumu'ta,REQUEST,flashcards
+FL2_0444,Espera aquí.,wa'tenter' asek,REQUEST,flashcards
+FL2_0446,Esperen aquí.,wa'tenku' asek,REQUEST,flashcards
+FL2_0465,¡Sé cuidadoso!,li'ker' la,REQUEST,flashcards
+FL2_0466,Estate contento.,napaker' musu'kankantusu',REQUEST,flashcards
+FL2_0468,Sé serio.,yamercha,REQUEST,flashcards
+FL2_0470,Trae vino.,kencher' vinu',REQUEST,flashcards
+FL2_0472,Lleva esto.,ekpa'ker' asu',REQUEST,flashcards
+FL2_0475,Ven solo.,wenller' kenmasa',REQUEST,flashcards
+FL2_0477,Ven temprano.,wenller' dasu'la,REQUEST,flashcards
+FL2_0494,No esperes.,yawa'tentuta,REQUEST,flashcards
+FL2_0495,No grites.,yalamapu'ta,REQUEST,flashcards
+FL2_0681,Mira esto.,lli'ker' asu',REQUEST,flashcards
+FL2_0682,Miren esto.,lli'ku' asu',REQUEST,flashcards
+FL2_0709,Puedes irte.,yennitula pa'a' masu',REQUEST,flashcards
+FL2_0726,Especifica más.,wintu'u a'pinta,REQUEST,flashcards
+FL2_0733,¿Puedes ver?,yennitulan'cha lli'ta' mak,REQUEST,flashcards
+FL2_0741,No discutan.,yainyututama',REQUEST,flashcards
+FL2_1002,¿Puede hacerlo?,yennitulek nu'tak,REQUEST,flashcards
+FL2_1003,¿Puedes venir?,yennitula uk'a' mak,REQUEST,flashcards
+FL2_1004,¿Puedes ayudar?,yennitula katu'pa' ta'mak,REQUEST,flashcards
+FL2_1005,¿Puedes leer?,yennitula lunta'mak,REQUEST,flashcards
+FL2_1007,¿Puedes andar?,yennitapala dekkunta'mak,REQUEST,flashcards
+FL2_1008,¿Pueden andar?,yennitulama' dekkunta'mamak,REQUEST,flashcards
+FL2_1324,Apóyame.,katu'pa' u,REQUEST,flashcards
+FL2_1325,Apóyanos.,katu'pa' udek,REQUEST,flashcards
+FL2_1326,Tráelo aquí.,kencher' asek,REQUEST,flashcards
+FL2_1330,¡Llámame después!,peklu'u ma'isik,REQUEST,flashcards
+FL2_1338,¿Puedes dormir?,yennitula wichi'a' mak,REQUEST,flashcards
+FL2_1339,Venga mañana.,weker' eklli,REQUEST,flashcards
+FL2_1346,Hazlo rápidamente.,wiu'su' nu'ter',REQUEST,flashcards
+FL2_1348,Hazlo conmigo.,kualek nu'ter',REQUEST,flashcards
+FL2_1352,No engordes.,yaweyta,REQUEST,flashcards
+FL2_1355,Dámelo.,enka'u,REQUEST,flashcards
+FL2_1357,Dame algunos.,enka'u nu'unta' lusa',REQUEST,flashcards
+FL2_1358,Deme esos.,enka'u nanalusa',REQUEST,flashcards
+FL2_1360,Espera ahí.,nanek watenker',REQUEST,flashcards
+FL2_1363,Guarda eso.,sekdiperker' nana,REQUEST,flashcards
+FL2_1365,Hazlo venir.,a'wencher',REQUEST,flashcards
+FL2_1377,Espera allí.,wa'tender' nanek,REQUEST,flashcards
+FL2_1397,No esperé.,wa'tenchi' nek,REQUEST,flashcards
+FL2_1499,Déjame probarlo.,ta'itula' u tekle'richek,REQUEST,flashcards
+FL2_1501,Hagamos más.,a'pinta' nu'tawa',REQUEST,flashcards
+FL2_1502,Hagamos eso.,nu'tawa' nana,REQUEST,flashcards
+FL2_1503,Comamos fuera.,adipi ka'awa',REQUEST,flashcards
+FL2_1655,¿Puedes levantarte?,yennitula yunsan'a' mak,REQUEST,flashcards
+FL2_1656,¿Puedes verlo?,yennitula lli'a' mak,REQUEST,flashcards
+FL2_1677,No forcejees.,yanantapita,REQUEST,flashcards
+FL2_1726,Necesito respuestas.,luwantulek na'pia' musu',REQUEST,flashcards
+FL2_1727,Necesito descansar.,luwantulek neriak,REQUEST,flashcards
+FL2_1728,Necesito trabajar.,luwantulek saka'tak,REQUEST,flashcards
+FL2_1779,No funcionó.,ku'la saka'chi' ni,REQUEST,flashcards
+FL2_1796,Olvídalo ya.,ipa' pinanerker',REQUEST,flashcards
+FL2_1798,Déjame irme.,ta'itula' u pae'chek,REQUEST,flashcards
+FL2_1799,Llévalo contigo.,ekpa'ker kenmalek,REQUEST,flashcards
+FL2_1801,Siga intentando.,inpaleriaper',REQUEST,flashcards
+FL2_1802,Sigue buscando.,dunker'aper' i'la,REQUEST,flashcards
+FL2_1804,¡Déjame sola!,ta'itula' u kuasa',REQUEST,flashcards
+FL2_1806,Déjame explicar.,ta'itula' u wintechen,REQUEST,flashcards
+FL2_1807,Déjame sentirlo.,ta'itula' u lauk'echek,REQUEST,flashcards
+FL2_1808,Déjalos pelear.,ta'itula' dek'ku' idenmaina',REQUEST,flashcards
+FL2_1811,Comamos aquí.,weranwa' asek,REQUEST,flashcards
+FL2_1815,Escucha atentamente.,lau'ker' musu',REQUEST,flashcards
+FL2_1816,¡Escucha esto!,lau'ker' asu',REQUEST,flashcards
+FL2_1930,¿Pueden vernos?,yennitullina lli'er' kenmuak,REQUEST,flashcards
+FL2_1932,¿Puedes encontrarlo?,yennitula kanan'a' mak,REQUEST,flashcards
+FL2_1933,¿Puedes oírme?,yennitula lauk'a' muk,REQUEST,flashcards
+FL2_1934,¿Puedes oírnos?,yennitula lauk'a' mudek,REQUEST,flashcards
+FL2_1935,¿Puedes ayudarme?,yennitula katupa'a' muk,REQUEST,flashcards
+FL2_1936,¿Pueden ayudarme?,yennitulama katupa'a' muk,REQUEST,flashcards
+FL2_1937,¿Puedes abrirlo?,yennitula ek'ker' cha'mak,REQUEST,flashcards
+FL2_1938,¿Puedes mostrarme?,yennitula a'lli' a'muk,REQUEST,flashcards
+FL2_2171,Anota esto.,llinser'ker' asu',REQUEST,flashcards
+FL2_2172,Anoten esto.,llinser'ku' nana,REQUEST,flashcards
+FL2_2193,Respira normal.,neriker' u'chimu,REQUEST,flashcards
+FL2_2196,Sigue cavando.,iwa'taper' i'la,REQUEST,flashcards
+FL2_2197,¡Contrólate!,inlu'uk' ter,REQUEST,flashcards
+ FL2_2084,¡Feliz Navidad!,u'chimu ninuduker,SAL,flashcards
+FL2_0004,Hola.,ma'pu' sin,SAL,flashcards
+FL2_0071,¡Hasta luego!,pante'chek,SAL,flashcards
+FL2_0072,¡Chau!,pante'chek,SAL,flashcards
+FL2_0105,Nos vemos.,inlli'ter,SAL,flashcards
+FL2_0109,Hasta luego.,pante'chek,SAL,flashcards
+FL2_0126,Bienvenidos.,muwencha'ku',SAL,flashcards
+FL2_0127,Bienvenidas.,muwencha'ku',SAL,flashcards
+FL2_0128,Bienvenido.,muwencha'ker',SAL,flashcards
+FL2_0168,Buenas.,mulusa',SAL,flashcards
+FL2_1037,Buenos días.,muuklli,SAL,flashcards
+FL2_1039,Feliz Pascua.,musu' paskua',SAL,flashcards
+FL2_1040,¡Feliz Pascua!,musu' paskua',SAL,flashcards
+FL2_1683,Buenas tardes.,muer'wa,SAL,flashcards
+FL2_1685,¡Feliz año!,muek'kilala,SAL,flashcards
+SAL_NEW_001,Adiós.,pante'chek,SAL,api_generada
+SAL_NEW_002,Buenas noches.,mudek pilli',SAL,api_generada
+SAL_NEW_003,"Buenos días, señora.",mu ukli senula',SAL,api_generada
+SAL_NEW_004,"Buenas tardes, abuelo.",mu er'wa papinku,SAL,api_generada
+SAL_NEW_005,"Hola, abuelita.",ma'pu' sin amisha,SAL,api_generada
+SAL_NEW_006,"Hola, hermana.",ma'pu' sin kaiksha,SAL,api_generada
+SAL_NEW_007,"Hola, padre.",ma'pu' sin tata,SAL,api_generada
+SAL_NEW_008,"Hola, madre.",ma'pu' sin awa,SAL,api_generada
+SAL_NEW_009,"Chau, mamá.",pante'chek awa,SAL,api_generada
+SAL_NEW_010,"Chau, papá.",pante'chek tata,SAL,api_generada
+SAL_NEW_011,Hasta mañana.,eklliwalek,SAL,api_generada
+SAL_NEW_012,Nos vemos mañana.,eklli inlli'ter,SAL,api_generada
+SAL_NEW_013,Que descanse.,neri'i,SAL,api_generada
+SAL_NEW_014,Que descansen.,neri'ina',SAL,api_generada
+SAL_NEW_015,Que amanezca bien.,musu' uklli'i,SAL,api_generada
+SAL_NEW_016,Buen día.,mu uklli,SAL,api_generada
+SAL_NEW_017,"Buenas, abuelas.",mukankan amilusa',SAL,api_generada
+SAL_NEW_018,Hasta pronto.,wiuk'su' walek,SAL,api_generada
+SAL_NEW_019,Nos vemos luego.,ma'isik inlli'ter,SAL,api_generada
+SAL_NEW_020,"Hola, señora.",ma'pu' sin senula',SAL,api_generada
+SAL_NEW_021,Que te vaya bien.,musu' pa'ichi' in,SAL,api_generada
+SAL_NEW_022,Que les vaya bien.,musu' pa'ich' inma',SAL,api_generada
+SAL_NEW_023,Pase usted.,da'encher' kenma,SAL,api_generada
+SAL_NEW_024,"Pasen, por favor.",da'encha' ku' yusmalek,SAL,api_generada
+SAL_NEW_025,"Buenas, hermanas.",mukankan kaikualusa',SAL,api_generada
+SAL_NEW_026,"Hola, hijos.",ma'pu' sinma' wilauk'lusa',SAL,api_generada
+SAL_NEW_027,"Hola, hija.",ma'pu' sin ku'tin,SAL,api_generada
+SAL_NEW_028,"Chau, hija.",pante'chek teklapin,SAL,api_generada
+SAL_NEW_029,"Chau, hermano.",pante'cek yalli'wa,SAL,api_generada
+SAL_NEW_030,"Chau, abuelos.",pante'cek papinkulusa',SAL,api_generada
+SAL_NEW_031,Hasta la tarde.,er'wawalek,SAL,api_generada
+SAL_NEW_032,Hasta el anochecer.,uklliak'walek,SAL,api_generada
+SAL_NEW_033,Que amanezcas bien.,ukllinanter' musu',SAL,api_generada
+SAL_NEW_034,Que amanezcan bien.,ukllinanchina' musu',SAL,api_generada
+SAL_NEW_035,Nos vemos después.,ma'sik inlli'ter,SAL,api_generada
+SAL_NEW_036,"Hola, vecina.",ma'pu' sin kawipa'musu',SAL,api_generada
+SAL_NEW_037,"Hola, Jeberina.",ma'pusin shiwilulun,SAL,api_generada
+SAL_NEW_038,Hola de nuevo.,nalukla,SAL,api_generada
+SAL_NEW_039,"Chau, vecina.",pante'chek kawipa'musu',SAL,api_generada
+SAL_NEW_040,"Chau, señora.",pante 'chek senula',SAL,api_generada
+SAL_NEW_041,Que te cuides.,inluuk'ter',SAL,api_generada
+SAL_NEW_042,Cuídense.,inluuk'tuku',SAL,api_generada
+SAL_NEW_043,Cuídate.,inluuk'ter',SAL,api_generada
+SAL_NEW_044,Que se cuide.,inluuk'chii,SAL,api_generada
+SAL_NEW_045,Hasta el rato.,ma'isik' welek,SAL,api_generada
+SAL_NEW_046,Nos vemos al rato.,inlli'ter ma'isikwalek,SAL,api_generada
+SAL_NEW_047,"Hola, marido.",ma'pu' sin muda'uk,SAL,api_generada
+SAL_NEW_048,"Hasta luego, madre.",pante'chek awa,SAL,api_generada
+SAL_NEW_049,"Hasta luego, padre.",pante'chek tata,SAL,api_generada
+SAL_NEW_050,"Adiós, abuelos.",pa'echek papinkulusa',SAL,api_generada
+SAL_NEW_051,"Adiós, abuelita.",pa'echek amisha,SAL,api_generada
+SAL_NEW_052,"Adiós, hermana.",pa'echek sha'wa,SAL,api_generada
+SAL_NEW_053,"Adiós, señora.",pa'echek senula',SAL,api_generada
+SAL_NEW_054,"Adiós, vecina.",pa'echek kawipa'musu',SAL,api_generada
+SAL_NEW_055,Que bien llegaste.,enpu'nimusu' ektu'la,SAL,api_generada
+SAL_NEW_056,Bienvenida al pueblo.,muektu'kerker' ninaluk,SAL,api_generada
+SAL_NEW_057,Bienvenido al pueblo.,muektu'kerker' ninaluk,SAL,api_generada
+SAL_NEW_058,Bienvenidos al pueblo.,muektu'kerku' ninaluk,SAL,api_generada
+SAL_NEW_059,Bienvenidos a Jeberos.,muektu'kerku' shiwiluk,SAL,api_generada
+SAL_NEW_060,Bienvenido a casa.,muektu'kerker' pidik,SAL,api_generada
+SAL_NEW_061,Bienvenida a casa.,muektu'kerker' pidik,SAL,api_generada
+SAL_NEW_062,Bienvenidos a casa.,muektu'kerku' pidik,SAL,api_generada
+SAL_NEW_063,Que llegaste bien.,musu' ektu'kerla,SAL,api_generada
+SAL_NEW_064,"Llegaste, bien.",ektu'kerla musu',SAL,api_generada
+SAL_NEW_065,Ya llegaste.,ipa' ektu'kerla,SAL,api_generada
+SAL_NEW_066,Ya llegaron.,ipa' ektu'kerllina',SAL,api_generada
+SAL_NEW_067,Por fin llegaste.,ipa'la' ka ektu'kerla,SAL,api_generada
+SAL_NEW_068,"Chau, nos vemos.",pante'chek inlli'ter,SAL,api_generada
+SAL_NEW_069,Ya me voy.,ipa' pante'chek,SAL,api_generada
+SAL_NEW_070,Ya nos vamos.,ipa' inlli'ater,SAL,api_generada
+SAL_NEW_071,Me voy ya.,pante'chek ipa',SAL,api_generada
+SAL_NEW_072,Nos vamos ya.,pa'aterwa' ipa',SAL,api_generada
+SAL_NEW_073,Que estés bien.,mupker',SAL,api_generada
+SAL_NEW_074,Que estén bien.,mupaina',SAL,api_generada
+SAL_NEW_075,Que esté bien.,mupai,SAL,api_generada
+SAL_NEW_076,"Hola, yerno.",ma'pu' sin meksin,SAL,api_generada
+SAL_NEW_077,"Hola, viuda.",ma'pu' sin ekdulun,SAL,api_generada
+SAL_NEW_078,"Buenos días, abuelas.",muuklli amilusa',SAL,api_generada
+SAL_NEW_079,"Buenas noches, hermana.",mudek'pilli' sha'wa,SAL,api_generada
+SAL_NEW_080,"Buenas noches, madre.",mudekpill' awa,SAL,api_generada
+SAL_NEW_081,"Buenas noches, padre.",mudekpilli' tata,SAL,api_generada
+SAL_NEW_082,"Buenas noches, hijos.",mudekpilli' wilauk'lusa,SAL,api_generada
+SAL_NEW_083,"Buenas noches, abuelita.",mudekpilli' amisha,SAL,api_generada
+SAL_NEW_084,Hasta la noche.,dekpilli'walek,SAL,api_generada
+SAL_NEW_085,Que bien te veo.,enpu'nimuipa' lli'apallen,SAL,api_generada

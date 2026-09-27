@@ -37,6 +37,7 @@ PROP_DEV_TEST = 0.30   # 70% train, 15% dev, 15% test
 VALORES_C = [0.01, 0.1, 1.0, 3.0, 10.0]   # grilla de ajuste sobre el dev
 SPLIT_FIJO_CSV = Path(__file__).resolve().parent / "split_fijo.csv"
 FOLDS_FIJOS_CSV = Path(__file__).resolve().parent / "folds_fijos.csv"
+CORPUS_NORMALIZADO_CSV = Path(__file__).resolve().parent / "corpus_normalizado.csv"
 N_FOLDS = 5
 
 # Modelos de embeddings soportados: nombre corto -> (id de HuggingFace, tipo)
@@ -83,18 +84,62 @@ def _normalizar_estricto(texto: str) -> str:
     return re.sub(r"[^a-z0-9’']", "", sin_marcas)
 
 
-def quitar_puntuacion(texto: str, minusculas: bool = True) -> str:
+def quitar_puntuacion(texto: str, minusculas: bool = True, quitar_tildes: bool = False) -> str:
     """Deja solo las palabras (con sus apostrofes), separadas por un espacio.
 
-    Con `minusculas=True` (por defecto) tambien pasa todo a minusculas. Ambas
-    cosas importan porque son atajos del corpus: los signos `¿?` delatan PRG y
-    las oraciones TODAS EN MAYUSCULAS son el 100% de DES, PRG y REQUEST (contra
-    10-21% en las demas categorias).
+    Con `minusculas=True` (por defecto) tambien pasa todo a minusculas, y con
+    `quitar_tildes=True` ademas ignora tildes y la ene con tilde (¥ -> n). Todo
+    esto son atajos del corpus, no señal real: los signos `¿?` delatan PRG, las
+    oraciones TODAS EN MAYUSCULAS son el 100% de DES, PRG y REQUEST (contra
+    10-21% en las demas), y unas pocas oraciones solo difieren en una tilde.
+    La condicion "sin_puntuacion" (el texto normalizado que se usa en todos los
+    experimentos) activa las 3 a la vez.
     """
     t = str(texto)
     if minusculas:
         t = t.lower()
-    return " ".join(re.findall(r"[^\W_]+(?:'[^\W_]+)*", t))
+    if quitar_tildes:
+        t = "".join(c for c in unicodedata.normalize("NFD", t) if unicodedata.category(c) != "Mn")
+    # el apostrofo (oclusiva glotal, un fonema real del shiwilu, no puntuacion
+    # decorativa) se trata como parte de la palabra en cualquier posicion; el
+    # patron anterior ([^\W_]+(?:'[^\W_]+)*) exigia que fuera SEGUIDO de mas
+    # letras para conservarlo, y perdia ~30% de los apostrofos del corpus por
+    # quedar al final de palabra (ej. "ipa'", "musu'").
+    return " ".join(re.findall(r"[^\W_']*'*[^\W_]+'*", t))
+
+
+def cargar_corpus_normalizado(corpus_csv=CORPUS_CSV) -> pd.DataFrame:
+    """Corpus con la columna `shiwilu` ya normalizada (minusculas, sin
+    puntuacion, sin tildes/ni, apostrofo de oclusiva glotal preservado) —
+    exactamente `quitar_puntuacion(t, quitar_tildes=True)` aplicado fila por
+    fila, guardado como archivo para que se pueda inspeccionar directamente
+    (en vez de confiar en que el codigo lo recalcula bien cada vez).
+
+    Se regenera solo si el corpus maestro cambio desde la ultima vez (se
+    compara contra lo que este archivo deberia decir); a diferencia de
+    `split_fijo.csv`/`folds_fijos.csv`, esto es seguro porque es una funcion
+    pura de cada fila (no hay aleatoriedad ni asignacion de grupos que
+    "contaminar" si se recalcula).
+    """
+    corpus = cargar_corpus(corpus_csv)
+    esperado = corpus["shiwilu"].map(lambda t: quitar_puntuacion(t, quitar_tildes=True))
+
+    desactualizado = True
+    if CORPUS_NORMALIZADO_CSV.exists():
+        guardado = pd.read_csv(CORPUS_NORMALIZADO_CSV, dtype=str, keep_default_na=False)
+        if (len(guardado) == len(corpus)
+                and (guardado["id"].to_numpy() == corpus["id"].astype(str).to_numpy()).all()
+                and (guardado["shiwilu"].to_numpy() == esperado.to_numpy()).all()):
+            desactualizado = False
+
+    if desactualizado:
+        normalizado = corpus.copy()
+        normalizado["shiwilu"] = esperado
+        normalizado.to_csv(CORPUS_NORMALIZADO_CSV, index=False, encoding="utf-8")
+        print(f"[corpus normalizado] (re)generado en {CORPUS_NORMALIZADO_CSV}")
+        return normalizado
+
+    return pd.read_csv(CORPUS_NORMALIZADO_CSV)
 
 
 def _asignar_split(df: pd.DataFrame) -> pd.DataFrame:

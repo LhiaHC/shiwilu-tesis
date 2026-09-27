@@ -24,9 +24,13 @@ las 7 categorías de intención del corpus.
   comparan**, no se filtran — el contraste con la evaluación extrínseca
   (F1 de clasificación) se hace en [`5_sintesis_r9/`](../5_sintesis_r9/README.md).
 
-- **Texto:** las oraciones se pasan a minúsculas y se les quita la puntuación antes de
-  extraer los embeddings (`comun.quitar_puntuacion`), porque en el corpus los signos de
-  pregunta y las mayúsculas delatan categorías (ver más abajo).
+- **Texto:** todas las oraciones se normalizan antes de extraer los embeddings —
+  minúsculas, sin puntuación y sin distinguir tildes/ñ
+  (`comun.quitar_puntuacion(..., quitar_tildes=True)`) — porque en el corpus los
+  signos de pregunta y las mayúsculas delatan categorías (ver más abajo). Es la
+  misma condición `sin_puntuacion` que se usa en los 12 experimentos extrínsecos
+  (decisión 2026-09-27, ver
+  [`../3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md)).
 
 - **Corpus:** R7 pide correr esto "sobre el corpus original y los corpus
   aumentados obtenidos en R6". Este script soporta las 3 variantes de
@@ -72,32 +76,38 @@ pocos minutos; las variantes aumentadas tardan más por tener más oraciones).
 
 | Modelo | Estrategia | Silueta | Davies-Bouldin | Calinski-Harabasz |
 |---|---|---|---|---|
-| mBERT | Combinación de capas | -0.0054 | 6.62 | 7.58 |
-| mBERT | Max pooling | -0.0079 | 6.88 | 6.63 |
-| mBERT | CLS | -0.0086 | 6.78 | 7.36 |
-| mBERT | Mean pooling | -0.0099 | 6.62 | 7.08 |
-| LaBSE | Combinación de capas | -0.0202 | 7.07 | 6.73 |
-| LaBSE | CLS | -0.0218 | 7.31 | 6.37 |
-| LaBSE | Mean pooling | -0.0266 | 7.14 | 6.64 |
-| XLM-R | Max pooling | -0.0350 | 7.66 | 8.12 |
-| XLM-R | Combinación de capas | -0.0364 | 7.16 | 8.97 |
-| LaBSE | Max pooling | -0.0366 | 7.27 | 6.20 |
-| XLM-R | Mean pooling | -0.0368 | 7.45 | 9.55 |
-| XLM-R | CLS | -0.1097 | 7.13 | 10.27 |
+| mBERT | Mean pooling | -0.0096 | 6.74 | 6.21 |
+| mBERT | Combinación de capas | -0.0113 | 6.89 | 6.03 |
+| mBERT | Max pooling | -0.0124 | 6.97 | 5.62 |
+| mBERT | CLS | -0.0183 | 6.94 | 6.05 |
+| LaBSE | Combinación de capas | -0.0254 | 6.95 | 6.24 |
+| LaBSE | Mean pooling | -0.0296 | 6.99 | 6.17 |
+| LaBSE | CLS | -0.0317 | 7.14 | 5.82 |
+| LaBSE | Max pooling | -0.0366 | 7.19 | 5.73 |
+| XLM-R | Max pooling | -0.0387 | 7.84 | 5.26 |
+| XLM-R | Mean pooling | -0.0510 | 7.90 | 6.08 |
+| XLM-R | CLS | -0.0513 | 7.73 | 6.33 |
+| XLM-R | Combinación de capas | -0.0567 | 7.70 | 6.87 |
 
 **Sobre texto normalizado, ningún modelo separa las categorías de intención.** Todas
-las siluetas son ≈ 0 o negativas (entre -0.110 y -0.005): los vecinos más
+las siluetas son ≈ 0 o negativas (entre -0.057 y -0.010): los vecinos más
 cercanos de una oración, en el espacio de embeddings crudos, no comparten su
 categoría más que al azar. Por modelo, la mejor estrategia es
-mBERT Combinación de capas (-0.0054); LaBSE Combinación de capas (-0.0202); XLM-R Max pooling (-0.0350).
-El CLS de XLM-R es el peor de las 12 combinaciones.
+mBERT Mean pooling (-0.0096); LaBSE Combinación de capas (-0.0254); XLM-R Max pooling (-0.0387).
+La Combinación de capas de XLM-R es la peor de las 12 combinaciones, y **mBERT domina
+las 4 primeras posiciones**: sus 4 estrategias separan mejor que cualquier estrategia
+de LaBSE o XLM-R — coincide con que mBERT también es el mejor en el eje extrínseco
+(ver [`../5_sintesis_r9/README.md`](../5_sintesis_r9/README.md)).
 
 **Por qué se calcula sobre texto normalizado.** Con el texto crudo, LaBSE + CLS daba
 una silueta de +0.049 y parecía el mejor modelo. Esa ventaja venía de los atajos del
 corpus, no de las palabras: los `¿?` y las MAYÚSCULAS (100% de DES, PRG y REQUEST)
 separan esas categorías del resto. Al pasar el texto a minúsculas y quitar la
 puntuación, la ventaja desaparece y todos los modelos quedan en ≈ 0. (Los resultados
-con texto crudo están en el historial de git.)
+con texto crudo están en el historial de git.) La normalización **preserva el
+apóstrofo** (oclusiva glotal, un fonema real del shiwilu, ej. `pante'chek`) en
+cualquier posición de la palabra — solo se quitan signos de puntuación reales
+(`¿ ? ¡ ! . , ; :`), mayúsculas y tildes/ñ.
 
 ### Efecto del aumento de datos (R6) sobre la calidad intrínseca
 
@@ -107,12 +117,12 @@ silueta: las diferencias son de ≤ 0.01 en valor absoluto, o sea, prácticament
 
 | Modelo | Técnica | Silueta original | Silueta aumentada | Delta |
 |---|---|---|---|---|
-| LaBSE | retrotraducción | -0.0202 | -0.0304 | -0.0103 |
-| mBERT | retrotraducción | -0.0054 | -0.0095 | -0.0040 |
-| XLM-R | retrotraducción | -0.0350 | -0.0365 | -0.0015 |
-| LaBSE | generate_then_refine | -0.0202 | -0.0158 | +0.0044 |
-| mBERT | generate_then_refine | -0.0054 | -0.0040 | +0.0014 |
-| XLM-R | generate_then_refine | -0.0350 | -0.0307 | +0.0043 |
+| LaBSE | retrotraducción | -0.0254 | -0.0335 | -0.0081 |
+| mBERT | retrotraducción | -0.0096 | -0.0126 | -0.0029 |
+| XLM-R | retrotraducción | -0.0387 | -0.0295 | +0.0092 |
+| LaBSE | generate_then_refine | -0.0254 | -0.0229 | +0.0025 |
+| mBERT | generate_then_refine | -0.0096 | -0.0080 | +0.0017 |
+| XLM-R | generate_then_refine | -0.0387 | -0.0352 | +0.0035 |
 
 Como el punto de partida es ≈ 0 en todos los casos, no se puede afirmar que el
 aumento mejore ni empeore la organización intrínseca de los embeddings. La

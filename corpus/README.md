@@ -47,6 +47,15 @@ fases.
 | DES | 100 | 0 | 100 |
 | **Total** | **359** | **341** | **700** |
 
+### Versión normalizada (derivada, para clasificación)
+
+Los experimentos de clasificación (OE2/OE3) no usan este archivo directamente
+para el texto shiwilu: usan `2_baselines/corpus_normalizado.csv` (`shiwilu` en
+minúsculas, sin puntuación, sin tildes/ñ, apóstrofo de oclusiva glotal siempre
+preservado), generado automáticamente a partir de este archivo por
+`comun.cargar_corpus_normalizado()`. No se edita a mano; se regenera sola si
+este archivo cambia.
+
 ## Versión
 
 Versión 1.0.0 del corpus. Si se corrige o amplía, conviene etiquetar el commit

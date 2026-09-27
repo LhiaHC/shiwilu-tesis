@@ -72,6 +72,7 @@ from comun import (  # noqa: E402
     _normalizar_estricto,
     quitar_puntuacion,
     cargar_corpus,
+    cargar_corpus_normalizado,
     cargar_folds,
     extraer_embeddings,
 )
@@ -90,7 +91,7 @@ CONDICIONES = {
     "original": lambda t: str(t),
     "minusculas": lambda t: str(t).lower(),
     "sin_puntuacion_mayusculas": lambda t: quitar_puntuacion(t, minusculas=False),
-    "sin_puntuacion": lambda t: quitar_puntuacion(t, minusculas=True),
+    "sin_puntuacion": lambda t: quitar_puntuacion(t, minusculas=True, quitar_tildes=True),
 }
 ALPHA_MIXUP, MULT_MIXUP = 0.4, 1.0
 REPETICIONES_BOOTSTRAP = 2000
@@ -148,6 +149,15 @@ def main() -> int:
     tx = CONDICIONES[condicion]
 
     df = cargar_corpus()
+    if condicion == "sin_puntuacion":
+        # las 700 oraciones del corpus se leen ya normalizadas de un archivo
+        # (2_baselines/corpus_normalizado.csv), en vez de recalcularlo en
+        # memoria: es la condicion vigente, y asi se puede inspeccionar
+        # directamente el texto exacto que ven los modelos. Es idempotente con
+        # `tx` (aplicar quitar_puntuacion a texto ya normalizado no lo cambia),
+        # asi que esto no altera ningun resultado ya obtenido.
+        df = df.copy()
+        df["shiwilu"] = cargar_corpus_normalizado()["shiwilu"].to_numpy()
     n = len(df)
     y = df["intencion"].to_numpy()
     claves = df["shiwilu"].map(_normalizar_estricto).to_numpy()
