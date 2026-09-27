@@ -34,6 +34,9 @@ Entrada: corpus, 2_baselines/folds_fijos.csv, salidas/retrotraduccion_pool.csv,
          salidas/generate_then_refine_fold<0..4>.csv
 Salida:  3_baselines_y_aumento_datos/validacion_cruzada_resumen.csv
          3_baselines_y_aumento_datos/validacion_cruzada_predicciones.csv
+         (con columnas prob_<categoria>: probabilidad de cada categoria segun
+         el clasificador de ese fold, insumo de curvas_roc.py; nan en las filas
+         de los baselines triviales, que no producen probabilidades)
 
 Opcion --condicion (o --sin-puntuacion): transforma el texto ANTES de extraer los
 embeddings, como ablacion de dos atajos del corpus (ver CONDICIONES): los signos de
@@ -75,6 +78,7 @@ from comun import (  # noqa: E402
     cargar_corpus_normalizado,
     cargar_folds,
     extraer_embeddings,
+    liberar_modelo,
 )
 from mixup import generar_sinteticos_mixup  # noqa: E402
 from retrotraduccion import UMBRAL_SIMILITUD_MAX, UMBRAL_SIMILITUD_MIN  # noqa: E402
@@ -103,7 +107,12 @@ def f1m(y, p) -> float:
 
 
 def ajustar_y_predecir(X_core, y_core, X_dev, y_dev, X_pool, y_pool, X_test):
-    """Elige C sobre el dev interno y predice el test con el modelo reentrenado sobre el pool."""
+    """Elige C sobre el dev interno y predice el test con el modelo reentrenado sobre el pool.
+
+    Devuelve tambien predict_proba(X_test) y clf.classes_ (columnas de la
+    matriz de probabilidad, en el orden que scikit-learn les asigna) para las
+    curvas ROC (ver curvas_roc.py) - no afecta la prediccion dura ni el F1.
+    """
     mejor_c, mejor_f1 = VALORES_C[0], -1.0
     for c in VALORES_C:
         clf = LogisticRegression(C=c, max_iter=2000, random_state=SEMILLA).fit(X_core, y_core)
@@ -111,7 +120,7 @@ def ajustar_y_predecir(X_core, y_core, X_dev, y_dev, X_pool, y_pool, X_test):
         if f1 > mejor_f1:
             mejor_c, mejor_f1 = c, f1
     clf = LogisticRegression(C=mejor_c, max_iter=2000, random_state=SEMILLA).fit(X_pool, y_pool)
-    return clf.predict(X_test), mejor_c
+    return clf.predict(X_test), clf.predict_proba(X_test), clf.classes_, mejor_c
 
 
 def filtrar_catalogo_retro(pool_retro, L_orig, L_retro, y, idx_pool) -> np.ndarray:
@@ -149,6 +158,14 @@ def main() -> int:
     tx = CONDICIONES[condicion]
 
     df = cargar_corpus()
+    n = len(df)
+    y = df["intencion"].to_numpy()
+    # folds_fijos.csv esta congelado con claves calculadas sobre el texto
+    # ORIGINAL (acentos/ñ incluidos, ver comun.cargar_folds/_normalizar_shiwilu);
+    # hay que calcular los folds ANTES de sustituir el texto normalizado, o esa
+    # verificacion deja de coincidir (a diferencia de `claves` mas abajo, que usa
+    # la normalizacion estricta y por eso es idempotente con el texto ya limpio).
+    folds = cargar_folds(df)
     if condicion == "sin_puntuacion":
         # las 700 oraciones del corpus se leen ya normalizadas de un archivo
         # (2_baselines/corpus_normalizado.csv), en vez de recalcularlo en
@@ -158,10 +175,7 @@ def main() -> int:
         # asi que esto no altera ningun resultado ya obtenido.
         df = df.copy()
         df["shiwilu"] = cargar_corpus_normalizado()["shiwilu"].to_numpy()
-    n = len(df)
-    y = df["intencion"].to_numpy()
     claves = df["shiwilu"].map(_normalizar_estricto).to_numpy()
-    folds = cargar_folds(df)
     print(f"{n} oraciones, folds: {np.bincount(folds).tolist()}")
 
     pool_retro = pd.read_csv(AUMENTO_SALIDA / "retrotraduccion_pool.csv")
@@ -185,6 +199,7 @@ def main() -> int:
     for modelo in ["labse"] + [k for k in MODELOS if k != "labse"]:
         print(f"\n=== {modelo}: extrayendo embeddings de {len(textos)} textos ===")
         E = extraer_embeddings(textos, modelo)
+        liberar_modelo(modelo)  # ya se extrajeron los embeddings; no hace falta mantener los pesos en RAM
         E_orig, E_retro = E[:n], E[n:n + m]
         if modelo == "labse":
             L_orig, L_retro = E_orig, E_retro
@@ -226,10 +241,12 @@ def main() -> int:
 
                 X_core = np.concatenate([E_orig[idx_core], aug_core[0]]); y_core = np.concatenate([y[idx_core], aug_core[1]])
                 X_pool = np.concatenate([E_orig[idx_pool], aug_pool[0]]); y_pool = np.concatenate([y[idx_pool], aug_pool[1]])
-                pred, c = ajustar_y_predecir(X_core, y_core, E_orig[idx_dev], y[idx_dev], X_pool, y_pool, E_orig[idx_test])
-                for pos_i, real_i, pred_i in zip(idx_test, y[idx_test], pred):
-                    predicciones.append({"modelo": modelo, "tecnica": tecnica, "fold": f, "pos": int(pos_i),
-                                         "real": real_i, "prediccion": pred_i, "C": c})
+                pred, proba, clases, c = ajustar_y_predecir(X_core, y_core, E_orig[idx_dev], y[idx_dev], X_pool, y_pool, E_orig[idx_test])
+                for pos_i, real_i, pred_i, proba_i in zip(idx_test, y[idx_test], pred, proba):
+                    fila = {"modelo": modelo, "tecnica": tecnica, "fold": f, "pos": int(pos_i),
+                            "real": real_i, "prediccion": pred_i, "C": c}
+                    fila.update({f"prob_{clase}": p for clase, p in zip(clases, proba_i)})
+                    predicciones.append(fila)
             print(f"  fold {f} listo (test={len(idx_test)}, pool={len(idx_pool)}, dev interno={len(idx_dev)})")
 
     # baselines triviales por fold

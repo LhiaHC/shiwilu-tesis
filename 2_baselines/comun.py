@@ -10,6 +10,7 @@ cambia es como se extraen los embeddings.
 
 from __future__ import annotations
 
+import gc
 import json
 import re
 import unicodedata
@@ -104,8 +105,12 @@ def quitar_puntuacion(texto: str, minusculas: bool = True, quitar_tildes: bool =
     # decorativa) se trata como parte de la palabra en cualquier posicion; el
     # patron anterior ([^\W_]+(?:'[^\W_]+)*) exigia que fuera SEGUIDO de mas
     # letras para conservarlo, y perdia ~30% de los apostrofos del corpus por
-    # quedar al final de palabra (ej. "ipa'", "musu'").
-    return " ".join(re.findall(r"[^\W_']*'*[^\W_]+'*", t))
+    # quedar al final de palabra (ej. "ipa'", "musu'"). Tambien se acepta la
+    # comilla tipografica (') como apostrofo (no aparece hoy en ningun archivo
+    # del pipeline, pero _normalizar_shiwilu/_normalizar_estricto si la
+    # whitelistean; sin esto, un futuro "'" silenciosamente perderia el fonema
+    # aqui aunque esas otras dos funciones lo sigan tratando bien).
+    return " ".join(re.findall(r"[^\W_'’]*['’]*[^\W_]+['’]*", t))
 
 
 def cargar_corpus_normalizado(corpus_csv=CORPUS_CSV) -> pd.DataFrame:
@@ -244,6 +249,25 @@ def extraer_embeddings(oraciones: list[str], nombre_modelo: str) -> np.ndarray:
             pooled = _mean_pooling(salida, enc["attention_mask"])
             vectores.append(pooled.numpy())
     return np.concatenate(vectores, axis=0)
+
+
+def liberar_modelo(nombre_modelo: str) -> None:
+    """Saca de la cache los PESOS ya usados de `nombre_modelo` (no las
+    embeddings ya extraidas, que son arrays de numpy independientes).
+
+    `extraer_embeddings` nunca los descarga solo porque un script termino de
+    usarlos (por ejemplo, LaBSE se reutiliza en cada fold de
+    `validacion_cruzada.py` para filtrar Retrotraduccion), asi que si un
+    proceso pasa por los 3 modelos en fila mantiene los 3 cargados en RAM a
+    la vez. En maquinas con poca memoria/pagefile chico eso terminaba en
+    `Segmentation fault` (o el error de Windows "el archivo de paginacion es
+    demasiado pequeno") al cargar el segundo o tercer modelo. Llamar a esto
+    apenas se sabe que un modelo ya no hace falta evita mantener las 3
+    arquitecturas cargadas a la vez.
+    """
+    hf_id, _ = MODELOS[nombre_modelo]
+    if _CACHE_MODELOS.pop(hf_id, None) is not None:
+        gc.collect()
 
 
 def ajustar_clasificador(X_train, y_train, X_dev, y_dev) -> LogisticRegression:
