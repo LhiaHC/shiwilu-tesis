@@ -42,7 +42,8 @@ construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
 │   ├── correr_todos.py              corre los 3 y compara
 │   ├── baseline_trivial.py          piso sin embeddings (mayoria, solapamiento de palabras)
 │   ├── split_fijo.csv               split train/dev/test congelado (no recalcular)
-│   └── folds_fijos.csv              folds de la validación cruzada, congelados
+│   ├── folds_fijos.csv              folds de la validación cruzada, congelados
+│   └── corpus_normalizado.csv       las 700 oraciones con `shiwilu` normalizado (auto-generado)
 │
 ├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
 │   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)

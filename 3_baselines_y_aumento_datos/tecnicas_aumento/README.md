@@ -29,6 +29,17 @@ contra ellos.
   checkpoint), así que ninguna oración de dev/test participó en generar ni
   filtrar texto sintético. Si algún día se recalcula el split, hay que
   regenerar las dos técnicas.
+- **Limpieza del corpus maestro (2026-09-27):** `corpus/corpus_shiwilu_final.csv`
+  tenía 13 filas donde una comilla doble (`"`) reemplazaba por error un
+  apóstrofo (oclusiva glotal, un fonema real del shiwilu — ej. `nanapi"la` debía
+  ser `nanapi'la`); esas filas perdían ese fonema al normalizar el texto, porque
+  el código no sabía que esa comilla debía leerse como apóstrofo. También tenía
+  205 filas con espacios dobles y usaba mayúsculas/minúsculas sin criterio
+  fijo (10-100% en mayúsculas según la categoría, ver más abajo). Se corrigieron
+  los 3 problemas directamente en el corpus (columna `shiwilu` únicamente;
+  `espanol` no se tocó). Esto cambió el agrupamiento por texto normalizado de 12
+  oraciones, así que `split_fijo.csv` y `folds_fijos.csv` se recalcularon y
+  ambas técnicas se regeneraron una vez más con el corpus ya limpio.
 
 
 ## Evaluación principal: validación cruzada de 5 folds
@@ -43,14 +54,23 @@ congelados en `2_baselines/folds_fijos.csv`), y el aumento de cada fold se gener
 angosto (±0.031 en promedio), y un análisis con 30 splits aleatorios
 confirmó que no está inflado.
 
-### Dos condiciones de texto (los 12 experimentos en ambas)
+### Condición de texto: normalizado, sin excepción (decisión 2026-09-27)
 
-El corpus tiene **dos atajos superficiales**: (1) los signos de puntuación (los `¿?`
-delatan la categoría PRG) y (2) las mayúsculas (las oraciones de DES, PRG y REQUEST
-están 100% TODAS EN MAYÚSCULAS; las otras categorías, 10-21%). Por eso todos los
-experimentos se reportan en dos condiciones.
+El corpus tiene **atajos superficiales** que no son señal lingüística real: los
+signos de puntuación (los `¿?` delatan la categoría PRG), las mayúsculas (las
+oraciones de DES, PRG y REQUEST están 100% TODAS EN MAYÚSCULAS; las otras
+categorías, 10-21%) y algunas tildes que solo distinguen variantes de una misma
+oración. Por eso **desde ahora todos los experimentos —Mixup, Generate-then-Refine,
+Retrotraducción, OE3, curvas, lo que siga— se corren únicamente sobre texto
+normalizado**: minúsculas, sin puntuación y sin distinguir tildes/ñ
+(`comun.quitar_puntuacion(..., quitar_tildes=True)`, la condición `sin_puntuacion`
+de [`../validacion_cruzada.py`](../validacion_cruzada.py)).
 
-**Con puntuación** (texto tal cual está en el corpus), F1 macro sobre las 700 predicciones:
+El texto **con puntuación** (tal cual está el corpus) ya no se vuelve a correr — la
+tabla de abajo queda **congelada** como evidencia de por qué se descartó, no como
+un resultado a mantener en paralelo.
+
+**Con puntuación** (histórico, congelado — NO se actualiza), F1 macro sobre las 700 predicciones:
 
 | Modelo | Sin aumento | Mixup | Generate-then-Refine | Retrotraducción |
 |---|---|---|---|---|
@@ -60,57 +80,54 @@ experimentos se reportan en dos condiciones.
 
 Baselines triviales: mayoría 0.0753, vecino por palabras 0.5176.
 
-**Sin puntuación** (texto en minúsculas y sin signos; `--sin-puntuacion`):
+**Texto normalizado** (minúsculas, sin puntuación, sin tildes/ñ, apóstrofos de
+oclusiva glotal preservados — la condición vigente y **definitiva**, sobre el
+corpus ya limpio de typos):
 
 | Modelo | Sin aumento | Mixup | Generate-then-Refine | Retrotraducción |
 |---|---|---|---|---|
-| XLM-R | **0.6080** | 0.5980 | 0.5798 | 0.5940 |
-| mBERT | 0.6378 | 0.6391 | **0.6417** | 0.6144 |
-| LaBSE | 0.5816 | 0.5740 | **0.5984** | 0.5737 |
+| mBERT | **0.6575** | 0.6346 | 0.6491 | 0.6214 |
+| XLM-R | 0.5481 | 0.5580 | **0.5798** | 0.5574 |
+| LaBSE | 0.5873 | 0.5927 | **0.5952** | 0.5683 |
 
-Baselines triviales: mayoría 0.0753, vecino por palabras 0.4825.
+Baselines triviales: mayoría 0.0880, vecino por palabras 0.5048.
 Sin los atajos, los modelos superan a la coincidencia de palabras por solo
-0.10 (LaBSE) a 0.16 (mBERT) puntos de F1.
+0.04 (XLM-R) a 0.15 (mBERT) puntos de F1.
 
-**Cuánto pesa cada atajo** (sin aumento, F1 macro):
+**Cuánto pesaban los atajos** (sin aumento, F1 macro — diagnóstico que motivó la
+decisión; se corrió antes de limpiar el corpus, sirve solo para dimensionar el
+problema, no como número final):
 
-| Modelo | Texto original | Solo minúsculas | Solo sin puntuación | Ambos |
-|---|---|---|---|---|
-| XLM-R | 0.7583 | 0.6877 | 0.6693 | 0.6080 |
-| mBERT | 0.7577 | 0.7153 | 0.7076 | 0.6378 |
-| LaBSE | 0.7451 | 0.6862 | 0.6409 | 0.5816 |
+| Modelo | Texto original | Solo minúsculas | Solo sin puntuación |
+|---|---|---|---|
+| XLM-R | 0.7583 | 0.6877 | 0.6693 |
+| mBERT | 0.7577 | 0.7153 | 0.7076 |
+| LaBSE | 0.7451 | 0.6862 | 0.6409 |
 
-Los dos atajos pesan de forma parecida (cada uno ~0.04-0.10 de F1) y se suman. La
+Los atajos pesaban de forma parecida (cada uno ~0.04-0.10 de F1) y se sumaban. La
 categoría PRG pasa de F1 ≈ 0.97-0.99 a ≈ 0.50-0.54 al quitar la puntuación.
 
 ### Efecto de cada técnica frente a "sin aumento"
 
-Diferencia pareada de F1 sobre las mismas 700 oraciones
-([`../comparacion_pareada.py`](../comparacion_pareada.py)); en negrita, las
-diferencias cuyo IC95% no incluye 0.
-
-Con puntuación:
+Diferencia pareada de F1 sobre las mismas 700 oraciones, texto normalizado
+([`../comparacion_pareada.py --sin-puntuacion`](../comparacion_pareada.py)); en
+negrita, las diferencias cuyo IC95% no incluye 0.
 
 | Técnica | LaBSE | mBERT | XLM-R |
 |---|---|---|---|
-| Mixup | **-0.026** | -0.009 | **-0.019** |
-| Generate-then-Refine | -0.012 | +0.005 | +0.010 |
-| Retrotraducción | **-0.036** | **-0.036** | -0.020 |
+| Mixup | +0.005 | **-0.023** | +0.010 |
+| Generate-then-Refine | +0.008 | -0.008 | **+0.032** |
+| Retrotraducción | -0.019 | **-0.036** | +0.009 |
 
-Sin puntuación:
-
-| Técnica | LaBSE | mBERT | XLM-R |
-|---|---|---|---|
-| Mixup | -0.008 | +0.001 | -0.010 |
-| Generate-then-Refine | +0.017 | +0.004 | **-0.028** |
-| Retrotraducción | -0.008 | -0.023 | -0.014 |
-
-**Conclusión:** ninguna técnica mejora el F1 de forma distinguible de cero en
-ninguna de las dos condiciones; varias lo empeoran (Mixup y Retrotraducción, sobre
-todo con puntuación). Entre modelos (sin aumento), con puntuación
-XLM-R − LaBSE = +0.013 (IC95% [-0.020, +0.046]); sin puntuación mBERT − LaBSE = +0.056 (IC95% [+0.019, +0.094]), la única
-diferencia entre modelos distinguible de cero. Las tablas por técnica de más abajo
-corresponden al split único y quedan como referencia.
+**Conclusión:** la única técnica que ayuda de forma distinguible es
+**Generate-then-Refine en XLM-R** (+0.032, IC95% [+0.012, +0.052]); Mixup y
+Retrotraducción **empeoran** de forma distinguible a mBERT (-0.023 y -0.036); el
+resto de combinaciones no es distinguible de cero. Entre modelos (sin aumento):
+**mBERT es significativamente mejor que XLM-R** (+0.109, IC95% [+0.071, +0.148])
+y **que LaBSE** (+0.070, IC95% [+0.031, +0.108]); XLM-R vs. LaBSE no es
+distinguible (-0.039, IC95% [-0.081, +0.001]). La tabla "con puntuación" de
+arriba y las tablas por técnica de más abajo (que usan el split único) quedan
+solo como referencia histórica.
 
 Cómo se genera el aumento para la validación cruzada:
 - **Retrotraducción:** un único catálogo de las 700 oraciones

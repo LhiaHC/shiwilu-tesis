@@ -25,7 +25,15 @@ caracterización de embeddings (OE3).
   (`comun.dividir_train_dev_test`/`_normalizar_shiwilu`): el corpus tiene
   oraciones muy cortas que se repiten con distinta glosa en español,
   mayúsculas o puntuación (`"MUPALLI"`, `"¡PANTE'CHEK!"` vs. `"pante'chek"`),
-  y antes de este ajuste una misma oración podía caer en train y en test a la vez. El split se calculó una sola vez y quedó **congelado** en `split_fijo.csv`: todos los scripts lo leen de ahí en vez de recalcularlo (así ningún cambio de código o de versión de librerías lo reordena y contamina las técnicas de aumento generadas a partir de train).
+  y antes de este ajuste una misma oración podía caer en train y en test a la vez. El split se calculó una sola vez y quedó **congelado** en `split_fijo.csv`: todos los scripts lo leen de ahí en vez de recalcularlo (así ningún cambio de código o de versión de librerías lo reordena y contamina las técnicas de aumento generadas a partir de train). El corpus mismo (`corpus/corpus_shiwilu_final.csv`, columna `shiwilu`) también se limpió una vez: 13 typos de comilla doble por apóstrofo, espacios dobles y mayúsculas inconsistentes — ver la nota de metodología en [`../3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](../3_baselines_y_aumento_datos/tecnicas_aumento/README.md).
+
+- **`corpus_normalizado.csv`** (`comun.cargar_corpus_normalizado()`): las mismas
+  700 oraciones, con `shiwilu` ya normalizado — minúsculas, sin puntuación,
+  sin tildes/ñ, apóstrofo (oclusiva glotal) siempre preservado. Es el archivo
+  que se puede abrir para ver **exactamente** el texto que usan la validación
+  cruzada y la caracterización de embeddings, en vez de confiar en que el
+  código lo recalcula igual cada vez. Se regenera solo (automáticamente) si
+  `corpus_shiwilu_final.csv` cambia.
 
 ## Uso
 
@@ -51,27 +59,31 @@ necesidad de Colab.
 - `matriz_confusion.png` — matriz de confusión sobre el conjunto de prueba.
 - `reporte_clasificacion.csv` — métricas desagregadas por categoría de intención.
 
-## Resultado principal: validación cruzada de 5 folds
+## Resultado principal: validación cruzada de 5 folds, texto normalizado
 
 Los scripts de esta carpeta (`baseline.py`, `correr_todos.py`) usan el split
-único 70/15/15, cuyo test de ~99 oraciones da un F1 con ±0.09 de incertidumbre.
-La evaluación principal de la tesis es la validación cruzada de
+único 70/15/15 y el texto crudo del corpus, cuyo test de ~99 oraciones da un F1
+con ±0.09 de incertidumbre. La evaluación **vigente** de la tesis es la
+validación cruzada de
 [`../3_baselines_y_aumento_datos/validacion_cruzada.py`](../3_baselines_y_aumento_datos/validacion_cruzada.py)
-(folds congelados en `folds_fijos.csv`, agrupados por texto normalizado), en dos
-condiciones de texto porque el corpus tiene dos atajos: los signos de puntuación
-(`¿?` delatan PRG) y las mayúsculas (DES, PRG y REQUEST están 100% en MAYÚSCULAS):
+(folds congelados en `folds_fijos.csv`, agrupados por texto normalizado),
+**siempre sobre texto normalizado** (minúsculas, sin puntuación, sin
+tildes/ñ — `--sin-puntuacion`): el corpus tiene atajos superficiales que
+delatan la categoría (los signos `¿?` para PRG; las mayúsculas, 100% en
+DES/PRG/REQUEST) y ya no se corre ni se mantiene la condición con texto crudo
+más que como referencia histórica (tabla más abajo).
 
-| Modelo (sin aumento) | Con puntuación | IC95% | Sin puntuación | IC95% |
-|---|---|---|---|---|
-| XLM-R | 0.7583 | [0.727, 0.789] | 0.6080 | [0.571, 0.639] |
-| mBERT | 0.7577 | [0.726, 0.789] | 0.6378 | [0.602, 0.670] |
-| LaBSE | 0.7451 | [0.713, 0.776] | 0.5816 | [0.547, 0.617] |
+| Modelo (sin aumento) | F1 macro (normalizado) | IC95% |
+|---|---|---|
+| mBERT | 0.6575 | [0.622, 0.691] |
+| LaBSE | 0.5873 | [0.549, 0.621] |
+| XLM-R | 0.5481 | [0.510, 0.583] |
 
-Los 3 modelos quedan muy parejos: con puntuación, XLM-R − LaBSE = +0.013 (IC95% [-0.020, +0.046]);
-sin puntuación, mBERT − LaBSE = +0.056 (IC95% [+0.019, +0.094]) (la única diferencia entre
-modelos distinguible de cero).
+**mBERT es significativamente mejor que los otros dos**: mBERT − XLM-R = +0.109
+(IC95% [+0.071, +0.148]) y mBERT − LaBSE = +0.070 (IC95% [+0.031, +0.108]).
+XLM-R vs. LaBSE no es distinguible de cero (-0.039, IC95% [-0.081, +0.001]).
 
-## Resultado con split único (referencia)
+## Resultado con split único y texto crudo (histórico, congelado)
 
 | Modelo | F1 macro | F1 ponderado | Exactitud |
 |---|---|---|---|
@@ -104,13 +116,13 @@ python 2_baselines/baseline_trivial.py
 
 | Baseline | F1 macro | Qué mide |
 |---|---|---|
-| Mayoría (siempre predice `DES`) | 0.0309 (CV: 0.0753) | Piso absoluto — cualquier modelo real debe superarlo con margen. |
-| 1-vecino-más-cercano por palabras compartidas (sin embeddings) | 0.3830 (CV: 0.5176 con puntuación, 0.4825 sin ella) | Cuánto se puede clasificar solo por solapamiento léxico exacto, sin ninguna noción de significado. |
+| Mayoría (siempre predice `DES`) | 0.0309 (CV: 0.0880) | Piso absoluto — cualquier modelo real debe superarlo con margen. |
+| 1-vecino-más-cercano por palabras compartidas (sin embeddings) | 0.3830 (CV: 0.5176 con puntuación, 0.5048 sin ella) | Cuánto se puede clasificar solo por solapamiento léxico exacto, sin ninguna noción de significado. |
 
-Los 3 modelos reales (0.69-0.72) superan claramente el 0.38 del vecino más
-cercano por palabras — así que sí hay señal más allá de la simple
-repetición léxica, pero la brecha (~0.3-0.35 puntos de F1) no es enorme para
-un problema de 7 clases. Es una llamada a interpretar los resultados de OE2
-con cautela, no evidencia de que estén invalidados.
-
-Con la validación cruzada el vecino por palabras sube a 0.5176 con puntuación (0.4825 sin ella): el test único de 99 oraciones resultó ser particularmente "difícil" léxicamente. Sin los atajos de puntuación y mayúsculas, los modelos superan a la coincidencia de palabras por solo ~0.10-0.15 puntos de F1.
+Los 3 modelos reales del split único con texto crudo (0.69-0.72) superan
+claramente el 0.38 de ese mismo baseline — pero esa comparación mezclaba señal
+real con los atajos de puntuación/mayúsculas. Con la validación cruzada y texto
+normalizado (la comparación que vale), el vecino por palabras da 0.5048 y los
+modelos reales 0.55-0.66: la brecha real es de solo ~0.04-0.15 puntos de F1, no
+0.3-0.35. Es una llamada fuerte a interpretar los resultados de OE2 con cautela:
+hay señal, pero es modesta, y en XLM-R es la más chica de los 3.

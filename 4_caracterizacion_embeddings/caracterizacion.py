@@ -79,9 +79,14 @@ from sklearn.preprocessing import normalize
 import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "2_baselines"))
-from comun import MODELOS, _normalizar_estricto, quitar_puntuacion  # noqa: E402  (mismos 3 modelos que los baselines)
+from comun import (  # noqa: E402  (mismos 3 modelos que los baselines)
+    MODELOS,
+    _normalizar_estricto,
+    cargar_corpus_normalizado,
+    quitar_puntuacion,
+)
 
-from shiwilu.rutas import CARACTERIZACION_RESULTADOS, CORPUS_CSV, FASE4  # noqa: E402
+from shiwilu.rutas import CARACTERIZACION_RESULTADOS, FASE4  # noqa: E402
 from shiwilu.taxonomia import COLOR_INT, INTENCIONES  # noqa: E402
 
 ESTRATEGIAS = ["cls", "mean_pooling", "max_pooling", "combinacion_capas"]
@@ -143,8 +148,14 @@ def extraer_todas_las_estrategias(oraciones: list[str], nombre_modelo: str, batc
 
 
 def cargar_corpus_variante(variante: str) -> pd.DataFrame:
-    """Corpus original, o original + filas aprobadas de una tecnica de texto (R6)."""
-    original = pd.read_csv(CORPUS_CSV)[["shiwilu", "intencion"]]
+    """Corpus original, o original + filas aprobadas de una tecnica de texto (R6).
+
+    Las 700 oraciones propias del corpus se leen ya normalizadas de
+    `2_baselines/corpus_normalizado.csv` (mismo texto que produce
+    `quitar_puntuacion(t, quitar_tildes=True)`, guardado como archivo para
+    poder inspeccionarlo directamente).
+    """
+    original = cargar_corpus_normalizado()[["shiwilu", "intencion"]]
     if variante == "original":
         return original
     if variante == "mixup":
@@ -249,7 +260,7 @@ def main() -> int:
 
     print(f"Cargando corpus '{args.corpus}' (analisis intrinseco, sin dividir train/dev/test)...")
     df = cargar_corpus_variante(args.corpus)
-    oraciones = [quitar_puntuacion(t) for t in df["shiwilu"]]   # minusculas y sin puntuacion
+    oraciones = [quitar_puntuacion(t, quitar_tildes=True) for t in df["shiwilu"]]   # texto normalizado
     etiquetas = df["intencion"].to_numpy()
     print(f"{len(df)} oraciones, {len(set(etiquetas))} categorias")
 
