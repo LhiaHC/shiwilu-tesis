@@ -17,16 +17,29 @@ No toca dev ni test: `C` se elige sobre dev y el F1 se mide sobre test, igual
 que en los experimentos principales. No genera texto sintetico nuevo
 (retrotraduccion y Generate-then-Refine quedan fuera).
 
+Usa el corpus con `shiwilu` normalizado (`comun.cargar_corpus_normalizado`,
+minusculas/sin puntuacion/sin tildes-ñ) - la condicion `sin_puntuacion`,
+unica vigente desde 2026-09-27 - y el split unico congelado
+(`2_baselines/split_fijo.csv`), no los folds de la validacion cruzada.
+
 Salida:
     3_baselines_y_aumento_datos/curva_aprendizaje.csv
     3_baselines_y_aumento_datos/curva_aprendizaje.png
 
 Uso:
     python 3_baselines_y_aumento_datos/curva_aprendizaje.py
+
+    # un modelo a la vez (evita el segmentation fault de Windows al cargar
+    # sentence-transformers y transformers en el mismo proceso, viendo
+    # transicion labse -> mbert): cada corrida se fusiona con el CSV existente
+    python 3_baselines_y_aumento_datos/curva_aprendizaje.py --modelo labse
+    python 3_baselines_y_aumento_datos/curva_aprendizaje.py --modelo mbert
+    python 3_baselines_y_aumento_datos/curva_aprendizaje.py --modelo xlmr
 """
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -49,8 +62,10 @@ from comun import (  # noqa: E402
     SEMILLA,
     VALORES_C,
     cargar_corpus,
+    cargar_corpus_normalizado,
     dividir_train_dev_test,
     extraer_embeddings,
+    liberar_modelo,
 )
 from mixup import generar_sinteticos_mixup  # noqa: E402
 
@@ -72,20 +87,70 @@ def f1_test(X_train, y_train, X_dev, y_dev, X_test, y_test) -> float:
     return float(f1_score(y_test, mejor_clf.predict(X_test), average="macro", zero_division=0))
 
 
+def graficar(tabla: pd.DataFrame) -> None:
+    modelos = [m for m in MODELOS if m in set(tabla["modelo"])]
+    fig, ejes = plt.subplots(1, len(modelos), figsize=(5 * len(modelos), 4), sharey=True)
+    for ax, modelo in zip(np.atleast_1d(ejes), modelos):
+        for tecnica, estilo in (("sin_aumento", "o-"), ("mixup", "s--")):
+            sub = tabla[(tabla["modelo"] == modelo) & (tabla["tecnica"] == tecnica)]
+            ax.errorbar(sub["n_train"], sub["f1_macro_media"], yerr=sub["f1_macro_sd"],
+                        fmt=estilo, capsize=3, label=tecnica)
+        ax.set_title(modelo)
+        ax.set_xlabel("oraciones de train usadas")
+        ax.grid(alpha=0.3)
+    np.atleast_1d(ejes)[0].set_ylabel("F1 macro (test)")
+    np.atleast_1d(ejes)[0].legend()
+    fig.suptitle("Curva de aprendizaje (test fijo, media +- sd de submuestreos)")
+    fig.tight_layout()
+    fig.savefig(SALIDA_PNG, dpi=150)
+    plt.close(fig)
+
+
 def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--modelo", choices=list(MODELOS), default=None,
+                     help="Corre solo este modelo y fusiona el resultado con el CSV existente. "
+                          "Por defecto corre los 3 modelos en un mismo proceso; usar esta opcion "
+                          "si eso falla con 'Segmentation fault' (conflicto de librerias al cargar "
+                          "sentence-transformers y transformers en el mismo proceso, visto en Windows).")
+    ap.add_argument("--solo-graficar", action="store_true",
+                     help="No calcula nada nuevo: regenera curva_aprendizaje.png a partir del CSV ya guardado.")
+    args = ap.parse_args()
+
+    if args.solo_graficar:
+        if not SALIDA_CSV.exists():
+            raise SystemExit(f"No existe {SALIDA_CSV} todavia.")
+        graficar(pd.read_csv(SALIDA_CSV))
+        print(f"Grafico regenerado en {SALIDA_PNG}")
+        return 0
+
     df = cargar_corpus()
+    # El split unico (split_fijo.csv) esta congelado sobre claves calculadas
+    # con el texto ORIGINAL (acentos/ñ incluidos, ver comun._normalizar_shiwilu);
+    # hay que dividir primero y normalizar despues, o esas claves dejan de
+    # coincidir (a diferencia de folds_fijos.csv, que agrupa con la
+    # normalizacion estricta y por eso es idempotente con el texto ya limpio).
     train, dev, test = dividir_train_dev_test(df)
+    normalizado = cargar_corpus_normalizado().set_index("id")["shiwilu"]
+    train = train.copy()
+    train["shiwilu"] = train["id"].map(normalizado)
+    dev = dev.copy()
+    dev["shiwilu"] = dev["id"].map(normalizado)
+    test = test.copy()
+    test["shiwilu"] = test["id"].map(normalizado)
     y_train = train["intencion"].to_numpy()
     y_dev = dev["intencion"].to_numpy()
     y_test = test["intencion"].to_numpy()
     print(f"train={len(train)}  dev={len(dev)}  test={len(test)}")
 
+    modelos_a_correr = [args.modelo] if args.modelo else list(MODELOS)
     filas = []
-    for modelo in MODELOS:
+    for modelo in modelos_a_correr:
         print(f"\n=== {modelo} ===")
         X_train = extraer_embeddings(train["shiwilu"].astype(str).tolist(), modelo)
         X_dev = extraer_embeddings(dev["shiwilu"].astype(str).tolist(), modelo)
         X_test = extraer_embeddings(test["shiwilu"].astype(str).tolist(), modelo)
+        liberar_modelo(modelo)  # ya se extrajeron los embeddings; no hace falta mantener los pesos en RAM
 
         for fraccion in FRACCIONES:
             n_rep = 1 if fraccion == 1.0 else REPETICIONES
@@ -116,25 +181,20 @@ def main() -> int:
                               "repeticiones": n_rep})
                 print(f"  {fraccion:>4.0%} (n={n_usado:>3})  {tecnica:<12} F1={media:.4f} +- {sd:.4f}")
 
-    tabla = pd.DataFrame(filas)
+    tabla_nueva = pd.DataFrame(filas)
+    if SALIDA_CSV.exists():
+        previa = pd.read_csv(SALIDA_CSV)
+        previa = previa[~previa["modelo"].isin(modelos_a_correr)]
+        tabla = pd.concat([previa, tabla_nueva], ignore_index=True)
+    else:
+        tabla = tabla_nueva
     tabla.to_csv(SALIDA_CSV, index=False, encoding="utf-8")
 
-    fig, ejes = plt.subplots(1, len(MODELOS), figsize=(5 * len(MODELOS), 4), sharey=True)
-    for ax, modelo in zip(np.atleast_1d(ejes), MODELOS):
-        for tecnica, estilo in (("sin_aumento", "o-"), ("mixup", "s--")):
-            sub = tabla[(tabla["modelo"] == modelo) & (tabla["tecnica"] == tecnica)]
-            ax.errorbar(sub["n_train"], sub["f1_macro_media"], yerr=sub["f1_macro_sd"],
-                        fmt=estilo, capsize=3, label=tecnica)
-        ax.set_title(modelo)
-        ax.set_xlabel("oraciones de train usadas")
-        ax.grid(alpha=0.3)
-    np.atleast_1d(ejes)[0].set_ylabel("F1 macro (test)")
-    np.atleast_1d(ejes)[0].legend()
-    fig.suptitle("Curva de aprendizaje (test fijo, media +- sd de submuestreos)")
-    fig.tight_layout()
-    fig.savefig(SALIDA_PNG, dpi=150)
-    plt.close(fig)
+    graficar(tabla)
 
+    faltantes = [m for m in MODELOS if m not in set(tabla["modelo"])]
+    if faltantes:
+        print(f"\nFalta correr: {faltantes} (el grafico solo tiene los modelos ya calculados)")
     print(f"\nGuardado en {SALIDA_CSV} y {SALIDA_PNG}")
     return 0
 
