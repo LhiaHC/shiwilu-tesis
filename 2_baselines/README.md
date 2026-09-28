@@ -99,30 +99,3 @@ confianza (bootstrap, ver
 de cada modelo es de ±0.04-0.05 en F1 y se solapan entre sí — ninguna
 diferencia entre los 3 modelos es estadísticamente concluyente con esta
 muestra. Interpretar con cautela antes de generalizar.
-
-## Baselines triviales (piso de referencia, sin ningún embedding)
-
-[`baseline_trivial.py`](baseline_trivial.py) corre dos baselines que **no
-usan ningún modelo de lenguaje ni aprendizaje real**, para poder leer los
-F1 de arriba con perspectiva: el corpus se construyó a partir de plantillas
-y flashcards (no de lenguaje espontáneo), y varias oraciones repiten la
-misma raíz shiwilu con variantes menores dentro de una misma categoría — así
-que parte del F1 de los modelos reales puede reflejar esa repetición léxica
-superficial, no comprensión semántica del shiwilu.
-
-```bash
-python 2_baselines/baseline_trivial.py
-```
-
-| Baseline | F1 macro | Qué mide |
-|---|---|---|
-| Mayoría (siempre predice `DES`) | 0.0309 (CV: 0.0880) | Piso absoluto — cualquier modelo real debe superarlo con margen. |
-| 1-vecino-más-cercano por palabras compartidas (sin embeddings) | 0.3830 (CV: 0.5176 con puntuación, 0.5048 sin ella) | Cuánto se puede clasificar solo por solapamiento léxico exacto, sin ninguna noción de significado. |
-
-Los 3 modelos reales del split único con texto crudo (0.69-0.72) superan
-claramente el 0.38 de ese mismo baseline — pero esa comparación mezclaba señal
-real con los atajos de puntuación/mayúsculas. Con la validación cruzada y texto
-normalizado (la comparación que vale), el vecino por palabras da 0.5048 y los
-modelos reales 0.55-0.66: la brecha real es de solo ~0.04-0.15 puntos de F1, no
-0.3-0.35. Es una llamada fuerte a interpretar los resultados de OE2 con cautela:
-hay señal, pero es modesta, y en XLM-R es la más chica de los 3.

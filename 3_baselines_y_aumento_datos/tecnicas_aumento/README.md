@@ -78,8 +78,6 @@ un resultado a mantener en paralelo.
 | mBERT | 0.7577 | 0.7491 | **0.7623** | 0.7214 |
 | LaBSE | **0.7451** | 0.7195 | 0.7333 | 0.7091 |
 
-Baselines triviales: mayoría 0.0753, vecino por palabras 0.5176.
-
 **Texto normalizado** (minúsculas, sin puntuación, sin tildes/ñ, apóstrofos de
 oclusiva glotal preservados — la condición vigente y **definitiva**, sobre el
 corpus ya limpio de typos):
@@ -90,9 +88,6 @@ corpus ya limpio de typos):
 | XLM-R | 0.5481 | 0.5580 | **0.5798** | 0.5574 |
 | LaBSE | 0.5873 | 0.5927 | **0.5952** | 0.5683 |
 
-Baselines triviales: mayoría 0.0880, vecino por palabras 0.5048.
-Sin los atajos, los modelos superan a la coincidencia de palabras por solo
-0.04 (XLM-R) a 0.15 (mBERT) puntos de F1.
 
 **Cuánto pesaban los atajos** (sin aumento, F1 macro — diagnóstico que motivó la
 decisión; se corrió antes de limpiar el corpus, sirve solo para dimensionar el

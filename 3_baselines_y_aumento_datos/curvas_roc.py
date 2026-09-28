@@ -62,7 +62,6 @@ def main() -> int:
             "  python 3_baselines_y_aumento_datos/validacion_cruzada.py --sin-puntuacion"
         )
     P = pd.read_csv(ENTRADA)
-    P = P[P["modelo"].isin(MODELOS)].copy()  # descarta baselines triviales (no tienen probabilidades)
     columnas_prob = [c for c in P.columns if c.startswith("prob_")]
     if not columnas_prob:
         raise SystemExit(

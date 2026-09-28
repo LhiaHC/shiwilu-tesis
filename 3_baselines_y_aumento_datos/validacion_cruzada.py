@@ -35,8 +35,7 @@ Entrada: corpus, 2_baselines/folds_fijos.csv, salidas/retrotraduccion_pool.csv,
 Salida:  3_baselines_y_aumento_datos/validacion_cruzada_resumen.csv
          3_baselines_y_aumento_datos/validacion_cruzada_predicciones.csv
          (con columnas prob_<categoria>: probabilidad de cada categoria segun
-         el clasificador de ese fold, insumo de curvas_roc.py; nan en las filas
-         de los baselines triviales, que no producen probabilidades)
+         el clasificador de ese fold, insumo de curvas_roc.py)
 
 Opcion --condicion (o --sin-puntuacion): transforma el texto ANTES de extraer los
 embeddings, como ablacion de dos atajos del corpus (ver CONDICIONES): los signos de
@@ -66,7 +65,6 @@ RAIZ = Path(__file__).resolve().parents[1]
 for ruta in (RAIZ, RAIZ / "2_baselines", RAIZ / "3_baselines_y_aumento_datos" / "tecnicas_aumento"):
     sys.path.insert(0, str(ruta))
 
-from baseline_trivial import predecir_mayoria, predecir_nn_palabras  # noqa: E402
 from comun import (  # noqa: E402
     MODELOS,
     N_FOLDS,
@@ -248,18 +246,6 @@ def main() -> int:
                     fila.update({f"prob_{clase}": p for clase, p in zip(clases, proba_i)})
                     predicciones.append(fila)
             print(f"  fold {f} listo (test={len(idx_test)}, pool={len(idx_pool)}, dev interno={len(idx_dev)})")
-
-    # baselines triviales por fold
-    for f in range(N_FOLDS):
-        idx_test = np.where(folds == f)[0]
-        df_txt = df.assign(shiwilu=df["shiwilu"].map(tx))
-        train_f, test_f = df_txt.iloc[np.where(folds != f)[0]], df_txt.iloc[idx_test]
-        for nombre, fn in (("trivial_mayoria", predecir_mayoria), ("trivial_nn_palabras", predecir_nn_palabras)):
-            if args.tecnicas != TECNICAS:
-                continue
-            for pos_i, real_i, pred_i in zip(idx_test, y[idx_test], fn(train_f, test_f)):
-                predicciones.append({"modelo": "-", "tecnica": nombre, "fold": f, "pos": int(pos_i),
-                                     "real": real_i, "prediccion": pred_i, "C": np.nan})
 
     P = pd.DataFrame(predicciones)
     P.to_csv(DIR / f"validacion_cruzada_predicciones{sufijo}.csv", index=False, encoding="utf-8")
