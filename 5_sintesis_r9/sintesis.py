@@ -63,7 +63,6 @@ def cargar_extrinseco(nombre_csv: str) -> pd.DataFrame:
         raise SystemExit(f"No se encontro {ruta}. Corre primero "
                           "3_baselines_y_aumento_datos/validacion_cruzada.py [--sin-puntuacion]")
     cv = pd.read_csv(ruta)
-    cv = cv[cv["modelo"] != "-"]   # quita los baselines triviales
     return cv.rename(columns={"f1_macro_agrupado": "f1_macro"})[["modelo", "tecnica", "f1_macro"]]
 
 

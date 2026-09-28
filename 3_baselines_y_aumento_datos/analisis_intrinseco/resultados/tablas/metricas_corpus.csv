@@ -7,15 +7,15 @@ Fuente: api_generada,341
 Longitud media español (palabras),2.18
 Longitud media shiwilu (palabras),1.66
 Longitud media español (caracteres),13.04
-Longitud media shiwilu (caracteres),15.6
+Longitud media shiwilu (caracteres),15.28
 Caracteres por palabra español,5.98
-Caracteres por palabra shiwilu,9.41
+Caracteres por palabra shiwilu,9.21
 Ratio de compresión ES:SH (palabras),1.32
 Tokens español,1525
-Tokens shiwilu,1171
+Tokens shiwilu,1161
 Tipos español,609
-Tipos shiwilu,675
+Tipos shiwilu,662
 TTR español,0.399
-TTR shiwilu,0.576
-Traducciones shiwilu únicas,672
-Enunciados con oclusiva glotal (%),85.6%
+TTR shiwilu,0.57
+Traducciones shiwilu únicas,661
+Enunciados con oclusiva glotal (%),86.3%

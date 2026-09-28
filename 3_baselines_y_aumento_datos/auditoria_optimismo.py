@@ -27,7 +27,6 @@ for r in (RAIZ, RAIZ / "2_baselines", RAIZ / "3_baselines_y_aumento_datos"):
     sys.path.insert(0, str(r))
 from comun import (MODELOS, SEMILLA, VALORES_C, cargar_corpus, cargar_folds, extraer_embeddings,
                    _normalizar_shiwilu, PROP_DEV_TEST)
-from baseline_trivial import predecir_nn_palabras
 from validacion_cruzada import ajustar_y_predecir
 
 df = cargar_corpus(); n = len(df)
@@ -47,16 +46,15 @@ def max_jacc(i, idx_train):
 print("=== A. Distribucion del F1 bajo muchos splits aleatorios 70/15/15 (agrupados) ===", flush=True)
 E = {m: extraer_embeddings(df["shiwilu"].astype(str).tolist(), m) for m in MODELOS}
 grupos = pd.DataFrame({"k": norm, "intencion": y}).groupby("k", as_index=False)["intencion"].first()
-res = {"nn_palabras": [], **{m: [] for m in MODELOS}}
+res = {m: [] for m in MODELOS}
 for s in range(30):
     tg, rg = train_test_split(grupos, test_size=PROP_DEV_TEST, stratify=grupos["intencion"], random_state=s)
     dg, eg = train_test_split(rg, test_size=0.5, stratify=rg["intencion"], random_state=s)
     itr = np.where(norm.isin(tg["k"]))[0]; idv = np.where(norm.isin(dg["k"]))[0]; ite = np.where(norm.isin(eg["k"]))[0]
-    res["nn_palabras"].append(f1m(y[ite], predecir_nn_palabras(df.iloc[itr], df.iloc[ite])))
     for m in MODELOS:
-        pred, _ = ajustar_y_predecir(E[m][itr], y[itr], E[m][idv], y[idv], E[m][itr], y[itr], E[m][ite])
+        pred, *_ = ajustar_y_predecir(E[m][itr], y[itr], E[m][idv], y[idv], E[m][itr], y[itr], E[m][ite])
         res[m].append(f1m(y[ite], pred))
-ref = {"nn_palabras": 0.3830, "labse": 0.6943, "mbert": 0.6977, "xlmr": 0.7223}
+ref = {"labse": 0.6943, "mbert": 0.6977, "xlmr": 0.7223}
 for k, v in res.items():
     v = np.array(v)
     print(f"{k:<12} media={v.mean():.4f} sd={v.std(ddof=1):.4f} min={v.min():.3f} max={v.max():.3f} | seed-42 (split unico)={ref[k]:.4f} -> percentil {100*(v<ref[k]).mean():.0f}", flush=True)
@@ -99,7 +97,7 @@ for m in MODELOS:
         cv = StratifiedGroupKFold(n_splits=6, shuffle=True, random_state=SEMILLA + f)
         _, dv = next(cv.split(ipool, y[ipool], groups=norm.to_numpy()[ipool]))
         idv = ipool[dv]; icore = np.setdiff1d(ipool, idv)
-        preds[ite], _ = ajustar_y_predecir(Ep[icore], y[icore], Ep[idv], y[idv], Ep[ipool], y[ipool], Ep[ite])
+        preds[ite], *_ = ajustar_y_predecir(Ep[icore], y[icore], Ep[idv], y[idv], Ep[ipool], y[ipool], Ep[ite])
     g = P[P.modelo == m].sort_values("pos")
     porcat_con = {c: f1_score(g.real == c, g.prediccion == c) for c in sorted(set(y))}
     porcat_sin = {c: f1_score(y == c, preds == c) for c in sorted(set(y))}
