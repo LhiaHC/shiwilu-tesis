@@ -2,8 +2,8 @@
 
 Corpus digital de la lengua **shiwilu** (jebero, ISO 639-3: `jeb`) anotado con
 categorías de intención comunicativa, construido como parte del proyecto de
-tesis *Evaluación de embeddings multilingües en la clasificación de intenciones
-para la lengua shiwilu*.
+tesis *Evaluación de técnicas de aumento de datos y caracterización de embeddings en
+la clasificación de intenciones para la lengua shiwilu*.
 
 El shiwilu es una lengua amazónica peruana hablada en el distrito de Jeberos
 (Loreto), en situación de peligro crítico de extinción. Este es el primer corpus
@@ -17,71 +17,58 @@ digital anotado para esta lengua.
 
 ## Organización del repositorio
 
-El repositorio está organizado por **objetivo específico de la tesis**
-(ver Entregable 1), con el corpus como frontera explícita entre la
-construcción del corpus (OE1) y todo lo que se construye sobre él (OE2).
+El repositorio está organizado por **objetivo específico (OE) de la tesis**: el
+número de cada carpeta `oeN_*` es el del objetivo. El corpus (`corpus/`) es la
+frontera explícita entre la construcción del corpus (OE1) y todo lo que se
+construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 
 ```
-├── shiwilu/                       ◆ Núcleo compartido — lo que cruza la frontera
-│   ├── taxonomia.py                 Intenciones, tipos de Searle, descripciones
-│   ├── anotacion.py                 Reglas de anotación (baseline de OE1)
-│   ├── dominios.py                  Dominios semánticos y vocabulario semilla
-│   ├── excel.py                     Formato de los reportes Excel
-│   └── rutas.py                     Rutas ancladas a la raíz del repositorio
-│
-├── 1_objetivo1_corpus/            ◆ OE1 (R1-R3) — construir el corpus
-│   ├── datos/                       Materiales fuente
-│   ├── pipeline/                    Etapas 0 a 3
-│   └── intermedios/                 Productos intermedios y logs de la API
-│
-├── corpus/                        ★ FRONTERA — salida de OE1, entrada de OE2
+├── corpus/                          ★ FRONTERA — salida de OE1, entrada del resto
 │   └── corpus_shiwilu_final.csv
 │
-├── 2_baselines/                   ◆ OE2 (R4) — baselines de clasificación
-│   ├── baseline.py                  LaBSE / mBERT / XLM-R congelados + Regresión Logística
-│   ├── correr_todos.py              corre los 3 y compara
-│   ├── split_fijo.csv               split train/dev/test congelado (no recalcular)
-│   ├── folds_fijos.csv              folds de la validación cruzada, congelados
-│   └── corpus_normalizado.csv       las 700 oraciones con `shiwilu` normalizado (auto-generado)
+├── oe1_corpus/                      ◆ OE1 (R1-R3) — construir el corpus
+│   ├── datos/                         Materiales fuente
+│   ├── pipeline/                      Etapas 0 a 3
+│   └── intermedios/                   Productos intermedios y logs de la API
 │
-├── 3_baselines_y_aumento_datos/   ◆ OE2 (R5-R6) — análisis + aumento, sobre los baselines
-│   ├── analisis_intrinseco/         Notebooks y tablas del análisis intrínseco (R5)
-│   ├── tecnicas_aumento/            Mixup, Generate-then-Refine, Retrotraducción (R6)
-│   ├── resumen_experimentos.py      Consolida los 12 experimentos (3 modelos x 4 config.)
-│   ├── validacion_cruzada.py        EVALUACIÓN PRINCIPAL: 12 experimentos en 5 folds
-│   ├── comparacion_pareada.py       Diferencias pareadas (técnica vs. sin aumento, modelo vs. modelo)
-│   ├── curva_aprendizaje.py         F1 según cuánto train se usa
-│   ├── auditoria_optimismo.py       Auditoría: splits aleatorios, solapamiento léxico, puntuación
-│   └── bootstrap_ic.py              Intervalo de confianza del F1 del split único
+├── oe2_aumento_de_datos/            ◆ OE2 (R4-R6) — baselines, análisis y aumento de datos
+│   ├── particiones/                   Folds congelados + corpus normalizado
+│   ├── analisis_intrinseco/           R5: notebooks y tablas del análisis del corpus
+│   ├── tecnicas_aumento/              R6: Mixup, Retrotraducción, Generate-then-Refine y sus salidas
+│   ├── evaluacion/                    R4+R6: validación cruzada, comparaciones pareadas, curvas ROC
+│   └── historico/                     Split único y texto crudo (ya no se corre; evidencia)
 │
-├── 4_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — caracterización de embeddings
-│   └── caracterizacion.py           4 estrategias de pooling x 3 modelos, métricas
-│                                     intrínsecas (silueta, DB, CH) y proyecciones t-SNE/UMAP,
-│                                     sobre el corpus original y los aumentados por R6
+├── oe3_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — 4 estrategias de pooling x 3 modelos,
+│                                      métricas intrínsecas y proyecciones t-SNE/UMAP
 │
-├── 5_sintesis_r9/                 ◆ OE4 (R9) — síntesis comparativa final
-│   └── sintesis.py                  Cruza lo extrínseco (R4-R6) con lo intrínseco (R7-R8)
+├── oe4_sintesis/                    ◆ OE4 (R9) — cruza lo extrínseco (OE2) con lo intrínseco (OE3)
 │
-├── docs/                          Metodología de construcción del corpus
-└── tests/                         Pruebas de las reglas de anotación
+├── shiwilu/                         Núcleo compartido (código)
+│   ├── taxonomia.py, anotacion.py, dominios.py, excel.py   OE1
+│   ├── clasificacion.py               Corpus normalizado, folds, embeddings y Regresión Logística (OE2-OE3)
+│   └── rutas.py                       Todas las rutas del proyecto, ancladas a la raíz
+│
+├── docs/                            Metodología de construcción del corpus
+└── tests/                           Pruebas de las reglas de anotación
 ```
 
 ### Quién escribe dónde
 
 | Zona | Lee de | Escribe en |
 |---|---|---|
-| `1_objetivo1_corpus/` | `datos/`, `shiwilu/` | `intermedios/` y `corpus/` |
+| `oe1_corpus/` | `datos/`, `shiwilu/` | `intermedios/` y `corpus/` |
 | `corpus/` | — | *solo la Etapa 3 de OE1* |
-| `2_baselines/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
-| `3_baselines_y_aumento_datos/analisis_intrinseco/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
-| `3_baselines_y_aumento_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `2_baselines/`, `shiwilu/` | `salidas/` únicamente |
-| `4_caracterizacion_embeddings/` | `corpus/`, `tecnicas_aumento/salidas/`, `2_baselines/`, `shiwilu/` | `resultados/` únicamente |
-| `5_sintesis_r9/` | `validacion_cruzada_resumen.csv`, `4_caracterizacion_embeddings/resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
+| `oe2_aumento_de_datos/analisis_intrinseco/` | `corpus/`, `shiwilu/` | `resultados/` únicamente |
+| `oe2_aumento_de_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `particiones/`, `shiwilu/` | `salidas/` únicamente |
+| `oe2_aumento_de_datos/evaluacion/` | `corpus/`, `particiones/`, `tecnicas_aumento/salidas/`, `shiwilu/` | `resultados/` únicamente |
+| `oe3_caracterizacion_embeddings/` | `corpus/`, `tecnicas_aumento/salidas/`, `shiwilu/` | `resultados/` únicamente |
+| `oe4_sintesis/` | `evaluacion/resultados/`, `oe3_.../resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
-regenerar `3_baselines_y_aumento_datos/analisis_intrinseco/resultados/` sin
-tocar nada más.
+regenerar cualquier carpeta `resultados/` sin tocar nada más. **Nunca** se
+recalculan a mano los archivos congelados de `oe2_aumento_de_datos/particiones/`:
+hacerlo invalida todos los datos sintéticos y resultados generados a partir de ellos.
 
 ---
 
@@ -133,21 +120,21 @@ checkpoint NMT una vez (ver su propio README).
 
 ## Uso
 
-- Reproducir la construcción del corpus (OE1) → [`1_objetivo1_corpus/README.md`](1_objetivo1_corpus/README.md)
-- Correr los baselines de clasificación (OE2/R4) → [`2_baselines/README.md`](2_baselines/README.md)
-- Reproducir el análisis intrínseco (OE2/R5) → [`3_baselines_y_aumento_datos/analisis_intrinseco/README.md`](3_baselines_y_aumento_datos/analisis_intrinseco/README.md)
-- Generar datos aumentados (OE2/R6) → [`3_baselines_y_aumento_datos/tecnicas_aumento/README.md`](3_baselines_y_aumento_datos/tecnicas_aumento/README.md)
-- Caracterizar los embeddings (OE3/R7-R8) → [`4_caracterizacion_embeddings/README.md`](4_caracterizacion_embeddings/README.md)
-- Ver la síntesis comparativa final (OE4/R9) → [`5_sintesis_r9/README.md`](5_sintesis_r9/README.md)
+- Reproducir la construcción del corpus (OE1) → [`oe1_corpus/README.md`](oe1_corpus/README.md)
+- Ver el protocolo, los resultados y cómo correr OE2 (baselines, aumento de datos, evaluación) → [`oe2_aumento_de_datos/README.md`](oe2_aumento_de_datos/README.md)
+  - Análisis intrínseco (R5) → [`analisis_intrinseco/README.md`](oe2_aumento_de_datos/analisis_intrinseco/README.md)
+  - Generar datos aumentados (R6) → [`tecnicas_aumento/README.md`](oe2_aumento_de_datos/tecnicas_aumento/README.md)
+- Caracterizar los embeddings (OE3/R7-R8) → [`oe3_caracterizacion_embeddings/README.md`](oe3_caracterizacion_embeddings/README.md)
+- Ver la síntesis comparativa final (OE4/R9) → [`oe4_sintesis/README.md`](oe4_sintesis/README.md)
 
 ---
 
 ## Materiales fuente
 
-`1_objetivo1_corpus/datos/II_TEXTOS_SHIWILU.pdf`, usado en la Etapa 0 para la
+`oe1_corpus/datos/II_TEXTOS_SHIWILU.pdf`, usado en la Etapa 0 para la
 extracción de dominios semánticos, **no se incluye** en este repositorio por
 tratarse de material de terceros. El vocabulario extraído de ese material sí está
-disponible en `1_objetivo1_corpus/intermedios/vocabulario_dominios.json`.
+disponible en `oe1_corpus/intermedios/vocabulario_dominios.json`.
 
 ---
 
