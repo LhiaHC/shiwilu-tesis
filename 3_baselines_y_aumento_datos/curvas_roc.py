@@ -17,6 +17,7 @@ Entrada: 3_baselines_y_aumento_datos/validacion_cruzada_predicciones_sin_puntuac
          `validacion_cruzada.py --sin-puntuacion` si no existen)
 Salida:  3_baselines_y_aumento_datos/curvas_roc.csv  (fpr, tpr, auc por categoria y combinacion)
          3_baselines_y_aumento_datos/curvas_roc.png   (grilla 3 modelos x 4 tecnicas)
+         3_baselines_y_aumento_datos/curvas_roc/      (12 imagenes, una por combinacion)
 
 Uso:
     python 3_baselines_y_aumento_datos/curvas_roc.py
@@ -45,6 +46,7 @@ DIR = Path(__file__).resolve().parent
 ENTRADA = DIR / "validacion_cruzada_predicciones_sin_puntuacion.csv"
 SALIDA_CSV = DIR / "curvas_roc.csv"
 SALIDA_PNG = DIR / "curvas_roc.png"
+SALIDA_DIR = DIR / "curvas_roc"
 
 TECNICAS = ["sin_aumento", "mixup", "retrotraduccion", "generate_then_refine"]
 NOMBRES_TECNICA = {
@@ -72,7 +74,32 @@ def main() -> int:
     categorias = sorted(c.removeprefix("prob_") for c in columnas_prob)
     print(f"{len(P)} predicciones, {len(categorias)} categorias: {categorias}")
 
+    def dibujar(ax, g, modelo, tecnica, filas, fuente_leyenda):
+        y_real = label_binarize(g["real"], classes=categorias)
+        fpr_grid = np.linspace(0.0, 1.0, 200)
+        tpr_acum = np.zeros_like(fpr_grid)
+        for k, cat in enumerate(categorias):
+            fpr, tpr, _ = roc_curve(y_real[:, k], g[f"prob_{cat}"].to_numpy())
+            area = auc(fpr, tpr)
+            tpr_acum += np.interp(fpr_grid, fpr, tpr)
+            ax.plot(fpr, tpr, lw=1, alpha=0.6, label=f"{cat} (AUC={area:.2f})")
+            for a, b in zip(fpr, tpr):
+                filas.append({"modelo": modelo, "tecnica": tecnica, "categoria": cat,
+                              "fpr": float(a), "tpr": float(b), "auc": float(area)})
+        tpr_macro = tpr_acum / len(categorias)
+        auc_macro = auc(fpr_grid, tpr_macro)
+        ax.plot(fpr_grid, tpr_macro, "k--", lw=2, label=f"Macro (AUC={auc_macro:.2f})")
+        filas.append({"modelo": modelo, "tecnica": tecnica, "categoria": "macro",
+                      "fpr": np.nan, "tpr": np.nan, "auc": float(auc_macro)})
+        ax.plot([0, 1], [0, 1], color="grey", lw=0.8, linestyle=":")
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1.02)
+        ax.legend(fontsize=fuente_leyenda, loc="lower right")
+        ax.grid(alpha=0.3)
+        return auc_macro
+
     filas = []
+    SALIDA_DIR.mkdir(exist_ok=True)
     fig, ejes = plt.subplots(
         len(MODELOS), len(TECNICAS), figsize=(4.2 * len(TECNICAS), 4 * len(MODELOS)),
         sharex=True, sharey=True,
@@ -81,37 +108,23 @@ def main() -> int:
         for j, tecnica in enumerate(TECNICAS):
             ax = ejes[i, j]
             g = P[(P["modelo"] == modelo) & (P["tecnica"] == tecnica)]
-            y_real = label_binarize(g["real"], classes=categorias)
-
-            fpr_grid = np.linspace(0.0, 1.0, 200)
-            tpr_acum = np.zeros_like(fpr_grid)
-            for k, cat in enumerate(categorias):
-                fpr, tpr, _ = roc_curve(y_real[:, k], g[f"prob_{cat}"].to_numpy())
-                area = auc(fpr, tpr)
-                tpr_acum += np.interp(fpr_grid, fpr, tpr)
-                ax.plot(fpr, tpr, lw=1, alpha=0.6, label=f"{cat} (AUC={area:.2f})")
-                for a, b in zip(fpr, tpr):
-                    filas.append({"modelo": modelo, "tecnica": tecnica, "categoria": cat,
-                                  "fpr": float(a), "tpr": float(b), "auc": float(area)})
-
-            tpr_macro = tpr_acum / len(categorias)
-            auc_macro = auc(fpr_grid, tpr_macro)
-            ax.plot(fpr_grid, tpr_macro, "k--", lw=2, label=f"Macro (AUC={auc_macro:.2f})")
-            filas.append({"modelo": modelo, "tecnica": tecnica, "categoria": "macro",
-                          "fpr": np.nan, "tpr": np.nan, "auc": float(auc_macro)})
-
-            ax.plot([0, 1], [0, 1], color="grey", lw=0.8, linestyle=":")
-            ax.set_xlim(0, 1)
-            ax.set_ylim(0, 1.02)
+            auc_macro = dibujar(ax, g, modelo, tecnica, filas, 6)
             if i == 0:
                 ax.set_title(NOMBRES_TECNICA[tecnica])
             if j == 0:
                 ax.set_ylabel(f"{modelo.upper()}\nTPR (sensibilidad)")
             if i == len(MODELOS) - 1:
                 ax.set_xlabel("FPR (1 - especificidad)")
-            ax.legend(fontsize=6, loc="lower right")
-            ax.grid(alpha=0.3)
             print(f"  {modelo:<6} {tecnica:<22} AUC macro = {auc_macro:.4f}")
+
+            fig1, ax1 = plt.subplots(figsize=(6, 5.2))
+            dibujar(ax1, g, modelo, tecnica, [], 8)
+            ax1.set_title(f"{modelo.upper()} - {NOMBRES_TECNICA[tecnica]}\nCurvas ROC One-vs-Rest, texto normalizado, CV 5 folds")
+            ax1.set_xlabel("FPR (1 - especificidad)")
+            ax1.set_ylabel("TPR (sensibilidad)")
+            fig1.tight_layout()
+            fig1.savefig(SALIDA_DIR / f"roc_{modelo}_{tecnica}.png", dpi=150)
+            plt.close(fig1)
 
     fig.suptitle("Curvas ROC One-vs-Rest (7 categorias) - texto normalizado, validacion cruzada de 5 folds")
     fig.tight_layout()
