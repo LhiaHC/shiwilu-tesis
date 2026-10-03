@@ -19,11 +19,18 @@ Salida:  evaluacion/resultados/curvas_roc.csv  (fpr, tpr, auc por categoria y co
          evaluacion/resultados/curvas_roc.png   (grilla 3 modelos x 4 tecnicas)
          evaluacion/resultados/curvas_roc/      (12 imagenes, una por combinacion)
 
+Con --entrada X.csv --etiqueta T grafica las predicciones de otro CSV (p. ej. el de una corrida en
+linea de los cuadernos de Colab, que trae los 12 experimentos) y guarda `curvas_roc_T.csv`,
+`curvas_roc_T.png` y la carpeta `curvas_roc_T/`.
+
 Uso (desde la raiz del repositorio):
     python oe2_aumento_de_datos/evaluacion/curvas_roc.py
 """
 
 from __future__ import annotations
+
+import argparse
+from pathlib import Path
 
 import matplotlib
 
@@ -54,16 +61,27 @@ NOMBRES_TECNICA = {
 
 
 def main() -> int:
-    if not ENTRADA.exists():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--entrada", type=Path, default=ENTRADA,
+                     help="CSV de predicciones con columnas prob_<categoria> (por defecto, el vigente).")
+    ap.add_argument("--etiqueta", default="", help="Se agrega al nombre de las salidas (CSV, PNG y carpeta).")
+    args = ap.parse_args()
+    sufijo = f"_{args.etiqueta}" if args.etiqueta else ""
+    entrada = args.entrada
+    salida_csv = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}.csv"
+    salida_png = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}.png"
+    salida_dir = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}"
+
+    if not entrada.exists():
         raise SystemExit(
-            f"No se encontro {ENTRADA}. Corre primero:\n"
+            f"No se encontro {entrada}. Corre primero:\n"
             "  python oe2_aumento_de_datos/evaluacion/validacion_cruzada.py"
         )
-    P = pd.read_csv(ENTRADA)
+    P = pd.read_csv(entrada)
     columnas_prob = [c for c in P.columns if c.startswith("prob_")]
     if not columnas_prob:
         raise SystemExit(
-            f"{ENTRADA} no tiene columnas prob_<categoria>. Corre de nuevo:\n"
+            f"{entrada} no tiene columnas prob_<categoria>. Corre de nuevo:\n"
             "  python oe2_aumento_de_datos/evaluacion/validacion_cruzada.py\n"
             "(con la version actualizada de validacion_cruzada.py que ya guarda las probabilidades)."
         )
@@ -95,7 +113,7 @@ def main() -> int:
         return auc_macro
 
     filas = []
-    SALIDA_DIR.mkdir(exist_ok=True)
+    salida_dir.mkdir(exist_ok=True)
     fig, ejes = plt.subplots(
         len(MODELOS), len(TECNICAS), figsize=(4.2 * len(TECNICAS), 4 * len(MODELOS)),
         sharex=True, sharey=True,
@@ -119,16 +137,16 @@ def main() -> int:
             ax1.set_xlabel("FPR (1 - especificidad)")
             ax1.set_ylabel("TPR (sensibilidad)")
             fig1.tight_layout()
-            fig1.savefig(SALIDA_DIR / f"roc_{modelo}_{tecnica}.png", dpi=150)
+            fig1.savefig(salida_dir / f"roc_{modelo}_{tecnica}.png", dpi=150)
             plt.close(fig1)
 
     fig.suptitle("Curvas ROC One-vs-Rest (7 categorias) - texto normalizado, validacion cruzada de 5 folds")
     fig.tight_layout()
-    fig.savefig(SALIDA_PNG, dpi=150)
+    fig.savefig(salida_png, dpi=150)
     plt.close(fig)
 
-    pd.DataFrame(filas).to_csv(SALIDA_CSV, index=False, encoding="utf-8")
-    print(f"\nGuardado en {SALIDA_CSV} y {SALIDA_PNG}")
+    pd.DataFrame(filas).to_csv(salida_csv, index=False, encoding="utf-8")
+    print(f"\nGuardado en {salida_csv} y {salida_png}")
     return 0
 
 

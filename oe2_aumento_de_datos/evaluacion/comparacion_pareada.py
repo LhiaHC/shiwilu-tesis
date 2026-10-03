@@ -16,6 +16,8 @@ Salida:  evaluacion/resultados/comparacion_pareada_sin_puntuacion.csv
 
 Con --condicion original usa las predicciones del texto crudo (historico:
 historico/atajos_texto_crudo/), que ya no forman parte de los resultados vigentes.
+Con --entrada [--etiqueta X] compara las predicciones de otro CSV (p. ej. el de una corrida
+en linea de los cuadernos de Colab) y guarda `comparacion_pareada_sin_puntuacion_X.csv`.
 
 Uso (desde la raiz del repositorio):
     python oe2_aumento_de_datos/evaluacion/comparacion_pareada.py
@@ -25,6 +27,7 @@ Uso (desde la raiz del repositorio):
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -60,10 +63,14 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--condicion", choices=["sin_puntuacion", "original"], default="sin_puntuacion",
                      help="Condicion de texto de las predicciones a comparar (por defecto, la vigente).")
+    ap.add_argument("--entrada", type=Path, default=None,
+                     help="CSV de predicciones a comparar (por defecto, el vigente de la condicion).")
+    ap.add_argument("--etiqueta", default="", help="Se agrega al nombre del CSV de salida.")
     args = ap.parse_args()
     sufijo = "" if args.condicion == "original" else f"_{args.condicion}"
     carpeta = EVALUACION_RESULTADOS if args.condicion == "sin_puntuacion" else ATAJOS_TEXTO_CRUDO
-    P = pd.read_csv(carpeta / f"validacion_cruzada_predicciones{sufijo}.csv")
+    P = pd.read_csv(args.entrada or carpeta / f"validacion_cruzada_predicciones{sufijo}.csv")
+    sufijo += f"_{args.etiqueta}" if args.etiqueta else ""
     rng = np.random.default_rng(SEMILLA)
     filas = []
 

@@ -136,10 +136,38 @@ def filtrar_catalogo_retro(pool_retro, L_orig, L_retro, y, idx_pool) -> np.ndarr
     return en_pool & idioma_ok & (sim >= UMBRAL_SIMILITUD_MIN) & (sim <= UMBRAL_SIMILITUD_MAX)
 
 
+def particionar_fold(folds, y, claves, f):
+    """(test, pool, dev interno, core) del fold `f`: test = el fold; pool = el resto; el dev
+    interno es 1/6 del pool (agrupado y estratificado) y el core es el pool sin el dev."""
+    idx_test = np.where(folds == f)[0]
+    idx_pool = np.where(folds != f)[0]
+    cv_interno = StratifiedGroupKFold(n_splits=6, shuffle=True, random_state=SEMILLA + f)
+    _, dev_rel = next(cv_interno.split(idx_pool, y[idx_pool], groups=claves[idx_pool]))
+    idx_dev = idx_pool[dev_rel]
+    idx_core = np.setdiff1d(idx_pool, idx_dev)
+    return idx_test, idx_pool, idx_dev, idx_core
+
+
 def bootstrap_ic(y, p, rng) -> tuple[float, float]:
     n = len(y)
     muestras = [f1m(y[i], p[i]) for i in (rng.integers(0, n, n) for _ in range(REPETICIONES_BOOTSTRAP))]
     return float(np.percentile(muestras, 2.5)), float(np.percentile(muestras, 97.5))
+
+
+def resumir_predicciones(P: pd.DataFrame) -> pd.DataFrame:
+    """F1 macro agrupado (700 predicciones) con IC95% bootstrap, y media/sd entre folds, por (modelo, tecnica)."""
+    rng = np.random.default_rng(SEMILLA)
+    filas = []
+    for (modelo, tecnica), g in P.groupby(["modelo", "tecnica"], sort=False):
+        por_fold = [f1m(gf["real"], gf["prediccion"]) for _, gf in g.groupby("fold")]
+        real, pred = g["real"].to_numpy(), g["prediccion"].to_numpy()
+        lo, hi = bootstrap_ic(real, pred, rng)
+        filas.append({"modelo": modelo, "tecnica": tecnica,
+                      "f1_macro_agrupado": f1m(real, pred),
+                      "ic95_bajo": lo, "ic95_alto": hi, "ancho_ic": hi - lo,
+                      "f1_media_folds": float(np.mean(por_fold)), "f1_sd_folds": float(np.std(por_fold, ddof=1)),
+                      "n_predicciones": len(g)})
+    return pd.DataFrame(filas)
 
 
 def main() -> int:
@@ -208,12 +236,7 @@ def main() -> int:
             L_orig, L_retro = E_orig, E_retro
 
         for f in range(N_FOLDS):
-            idx_test = np.where(folds == f)[0]
-            idx_pool = np.where(folds != f)[0]
-            cv_interno = StratifiedGroupKFold(n_splits=6, shuffle=True, random_state=SEMILLA + f)
-            _, dev_rel = next(cv_interno.split(idx_pool, y[idx_pool], groups=claves[idx_pool]))
-            idx_dev = idx_pool[dev_rel]
-            idx_core = np.setdiff1d(idx_pool, idx_dev)
+            idx_test, idx_pool, idx_dev, idx_core = particionar_fold(folds, y, claves, f)
 
             ok_retro = filtrar_catalogo_retro(pool_retro, L_orig, L_retro, y, idx_pool)
             claves_test = np.unique(claves[idx_test])
@@ -255,18 +278,7 @@ def main() -> int:
     P = pd.DataFrame(predicciones)
     P.to_csv(salida_dir / f"validacion_cruzada_predicciones{sufijo}.csv", index=False, encoding="utf-8")
 
-    rng = np.random.default_rng(SEMILLA)
-    filas = []
-    for (modelo, tecnica), g in P.groupby(["modelo", "tecnica"], sort=False):
-        por_fold = [f1m(gf["real"], gf["prediccion"]) for _, gf in g.groupby("fold")]
-        real, pred = g["real"].to_numpy(), g["prediccion"].to_numpy()
-        lo, hi = bootstrap_ic(real, pred, rng)
-        filas.append({"modelo": modelo, "tecnica": tecnica,
-                      "f1_macro_agrupado": f1m(real, pred),
-                      "ic95_bajo": lo, "ic95_alto": hi, "ancho_ic": hi - lo,
-                      "f1_media_folds": float(np.mean(por_fold)), "f1_sd_folds": float(np.std(por_fold, ddof=1)),
-                      "n_predicciones": len(g)})
-    R = pd.DataFrame(filas)
+    R = resumir_predicciones(P)
     R.to_csv(salida_dir / f"validacion_cruzada_resumen{sufijo}.csv", index=False, encoding="utf-8")
     print("\n" + R.round(4).to_string(index=False))
     return 0

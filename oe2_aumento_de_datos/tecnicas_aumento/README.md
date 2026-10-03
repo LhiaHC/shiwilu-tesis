@@ -15,10 +15,48 @@ contra ellos.
 | Archivo | Para qué sirve |
 |---|---|
 | `mixup.py`, `generate_then_refine.py`, `retrotraduccion.py` | Generadores de datos sintéticos (código). |
-| `colab_entrenar_checkpoint.ipynb` | Paso de GPU de Retrotraducción (checkpoint NLLB+LoRA de F. Prado, en Colab). |
+| `colab/colab_entrenar_checkpoint.ipynb` | Paso de GPU de Retrotraducción: catálogo único de las 700 oraciones (checkpoint NLLB+LoRA de F. Prado, en Colab). |
+| `colab/colab_retrotraduccion_en_linea.ipynb`, `colab/colab_generate_then_refine_en_linea.ipynb`, `colab/colab_mixup_en_linea.ipynb` | Un cuaderno por técnica: generan el aumento **dentro** de cada fold (core para elegir `C`, pool para el modelo final) y evalúan (ver más abajo). |
 | `salidas/retrotraduccion_pool.csv` | Catálogo de las 700 oraciones retrotraducidas; **alimenta la validación cruzada vigente**. |
 | `salidas/generate_then_refine_fold<0-4>.csv` | Un CSV por fold, generado solo con el train de ese fold; **alimenta la validación cruzada vigente**. |
 | `salidas/retrotraduccion.csv`, `salidas/generate_then_refine.csv` | Versiones para el split único histórico; hoy solo las usa [`OE3`](../../oe3_caracterizacion_embeddings/) para construir los corpus aumentados. |
+
+### Generación en línea dentro de cada fold (Colab)
+
+La evaluación vigente lee datos sintéticos ya generados. Los tres cuadernos `colab/colab_*_en_linea.ipynb` los **generan dentro del
+propio entrenamiento de cada fold**, con la estrategia test / pool / core / dev, usando
+[`../evaluacion/validacion_cruzada_en_linea.py`](../evaluacion/validacion_cruzada_en_linea.py):
+
+- **Etapa core (elegir `C`)**: el aumento se genera y filtra solo con el core; se mide en el dev interno.
+- **Etapa pool (modelo final)**: el aumento se genera y filtra con todo el pool; se mide en el test.
+- Así el dev interno nunca influye en el aumento con el que se elige `C` (en la evaluación vigente, Generate-then-Refine se genera una vez
+  con el pool y se usa en las dos etapas). El test no se toca nunca, y se descartan las filas sintéticas idénticas a una oración del test.
+
+| Cuaderno | Qué se genera dentro de cada fold | Necesita |
+|---|---|---|
+| `colab_retrotraduccion_en_linea.ipynb` | Parafrasea y traduce el pool (Helsinki-NLP + NMT de F. Prado). Cada fila depende solo de su oración de origen, así que se genera una vez desde el pool y la etapa core usa las filas cuyo origen está en el core; los filtros usan el centroide de cada etapa | GPU, checkpoint en Drive, `git push` previo |
+| `colab_generate_then_refine_en_linea.ipynb` | Dos generaciones con Claude por fold: una con el core y otra con el pool (70 llamadas a la API) | `ANTHROPIC_API_KEY` en los Secretos de Colab |
+| `colab_mixup_en_linea.ipynb` | Vectores interpolados con el core y con el pool, repetidos con varias semillas | nada (CPU) |
+
+**Mismos archivos que la evaluación vigente.** Con los 3 modelos y los 5 folds, cada corrida deja en `evaluacion/resultados/` (con el sufijo
+`_en_linea_<técnica>_<etiqueta>`) los **12 experimentos**: la técnica corrida sale de esa corrida y las otras tres configuraciones, de los resultados
+vigentes. Así los CSV tienen el mismo formato (incluidas las probabilidades por categoría) y los cuadernos generan, con los mismos scripts, todo lo
+necesario para gráficos y curvas ROC:
+
+| Archivo | Contenido |
+|---|---|
+| `validacion_cruzada_predicciones_sin_puntuacion_<TAG>.csv` | una fila por oración, modelo y técnica, con `prob_<categoría>` (insumo de las curvas ROC) |
+| `validacion_cruzada_resumen_sin_puntuacion_<TAG>.csv` | F1 macro agrupado con IC95%, media y sd entre folds |
+| `comparacion_pareada_sin_puntuacion_<TAG>.csv` | diferencias pareadas con IC95% (`comparacion_pareada.py --entrada ... --etiqueta <TAG>`) |
+| `curvas_roc_<TAG>.csv`, `curvas_roc_<TAG>.png`, `curvas_roc_<TAG>/` | curvas ROC One-vs-Rest: datos, grilla 3 × 4 y una imagen por experimento (`curvas_roc.py --entrada ... --etiqueta <TAG>`) |
+
+(`<TAG>` = `en_linea_<técnica>_<etiqueta>`; en Mixup, una por semilla.) En una corrida parcial (`--modelos` o `--folds`) los CSV traen solo la técnica corrida.
+
+Lo generado se guarda en una cache por (técnica, fold, etapa) —`salidas/en_linea/<técnica>/fold<N>_{core,pool}.csv`; en Colab, en Drive—, así que si
+se corta la corrida o se repite, se reutiliza en vez de volver a gastar tokens o GPU. Los resultados se guardan con la etiqueta `*_en_linea_<técnica>_<etiqueta>`
+y no pisan los vigentes; los cuadernos los comparan con `sin_aumento` y con lo vigente mediante diferencias pareadas con IC95%.
+Control: con Mixup, la semilla 0 reproduce el resultado vigente dentro del ruido numérico (F1 ±0.003; la elección de `C` es sensible a diferencias de
+~1e-6 en los embeddings).
 
 Los resultados de cada técnica con el split único (histórico) están en
 [`../historico/split_unico/resultados_tecnicas/`](../historico/split_unico/resultados_tecnicas/);
@@ -273,7 +311,7 @@ automática disponibles para shiwilu fuera del que aquí se reutiliza):
 ### Paso previo: obtener el checkpoint de F. Prado
 
 Este script **no** entrena nada — necesita el checkpoint ya entrenado. Ver
-[`colab_entrenar_checkpoint.ipynb`](colab_entrenar_checkpoint.ipynb) para el
+[`colab/colab_entrenar_checkpoint.ipynb`](colab/colab_entrenar_checkpoint.ipynb) para el
 notebook completo (clona su repo y reentrena su configuración campeona
 `v2.1b LoRA+` en Colab, ya que no se distribuyen los pesos originales; ya
 verificado: chrF++ promedio = 43.19, consistente con lo reportado por el

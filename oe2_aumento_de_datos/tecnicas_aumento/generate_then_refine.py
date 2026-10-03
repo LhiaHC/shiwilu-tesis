@@ -293,6 +293,50 @@ def refinar(
 
 
 # ---------------------------------------------------------------------------
+# Generacion + refinamiento para un conjunto de entrenamiento dado
+# ---------------------------------------------------------------------------
+
+def generar_para_train(
+    train: pd.DataFrame,
+    cantidad: int,
+    client: anthropic.Anthropic,
+    categorias: list[str] = INTENCIONES,
+) -> pd.DataFrame:
+    """Genera y refina oraciones para cada categoria usando SOLO `train` (columnas
+    espanol, shiwilu, intencion) como ejemplos few-shot y como referencia del filtro
+    semantico. Es lo que usa la validacion cruzada en linea con el core (para elegir C)
+    y con el pool (para el modelo final); nunca se le debe pasar el test."""
+    ejemplos_por_categoria = cargar_ejemplos_por_categoria(train)
+    marcadores_por_categoria = cargar_marcadores_validados()
+    candidatos_por_categoria = cargar_patrones_candidatos()
+
+    from shiwilu.clasificacion import extraer_embeddings
+
+    todas_las_filas = []
+    for categoria in categorias:
+        print(f"\n=== Generando {cantidad} oraciones para {categoria} ===")
+        candidatos = generar_candidatos(
+            categoria, cantidad,
+            ejemplos_por_categoria, marcadores_por_categoria, candidatos_por_categoria,
+            client,
+        )
+        print(f"  {len(candidatos)} candidatos generados, refinando...")
+
+        ejemplos_shiwilu_categoria = [shw for _, shw in ejemplos_por_categoria.get(categoria, [])]
+        embeddings_corpus_categoria = extraer_embeddings(ejemplos_shiwilu_categoria, "labse")
+
+        df_categoria = refinar(candidatos, categoria, marcadores_por_categoria, embeddings_corpus_categoria)
+        n_aprobados = (df_categoria["estado_filtro"] == "aprobado").sum()
+        print(f"  {n_aprobados}/{len(df_categoria)} aprobados; el resto queda para "
+              f"revision del hablante nativo")
+        todas_las_filas.append(df_categoria)
+
+    resultado = pd.concat(todas_las_filas, ignore_index=True)
+    resultado.insert(0, "id", [f"GTR_{i:04d}" for i in range(len(resultado))])
+    return resultado
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -327,33 +371,7 @@ def main() -> int:
         train = corpus[cargar_folds(corpus) != args.fold]
         print(f"Fold {args.fold}: ejemplos few-shot y filtro con {len(train)} oraciones (el fold queda fuera).")
 
-    ejemplos_por_categoria = cargar_ejemplos_por_categoria(train)
-    marcadores_por_categoria = cargar_marcadores_validados()
-    candidatos_por_categoria = cargar_patrones_candidatos()
-
-    from shiwilu.clasificacion import extraer_embeddings
-
-    todas_las_filas = []
-    for categoria in args.categorias:
-        print(f"\n=== Generando {args.cantidad} oraciones para {categoria} ===")
-        candidatos = generar_candidatos(
-            categoria, args.cantidad,
-            ejemplos_por_categoria, marcadores_por_categoria, candidatos_por_categoria,
-            client,
-        )
-        print(f"  {len(candidatos)} candidatos generados, refinando...")
-
-        ejemplos_shiwilu_categoria = [shw for _, shw in ejemplos_por_categoria.get(categoria, [])]
-        embeddings_corpus_categoria = extraer_embeddings(ejemplos_shiwilu_categoria, "labse")
-
-        df_categoria = refinar(candidatos, categoria, marcadores_por_categoria, embeddings_corpus_categoria)
-        n_aprobados = (df_categoria["estado_filtro"] == "aprobado").sum()
-        print(f"  {n_aprobados}/{len(df_categoria)} aprobados; el resto queda para "
-              f"revision del hablante nativo")
-        todas_las_filas.append(df_categoria)
-
-    resultado = pd.concat(todas_las_filas, ignore_index=True)
-    resultado.insert(0, "id", [f"GTR_{i:04d}" for i in range(len(resultado))])
+    resultado = generar_para_train(train, args.cantidad, client, args.categorias)
 
     nombre = "generate_then_refine.csv" if args.fold is None else f"generate_then_refine_fold{args.fold}.csv"
     salida = args.salida or (AUMENTO_SALIDA / nombre)

@@ -20,8 +20,10 @@ oe2_aumento_de_datos/
 │   └── corpus_normalizado.csv las 700 oraciones tal como las ven los modelos (autogenerado)
 ├── analisis_intrinseco/    R5: notebooks y tablas (perfil lingüístico, marcadores, patrones)
 ├── tecnicas_aumento/       R6: Mixup, Retrotraducción, Generate-then-Refine y sus salidas
+│   └── colab/                 cuadernos de Colab (checkpoint NMT y generación en línea, uno por técnica)
 ├── evaluacion/             R4+R6, vigente
 │   ├── validacion_cruzada.py   12 experimentos (3 modelos x 4 configuraciones) en 5 folds
+│   ├── validacion_cruzada_en_linea.py   igual, pero genera el aumento DENTRO de cada fold (core / pool)
 │   ├── comparacion_pareada.py  diferencias pareadas con IC95% (técnica vs. sin aumento)
 │   ├── curvas_roc.py           curvas ROC One-vs-Rest de los 12 experimentos
 │   ├── sensibilidad_c.py       sensibilidad del F1 al hiperparámetro C
@@ -65,6 +67,8 @@ python oe2_aumento_de_datos/evaluacion/validacion_cruzada.py     # R4+R6: 12 exp
 python oe2_aumento_de_datos/evaluacion/comparacion_pareada.py    # diferencias pareadas
 python oe2_aumento_de_datos/evaluacion/curvas_roc.py             # curvas ROC (usa las probabilidades guardadas)
 python oe2_aumento_de_datos/evaluacion/sensibilidad_c.py         # opcional: F1 vs. C (~10-15 min)
+# Opcional: generar el aumento dentro de cada fold (core para elegir C, pool para el modelo final); ver los cuadernos de tecnicas_aumento/colab/
+python oe2_aumento_de_datos/evaluacion/validacion_cruzada_en_linea.py --tecnica mixup
 ```
 
 ## Resultados vigentes
