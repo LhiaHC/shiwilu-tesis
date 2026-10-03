@@ -2,9 +2,9 @@
 
 Esta carpeta contiene el **producto de la Fase 1** y el **insumo de la Fase 2**.
 
-> **Regla:** solo la Etapa 3 de `1_objetivo1_corpus/pipeline/` escribe aquí.
+> **Regla:** solo la Etapa 3 de `oe1_corpus/pipeline/` escribe aquí.
 > La Fase 2 lee este archivo pero nunca lo modifica; sus salidas van a
-> `3_baselines_y_aumento_datos/analisis_intrinseco/resultados/`.
+> `oe2_aumento_de_datos/analisis_intrinseco/resultados/`.
 
 ## `corpus_shiwilu_final.csv`
 
@@ -50,10 +50,10 @@ fases.
 ### Versión normalizada (derivada, para clasificación)
 
 Los experimentos de clasificación (OE2/OE3) no usan este archivo directamente
-para el texto shiwilu: usan `2_baselines/corpus_normalizado.csv` (`shiwilu` en
+para el texto shiwilu: usan `oe2_aumento_de_datos/particiones/corpus_normalizado.csv` (`shiwilu` en
 minúsculas, sin puntuación, sin tildes/ñ, apóstrofo de oclusiva glotal siempre
 preservado), generado automáticamente a partir de este archivo por
-`comun.cargar_corpus_normalizado()`. No se edita a mano; se regenera sola si
+`shiwilu.clasificacion.cargar_corpus_normalizado()`. No se edita a mano; se regenera sola si
 este archivo cambia.
 
 ## Versión

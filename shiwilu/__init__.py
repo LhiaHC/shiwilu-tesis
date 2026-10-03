@@ -1,13 +1,15 @@
 """
-Nucleo compartido del proyecto: lo que cruza la frontera entre las dos fases.
+Nucleo compartido del proyecto: lo que cruza la frontera entre los objetivos.
 
-La Fase 1 (`1_objetivo1_corpus/`) lo usa para construir el corpus; la Fase 2
-(`3_baselines_y_aumento_datos/analisis_intrinseco/`) lo usa para analizarlo. Manteniendo la taxonomia y las
-reglas de anotacion en un unico lugar se evita que ambas fases trabajen sobre
-definiciones divergentes.
+OE1 (`oe1_corpus/`) lo usa para construir el corpus; OE2
+(`oe2_aumento_de_datos/analisis_intrinseco/`) lo usa para analizarlo. Manteniendo la
+taxonomia y las reglas de anotacion en un unico lugar se evita que ambos trabajen
+sobre definiciones divergentes.
 
-`shiwilu.excel` NO se importa aqui a proposito: depende de openpyxl, que solo
-necesita la Fase 1. Asi la Fase 2 puede usar el paquete sin instalarlo.
+`shiwilu.excel` y `shiwilu.clasificacion` NO se importan aqui a proposito: el primero
+depende de openpyxl (solo OE1) y el segundo de torch/scikit-learn (solo OE2-OE3).
+Los scripts que los requieren hacen `from shiwilu.excel import ...` o
+`from shiwilu.clasificacion import ...`.
 Los scripts que lo requieren hacen `from shiwilu.excel import ...`.
 """
 

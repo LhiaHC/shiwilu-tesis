@@ -1,4 +1,4 @@
-# Fase 5 — caracterizacion de embeddings (4_caracterizacion_embeddings/, OE3 R7-R8)
+# Fase 5 — caracterizacion de embeddings (oe3_caracterizacion_embeddings/, OE3 R7-R8)
 # No requiere clave de API. Usa los 3 modelos de la Fase 3 en su forma cruda
 # (AutoModel + output_hidden_states) para extraer las 4 estrategias de pooling.
 numpy>=1.24.0
