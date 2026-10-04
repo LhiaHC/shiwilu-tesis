@@ -35,8 +35,8 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 │   ├── particiones/                   Folds congelados + corpus normalizado
 │   ├── analisis_intrinseco/           R5: notebooks y tablas del análisis del corpus
 │   ├── tecnicas_aumento/              R6: Mixup, Retrotraducción, Generate-then-Refine y sus salidas
-│   ├── evaluacion/                    R4+R6: validación cruzada, comparaciones pareadas, curvas ROC
-│   └── historico/                     Split único y texto crudo (ya no se corre; evidencia)
+│   ├── evaluacion/                    R4+R6: validación cruzada (protocolo A y B), comparaciones pareadas, curvas ROC
+│   └── historico/                     Etapas cerradas: split único, texto crudo, generación en línea con dev, zips de Colab
 │
 ├── oe3_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — 4 estrategias de pooling x 3 modelos,
 │                                      métricas intrínsecas y proyecciones t-SNE/UMAP

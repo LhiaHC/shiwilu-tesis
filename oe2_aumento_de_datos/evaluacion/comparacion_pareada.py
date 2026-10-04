@@ -66,9 +66,12 @@ def main() -> int:
     ap.add_argument("--entrada", type=Path, default=None,
                      help="CSV de predicciones a comparar (por defecto, el vigente de la condicion).")
     ap.add_argument("--etiqueta", default="", help="Se agrega al nombre del CSV de salida.")
+    ap.add_argument("--carpeta", type=Path, default=None,
+                     help="Carpeta de salida (por defecto, evaluacion/resultados/; para la CV interna, "
+                          "evaluacion/resultados/cv_interna/).")
     args = ap.parse_args()
     sufijo = "" if args.condicion == "original" else f"_{args.condicion}"
-    carpeta = EVALUACION_RESULTADOS if args.condicion == "sin_puntuacion" else ATAJOS_TEXTO_CRUDO
+    carpeta = args.carpeta or (EVALUACION_RESULTADOS if args.condicion == "sin_puntuacion" else ATAJOS_TEXTO_CRUDO)
     P = pd.read_csv(args.entrada or carpeta / f"validacion_cruzada_predicciones{sufijo}.csv")
     sufijo += f"_{args.etiqueta}" if args.etiqueta else ""
     rng = np.random.default_rng(SEMILLA)
@@ -76,6 +79,8 @@ def main() -> int:
 
     for modelo in ["labse", "mbert", "xlmr"]:
         for tecnica in ["mixup", "retrotraduccion", "generate_then_refine"]:
+            if not ((P["modelo"] == modelo) & (P["tecnica"] == tecnica)).any():
+                continue   # corrida parcial (p. ej. la CV interna sin Generate-then-Refine)
             d, lo, hi = diferencia_pareada(P, (modelo, tecnica), (modelo, "sin_aumento"), rng)
             filas.append({"comparacion": f"{modelo}: {tecnica} - sin_aumento", "diferencia_f1": d,
                           "ic95_bajo": lo, "ic95_alto": hi, "distinguible_de_cero": not (lo <= 0 <= hi)})

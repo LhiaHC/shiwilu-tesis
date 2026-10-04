@@ -1,0 +1,139 @@
+id,espanol,shiwilu,intencion,fuente,estado_filtro,detalle_filtro,similitud_labse
+GTR_0000,"Hola, buenos días.",ma'pu'sin,SAL,generate_then_refine,aprobado,,0.7112
+GTR_0001,Hasta luego.,pante'chek,SAL,generate_then_refine,aprobado,,0.7058
+GTR_0002,Adiós.,pante',SAL,generate_then_refine,aprobado,,0.7064
+GTR_0003,Bienvenido.,ma'pusin awa,SAL,generate_then_refine,aprobado,,0.6704
+GTR_0004,Nos vemos mañana.,pa'echek inlli'ter,SAL,generate_then_refine,aprobado,,0.7689
+GTR_0005,Que les vaya bien.,inluuk'tuku' pante,SAL,generate_then_refine,aprobado,,0.7758
+GTR_0006,Hasta pronto.,pante'chek inlli'ter,SAL,generate_then_refine,aprobado,,0.6894
+GTR_0007,"Hola, amigo.",ma'pu'sin musu',SAL,generate_then_refine,aprobado,,0.8549
+GTR_0008,Chao.,pante',SAL,generate_then_refine,aprobado,,0.7064
+GTR_0009,Que te vaya bien.,inluuk'ter' pante,SAL,generate_then_refine,aprobado,,0.8098
+GTR_0010,Bienvenidos todos.,ma'pusin awa muektu'kerker',SAL,generate_then_refine,aprobado,,0.7074
+GTR_0011,Hasta la vista.,pa'echek pante'chek,SAL,generate_then_refine,aprobado,,0.7407
+GTR_0012,Hola a todos.,ma'pu'sin muektu'kerker',SAL,generate_then_refine,aprobado,,0.7562
+GTR_0013,Buenas tardes.,ma'pu'sin te'chek,SAL,generate_then_refine,aprobado,,0.7976
+GTR_0014,Que descanses.,inluuk'ter' musu',SAL,generate_then_refine,aprobado,,0.8339
+GTR_0015,Nos vemos pronto.,inlli'ter pa'echek,SAL,generate_then_refine,aprobado,,0.7793
+GTR_0016,Cuídense mucho.,inluuk'tuku' muektu,SAL,generate_then_refine,aprobado,,0.8254
+GTR_0017,"Hola, señora.",ma'pu'sin awa,SAL,generate_then_refine,aprobado,,0.7005
+GTR_0018,Buenas noches.,ma'pu'sin u'sin,SAL,generate_then_refine,aprobado,,0.7368
+GTR_0019,Me despido.,pante' inlli'ter,SAL,generate_then_refine,aprobado,,0.7474
+GTR_0020,¡Qué tristeza!,chi musu' anpinek,EMO,generate_then_refine,aprobado,,0.7507
+GTR_0021,Me alegra mucho.,a'sakek'lliu panapu',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.7952
+GTR_0022,¡Qué miedo!,enpu'ni tiwanpa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.8263
+GTR_0023,Estoy muy contenta.,a'sakeklliu ten iyalliu,EMO,generate_then_refine,aprobado,,0.6349
+GTR_0024,¡Qué vergüenza!,enpu'ni kishipa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.836
+GTR_0025,Me pone triste.,chi anpineklliu,EMO,generate_then_refine,aprobado,,0.6299
+GTR_0026,"¡Ay, qué susto!",enpu'ni tiwanipa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.8298
+GTR_0027,¡Qué alegría!,enpu'ni a'sakekpa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.8539
+GTR_0028,Me emociona.,mushipa' a'sakek'lliu,EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.7574
+GTR_0029,¡Qué dolor!,enpu'ni ananikpa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.8582
+GTR_0030,Estoy muy triste.,chi musu' anpineklliu,EMO,generate_then_refine,aprobado,,0.7691
+GTR_0031,¡Qué felicidad!,enpu'nipa' a'sakekpa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.7382
+GTR_0032,Me da pena.,ten anpineklliu,EMO,generate_then_refine,aprobado,,0.6594
+GTR_0033,"¡Ay, qué angustia!",enpu'ni musu' kishipa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.8043
+GTR_0034,Me entristece.,chi anpinek'lliu nuku',EMO,generate_then_refine,aprobado,,0.7342
+GTR_0035,¡Qué orgullo!,enpu'ni a'sakek mushipa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.7245
+GTR_0036,Me da mucho asco.,panapu' nudu'tulek nuku',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.6932
+GTR_0037,"¡Ay, qué envidia!",enpu'ni musu' tiwanipa',EMO,generate_then_refine,revisar_hablante_nativo,marcador,0.7658
+GTR_0038,Me alegra verte.,a'sakeklliu ten mushipa',EMO,generate_then_refine,aprobado,,0.7048
+GTR_0039,¿Tienes hambre?,¿mu'ki ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9153
+GTR_0040,¿Tienes sed?,¿yu'pi ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.8963
+GTR_0041,¿Estás cansado?,¿katu'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9128
+GTR_0042,¿Estás dormido?,¿nu'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.8865
+GTR_0043,¿Estás solo?,¿cha'wi ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9131
+GTR_0044,¿Tienes frío?,¿ya'chi ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9013
+GTR_0045,¿Tienes dolor?,¿kiru'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9112
+GTR_0046,¿Estás triste?,¿wachi'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9373
+GTR_0047,¿Estás despierto?,¿aku'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.9186
+GTR_0048,¿Hay agua?,¿yura a'cha?,PRG,generate_then_refine,aprobado,,0.8232
+GTR_0049,¿Hay comida?,¿muki'in a'cha?,PRG,generate_then_refine,aprobado,,0.8665
+GTR_0050,¿Es lejos?,¿kena'chi a'cha?,PRG,generate_then_refine,aprobado,,0.8994
+GTR_0051,¿Es cerca?,¿taki'chi a'cha?,PRG,generate_then_refine,aprobado,,0.8986
+GTR_0052,¿Es tuyo?,¿ami'ka a'cha?,PRG,generate_then_refine,aprobado,,0.891
+GTR_0053,¿Es grande?,¿wira'chi a'cha?,PRG,generate_then_refine,aprobado,,0.8614
+GTR_0054,¿Es pequeño?,¿yuku'chi a'cha?,PRG,generate_then_refine,aprobado,,0.836
+GTR_0055,¿Viene alguien?,¿kenma a'cha?,PRG,generate_then_refine,aprobado,,0.8866
+GTR_0056,¿Hay peligro?,¿tekinchi'wana a'cha?,PRG,generate_then_refine,aprobado,,0.8929
+GTR_0057,¿Estás lista?,¿tekin'su' ñapala?,PRG,generate_then_refine,revisar_hablante_nativo,marcador,0.8885
+GTR_0058,¡Ven!,uk'a'ker',REQUEST,generate_then_refine,aprobado,,0.7867
+GTR_0059,¡Siéntate!,nulla'ker',REQUEST,generate_then_refine,aprobado,,0.7272
+GTR_0060,¡Escúchame!,yantu'ker',REQUEST,generate_then_refine,aprobado,,0.8449
+GTR_0061,¿Puedes caminar?,¿yennitula dekkunta'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.4956
+GTR_0062,¡Corre!,pittulla'ker',REQUEST,generate_then_refine,aprobado,,0.7553
+GTR_0063,¿Puedes traer agua?,¿yennitula numi uk'a'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.4163
+GTR_0064,¡Ayúdame!,katu'pa'ker',REQUEST,generate_then_refine,aprobado,,0.8122
+GTR_0065,¿Pueden venir?,¿yennitulama' uk'a'mamak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.5427
+GTR_0066,¡Dame comida!,wa'te mani ula'u,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.6293
+GTR_0067,¿Puedes esperar?,¿yennitula ta'itula'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.522
+GTR_0068,¡Habla!,ya'ker',REQUEST,generate_then_refine,aprobado,,0.7701
+GTR_0069,¡Llámalo!,yaw pittulla'ker',REQUEST,generate_then_refine,aprobado,,0.6687
+GTR_0070,¿Puedes cocinar?,¿yennitula yanulla'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.492
+GTR_0071,¡Párate!,ta'itu nulla'ker',REQUEST,generate_then_refine,aprobado,,0.7556
+GTR_0072,¿Pueden ayudar?,¿yennitulama' katu'pa'ta'mamak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.5015
+GTR_0073,¡Tráeme leña!,wa'ten kawa uk'a'u,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.6432
+GTR_0074,¿Puedes escribir?,¿yennitula wirinta'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.4539
+GTR_0075,¡Duérmete!,pittun nulla'ker',REQUEST,generate_then_refine,aprobado,,0.6966
+GTR_0076,¡Cállate!,wa't ya'ker',REQUEST,generate_then_refine,aprobado,,0.7974
+GTR_0077,¿Puedes comer?,¿yennitula mani tula'mak?,REQUEST,generate_then_refine,revisar_hablante_nativo,marcador,0.4227
+GTR_0078,"Sí, claro.",ajá nu'su',AFI,generate_then_refine,aprobado,,0.7256
+GTR_0079,Así es.,untana,AFI,generate_then_refine,aprobado,,0.5714
+GTR_0080,"Sí, entendido.",ajá lachek'lek,AFI,generate_then_refine,aprobado,,0.6963
+GTR_0081,Correcto.,tekinchi,AFI,generate_then_refine,revisar_hablante_nativo,marcador,0.6306
+GTR_0082,"Sí, de acuerdo.",ajá iñer',AFI,generate_then_refine,aprobado,,0.6657
+GTR_0083,Exacto.,untana tekinchi,AFI,generate_then_refine,aprobado,,0.6438
+GTR_0084,"Sí, seguro.",ajá mupalli,AFI,generate_then_refine,aprobado,,0.7392
+GTR_0085,"Sí, confirmo.",ajá ipa' tekinchi,AFI,generate_then_refine,aprobado,,0.7788
+GTR_0086,Así nomás es.,untana u'la'su',AFI,generate_then_refine,aprobado,,0.7522
+GTR_0087,"Sí, ya sé.",ajá ipa' lachek'lek,AFI,generate_then_refine,aprobado,,0.7251
+GTR_0088,"Sí, correcto.",ajá tekinchi nu'su',AFI,generate_then_refine,aprobado,,0.712
+GTR_0089,"Sí, listo.",ajá ñapalli,AFI,generate_then_refine,aprobado,,0.7357
+GTR_0090,"Sí, está bien.",ajá mulli nu'su',AFI,generate_then_refine,aprobado,,0.702
+GTR_0091,"Sí, eso es.",ajá untana,AFI,generate_then_refine,aprobado,,0.5986
+GTR_0092,"Bien, de acuerdo.",mulli iñer',AFI,generate_then_refine,revisar_hablante_nativo,marcador,0.7827
+GTR_0093,"Sí, efectivamente.",ahã tekinchi,AFI,generate_then_refine,aprobado,,0.6666
+GTR_0094,"Sí, con gusto.",ajá luwante mupalli,AFI,generate_then_refine,aprobado,,0.5897
+GTR_0095,"Sí, todo bien.",ajá mulli mupalli,AFI,generate_then_refine,aprobado,,0.6424
+GTR_0096,Claro que sí.,ahã nu'su' ajá,AFI,generate_then_refine,aprobado,,0.7114
+GTR_0097,"Sí, perfecto.",ajá ñapalli tekinchi,AFI,generate_then_refine,aprobado,,0.6904
+GTR_0098,No come.,i'ñi uklupi'ñi,NEG,generate_then_refine,aprobado,,0.8311
+GTR_0099,No duerme.,i'ñi wañupi'ñi,NEG,generate_then_refine,aprobado,,0.8115
+GTR_0100,No habla.,i'ñi ñi'ñi,NEG,generate_then_refine,aprobado,,0.8132
+GTR_0101,Nunca camina.,ñinpi' pawantulek,NEG,generate_then_refine,revisar_hablante_nativo,marcador,0.876
+GTR_0102,No quiero.,i'n ku'la,NEG,generate_then_refine,aprobado,,0.5392
+GTR_0103,Jamás trabaja.,ñinpi'sha ñiden,NEG,generate_then_refine,revisar_hablante_nativo,marcador,0.8623
+GTR_0104,No viene.,i'ñi ektupi'ñi,NEG,generate_then_refine,aprobado,,0.8144
+GTR_0105,Nunca escucha.,ñinpi' api'ñi,NEG,generate_then_refine,aprobado,,0.8986
+GTR_0106,No sé.,i'n ñidenpi',NEG,generate_then_refine,aprobado,,0.7698
+GTR_0107,No hay agua.,i'npu' uapi'ñi,NEG,generate_then_refine,aprobado,,0.8575
+GTR_0108,Jamás llueve.,ñinpi'sha uklliapi'ñi,NEG,generate_then_refine,aprobado,,0.885
+GTR_0109,No puedo.,i'n pawantulek,NEG,generate_then_refine,aprobado,,0.5796
+GTR_0110,Nunca duerme.,ñinpi' wañupi'ñi,NEG,generate_then_refine,aprobado,,0.911
+GTR_0111,No me voy.,i'n pa'i'chek,NEG,generate_then_refine,aprobado,,0.7295
+GTR_0112,Jamás come aquí.,ñinpi'sha uklupi'li,NEG,generate_then_refine,revisar_hablante_nativo,marcador,0.8525
+GTR_0113,No existe.,i'ñi ñi'pi'ñi,NEG,generate_then_refine,aprobado,,0.8322
+GTR_0114,Nunca habla.,ñinpi' ñi'ñi,NEG,generate_then_refine,aprobado,,0.8991
+GTR_0115,No bebo.,i'n uapi'ñi,NEG,generate_then_refine,aprobado,,0.7287
+GTR_0116,Jamás regresa.,ñinpi'sha ektupi'ñi,NEG,generate_then_refine,aprobado,,0.8986
+GTR_0117,No están.,i'npu' ñiden,NEG,generate_then_refine,aprobado,,0.8261
+GTR_0118,Tengo hambre.,nuka'ka yawichek,DES,generate_then_refine,aprobado,,0.7282
+GTR_0119,Está lloviendo.,ñapawinek para'lek,DES,generate_then_refine,aprobado,,0.7395
+GTR_0120,El río está crecido.,asek numi'lek yawar,DES,generate_then_refine,aprobado,,0.6564
+GTR_0121,Duermo bien.,ruku'palek allita,DES,generate_then_refine,aprobado,,0.5559
+GTR_0122,Estoy cansado.,nuka'ka pu'tilek,DES,generate_then_refine,aprobado,,0.7228
+GTR_0123,El sol sale.,inti ñapawinek,DES,generate_then_refine,aprobado,,0.6821
+GTR_0124,Tengo frío.,nuka'ka chiriyalek,DES,generate_then_refine,aprobado,,0.6782
+GTR_0125,Camino despacio.,puripalek ashalla,DES,generate_then_refine,aprobado,,0.4184
+GTR_0126,Estoy aquí sentado.,asek tiyapalek,DES,generate_then_refine,aprobado,,0.7014
+GTR_0127,El niño llora.,wawa ka'chapalek,DES,generate_then_refine,aprobado,,0.767
+GTR_0128,Bebo agua.,umapalek yaku',DES,generate_then_refine,aprobado,,0.8415
+GTR_0129,Está oscuro.,nuka'ka tutayawinek,DES,generate_then_refine,aprobado,,0.7068
+GTR_0130,Vivo aquí.,asek kawsapalek,DES,generate_then_refine,aprobado,,0.6439
+GTR_0131,El pájaro canta.,pishku ñapawinek takilek,DES,generate_then_refine,aprobado,,0.5851
+GTR_0132,Tengo sueño.,nuka'ka punku'lek,DES,generate_then_refine,aprobado,,0.7333
+GTR_0133,Pesco en el río.,challwapalek yawar asek,DES,generate_then_refine,aprobado,,0.492
+GTR_0134,Estoy trabajando.,llank'apalek nuka'ka,DES,generate_then_refine,aprobado,,0.7549
+GTR_0135,El monte está lejos.,ñapawinek sacha' karulla,DES,generate_then_refine,aprobado,,0.6721
+GTR_0136,Escucho bien.,uyaripalek allita,DES,generate_then_refine,aprobado,,0.5075
+GTR_0137,Hablo shiwilu.,rimapalek shiwilu',DES,generate_then_refine,aprobado,,0.7104

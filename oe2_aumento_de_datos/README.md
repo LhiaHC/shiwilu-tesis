@@ -21,14 +21,15 @@ oe2_aumento_de_datos/
 ├── analisis_intrinseco/    R5: notebooks y tablas (perfil lingüístico, marcadores, patrones)
 ├── tecnicas_aumento/       R6: Mixup, Retrotraducción, Generate-then-Refine y sus salidas
 │   └── colab/                 cuadernos de Colab (checkpoint NMT y generación en línea, uno por técnica)
-├── evaluacion/             R4+R6, vigente
-│   ├── validacion_cruzada.py   12 experimentos (3 modelos x 4 configuraciones) en 5 folds
-│   ├── validacion_cruzada_en_linea.py   igual, pero genera el aumento DENTRO de cada fold (core / pool)
-│   ├── comparacion_pareada.py  diferencias pareadas con IC95% (técnica vs. sin aumento)
-│   ├── curvas_roc.py           curvas ROC One-vs-Rest de los 12 experimentos
-│   ├── sensibilidad_c.py       sensibilidad del F1 al hiperparámetro C
-│   └── resultados/             CSV y figuras de arriba
-└── historico/              Split único y texto crudo (ya no se corre; ver su README)
+├── evaluacion/             R4+R6 (ver evaluacion/README.md)
+│   ├── validacion_cruzada.py            PROTOCOLO A: 12 experimentos, C elegido en un dev interno de ~90 oraciones
+│   ├── validacion_cruzada_cv_interna.py PROTOCOLO B: C elegido por CV interna (K=5); el que cerrará el OE2
+│   ├── validacion_cruzada_en_linea.py   apoyo: genera el aumento dentro de cada fold y lo guarda en caché (lo importa el B)
+│   ├── unir_predicciones.py, comparacion_pareada.py, curvas_roc.py
+│   ├── diagnostico_c/                   sensibilidad del F1 al hiperparámetro C (scripts + resultados)
+│   └── resultados/                      protocolo A (raíz) y protocolo B (cv_interna/)
+└── historico/              Etapas cerradas, no se tocan (ver su README): split único, texto crudo,
+                            generación en línea con dev (niveles 20-120) y zips de Colab
 ```
 
 El núcleo de código compartido (carga del corpus, normalización, folds, embeddings,
@@ -47,9 +48,14 @@ Regresión Logística) está en [`../shiwilu/clasificacion.py`](../shiwilu/clasi
   se generan a partir del train de cada fold, así que si el reparto cambiara, una
   oración de test podría haber inspirado su propio entrenamiento.
 - **Protocolo por fold** (el test no se toca hasta el final): pool = los otros 4
-  folds (~560 oraciones); ~1/6 del pool se aparta como *dev interno* solo para elegir
-  `C ∈ {0.01, 0.1, 1, 3, 10}`; con ese `C` se reentrena sobre todo el pool (+ su
-  aumento) y se predice el fold.
+  folds (~560 oraciones). Hay dos formas de elegir el hiperparámetro `C`:
+  - **Protocolo A** (`validacion_cruzada.py`): ~1/6 del pool se aparta como *dev interno* (~90 oraciones)
+    solo para elegir `C ∈ {0.01, 0.1, 1, 3, 10}`; con ese `C` se reentrena sobre todo el pool (+ su
+    aumento) y se predice el fold. La elección es ruidosa.
+  - **Protocolo B** (`validacion_cruzada_cv_interna.py`): el pool se parte en K=5 particiones;
+    en cada una el aumento se genera **solo con su entrenamiento** y se evalúa en la parte retenida;
+    se elige el `C ∈ {0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30}` con mejor F1 sobre las ~560 predicciones
+    retenidas. Cada configuración (incluida "sin aumento") elige su propio `C` con la misma regla.
 - **Aumento, siempre solo con el pool del fold**; se descartan las filas sintéticas
   idénticas a una oración del test (el NMT de F. Prado memorizó parte del corpus).
 - **Métrica.** F1 macro sobre las 700 predicciones, con IC95% bootstrap (2000
@@ -63,15 +69,19 @@ salidas versionadas):
 ```bash
 # 1. Datos sintéticos (R6): ver tecnicas_aumento/README.md (Claude para Generate-then-Refine, Colab/GPU para Retrotraducción)
 # 2. Particiones y corpus normalizado: se crean solos la primera vez que se necesitan
-python oe2_aumento_de_datos/evaluacion/validacion_cruzada.py     # R4+R6: 12 experimentos (~10 min en CPU)
+# Protocolo A (12 experimentos, ~10 min en CPU)
+python oe2_aumento_de_datos/evaluacion/validacion_cruzada.py
 python oe2_aumento_de_datos/evaluacion/comparacion_pareada.py    # diferencias pareadas
 python oe2_aumento_de_datos/evaluacion/curvas_roc.py             # curvas ROC (usa las probabilidades guardadas)
-python oe2_aumento_de_datos/evaluacion/sensibilidad_c.py         # opcional: F1 vs. C (~10-15 min)
-# Opcional: generar el aumento dentro de cada fold (core para elegir C, pool para el modelo final); ver los cuadernos de tecnicas_aumento/colab/
-python oe2_aumento_de_datos/evaluacion/validacion_cruzada_en_linea.py --tecnica mixup
+# Protocolo B (una técnica por corrida; resultados en evaluacion/resultados/cv_interna/)
+python oe2_aumento_de_datos/evaluacion/validacion_cruzada_cv_interna.py --tecnica sin_aumento
+python oe2_aumento_de_datos/evaluacion/validacion_cruzada_cv_interna.py --tecnica mixup
+python oe2_aumento_de_datos/evaluacion/validacion_cruzada_cv_interna.py --tecnica retrotraduccion --checkpoint x   # usa la caché
+# Diagnóstico opcional del hiperparámetro C (~10-15 min)
+python oe2_aumento_de_datos/evaluacion/diagnostico_c/sensibilidad_c.py
 ```
 
-## Resultados vigentes
+## Resultados con el protocolo A (dev interno de ~90 oraciones)
 
 F1 macro sobre las 700 predicciones (texto normalizado, validación cruzada de 5 folds);
 [`evaluacion/resultados/validacion_cruzada_resumen_sin_puntuacion.csv`](evaluacion/resultados/validacion_cruzada_resumen_sin_puntuacion.csv):
@@ -104,6 +114,50 @@ en negrita, las que tienen IC95% que no incluye 0:
   mejora la capacidad de separar las categorías. mBERT sin aumento tiene el AUC más
   alto (0.894); Mixup lo reduce a 0.882.
 
+## Resultados con el protocolo B (CV interna): estado del avance
+
+F1 macro sobre las 700 predicciones, con `C` elegido por validación cruzada interna
+([`evaluacion/resultados/cv_interna/`](evaluacion/resultados/cv_interna/)). **Generate-then-Refine
+queda pendiente** (ver más abajo): sus sintéticos deben generarse de nuevo dentro de cada partición interna.
+
+| Modelo | Sin aumento | Mixup | Retrotraducción | Generate-then-Refine |
+|---|---|---|---|---|
+| mBERT | **0.665** [0.630, 0.698] | 0.629 | 0.631 | pendiente |
+| LaBSE | 0.587 [0.547, 0.624] | 0.587 | 0.582 | pendiente |
+| XLM-R | 0.570 [0.534, 0.602] | 0.546 | 0.551 | pendiente |
+
+Diferencia pareada frente a `sin_aumento` (en negrita, IC95% que no incluye 0):
+
+| Técnica | LaBSE | mBERT | XLM-R |
+|---|---|---|---|
+| Mixup | 0.000 | **-0.036** | **-0.024** |
+| Retrotraducción | -0.006 | **-0.034** | -0.019 |
+
+- Con una elección de `C` más confiable el baseline de XLM-R sube de 0.548 a 0.570, y la ventaja
+  aparente de Mixup y Retrotraducción en ese modelo desaparece.
+- Ninguna técnica evaluada hasta ahora supera al baseline; Mixup y Retrotraducción empeoran a mBERT.
+- AUC macro (curvas ROC en `cv_interna/curvas_roc_cv_interna/`): mBERT sin aumento 0.899, Mixup 0.887,
+  Retrotraducción 0.883; LaBSE 0.868 / 0.873 / 0.867; XLM-R 0.853 / 0.846 / 0.856.
+- Volumen sintético: Mixup 100% de las reales, Retrotraducción ~83%.
+
+## Pendiente: Generate-then-Refine con CV interna (K=5) y nivel 120
+
+Es la única técnica que falta para cerrar el protocolo B. Con K=5 hay que pedirle a Claude, **dentro de
+cada partición interna**, 120 oraciones por categoría (6 lotes de 20), usando solo las oraciones de entrenamiento
+de esa partición: 5 folds x 5 particiones x 7 categorías x 6 lotes ≈ **1050 llamadas** (~US$7-10 con
+`claude-sonnet-4-6`), más ~35 si se regenera el lote 0 del pool con el prompt actual. Los lotes son acumulativos,
+así que al generar 120 también se pueden evaluar 40 y 80 (`--cantidad`). Pasos:
+
+1. Cerrar antes lo que invalidaría lo generado: el prompt, los folds, K y el modelo de Claude (los filtros se pueden
+   cambiar después con `tecnicas_aumento/refiltrar_marcadores.py`, sin costo).
+2. Hacer `git push` de lo nuevo y correr en Colab el cuaderno
+   [`tecnicas_aumento/colab/colab_generate_then_refine_cv_interna.ipynb`](tecnicas_aumento/colab/colab_generate_then_refine_cv_interna.ipynb)
+   (ya está hecho y probado con un generador simulado): genera con Claude lo que falta (paso 4a, retomable si Colab se desconecta),
+   evalúa los niveles 120, 80 y 40, une con las otras tres técnicas, saca pareadas y ROC, y entrega un solo `.zip`.
+3. Traer el `.zip` al repositorio: `cv_interna/` a `evaluacion/resultados/cv_interna/` y `generate_then_refine/` a
+   `tecnicas_aumento/salidas/en_linea_marcadores_fuentes/generate_then_refine/`.
+4. Actualizar la tabla del protocolo B de este README con la fila de Generate-then-Refine.
+
 ## Verificaciones y limitaciones conocidas
 
 Verificado al reorganizar el repositorio (2026-10):
@@ -117,8 +171,8 @@ Verificado al reorganizar el repositorio (2026-10):
 
 Limitaciones (no invalidan el resultado, pero conviene declararlas):
 
-- **Elección de `C` en un dev pequeño.** Cada fold elige `C` con ~90-104 oraciones,
-  una elección ruidosa. Ver [`evaluacion/sensibilidad_c.py`](evaluacion/sensibilidad_c.py)
+- **Elección de `C` en un dev pequeño (protocolo A).** Cada fold elige `C` con ~90-104 oraciones,
+  una elección ruidosa; el protocolo B la corrige. Ver [`evaluacion/diagnostico_c/`](evaluacion/diagnostico_c/)
   y su salida `resultados/sensibilidad_c.csv` (F1 con `C` fijo, sin elegirlo en ningún dev):
   - La grilla de la validación cruzada (hasta `C=10`) **no se queda corta**: el mejor `C`
     fijo es 0.1 en mBERT y 10-100 en LaBSE/XLM-R, y ampliar la grilla a 1000 no cambia el

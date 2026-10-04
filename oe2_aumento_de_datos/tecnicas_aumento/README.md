@@ -23,6 +23,15 @@ contra ellos.
 
 ### Generación en línea dentro de cada fold (Colab)
 
+> **Estado.** Los cuadernos de `colab/` corren esta generación con el protocolo de etapas core/pool y dev interno de ~90
+> oraciones. Ese protocolo fue superado por la **CV interna** (K=5, ver [`../evaluacion/README.md`](../evaluacion/README.md)),
+> y sus resultados (niveles 20-120 de Generate-then-Refine, Retrotraducción ×1) están archivados en
+> [`../historico/en_linea_protocolo_dev/`](../historico/en_linea_protocolo_dev/). Cuando se corran los cuadernos, los CSV
+> salen en `evaluacion/resultados/` (carpeta del clon de Colab); al traerlos al repositorio van a esa carpeta del histórico.
+> Para Generate-then-Refine con CV interna (K=5, nivel 120) usa
+> [`colab/colab_generate_then_refine_cv_interna.ipynb`](colab/colab_generate_then_refine_cv_interna.ipynb), que llama a
+> `validacion_cruzada_cv_interna.py` (genera con `--solo-generar`, evalúa por nivel y entrega un `.zip`).
+
 La evaluación vigente lee datos sintéticos ya generados. Los tres cuadernos `colab/colab_*_en_linea.ipynb` los **generan dentro del
 propio entrenamiento de cada fold**, con la estrategia test / pool / core / dev, usando
 [`../evaluacion/validacion_cruzada_en_linea.py`](../evaluacion/validacion_cruzada_en_linea.py):

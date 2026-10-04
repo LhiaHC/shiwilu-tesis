@@ -90,7 +90,17 @@ TECNICAS = ["sin_aumento", "mixup", "retrotraduccion", "generate_then_refine"]
 # `¿?` delatan PRG) y las mayusculas (DES, PRG y REQUEST estan 100% en MAYUSCULAS;
 # las demas categorias, 10-21%). `sin_puntuacion` (la ablacion principal) quita
 # AMBOS; las otras dos condiciones sirven para atribuir el efecto a cada uno.
+def con_interrogacion(texto: str) -> str:
+    """Texto normalizado (minusculas, sin tildes ni otros signos) que CONSERVA los signos de interrogacion
+    `¿` y `?` como tokens separados: es lo que veria un asistente que recibe texto escrito. El texto ya viene en
+    minusculas desde el corpus limpio; `¡!` y el resto de la puntuacion se quitan como en `sin_puntuacion`."""
+    t = str(texto)
+    base = quitar_puntuacion(t, minusculas=True, quitar_tildes=True)
+    return ("¿ " if "¿" in t else "") + base + (" ?" if "?" in t else "")
+
+
 CONDICIONES = {
+    "con_interrogacion": con_interrogacion,
     "original": lambda t: str(t),
     "minusculas": lambda t: str(t).lower(),
     "sin_puntuacion_mayusculas": lambda t: quitar_puntuacion(t, minusculas=False),
@@ -172,7 +182,7 @@ def resumir_predicciones(P: pd.DataFrame) -> pd.DataFrame:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--condicion", choices=list(CONDICIONES), default="sin_puntuacion",
+    ap.add_argument("--condicion", choices=[c for c in CONDICIONES if c != "con_interrogacion"], default="sin_puntuacion",
                      help="Transformacion del texto ANTES de extraer embeddings (ver CONDICIONES). "
                           "Por defecto, la condicion vigente.")
     ap.add_argument("--tecnicas", nargs="+", choices=TECNICAS, default=TECNICAS,
