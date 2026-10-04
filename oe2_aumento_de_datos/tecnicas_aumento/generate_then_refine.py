@@ -190,6 +190,39 @@ Responde UNICAMENTE con un JSON array valido, sin texto adicional:
     return prompt_s, prompt_u
 
 
+INTENTOS_RESPUESTA = 3   # veces que se repite la llamada si la respuesta no se puede interpretar
+
+
+def _parsear_candidatos(texto: str) -> list[dict]:
+    """Interpreta la respuesta de Claude como lista de {"espanol": ..., "shiwilu": ...} y tolera lo que a veces
+    sale mal con muchas oraciones: texto antes o despues del JSON, comas colgantes, una oracion mal escapada o la
+    respuesta cortada a la mitad. Si el JSON completo no se puede leer, rescata los pares validos uno por uno."""
+    texto = texto.strip()
+    texto = re.sub(r"^```(?:json)?\s*", "", texto, flags=re.DOTALL)
+    texto = re.sub(r"\s*```$", "", texto, flags=re.DOTALL)
+    posibles = [texto]
+    i, j = texto.find("["), texto.rfind("]")
+    if i != -1 and j > i:
+        posibles.append(texto[i:j + 1])
+        posibles.append(re.sub(r",\s*([\]}])", r"\1", texto[i:j + 1]))   # comas colgantes
+    for candidato in posibles:
+        try:
+            datos = json.loads(candidato)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(datos, list):
+            return [d for d in datos if isinstance(d, dict) and "espanol" in d and "shiwilu" in d]
+    rescatados = []
+    for m in re.finditer(r"\{[^{}]*\}", texto, flags=re.DOTALL):
+        try:
+            d = json.loads(m.group(0))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(d, dict) and "espanol" in d and "shiwilu" in d:
+            rescatados.append(d)
+    return rescatados
+
+
 def generar_candidatos(
     categoria: str,
     cantidad: int,
@@ -207,15 +240,19 @@ def generar_candidatos(
     marcadores = marcadores_por_categoria.get(categoria, [])
 
     prompt_s, prompt_u = construir_prompt(categoria, cantidad, ejemplos, marcadores, candidatos_por_categoria)
-    resp = client.messages.create(
-        model=MODELO, max_tokens=4096,
-        system=prompt_s,
-        messages=[{"role": "user", "content": prompt_u}],
-    )
-    texto = resp.content[0].text.strip()
-    texto = re.sub(r"^```(?:json)?\s*", "", texto, flags=re.DOTALL)
-    texto = re.sub(r"\s*```$", "", texto, flags=re.DOTALL)
-    return json.loads(texto)
+    for intento in range(1, INTENTOS_RESPUESTA + 1):
+        resp = client.messages.create(
+            model=MODELO, max_tokens=4096,
+            system=prompt_s,
+            messages=[{"role": "user", "content": prompt_u}],
+        )
+        texto = resp.content[0].text
+        candidatos = _parsear_candidatos(texto)
+        if candidatos:
+            return candidatos
+        print(f"  aviso: la respuesta de Claude para {categoria} (lote {lote}, intento {intento}/{INTENTOS_RESPUESTA}) "
+              f"no trae ningun par utilizable. Inicio de la respuesta: {texto[:300]!r}")
+    raise RuntimeError(f"Claude no devolvio pares utilizables para {categoria} (lote {lote}) tras {INTENTOS_RESPUESTA} intentos.")
 
 
 # ---------------------------------------------------------------------------

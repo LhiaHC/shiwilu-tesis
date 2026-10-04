@@ -56,7 +56,7 @@ necesario para gráficos y curvas ROC:
 (~95 aprobadas por etapa). `validacion_cruzada_en_linea.py` permite aumentarlo sin repetir lo ya generado:
 - `--cantidad N` (Generate-then-Refine): oraciones por categoría y etapa, en lotes de 20 (una llamada por lote, con la ventana de ejemplos few-shot rotada).
   `fold<N>_<etapa>.csv` es el lote 0 (el de siempre) y `fold<N>_<etapa>_l<j>.csv` los siguientes; se reutilizan de la cache y solo se piden los que faltan. Se
-  descartan las repetidas y las copias de oraciones reales. Aprox.: 40 → ~34% del pool, 80 → ~68%, 120 → ~100%.
+  descartan las repetidas y las copias de oraciones reales. Medido: 40 → ~28% del pool, 80 → ~57%, 120 → ~85% (menos que n × 17% porque se descartan ~10-15% de repetidas y copias).
 - `--multiplicador K` (Retrotraducción): K paráfrasis por oración (`fold<N>_pool.csv` y `fold<N>_pool_s<j>.csv`, con otra semilla del muestreo). K = 2 → ~170%.
   No se recomienda subir más sin antes filtrar la calidad de las paráfrasis.
 - Cada corrida guarda además `volumen_sintetico_<TAG>.csv` (sintéticos usados por fold y etapa, y su % respecto de las oraciones reales).
