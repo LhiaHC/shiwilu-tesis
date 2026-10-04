@@ -56,6 +56,9 @@ TABLAS              = RESULTADOS / "tablas"
 FIGURAS             = RESULTADOS / "figuras"
 
 MARCADORES_CSV               = TABLAS / "analisis_marcadores_documentados.csv"
+# Marcadores que las fuentes (JIPA, Voces shiwilu) afirman EXPLICITAMENTE, con pagina y nivel de evidencia;
+# es la unica lista que usan el prompt y el filtro de marcador de Generate-then-Refine.
+MARCADORES_FUENTES_CSV       = ANALISIS_INTRINSECO / "marcadores_fuentes.csv"
 PALABRAS_CARACTERISTICAS_CSV = TABLAS / "analisis_palabras_caracteristicas.csv"
 SECUENCIAS_INICIALES_CSV     = TABLAS / "analisis_secuencias_iniciales.csv"
 SECUENCIAS_FINALES_CSV       = TABLAS / "analisis_secuencias_finales.csv"

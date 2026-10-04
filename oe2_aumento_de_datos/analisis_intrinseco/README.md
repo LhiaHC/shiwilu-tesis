@@ -12,6 +12,10 @@ OE1 ([`../../oe1_corpus/`](../../oe1_corpus/)).
 
 ## Contenido
 
+`marcadores_fuentes.csv` (en esta carpeta, no en `resultados/`): marcadores que las fuentes afirman explícitamente, con página y
+nivel de evidencia. Es una tabla curada a mano, no una salida regenerable; la usa Generate-then-Refine (ver
+[`../tecnicas_aumento/README.md`](../tecnicas_aumento/README.md)).
+
 ```
 notebooks/
   metricas_corpus.ipynb                 Métricas descriptivas del corpus
