@@ -14,6 +14,12 @@ historico/
 │   ├── resultados_baselines/ y resultados_tecnicas/    salidas por modelo / técnica
 │   └── intervalos_confianza.csv, resumen_experimentos.csv, curva_aprendizaje.{csv,png}
 │
+├── en_linea_protocolo_dev/ Generación en línea con elección de C en un dev de ~90 oraciones
+│   └── resultados/           Generate-then-Refine 20, 40, 80 y 120 por categoría, Retrotraducción ×1
+│                              (predicciones, resumen, pareadas, ROC y volumen). Ver su README
+│
+├── colab_zips/             Zips descargados de Colab (contienen lo generado y los resultados de arriba)
+│
 └── atajos_texto_crudo/     Validación cruzada con el texto tal cual (con signos y mayúsculas)
     ├── validacion_cruzada_{predicciones,resumen}*.csv   condiciones: texto crudo, solo
     │                                                    minúsculas, sin puntuación con mayúsculas

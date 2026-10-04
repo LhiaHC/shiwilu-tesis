@@ -65,12 +65,15 @@ def main() -> int:
     ap.add_argument("--entrada", type=Path, default=ENTRADA,
                      help="CSV de predicciones con columnas prob_<categoria> (por defecto, el vigente).")
     ap.add_argument("--etiqueta", default="", help="Se agrega al nombre de las salidas (CSV, PNG y carpeta).")
+    ap.add_argument("--carpeta", type=Path, default=EVALUACION_RESULTADOS,
+                     help="Carpeta donde se escriben las salidas (por defecto, evaluacion/resultados/; "
+                          "para la CV interna, evaluacion/resultados/cv_interna/).")
     args = ap.parse_args()
     sufijo = f"_{args.etiqueta}" if args.etiqueta else ""
     entrada = args.entrada
-    salida_csv = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}.csv"
-    salida_png = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}.png"
-    salida_dir = EVALUACION_RESULTADOS / f"curvas_roc{sufijo}"
+    salida_csv = args.carpeta / f"curvas_roc{sufijo}.csv"
+    salida_png = args.carpeta / f"curvas_roc{sufijo}.png"
+    salida_dir = args.carpeta / f"curvas_roc{sufijo}"
 
     if not entrada.exists():
         raise SystemExit(
@@ -86,6 +89,7 @@ def main() -> int:
             "(con la version actualizada de validacion_cruzada.py que ya guarda las probabilidades)."
         )
     categorias = sorted(c.removeprefix("prob_") for c in columnas_prob)
+    tecnicas = [t for t in TECNICAS if (P["tecnica"] == t).any()]   # una corrida parcial puede no traer las cuatro
     print(f"{len(P)} predicciones, {len(categorias)} categorias: {categorias}")
 
     def dibujar(ax, g, modelo, tecnica, filas, fuente_leyenda):
@@ -113,13 +117,13 @@ def main() -> int:
         return auc_macro
 
     filas = []
-    salida_dir.mkdir(exist_ok=True)
+    salida_dir.mkdir(parents=True, exist_ok=True)
     fig, ejes = plt.subplots(
-        len(MODELOS), len(TECNICAS), figsize=(4.2 * len(TECNICAS), 4 * len(MODELOS)),
-        sharex=True, sharey=True,
+        len(MODELOS), len(tecnicas), figsize=(4.2 * len(tecnicas), 4 * len(MODELOS)),
+        sharex=True, sharey=True, squeeze=False,
     )
     for i, modelo in enumerate(MODELOS):
-        for j, tecnica in enumerate(TECNICAS):
+        for j, tecnica in enumerate(tecnicas):
             ax = ejes[i, j]
             g = P[(P["modelo"] == modelo) & (P["tecnica"] == tecnica)]
             auc_macro = dibujar(ax, g, modelo, tecnica, filas, 6)

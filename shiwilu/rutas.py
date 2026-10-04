@@ -73,7 +73,10 @@ NMT_REPO_EXTERNO = TECNICAS_AUMENTO / "tesis_spa_jeb"
 
 # R4 + R6: evaluacion vigente (validacion cruzada, comparaciones, curvas ROC)
 EVALUACION            = OE2 / "evaluacion"
-EVALUACION_RESULTADOS = EVALUACION / "resultados"
+EVALUACION_RESULTADOS = EVALUACION / "resultados"                 # protocolo A: C elegido en un dev interno (12 experimentos)
+CV_INTERNA_RESULTADOS = EVALUACION_RESULTADOS / "cv_interna"      # protocolo B: C elegido por CV interna (K=5)
+DIAGNOSTICO_C         = EVALUACION / "diagnostico_c"              # sensibilidad del F1 al hiperparametro C
+DIAGNOSTICO_C_RESULTADOS = DIAGNOSTICO_C / "resultados"
 
 # Material historico (ya no se corre; se conserva como evidencia)
 HISTORICO              = OE2 / "historico"
@@ -82,6 +85,7 @@ SPLIT_FIJO_CSV         = SPLIT_UNICO / "split_fijo.csv"
 BASELINE_RESULTADOS    = SPLIT_UNICO / "resultados_baselines"
 TECNICAS_RESULTADOS    = SPLIT_UNICO / "resultados_tecnicas"
 ATAJOS_TEXTO_CRUDO     = HISTORICO / "atajos_texto_crudo"  # CV con puntuacion / mayusculas
+EN_LINEA_PROTOCOLO_DEV = HISTORICO / "en_linea_protocolo_dev" / "resultados"   # generacion en linea con dev (niveles 20-120)
 
 # --- Objetivo 3: caracterizacion de embeddings (R7-R8) --------------------
 OE3 = RAIZ / "oe3_caracterizacion_embeddings"
@@ -96,5 +100,5 @@ SINTESIS_RESULTADOS = OE4 / "resultados"
 
 def preparar_directorios() -> None:
     """Crea los directorios de salida que el pipeline necesita."""
-    for d in (INTERMEDIOS, LOGS, CORPUS_DIR, AUMENTO_SALIDA, EVALUACION_RESULTADOS):
+    for d in (INTERMEDIOS, LOGS, CORPUS_DIR, AUMENTO_SALIDA, EVALUACION_RESULTADOS, CV_INTERNA_RESULTADOS):
         d.mkdir(parents=True, exist_ok=True)

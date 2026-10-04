@@ -15,10 +15,10 @@ No modifica ningun resultado vigente: la corrida base escribe en una carpeta
 temporal que se descarta.
 
 Entrada: las mismas que validacion_cruzada.py.
-Salida:  evaluacion/resultados/sensibilidad_c.csv   (modelo, tecnica, C, f1_macro_agrupado)
+Salida:  evaluacion/diagnostico_c/resultados/sensibilidad_c.csv   (modelo, tecnica, C, f1_macro_agrupado)
 
 Uso (desde la raiz del repositorio; tarda unos 10-15 minutos en CPU):
-    python oe2_aumento_de_datos/evaluacion/sensibilidad_c.py
+    python oe2_aumento_de_datos/evaluacion/diagnostico_c/sensibilidad_c.py
 """
 
 from __future__ import annotations
@@ -34,14 +34,15 @@ from sklearn.exceptions import ConvergenceWarning
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))   # evaluacion/: validacion_cruzada*, _ruta_raiz
 import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 
 import validacion_cruzada as vc  # noqa: E402
 from shiwilu.clasificacion import MODELOS, N_FOLDS, SEMILLA, cargar_corpus, cargar_folds  # noqa: E402
-from shiwilu.rutas import EVALUACION_RESULTADOS  # noqa: E402
+from shiwilu.rutas import DIAGNOSTICO_C_RESULTADOS  # noqa: E402
 
 GRILLA_C = [0.01, 0.1, 1.0, 3.0, 10.0, 30.0, 100.0, 1000.0]
-SALIDA = EVALUACION_RESULTADOS / "sensibilidad_c.csv"
+SALIDA = DIAGNOSTICO_C_RESULTADOS / "sensibilidad_c.csv"
 
 
 def main() -> int:

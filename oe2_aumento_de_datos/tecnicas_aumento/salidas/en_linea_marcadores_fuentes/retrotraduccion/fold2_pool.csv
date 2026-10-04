@@ -1,0 +1,463 @@
+id_origen,espanol_original,espanol,intencion,shiwilu,fuente
+2,Correcto.,Cierto.,AFI,tekinchi,retrotraduccion
+5,Ya.,Sí.,AFI,tekinchi,retrotraduccion
+9,Seguro.,Por supuesto.,AFI,tekinchi,retrotraduccion
+10,Dale.,Vamos.,AFI,pa'awa',retrotraduccion
+11,Justo.,Así es.,AFI,nu'su' nuka'a,retrotraduccion
+12,Confirmado.,Confirmado,AFI,ta'ituler,retrotraduccion
+14,Aceptado.,Aceptada.,AFI,ta'ituler',retrotraduccion
+17,Así es.,Es verdad.,AFI,tekinchi nuka'a,retrotraduccion
+18,Así mismo.,Sí. - Seguro.,AFI,- Tekinchi,retrotraduccion
+20,Eso es.,Eso es todo.,AFI,nana iñer',retrotraduccion
+21,Eso mismo.,Es cierto.,AFI,tekinchi nuka'a,retrotraduccion
+23,Todo bien.,Bien.,AFI,mupalli,retrotraduccion
+26,Bien hecho.,¡Bien hecho!,AFI,¡mupalli!,retrotraduccion
+27,Claro que sí.,Claro que lo recuerdo.,AFI,tekinchichek lli'inutapalek,retrotraduccion
+28,Así nomás.,Sin más.,AFI,ma'pu'si'la,retrotraduccion
+29,Ya entendí.,Lo entiendo.,AFI,lachek'apalek,retrotraduccion
+30,Ya está.,Listo.,AFI,insekdiperpi,retrotraduccion
+31,Ya sé.,Lo sé.,AFI,ñinchitulek,retrotraduccion
+32,Todo correcto.,Ok,AFI,mudin,retrotraduccion
+33,Con gusto.,Afortunadamente.,AFI,musu',retrotraduccion
+34,Acepto.,Yo invito.,AFI,kua peklu'tulek,retrotraduccion
+35,"Confirmado, sí.",Confirmado.,AFI,ta'ituler',retrotraduccion
+36,"Sí, ya.","Sí, cierto.",AFI,tekinchi,retrotraduccion
+38,"Sí, exacto.",Sí exactamente.,AFI,tekinchi nuka'a,retrotraduccion
+40,"Sí, así es.",Es cierto. Me dijo que tenía un tema diferente.,AFI,tekinchi. itudeklli ali'la tema a'ñapalli.,retrotraduccion
+41,"Sí, entendido.","Sí, recibido.",AFI,tekdiper'ak,retrotraduccion
+46,"Sí, bien.","Sí, muy bien.",AFI,tekinchipa',retrotraduccion
+47,"Sí, obvio.","Sí, claro: ""Gracias """,AFI,tekinchi: yuspeinetchu,retrotraduccion
+49,"Sí, efectivamente.","Sí, desde luego.",AFI,tekinchi,retrotraduccion
+51,"Sí, acepto.",Sí.,AFI,tekinchi,retrotraduccion
+52,"Sí, ya entendí.","Si, Entiendo.",AFI,teklachek,retrotraduccion
+53,"Sí, así nomás.","- Sí, simplemente de esa manera.",AFI,"-ma'sha, nu'su' nu'su'.",retrotraduccion
+55,"Sí, con gusto.","Claro, encantados de conocerte.",AFI,tekinchichek musu' luwer'chimu.,retrotraduccion
+56,"Sí, ya sé.",Me gusta mucho pensar en las víctimas.,AFI,iyatulek a'pinta' lli'inutapa'dek'ek lli'inuta'kek.,retrotraduccion
+57,"Sí, muy bien.","Si, está bien.",AFI,"tekdi'pa, mupalli",retrotraduccion
+60,"Sí, eso mismo.","Sí, eso es.",AFI,tekinchi nuka'a,retrotraduccion
+61,"Sí, eso es.","Si, eso es. No tenemos nada más que escuchar.",AFI,"- ma'sha, nu'su' ma'pu'su' ñapallidek lauk'api'ñidek.",retrotraduccion
+62,"Sí, ya está.","Sí, eso es.",AFI,tekinchi nuka'a,retrotraduccion
+63,Es cierto.,Eso es correcto.,AFI,nanasa' ñapalli,retrotraduccion
+66,Así fue.,Es la verdad.,AFI,tekinchi nuka'a,retrotraduccion
+67,Así es nomás.,Por eso soy yo.,AFI,nu'amu kua nuka'ka,retrotraduccion
+68,Ya lo sé.,Lo sé.,AFI,ñinchitulek,retrotraduccion
+69,Ya lo entendí.,Ya entiendo.,AFI,ipa' lachek'apalek,retrotraduccion
+70,Ya lo hice.,"- No, ya Io conozco.",AFI,"- ma'sha, ipa' luwerchapalek.",retrotraduccion
+72,Ya cociné.,Ya he cocinado.,AFI,ipa' kalu'tulek,retrotraduccion
+74,Ya tosté.,He brindis,AFI,panwalalek,retrotraduccion
+75,Ya hervió.,Ya está cocido.,AFI,ipa' peksu' ñapalli,retrotraduccion
+76,La yuca está.,Ahí está la Y Salvadora.,AFI,nanek ñapalli ekkuanin.,retrotraduccion
+77,La chicha está.,He venido la chica.,AFI,wek'lek wila kuaper,retrotraduccion
+78,La leña está.,Allí están los residuos de madera.,AFI,nanek ñapallina' wa'danlalusa'.,retrotraduccion
+79,El agua está.,El agua esta aqui.,AFI,dek'la asek ñapalli,retrotraduccion
+81,La comida está.,La comida está aquí.,AFI,weran ñapalli asek,retrotraduccion
+82,El fuego está.,Aquí está el fuego.,AFI,asek ñapalli pen.,retrotraduccion
+83,La chacra está.,La chaCRa va por aquí.,AFI,nana da'wansu' ñapalli.,retrotraduccion
+84,El maíz está.,Aquí está.,AFI,asek' ñapalli,retrotraduccion
+86,Quedamos así.,Así somos así.,AFI,nu'su' nuka'kawa'.,retrotraduccion
+89,Tal cual.,Al igual.,AFI,nu'su',retrotraduccion
+90,Justo así.,Así de fácil.,AFI,nu'su' saka'dek,retrotraduccion
+91,De acuerdo.,Muy bien.,AFI,mu'chun,retrotraduccion
+93,Sé correr.,Yo te puedo esperar.,AFI,kua yennitulek wa'tentak,retrotraduccion
+94,Sé leer.,Sé leerlo.,AFI,ñinchitapalek lun'ak,retrotraduccion
+98,Es correcto.,- Así es.,AFI,- nu'su' nuka'a,retrotraduccion
+100,¡Incendio!,¡Fuego!,DES,¡pen!,retrotraduccion
+102,¡Socorro! ¡Auxilio!,¡Socorro!,DES,¡katu'pa'!,retrotraduccion
+103,¡Auxilio!,¡Socorro!,DES,¡katu'pa'!,retrotraduccion
+104,¡He ganado!,¡He derrotado!,DES,¡kana'tulek!,retrotraduccion
+105,"¡Oh, no! (masculino)","Oh, , no!",DES,¡ma'sha!,retrotraduccion
+106,"¡Oh, no! (femenino)","¡Oh, no!",DES,"¡ma'sha, ma'sha!",retrotraduccion
+107,¡Al ataque!,- Atentes.,DES,- inlli'ker',retrotraduccion
+108,¡Tengo!,Yo hago!,DES,kua nu'tulek,retrotraduccion
+109,Él corrió.,Se escapó.,DES,chi'yek'lli,retrotraduccion
+112,Perdí. (opuesto de ganar),- Que he perdido. - Por que si sabes,DES,- a'wer'apalek,retrotraduccion
+113,Tom saltó.,Venció Tom.,DES,kana'lli tom,retrotraduccion
+115,Tom pagará.,Tom me pagará esto.,DES,tom panwilek asu',retrotraduccion
+116,Somos hombres.,Estàn los hombres,DES,wanerlusa' ñapalli,retrotraduccion
+118,Nos divertimos.,Nos ha pasado bien.,DES,u'chimuwinek,retrotraduccion
+119,Nos reímos.,Nos rejimos.,DES,ñapallidek,retrotraduccion
+123,Lo queremos.,Lo nos queremos.,DES,luwantullidek,retrotraduccion
+125,Estamos ocupados.,Estoy ocupado.,DES,yen'nichi'nek,retrotraduccion
+131,Somos débiles.,Estamos débiles..,DES,saputek ñapallidek,retrotraduccion
+132,Cuenta conmigo.,Tengo toda la razón.,DES,iñer' musu' ñapalek,retrotraduccion
+134,Terminen esto.,Acaba eso,DES,a'ta'wanter nana,retrotraduccion
+135,Él envejeció.,-Está en una vejez.,DES,-kaserpi ñapalli.,retrotraduccion
+136,¡Ha venido!,¡Ahí está!,DES,¡nanek ñapalli!,retrotraduccion
+137,Tiene vino.,Él tuvo vino.,DES,nana vinu'ñi,retrotraduccion
+138,Es feliz.,Está feliz.,DES,musu' ñapalli,retrotraduccion
+139,Le gustó.,Le disfruté.,DES,sakek'tulek,retrotraduccion
+141,Está fingiendo comer.,Asumía que está comiendo.,DES,weranpi ka'apalli,retrotraduccion
+146,Estoy leseando.,Hablo.,DES,lunpalek,retrotraduccion
+147,Lo compré.,He comprado tú también.,DES,kenma mapa'lek'nta',retrotraduccion
+149,Puedo compartir.,Puedo compartirlo.,DES,yennitulek a'nañak,retrotraduccion
+150,Confesé.,He insistido.,DES,luwantulek,retrotraduccion
+155,Me enfadé.,me enfañé.,DES,yusu'lek,retrotraduccion
+156,Traigo noticias.,Tengo noticias. ¿Por qué?,DES,a'ñapalek news. ¿ma'ki'na?,retrotraduccion
+157,Tengo tiempo.,¡Tengo tiempo!¡Yeah won!,DES,¡wantulek! ¡a'cha kana'tulli!,retrotraduccion
+159,Te oí.,Sí te he escuchado.,DES,tekinchilek lauk'la,retrotraduccion
+160,Los conozco.,Sé cuándo se les da.,DES,ñinchitulek ipa'da'pi'na'.,retrotraduccion
+161,Vivo aquí.,Yo vivo aquí.,DES,kua asek nanpipalek,retrotraduccion
+162,La amaba.,- La quería mucho.,DES,luwantulli enpu'nipa',retrotraduccion
+163,Lo extrañaba.,lo extrañé.,DES,lu'wanek,retrotraduccion
+164,Debo esconderme.,- Tengo que me esconder.,DES,- yumu'a'kasu' ñapalli,retrotraduccion
+165,Los necesito.,"Yo se los uso, entonces.",DES,"kua luwantulek, ipa'linchi.",retrotraduccion
+169,Quiero más.,Me quedan más.,DES,a'pinta' llia'palek,retrotraduccion
+173,Me despidieron.,Me han despedido.,DES,usu'lliner'ku,retrotraduccion
+176,Estaba equivocado.,Me equivoqué.,DES,aper'su' ñapalek,retrotraduccion
+177,Soy finlandés.,¡Soy finés!,DES,¡mufin nuka'ka!,retrotraduccion
+181,Soy mujer.,Soy así. Yo soy una mujer.,DES,nu'su' nuka'ka kua ku'aper nuka'ka.,retrotraduccion
+182,Tengo curiosidad.,¿Qué sucede aquí? Tengo curiosidad.,DES,- ¿ma'pu'sa' asek nakulli? ñapalek?,retrotraduccion
+184,Estoy comprometida.,- Estoy decidido--.,DES,- ñapalek ñapalek...,retrotraduccion
+187,Estoy saludable.,Estoy sano. ¿Está seguro?,DES,mu'su' ñapalek. ¿tekinchi'cha?,retrotraduccion
+189,Me traicionaste.,Me engañaste.,DES,tumu'tulun,retrotraduccion
+190,Nos traicionaste.,Traicionar y hacer eso!,DES,"¡u'chimu'lek, nu'tulek!",retrotraduccion
+191,Nos engañaste.,Nos has echado a perder el tiempo.,DES,a'wer'dek'llidek muda'su',retrotraduccion
+192,Puedes entrar.,Puedes venir aquí.,DES,yennitula wencha'mak,retrotraduccion
+193,Puedes decírnoslo.,Puedes decirnos.,DES,yennitula winta'mudek,retrotraduccion
+194,Pareces triste.,Luces triste.,DES,we'inutusu' lli'tula,retrotraduccion
+195,Deberías descansar.,Debería descansar.,DES,neria'masu' ñapalli,retrotraduccion
+196,Deberían quedarse.,Deben permanecer.,DES,llia'a'masu' ñapalli,retrotraduccion
+198,Escaparon todos.,Escaparon de todos.,DES,chi'lek'llina' iñer',retrotraduccion
+199,Odia correr.,Él odia huir.,DES,nana luyuñi teka'su',retrotraduccion
+200,Bravo!,¡Bravo!,EMO,¡mupalli!,retrotraduccion
+201,Lo siento.,Perdona.,EMO,ta'ituler',retrotraduccion
+202,"Ay, no!","Ah, no!",EMO,¡ma'sha!,retrotraduccion
+203,Me alegra.,Estoy contento.,EMO,ñapalek sakeksu',retrotraduccion
+206,Como duele!,"¡ Cuánto me duele, Dios mió!",EMO,"¡enpu'ni iker'apalek, ¡Dios ma'nen!",retrotraduccion
+208,Me entristece.,Me pone triste.,EMO,we'inutusu' ñapalek,retrotraduccion
+209,Que lastima!,Eso es asqueroso.,EMO,nana u'chimuinchi nuka'a,retrotraduccion
+210,"Ay, que susto!",¡Habra un susto!,EMO,¡katek'ker'!,retrotraduccion
+211,Me da gusto.,Es bueno.,EMO,mulunsha nuka'a,retrotraduccion
+212,Que humillante!,Qué humillante...,EMO,empu'ni we'inutapa...,retrotraduccion
+213,Cuanto lo extraño!,Él tanto que le Extraño!,EMO,nana enpu'nipa' luwanpalek!,retrotraduccion
+215,Me fascina.,Es fascinante.,EMO,u'chimuinchi nuka'a,retrotraduccion
+216,Que suerte!,No tengo suerte!,EMO,¡lu'wanpi'nek!,retrotraduccion
+218,"Ay, pobrecito!","Oh, pobrecito.",EMO,"¡ma'sha, malli'wa!",retrotraduccion
+219,Me da miedo.,Me asusta.,EMO,imanantusu',retrotraduccion
+220,Que divertido!,Eso se parece mucho.,EMO,nana lli'apalli enpu'nipa',retrotraduccion
+221,Cuanto me duele!,¡Dole mucho!,EMO,¡enpu'ni ikerlli!,retrotraduccion
+222,"Ay, que feo!",¡Qué asco!,EMO,¡enpu'ni u'chimuinchipa'!,retrotraduccion
+223,Me emociona.,Eso es muy excitante.,EMO,nana u'chimuinpu' nuka'a,retrotraduccion
+224,Que horror!,¡Qué horror!,EMO,¡enpu'ni iker'ipa'!,retrotraduccion
+225,Como me entristece!,¡ ¡Qué triste resulta esto para mi !,EMO,¡embu'ni we'inutapa' asu' kualek!,retrotraduccion
+226,"Ay, que calor!",Esto está caliente!,EMO,¡asu' ñapalli!,retrotraduccion
+229,Cuanto me preocupa!,¡Qué preocupada me siento!,EMO,¡enpu'ni tekkichi'nek!,retrotraduccion
+230,"Ay, que frio!","Ah, ¡Qué frío!",EMO,¡enpu'ni sanek'ipa'!,retrotraduccion
+231,Me incomoda.,Estoy incómodo.,EMO,ñapalek iker'su',retrotraduccion
+232,Que orgullo!,¡Qué cosa!,EMO,¡empu'ni nuka'a!,retrotraduccion
+233,Como me asusta!,¡Como si me da miedo!,EMO,¡asu'lupa'su' ñapalek!,retrotraduccion
+234,"Ay, que rabia!","Oh, ¡qué ira...!",EMO,¡ma'nenpa' lli'ker'!,retrotraduccion
+235,Me avergüenza.,Me da vergüenza.,EMO,a'cha'itulek,retrotraduccion
+236,Que bonita chacra!,¡Muy buen chacra!,EMO,¡u'chimu nuka'a!,retrotraduccion
+237,Cuanto extrano al abuelo!,¡Extraño tanto a Abuelo!,EMO,¡a'mapu'ka amiku!,retrotraduccion
+238,"Ay, que pena!",Que lástima.,EMO,embu'ni we'inutusu',retrotraduccion
+239,Me angustia.,Todo desgraciadamente.,EMO,iñer' u'chimusha',retrotraduccion
+241,Como me duele el corazon!,Cómo me duele mi alma!,EMO,¡ma'pu'si'na ñapalek ñapalek!,retrotraduccion
+242,"Ay, que bonito!","Oh, que bien!",EMO,¡embu'ni u'chimu!,retrotraduccion
+243,Me desespera.,Estoy desesperado'.,EMO,ñapalek saka'tusu',retrotraduccion
+244,Cuanto me alegra verte!,¡Me alegro mucho de verte!,EMO,¡mapu'ni sakeksu' lli'kunta'ku!,retrotraduccion
+245,"Ay, que vergüenza!","Oh, qué pena!",EMO,¡embu'ni we'ipa'!,retrotraduccion
+246,Me conmueve.,"Esto me conmueve, te conmuevera.",EMO,"asu' tekmapu'ku, tekmapu'ken.",retrotraduccion
+247,Como me alegra la chicha!,Me alegro tanto de ser niña.,EMO,musu' sakeksu' ñapalek wilakuaper.,retrotraduccion
+248,"Ay, que pereza!",(Músico). ¡Vaya pereza!,EMO,¡enpu'ni wa'danpintek!,retrotraduccion
+250,Que interesante!,Es muy interesante.,EMO,u'chimuinpu' nuka'a,retrotraduccion
+251,Cuanto me duele la cabeza!,"¡Cuánto me duele la cabeza! (Rímido en ""Pedazo)",EMO,¡enpu'ni pumu'lek!,retrotraduccion
+252,"Ay, que rico!",¡Me alegro de tu madre...,EMO,¡musu'wa awaenlek...,retrotraduccion
+253,Me fastidia.,Eso me hace enojar.,EMO,nana nu'tulek,retrotraduccion
+254,Que aburrimiento!,Qué aburrimiento.,EMO,embu'ni we'nyusu',retrotraduccion
+256,"Ay, que lindo!",¡Eres muy bueno!,EMO,¡u'chimu nuka'ma!,retrotraduccion
+257,Me da asco.,A mí me asquea.,EMO,kua luyulek,retrotraduccion
+258,Cuanto me alegra el maiz!,¿Me alegra que les gusta el callo?,EMO,¿musu'cha a'cha a'cha a'cha a'cha a'cha a'cha a'cha?,retrotraduccion
+260,Me entusiasma.,Soy emotiva.,EMO,ku'la emoción ñapalek,retrotraduccion
+261,Que peligro!,¡Qué peligro!,EMO,¡enpu'ni llipu'ipa'!,retrotraduccion
+262,Como me alegra la cosecha!,Tengo el placer de realizar la siega!,EMO,¡a'cha sakeksu' ñapalek!,retrotraduccion
+263,"Ay, que torpeza!",Es una cagada.,EMO,ala'sa' ñapalli,retrotraduccion
+264,Me irrita.,"- Me irritan, querida.",EMO,"- yupa'lliner'ku, yu'na",retrotraduccion
+265,Cuanto extrano la chacra!,¡Cuánto existo con las Chacra!,EMO,¡enpu'ni ñapalek nuka'lusa'lek!,retrotraduccion
+266,"Ay, que tristeza tan grande!",Me refiero a una angustia.,EMO,nu'apalek ala'sa' iker'su'.,retrotraduccion
+268,Como me alegra la yuca!,Bendito estoy la yuca!,EMO,¡musu' nuka'ka nuka'ka!,retrotraduccion
+269,"Ay, que injusto!",¡Esto... no es justo!,EMO,¡ma'sha... ma'sha tekkichi'ñi!,retrotraduccion
+271,Cuanto extrano a mi madre!,¡Cuánto extraño a mi madre!,EMO,¡enpu'ni lu'wanek awawek!,retrotraduccion
+272,"Ay, que belleza!",¡Es una belleza!,EMO,¡u'chimusha nuka'a!,retrotraduccion
+274,Como me entristece la muerte!,"La muerte me entristece, por favor.",EMO,"kua we'inutusu' we'itulek, please",retrotraduccion
+275,"Ay, que maravilla!","¡Oh, maravilloso!",EMO,¡u'chimuinchi nuka'a!,retrotraduccion
+276,Me alegra el amanecer.,Me alegro de que nazca.,EMO,ñinchitulek nanasa'su',retrotraduccion
+277,Cuanto me alegra el shiwilu!,Qué bueno que me pongo al lado del sshiwilu.,EMO,¡mapu'si'na asu' shiwilu luwantulek!,retrotraduccion
+280,Gracias.,- Ya. Gracias.,EMO,- ya. yuspeinet'echun,retrotraduccion
+281,¡Qué encanto!,¡Que encanto!,EMO,¡enpu'ni mulunsha!,retrotraduccion
+282,¡Qué divertido!,Que divertida!,EMO,¡enpu'ni musu'pa'!,retrotraduccion
+283,¡Qué horror!,Fue increíble.,EMO,u'chimuinchi ñapawiñi,retrotraduccion
+286,¡Qué bonito!,- ¡Está bien!,EMO,¡mupalli!,retrotraduccion
+287,¡Qué curioso!,Pero me da risa...,EMO,iñer yamer'apalek...,retrotraduccion
+288,Qué raro.,Eso es raro.,EMO,nana nuka'a,retrotraduccion
+289,Me gustan.,Me gusta eso.,EMO,iyatulek nana,retrotraduccion
+290,¡Qué pesado!,Eso hace más bien alto!,EMO,nana u'chimuñi u'chimu!,retrotraduccion
+291,¡Qué horrible!,¡Qué horrible es...!,EMO,¡embu'ni u'chimu nuka'a!,retrotraduccion
+294,¡Qué listo!,Gracias a Dios que tienes razón.,EMO,yuspeine'pu'a'su' a'ña'masu'.,retrotraduccion
+295,¡Qué fiasco!,"¡Vaya fiasco! - Es fácil. Gracias, señor.",EMO,- ¡enpu'ni enpu'nipa'!,retrotraduccion
+296,¡Qué alivio!,¡ Qué alivio!,EMO,¡enpu'ni ñapalek!,retrotraduccion
+297,Qué malo.,Es terrible.,EMO,u'chimuinchi nuka'a,retrotraduccion
+298,¡Qué humillante!,Me humillaría que sea así! Muy hiriente !,EMO,¡a'mapu'tulek nu'ta'su'! ¡enpu'ni ikerlli!,retrotraduccion
+300,Nadie respondió.,Ninguno respondió.,NEG,ñiden na'pi'ñi,retrotraduccion
+302,Me niego.,No lo quiero.,NEG,ku'la luwantulek,retrotraduccion
+304,No sé.,No lo sé.,NEG,ñinchichi'nek,retrotraduccion
+306,Nadie llamó.,Pero nunca llamaron.,NEG,ku'la peklu'pi'ñina'.,retrotraduccion
+307,Nunca hablamos.,Nosotros nunca hablamos.,NEG,kuda ku'la lunpi'ñidek,retrotraduccion
+308,No pico.,"Yo no choque. Sí, claro.",NEG,kua ku'la pilli'tapi'nek.,retrotraduccion
+309,No sigo.,Ya no puedo seguirlo.,NEG,a'pinta' ñinchitulek tupi'nek.,retrotraduccion
+310,No entiendo.,Que no entiendo.,NEG,ñinchichi'nek,retrotraduccion
+312,Nadie gritó.,Nadie gritaba.,NEG,ñiden lamapu'ñi,retrotraduccion
+317,Jamás.,Nunca.,NEG,ku'la,retrotraduccion
+318,Sin agua.,No agua.,NEG,ku'la dek'ta',retrotraduccion
+319,Sin yuca.,No tengo anzuelo. No la casava.,NEG,ma'wi'ñi pu'si'nek. ñi a'pi'ñi.,retrotraduccion
+320,Sin fuego.,No disparar.,NEG,ya'pinta',retrotraduccion
+321,Sin leña.,No. - No hay leña.,NEG,- ma'sha ku'la nanpi'ñi.,retrotraduccion
+322,Sin chicha.,Nonno,NEG,papinku,retrotraduccion
+323,Sin maíz.,No maíz.,NEG,ma'nen ma'nen,retrotraduccion
+324,Sin camino.,¡No puede ser!,NEG,¡ma'nenchi'ñi!,retrotraduccion
+325,Sin peces.,No pescado.,NEG,samer'enchi'ñi,retrotraduccion
+330,Me cuesta.,Es duro para mí.,NEG,saka'dek'inpu' nuka'ka,retrotraduccion
+331,Me falta yuca.,Me estoy perdiendo 'Yacca.,NEG,a'wer'apalek 'yaacca.,retrotraduccion
+332,Nadie llega.,El otro no llega nadie.,NEG,ali'la ektu'pi'ñi ñi.,retrotraduccion
+335,Nadie pesca.,Nos tenemos que ir de pesca.,NEG,pur'awa'su' ñapalidek,retrotraduccion
+336,Nadie siembra.,No me la suba nadie.,NEG,ñi nu'wan'u ñiden.,retrotraduccion
+337,Nadie habla.,- Nadie habla.,NEG,- ñiden lu'chi'ñi,retrotraduccion
+338,Nadie muele.,Nadie crucifíca.,NEG,ñiden incipi'ñi,retrotraduccion
+339,Nadie tuesta.,Nada va bien de gente.,NEG,ñiden u'chimu nuka'a.,retrotraduccion
+342,Nunca llega.,Nunca viene. Vamos.,NEG,ñi uk'api'ñi. pa'awa',retrotraduccion
+343,Nunca siembra.,Nunca planta.,NEG,ku'la tera'pi'ñi,retrotraduccion
+347,Jamás enseña.,Nunca enseña.,NEG,ku'la a'lekchi'ñi,retrotraduccion
+348,Jamás mastica.,Nunca mas.,NEG,ku'la a'pinta',retrotraduccion
+349,Nunca toma chicha.,Él jamás bebió chihá.,NEG,nanpi'pi'ñi u'pi'ñi.,retrotraduccion
+350,Ya no hay.,No queda más.,NEG,ku'la a'pinta' ñapalli,retrotraduccion
+351,Ya se fue.,Él se ha ido.,NEG,nana pa'lli,retrotraduccion
+352,Se acabó.,Ha terminado.,NEG,ta'wan'tulli,retrotraduccion
+353,Se perdió.,Ha perdido.,NEG,kana'lli,retrotraduccion
+354,Ya no pesca.,Se han roto los peces. No hago peces más.,NEG,samerlusa' nu'tullina'. ñi samer a'pinta' nu'tulek.,retrotraduccion
+355,Ya no queda yuca.,Ya no habrá ni ni un kilo.,NEG,ñi a'pinta' a'pinta' ala'sa' kilo.,retrotraduccion
+356,Ya no siembra.,Él ya no está ahí.,NEG,nana ñapi'ñi nanek,retrotraduccion
+357,Ya no viene.,Él ya no viene más.,NEG,nana ku'la unpi'ñi.,retrotraduccion
+358,Se acabó el maíz.,El maíz ha acabado.,NEG,wa'dan a'ta'wantulli,retrotraduccion
+359,Ya no llueve.,No llovía más,NEG,ku'la u'lanñi,retrotraduccion
+360,Ya se perdió.,El ya está perdido.,NEG,ipa' wer'su' ñapalli,retrotraduccion
+361,Se acabó la chicha.,Sólo esa es toda.,NEG,nanasa' iñer' nuka'a,retrotraduccion
+366,No hay agua.,- No hay agua.,NEG,- ku'la dek'i'ñi,retrotraduccion
+368,No hay comida.,No hay alimentación.,NEG,ku'la ka'api'ñi,retrotraduccion
+370,No llego.,No lo puedo conseguir.,NEG,ñi ñinchitapalek a'kawinek,retrotraduccion
+371,No voy.,No quiero ir.,NEG,ku'la pa'api'nek,retrotraduccion
+372,No cocino.,No cocino como una hembra.,NEG,ku'la a'ka'pi'ñi ku'aper'su',retrotraduccion
+374,No siembro.,"- No lo hago, se siembran.",NEG,"- ñi nu'tapi'nek, tera'llina'.",retrotraduccion
+375,No pesco hoy.,Hoy no me encuentro.,NEG,ipa'la ku'la kananpi'nek,retrotraduccion
+376,No tomo.,yo no bebo.,NEG,kua ku'la u'api'nek,retrotraduccion
+377,No pudo.,Puede no volver a eso.,NEG,ñi enpu'ni adanta'pi'ñi nana,retrotraduccion
+378,Sin olla.,No hay marihuana.,NEG,ku'la nanpi'ñi marihuana,retrotraduccion
+385,Me duele la cabeza.,La mía duele.,NEG,kui'na ikerlli,retrotraduccion
+387,Me niego a ir.,No entiendo.,NEG,ñinchichi'nek,retrotraduccion
+388,Nadie cuida.,Nadie los cuida.,NEG,ñiden luwer'chi'ñi,retrotraduccion
+390,Nadie recoge.,Alguien recoge.,NEG,la'la' pak'tulli,retrotraduccion
+392,Nadie cocina.,Nadie hace cocinar.,NEG,ñiden kalu'pi'ñi,retrotraduccion
+393,Nadie cosecha.,"Los cultivos no son para nadie, de la colección de los Apiotes.",NEG,"cultu'lusa' ñi ñi ñi ñi ñi ñi ñi ma'i'ñina', ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'i'na ma'na ma'i'na ma'i'na ma ma'i'na ma'na ma'i'na ma ma'i'na ma ma'i'na ma ma'i'na ma ma",retrotraduccion
+394,Nadie difunde.,Nadie se extiende.,NEG,ñiden nu'chi'ñi,retrotraduccion
+395,Nunca cosecho.,Yo nunca cosechara la comida.,NEG,kua ku'la pek'api'nek weran,retrotraduccion
+396,Nunca curo.,Nunca la mato.,NEG,ku'la pinapi'pi'nek,retrotraduccion
+398,Nunca aprendo.,No aprendo.,NEG,ñinchitapi'nek,retrotraduccion
+399,Jamás trabaja.,Nunca trabaja.,NEG,ku'la saka'tapi'ñi,retrotraduccion
+400,¿Entendiste?,Sí. ¿Entendido?,PRG,¿nu'ta? ¿lachek?,retrotraduccion
+404,¿Quién ganó?,¿Cómo quién venció?,PRG,¿ma'pu'sin ma'nen kana'tulli?,retrotraduccion
+407,¿Es alto? (estatura - masculino),¿ Es alto?,PRG,¿nakusu' nuka'a?,retrotraduccion
+408,¿Es alto? (estatura - femenino),¿Es alto? (Altura - hembra),PRG,¿shipen a'cha?,retrotraduccion
+409,¿Es alto? (muy arriba),¿Está alta? (Alto sobre),PRG,¿wanpi ñapalli?,retrotraduccion
+410,¿Es gratis?,- ¿Esta libre?,PRG,¿inapi ñapala?,retrotraduccion
+411,¿Está bueno?,¿Es bueno?,PRG,¿mupalli?,retrotraduccion
+412,¿Es acá?,Esto es todo?,PRG,¿asui'na?,retrotraduccion
+413,¿Aquí?,- Sí - Aquí'.,PRG,- ma'sha - asek'.,retrotraduccion
+414,¿Está aquí?,¿Está él aquí?,PRG,¿asek a'cha?,retrotraduccion
+415,¿Es seguro?,¿Se siente seguro? Sí.,PRG,¿tekinchi'su' ñapalli?,retrotraduccion
+417,¿Es ese?,- Es todo?,PRG,- ¿iñin'cha?,retrotraduccion
+418,¿Es así?,¿En serio?,PRG,¿tekinchi?,retrotraduccion
+419,¿Es este?,¿ESTOS son?,PRG,¿kenmama'cha?,retrotraduccion
+424,¿Quién gritó?,¿Quién llamó?,PRG,¿den peklu'tulli?,retrotraduccion
+425,¿Llamaste?,¿Me has llamado?,PRG,¿peklu'tula?,retrotraduccion
+426,¿Hemos terminado?,¿Habéis acabado?,PRG,¿ta'wantulama'?,retrotraduccion
+427,¿Estás loco?,¿Estás loca?,PRG,¿wa'danpindek ñapala?,retrotraduccion
+429,¿Eres nuevo?,¿Eres nueva?,PRG,¿ñapala'sa'?,retrotraduccion
+430,¿Puedo comenzar?,¿Puedo empezar ya?,PRG,¿yennitulek tenmiansu'ak ipa'?,retrotraduccion
+432,¿Podemos conversar?,"Entonces, ¿ podemos hablar?",PRG,¿nu'su' ¿yennitulekwa' lun'ak?,retrotraduccion
+433,¿Ganaste?,Ha ganado?,PRG,¿kana'tulli?,retrotraduccion
+434,¿Juegas boliche?,"Es el mundo, tu juegas bolos, ¿no?",PRG,"mundu' nuka'a, kenma intekllitapala pallusa', ¿ma'nen?",retrotraduccion
+435,¿Ha venido?,¿Sí ha venido?,PRG,¿uk'lli?,retrotraduccion
+436,¿Para llevar?,¿De ir?,PRG,¿paker'?,retrotraduccion
+437,¿Está ventoso?,¿Tiene viento?,PRG,¿wa'tanpalli?,retrotraduccion
+438,¿Es suyo?,- ¿De verdad es ése?,PRG,- ¿tekinchi'na nana?,retrotraduccion
+439,¿Es todo?,¿Ya está?,PRG,¿ipa' ñapalli?,retrotraduccion
+440,¿Estoy invitado?,? Estoy invitado?,PRG,¿peklu'tusu' ñapalek?,retrotraduccion
+441,¿Nada nuevo?,- nada nuevo? -,PRG,- ¿ma'nen'upi?,retrotraduccion
+443,¿Estás muerto?,"¡Sí, está muerto!",PRG,"¡a'ka, chiminpu'lli!",retrotraduccion
+444,¿Eres sordo?,¿ Estás sordo? ¡Estás más sordo!,PRG,¿luwek'su' ñapala? ¡luwek'su' ñapala!,retrotraduccion
+445,¿Estás libre?,¿Está libre?,PRG,¿inapi ñapala?,retrotraduccion
+446,¿Estás lleno?,Que has superado los cinco,PRG,naka'lli katu'deklusa',retrotraduccion
+448,¿Estás perdido?,¿Te has perdido?,PRG,¿wer'su' ñapala?,retrotraduccion
+450,¿Está segura?,- Estoy seguro.,PRG,ñapalek ñapalek,retrotraduccion
+451,¿Está seguro?,¿Estás segura?,PRG,¿tekinchi'cha' ñapala?,retrotraduccion
+452,¿Están seguros?,¿Estás segura?,PRG,¿tekinchi'cha' ñapala?,retrotraduccion
+455,¿Vino Tom?,¿Sí? ¿Ha vuelto Tom?,PRG,¿tekin? ¿tom adencha'lli?,retrotraduccion
+458,¿Firmaste?,Fuíste?,PRG,¿pa'tula?,retrotraduccion
+459,¿Firmaron?,¿Firmaron él?,PRG,¿llia'tullina' nana?,retrotraduccion
+460,¿Luzco bien?,¿Que si me veo bien?,PRG,¿ma'nen lli'apalek musu'?,retrotraduccion
+462,¿Fumas?,fuma?,PRG,¿u'wa'ta?,retrotraduccion
+463,¿Usted ronca?,Roncaste?,PRG,¿luwer'chu?,retrotraduccion
+464,¿Tú roncas?,¿ Roncaste?,PRG,¿lumelu'tula?,retrotraduccion
+465,¿Duele?,¿Dolerá?,PRG,¿ikerlli?,retrotraduccion
+466,¿Está roto?,"- Sí, pero estaba rota.",PRG,- tekinchi ñapawinek.,retrotraduccion
+468,¿Puedo probármelo?,¿Puedo PRUEVÉDALO?,PRG,¿yennitulek lli'dek'ak?,retrotraduccion
+470,¿Me oíste?,"- ¿Qué quieres decir, doctor?",PRG,"- ¿ma'nen'cha lli'tula, doktoru?",retrotraduccion
+471,¿Te gustó?,- ¿Te gustó?,PRG,- ¿iyatechu?,retrotraduccion
+472,¿Les gustó?,"""¿Le ha ido bien?""",PRG,¿musu' ñapalli?,retrotraduccion
+473,¿Me amabas?,-¿Me amaba usted? .,PRG,- ¿luwantulun kenma?,retrotraduccion
+475,¿Me extrañaste?,¿Me miraste por faltas?,PRG,¿llia'lun?,retrotraduccion
+476,¿Comés carne?,- ¿Tienes carne?,PRG,- ¿luwer'wanpala?,retrotraduccion
+477,¿Está mal?,-¿Está mal?,PRG,- ¿musu' ñapalli?,retrotraduccion
+478,¿Tienes uno?,¿Tienes un auto?,PRG,¿a'ñapala ala'sa'?,retrotraduccion
+481,¿Le conoce?,¿Lo conoces?,PRG,¿luwer'chapala?,retrotraduccion
+482,¿Lo recuerdas?,¿Recuerdas?,PRG,¿lli'inutapala?,retrotraduccion
+483,¿Tú crees?,¿Y piensa usted?,PRG,¿kenma lli'inupala?,retrotraduccion
+484,¿Le quieres?,- ¿Lo amas?,PRG,- ¿luwantulun?,retrotraduccion
+485,¿Me conoce?,Dime la cara.,PRG,wintu'u musu',retrotraduccion
+486,¿Cómo terminará?,Qué acaba de pasar?,PRG,¿ma'nen'a'cha nakulli?,retrotraduccion
+487,¿Es maestro?,Es el profesor?,PRG,¿a'lektutek'a'cha?,retrotraduccion
+488,¿Respira?,Está respirandos?,PRG,¿nerapalli?,retrotraduccion
+489,¿Está satisfecho?,Estás satisfecha?,PRG,¿musu' ñapala?,retrotraduccion
+490,¿Es venenoso?,"¿Es tóxicos, de pronto?",PRG,"¿teksik a'cha, u'chimu?",retrotraduccion
+491,¿Estabas llorando?,¿Estuvo llorando?,PRG,¿welliek'apawina?,retrotraduccion
+492,¿Qué dijo?,¿Qué te dijo?,PRG,¿ma'nen itulli?,retrotraduccion
+493,¿Qué hiciste?,¿Qué has hecho?,PRG,¿ma'pu'la nu'tula?,retrotraduccion
+494,¿Qué falta?,¿Qué es lo que falta?,PRG,¿ma'nen luwanpalli?,retrotraduccion
+495,¿Cuándo acabó?,¿Cuándo se terminó?,PRG,¿enpi'ta'wantulli?,retrotraduccion
+497,¿Quien ayudó?,¿Quién ayudó?,PRG,¿den katu'pa'tulli?,retrotraduccion
+500,Ve.,Continúen.,REQUEST,tupiter',retrotraduccion
+502,¡Para!,¡Alto!,REQUEST,¡wanerker'!,retrotraduccion
+504,Esperen.,Espere...,REQUEST,wa'tenker',retrotraduccion
+505,Sonríe.,Sonria,REQUEST,yamerladalli,retrotraduccion
+506,Sonrían.,Soníd.,REQUEST,linser'ker',retrotraduccion
+507,Levanta. (un objeto),Levantes. (un objeto),REQUEST,usanker',retrotraduccion
+510,Escucha.,¡Oye!,REQUEST,¡laweku'!,retrotraduccion
+513,Entra.,Adelante.,REQUEST,da'encher',retrotraduccion
+516,Déjalo.,- Déjalo.,REQUEST,- ta'ituler',retrotraduccion
+518,Vigílame.,Cuídame...,REQUEST,luwekter'u,retrotraduccion
+519,Obsérvame.,- ¿Y eso? Sí.,REQUEST,- ¿ma'nen? a'cha.,retrotraduccion
+520,Obsérvalos.,Vigílalos.,REQUEST,lli'ker',retrotraduccion
+523,No mientas.,Mentiría.,REQUEST,tumu'chek,retrotraduccion
+525,Esperen aquí.,Espera aqui.,REQUEST,wa'tenker' asek,retrotraduccion
+526,¡Sé cuidadoso!,Ten ojo.,REQUEST,lli'ker',retrotraduccion
+529,Trae vino.,B suyos y bébanlo.,REQUEST,b kenmapu'lusa' u'ku'ku'.,retrotraduccion
+530,Lleva esto.,Cógelo. Vuelva.,REQUEST,pilli'ter',retrotraduccion
+532,Ven temprano.,Es hora de llegar rápido.,REQUEST,wek'a'lli wiuksu' ektu'ker'ka,retrotraduccion
+533,No esperes.,No espere.,REQUEST,ya'tenchi'ta,retrotraduccion
+534,No grites.,No llores.,REQUEST,yawellektama',retrotraduccion
+535,Mira esto.,Mire esto.,REQUEST,lli'ker' asu',retrotraduccion
+538,Especifica más.,especifíquelas más a cada uno.,REQUEST,a'pinta' lli'ker' iñer',retrotraduccion
+539,¿Puedes ver?,¿Puedes verlo?,REQUEST,¿yennitula lli'a'mak?,retrotraduccion
+541,¿Puede hacerlo?,¿Puedes hacerlo?,REQUEST,¿yennitula nu'ta'mak?,retrotraduccion
+545,¿Puedes andar?,¿Puedes andar? Ven.,REQUEST,¿yennitula dekkunta'a'mak? wencher',retrotraduccion
+546,¿Pueden andar?,¿Puedes ir a caminar?,REQUEST,¿yennitula dekkunta'mak?,retrotraduccion
+547,Apóyame.,Resistan conmigo.,REQUEST,wanerku' kualek,retrotraduccion
+548,Apóyanos.,Respalden nuestra historia.,REQUEST,luwerku' ler'kenmu'wa',retrotraduccion
+549,Tráelo aquí.,Vengan a llevarlo. ¡Desaparece!,REQUEST,¡wencher' kencha'ku'! ¡werker'!,retrotraduccion
+550,¡Llámame después!,Llámeme después!,REQUEST,¡peklu'u nanekla!,retrotraduccion
+551,¿Puedes dormir?,¿Supiste?,REQUEST,¿pilli'tula?,retrotraduccion
+552,Venga mañana.,Vengan mañana.,REQUEST,wencher' eklli,retrotraduccion
+553,Hazlo rápidamente.,Hazlo rápido.,REQUEST,wiuksu' nu'ter',retrotraduccion
+554,Hazlo conmigo.,"Adelante, yo te llevaré",REQUEST,da'encher' kua ekpekchek,retrotraduccion
+557,Dame algunos.,Dámelo.,REQUEST,enka'u,retrotraduccion
+558,Deme esos.,Dámelas.,REQUEST,enka'u,retrotraduccion
+559,Espera ahí.,Unas cuantas semanas. Espera aquí.,REQUEST,enpu'nipu' simana'lusa'. wa'tenker' asek,retrotraduccion
+560,Guarda eso.,- ¿Qué quiere decir con la cara gorda? ¡Sal y tira esto todo!,REQUEST,- ¿ma'nen a'cha? ¡ yunsu'n a'pinta' asu'!,retrotraduccion
+561,Hazlo venir.,Hazme que venga.,REQUEST,a'wencher'u,retrotraduccion
+562,Espera allí.,Espera ahí.,REQUEST,nanek watenker',retrotraduccion
+564,Déjame probarlo.,A mi me toca.,REQUEST,kua a'pinta'lek,retrotraduccion
+565,Hagamos más.,¡Vamos a pedir.,REQUEST,¡enchuku' pekka'wa'!,retrotraduccion
+566,Hagamos eso.,Hagámoslo.,REQUEST,nu'tawa',retrotraduccion
+567,Comamos fuera.,Vamos a comer fuera.,REQUEST,adipi ka'awa',retrotraduccion
+568,¿Puedes levantarte?,Ven.,REQUEST,wencher',retrotraduccion
+570,No forcejees.,No lucharé.,REQUEST,ku'la idenmechi'nek,retrotraduccion
+571,Necesito respuestas.,Y creo que necesito una respuesta.,REQUEST,luwantulek a'pinta' luwantulek,retrotraduccion
+573,Necesito trabajar.,Necesito trabajar ...,REQUEST,luwantulek saka'tak,retrotraduccion
+574,No funcionó.,Así no sucedió.,REQUEST,nu'su' ñi'ñi,retrotraduccion
+575,Olvídalo ya.,"Olvídalo ya. Está todo olvidado, señora.",REQUEST,"ipa' pinaner'ker' iñer' pinaner'lli, senñula'.",retrotraduccion
+576,Déjame irme.,Yo creo .,REQUEST,kua latekapalek,retrotraduccion
+578,Siga intentando.,Sigue intentándolo.,REQUEST,intekler'i'la,retrotraduccion
+580,¡Déjame sola!,¡Déjeme en paz!,REQUEST,¡ta'itula'u ta'itula'u!,retrotraduccion
+581,Déjame explicar.,¡Déjame explicarlo...!,REQUEST,¡ta'itula'u wintechek!,retrotraduccion
+583,Déjalos pelear.,Déjenlos luchar.,REQUEST,ta'itula'ku' idenma',retrotraduccion
+584,Comamos aquí.,Vamos a comer aquí,REQUEST,weranwa' asek,retrotraduccion
+587,¿Pueden vernos?,¿Puede vernos?,REQUEST,¿yennitula lli'a'mudek?,retrotraduccion
+588,¿Puedes encontrarlo?,Usted le pueden ir.,REQUEST,kenmama' pa'a'masu' pa'a'masu',retrotraduccion
+589,¿Puedes oírme?,- ¿Puedes oírme?,REQUEST,¿yennitula lauk'a'muk?,retrotraduccion
+592,¿Pueden ayudarme?,¿Me puedes ayudar?,REQUEST,¿yennitula katu'pa'a'muk?,retrotraduccion
+593,¿Puedes abrirlo?,Pueden abrirla?,REQUEST,¿yennitulama' ek'ker'chuna'?,retrotraduccion
+594,¿Puedes mostrarme?,¿Puedes hacermelas demostrar?,REQUEST,¿yennitula a'lli'a'muk?,retrotraduccion
+596,Anoten esto.,Anote esto.,REQUEST,llinser'ker' asu',retrotraduccion
+597,Respira normal.,Respira bien.,REQUEST,neriker' musu',retrotraduccion
+598,Sigue cavando.,Sigue estudiando.,REQUEST,ñapalli ñinchiter',retrotraduccion
+599,¡Contrólate!,¡Que te contengas!,REQUEST,¡mansu'ta!,retrotraduccion
+600,¡Feliz Navidad!,feliz de Navidad!,SAL,¡u'chimu nata'su'!,retrotraduccion
+601,Hola.,Oye.,SAL,lli'ker',retrotraduccion
+602,¡Hasta luego!,¡Te veré más tarde!,SAL,¡pilli'chen!,retrotraduccion
+603,¡Chau!,¡Chao!,SAL,¡pilli!,retrotraduccion
+604,Nos vemos.,Nos vemos. ¿Qué pasa?,SAL,lli'ater'ku. ¿ma'nen'cha?,retrotraduccion
+609,Buenas.,Hola. - Hola.,SAL,- lli'tau,retrotraduccion
+612,¡Feliz Pascua!,! ¡Feliz Pascua!,SAL,¡musu' paskua'!,retrotraduccion
+617,"Buenos días, señora.","Buenos días, señorita.",SAL,"muuklli, wilalun",retrotraduccion
+618,"Buenas tardes, abuelo.",Buenas tardes abuelo.,SAL,musu' dasu' papinku,retrotraduccion
+619,"Hola, abuelita.","Mi abuelita, váyo:",SAL,"amishawekkek, pa'ak:",retrotraduccion
+623,"Chau, mamá.","Adiós, papá.",SAL,"pantekchek, tata",retrotraduccion
+627,Que descanse.,Descansa.,SAL,neriker',retrotraduccion
+628,Que descansen.,Déjenlo descansar.,SAL,ta'itula'u neria',retrotraduccion
+629,Que amanezca bien.,"Buenos días, señores.",SAL,"muuklli, señullusa'",retrotraduccion
+630,Buen día.,Buenos noches.,SAL,muder'kawa,retrotraduccion
+632,Hasta pronto.,Te veo pronto.,SAL,lli'e'chen ipia'la,retrotraduccion
+634,"Hola, señora.","Hola, señorita.",SAL,"lli'taa, wilalun",retrotraduccion
+635,Que te vaya bien.,Pásalo bien.,SAL,musu' iker',retrotraduccion
+636,Que les vaya bien.,Pasala bien.,SAL,musu' musu',retrotraduccion
+637,Pase usted.,Entra tú mismo.,SAL,da'encher' kenma,retrotraduccion
+638,"Pasen, por favor.","Entren, por favor.",SAL,da'encha'ku' ta'tuna',retrotraduccion
+639,"Buenas, hermanas.","Buenos días, hermanas.",SAL,"muuklla, sha'wa'lusa'",retrotraduccion
+640,"Hola, hijos.","¡Hola, señores míos!",SAL,"¡u'cha, yuyu'lusa'!",retrotraduccion
+643,"Chau, hermano.","- Adiós, hermano. - Hola.",SAL,"- pantekchek, yalli'sha",retrotraduccion
+644,"Chau, abuelos.",Adiós.,SAL,pantekchek,retrotraduccion
+646,Hasta el anochecer.,Hasta que viniese la tarde.,SAL,uklli er'wa.,retrotraduccion
+647,Que amanezcas bien.,Qué tenga una buena salud.,SAL,u'chimuinpu'su'.,retrotraduccion
+648,Que amanezcan bien.,Que tengan algunos buenos dígesimos d eIs?,SAL,¿a'ñapalli nu'unta' mukuntukwa' itudekllima?,retrotraduccion
+649,Nos vemos después.,Hasta luego.,SAL,pantek'chek,retrotraduccion
+650,"Hola, vecina.",Hola.,SAL,lli'taa,retrotraduccion
+652,Hola de nuevo.,Buenos tiempos.,SAL,mukankanlusa',retrotraduccion
+653,"Chau, vecina.","Adiós, vecina.",SAL,"pantekchek, wa'danpi",retrotraduccion
+654,"Chau, señora.",Chao señora.,SAL,senñula.,retrotraduccion
+655,Que te cuides.,Cuídate muchas veces.,SAL,inlli'ker' wapu'lusa,retrotraduccion
+656,Cuídense.,Cuidado.,SAL,inlli'ker',retrotraduccion
+658,Que se cuide.,Yo me encargaré de él.,SAL,kua lli'tulek nana,retrotraduccion
+659,Hasta el rato.,Hasta luego.,SAL,pantek'chek,retrotraduccion
+660,Nos vemos al rato.,¡Los veo después!,SAL,¡lanerku' ipa'linchi!,retrotraduccion
+662,"Hasta luego, madre.",Adiós madre.,SAL,pantekchek awa',retrotraduccion
+665,"Adiós, abuelita.","Adiós, Abuela.",SAL,"pantekchek, amisha",retrotraduccion
+668,"Adiós, vecina.","Chau, vecino.",SAL,"enpu'ni, wa'ncha.",retrotraduccion
+669,Que bien llegaste.,- Eres muy...,SAL,- enpu'ni...,retrotraduccion
+670,Bienvenida al pueblo.,Bienvenidos al poblado.,SAL,muwencha'ku' ñinanlu',retrotraduccion
+671,Bienvenido al pueblo.,Bienvenido al pueblo--,SAL,muwencha'ku' ñinanlu' -,retrotraduccion
+672,Bienvenidos al pueblo.,bienvenidas al pueblo.,SAL,muwencha'ku' ñinanlu',retrotraduccion
+673,Bienvenidos a Jeberos.,Bienvenida a Jeberos.,SAL,muwencha'ker' shiwilu,retrotraduccion
+676,Bienvenidos a casa.,Bienvenido.,SAL,muwencha'ker,retrotraduccion
+678,"Llegaste, bien.","Ya viniste, de acuerdo.",SAL,"ipa' wek'la, uk'apila.",retrotraduccion
+679,Ya llegaste.,Ya estáis acá.,SAL,ipa' asek ñapalama'.,retrotraduccion
+682,"Chau, nos vemos.",Adiós.,SAL,pantekchek,retrotraduccion
+684,Ya nos vamos.,Los dos saldremos.,SAL,kenmu'wa' yunsu'terwa',retrotraduccion
+688,Que estén bien.,Bueno pónganse uno.,SAL,ipa'la aku'ku' ala'sa',retrotraduccion
+691,"Hola, viuda.","Viuda, hola.",SAL,"wek'wa, lli'au",retrotraduccion
+692,"Buenos días, abuelas.",Buenos días abuelas .,SAL,muuklli amisha,retrotraduccion
+693,"Buenas noches, hermana.","¡Buenas noches, Hermana... - Buenos días!",SAL,"- ¡pilli'chek, sha'sha... ¡pilli'chek!",retrotraduccion
+694,"Buenas noches, madre.","Buenas noches, mamá.",SAL,muder'ka awa',retrotraduccion
+695,"Buenas noches, padre.","Buenas noches, papá.",SAL,muder'ka tata,retrotraduccion
+696,"Buenas noches, hijos.","Adiós, chicos.",SAL,pantekchek wilalusa',retrotraduccion
+697,"Buenas noches, abuelita.","Buenas noches, abuela.",SAL,muder'ka amisha,retrotraduccion
+698,Hasta la noche.,Me dirijo a la estación.,SAL,pa'echek estación,retrotraduccion
+699,Que bien te veo.,Nos vemos bien.,SAL,lli'apalek musu',retrotraduccion
