@@ -129,8 +129,12 @@ Limitaciones (no invalidan el resultado, pero conviene declararlas):
     a Retrotraducción y, en menor medida, a Mixup, pero **no frente a Generate-then-Refine**:
     con `C` fijo son indistinguibles.
 - **Generate-then-Refine aporta pocos sintéticos y muy desbalanceados** (~80 por fold,
-  frente a ~560 reales, ~15%): el filtro de marcador deja REQUEST con 1-2 oraciones por
-  fold y DES y SAL con ~20. Mixup añade 100% del pool y Retrotraducción ~85% (antes de
+  frente a ~560 reales, ~15%): con el filtro de marcador original (cadenas literales como
+  `-ker'/-e'r/-r'` que nunca aparecen en una oración) REQUEST recibía 1-2 oraciones por fold y
+  DES y SAL ~20. Con el filtro corregido a los marcadores que las fuentes afirman explícitamente
+  (`analisis_intrinseco/marcadores_fuentes.csv`) REQUEST sube a ~12 y NEG a ~19, pero AFI y EMO
+  bajan (se dejan de aceptar `i'na`, `-sa'` y coincidencias por subcadena), y el F1 no cambia de
+  forma distinguible (ver `tecnicas_aumento/README.md`). Mixup añade 100% del pool y Retrotraducción ~85% (antes de
   los filtros), así que las tres técnicas perturban el entrenamiento en grados muy distintos.
 - **Patrones candidatos de R5.** Los patrones estadísticos que se le pasan a Claude en
   Generate-then-Refine se calcularon con el corpus completo (fuga débil y agregada;

@@ -52,6 +52,16 @@ necesario para gráficos y curvas ROC:
 
 (`<TAG>` = `en_linea_<técnica>_<etiqueta>`; en Mixup, una por semilla.) En una corrida parcial (`--modelos` o `--folds`) los CSV traen solo la técnica corrida.
 
+**Más datos sintéticos (niveles de volumen).** Hoy el aporte sintético medio es: Mixup 100% del pool real, Retrotraducción ~85% y Generate-then-Refine ~17%
+(~95 aprobadas por etapa). `validacion_cruzada_en_linea.py` permite aumentarlo sin repetir lo ya generado:
+- `--cantidad N` (Generate-then-Refine): oraciones por categoría y etapa, en lotes de 20 (una llamada por lote, con la ventana de ejemplos few-shot rotada).
+  `fold<N>_<etapa>.csv` es el lote 0 (el de siempre) y `fold<N>_<etapa>_l<j>.csv` los siguientes; se reutilizan de la cache y solo se piden los que faltan. Se
+  descartan las repetidas y las copias de oraciones reales. Aprox.: 40 → ~34% del pool, 80 → ~68%, 120 → ~100%.
+- `--multiplicador K` (Retrotraducción): K paráfrasis por oración (`fold<N>_pool.csv` y `fold<N>_pool_s<j>.csv`, con otra semilla del muestreo). K = 2 → ~170%.
+  No se recomienda subir más sin antes filtrar la calidad de las paráfrasis.
+- Cada corrida guarda además `volumen_sintetico_<TAG>.csv` (sintéticos usados por fold y etapa, y su % respecto de las oraciones reales).
+Los cuadernos de `colab/` recorren varios niveles y entregan **un solo `.zip` por técnica** con lo generado y los resultados de todos los niveles.
+
 Lo generado se guarda en una cache por (técnica, fold, etapa) —`salidas/en_linea/<técnica>/fold<N>_{core,pool}.csv`; en Colab, en Drive—, así que si
 se corta la corrida o se repite, se reutiliza en vez de volver a gastar tokens o GPU. Los resultados se guardan con la etiqueta `*_en_linea_<técnica>_<etiqueta>`
 y no pisan los vigentes; los cuadernos los comparan con `sin_aumento` y con lo vigente mediante diferencias pareadas con IC95%.
@@ -240,23 +250,43 @@ ninguna de estas diferencias es concluyente con ~99 oraciones de prueba).
 shiwilu para una categoría de intención, condicionado por:
 - la descripción de la categoría (`shiwilu/taxonomia.py`),
 - ejemplos reales del corpus de esa categoría,
-- los marcadores morfosintácticos ya **validados** contra la literatura
-  lingüística en el análisis intrínseco
-  (`oe2_aumento_de_datos/analisis_intrinseco/resultados/tablas/analisis_marcadores_documentados.csv`, R5),
+- los marcadores morfosintácticos que las fuentes (artículo de JIPA y el libro *Voces shiwilu*) afirman
+  **explícitamente**, con su página
+  ([`../analisis_intrinseco/marcadores_fuentes.csv`](../analisis_intrinseco/marcadores_fuentes.csv),
+  solo las filas `usar = si`; ver «Marcadores explícitos» más abajo),
 - patrones **candidatos** detectados estadísticamente en el corpus pero
   **sin validar** externamente (palabras características, secuencias
   iniciales/finales) — se le indica explícitamente al modelo que son pistas,
   no reglas confirmadas.
 
 **Refinamiento:** cada oración generada pasa por tres filtros:
-1. **Marcador** — si la categoría tiene marcadores documentados, exige que
-   al menos uno aparezca en la oración generada.
+1. **Marcador** — si la categoría tiene marcadores explícitos en las fuentes, exige que
+   la oración coincida con el patrón de al menos uno (los patrones están en
+   `marcadores_fuentes.csv`; DES y SAL no tienen y siempre pasan).
 2. **Idioma** — heurística simple contra "españolización" (rechaza si el
    shiwilu generado es idéntico al glosado en español).
 3. **Semántico** — similitud coseno (LaBSE, congelado) entre la oración
    generada y el centroide de los ejemplos reales de su categoría; rechaza
    si está demasiado alejada (deriva de tema) o es casi idéntica a un
    ejemplo existente (duplicado).
+
+### Marcadores explícitos (filtro de marcador)
+
+El filtro y el prompt usan **solo** lo que las fuentes dicen de forma explícita. La tabla
+[`marcadores_fuentes.csv`](../analisis_intrinseco/marcadores_fuentes.csv) lista cada forma con su función, página y nivel de evidencia:
+
+| Nivel | Significado | ¿Se usa? |
+|---|---|---|
+| **A** | La fuente da la forma **y** su función | Sí |
+| **B** | La fuente da la forma con una glosa, pero no la etiqueta como marcador de esa función (p. ej. `enchuku'` «vamos», palabras interrogativas léxicas) | No (activable cambiando `usar`) |
+| **C** | La función descrita no corresponde a la categoría (`i'na` focalizador, `-sa'` delimitativo, `-sha` diminutivo) | No |
+
+Usados (nivel A): NEG `i'n`, `-inpu'`; PRG `a'cha`, `a'ta'`; REQUEST imperativo `-(k)er'`; EMO `chi`, `ten` (palabras
+independientes); AFI `ajá`, `ahã`, `untana`. DES y SAL no tienen marcador. Fuentes: Valenzuela & Gussenhoven (2013, JIPA) y *Voces
+shiwilu* (Parte II). El capítulo de shiwilu de la Enciclopedia del Bicentenario no afirma ningún marcador de estos.
+
+Si cambia la lista no hace falta volver a generar (ni gastar tokens): `refiltrar_marcadores.py` reaplica el filtro a las
+candidatas ya guardadas (que incluyen las rechazadas) y escribe copias para evaluar.
 
 Las oraciones que no pasan todos los filtros **no se descartan**: quedan
 marcadas `revisar_hablante_nativo` en la columna `estado_filtro`, siguiendo

@@ -24,6 +24,10 @@ vigente, Generate-then-Refine se genera una vez con el pool y se usa en las dos 
                         pool (cada una con sus ejemplos few-shot y su centroide)
 
 En cualquier tecnica se descartan las filas sinteticas identicas a una oracion del test.
+Mas datos sinteticos: --cantidad N (Generate-then-Refine, en lotes de 20 por categoria y etapa) y
+--multiplicador K (Retrotraduccion, K parafrasis por oracion). Cada lote/sorteo se guarda aparte en la cache y
+el 0 es el de siempre, asi que subir de nivel solo genera lo que falta; se quitan repetidas y copias. Cada corrida
+tambien guarda volumen_sintetico_<...>.csv (sinteticos usados y su % respecto de las oraciones reales).
 Lo generado se guarda en una cache por (tecnica, fold, etapa): si se corta la corrida (o se
 repite), se reutiliza en vez de volver a generar (y a gastar tokens/GPU).
 
@@ -45,6 +49,7 @@ Los cuadernos de tecnicas_aumento/colab/ lo corren en Colab.
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import sys
 from pathlib import Path
@@ -71,14 +76,17 @@ from shiwilu.clasificacion import (  # noqa: E402
 from shiwilu.rutas import AUMENTO_SALIDA, EVALUACION_RESULTADOS, NMT_REPO_EXTERNO  # noqa: E402
 
 TECNICAS = ["mixup", "retrotraduccion", "generate_then_refine"]
+POR_LLAMADA = 20   # oraciones que se le piden a Claude por categoria en cada llamada (un "lote")
 
 
-def generar_retro(corpus: pd.DataFrame, idx: np.ndarray, fold: int, checkpoint: Path, repo_nmt: Path) -> pd.DataFrame:
-    """Parafrasea (Helsinki-NLP) y traduce al shiwilu (NMT de F. Prado) las oraciones `idx` del corpus."""
+def generar_retro(corpus: pd.DataFrame, idx: np.ndarray, fold: int, checkpoint: Path, repo_nmt: Path,
+                  sorteo: int = 0) -> pd.DataFrame:
+    """Parafrasea (Helsinki-NLP) y traduce al shiwilu (NMT de F. Prado) las oraciones `idx` del corpus.
+    `sorteo` k >= 1 repite la parafrasis con otra semilla (otra muestra del muestreo); 0 es la original."""
     import retrotraduccion as rt
 
     sub = corpus.iloc[idx]
-    parafrasis = rt.parafrasear_espanol(sub["espanol"].astype(str).tolist(), semilla=SEMILLA + fold)
+    parafrasis = rt.parafrasear_espanol(sub["espanol"].astype(str).tolist(), semilla=SEMILLA + fold + 1000 * sorteo)
     df = pd.DataFrame({
         "id_origen": sub.index.to_numpy(),
         "espanol_original": sub["espanol"].astype(str).to_numpy(),
@@ -91,21 +99,36 @@ def generar_retro(corpus: pd.DataFrame, idx: np.ndarray, fold: int, checkpoint: 
     return df.reset_index(drop=True)
 
 
-def generar_gtr(corpus: pd.DataFrame, idx: np.ndarray, cantidad: int) -> pd.DataFrame:
-    """Claude genera y refina oraciones usando como train SOLO las oraciones `idx` del corpus."""
+def generar_gtr(corpus: pd.DataFrame, idx: np.ndarray, cantidad: int, lote: int = 0) -> pd.DataFrame:
+    """Claude genera y refina `cantidad` oraciones por categoria usando como train SOLO las oraciones `idx`
+    del corpus. `lote` >= 1 rota los ejemplos few-shot para obtener oraciones distintas a las del lote 0."""
     import anthropic
     import generate_then_refine as gtr
 
     clave = os.environ.get("ANTHROPIC_API_KEY", "")
     if not clave:
         raise SystemExit("Falta ANTHROPIC_API_KEY en el entorno (en Colab: Secretos).")
-    return gtr.generar_para_train(corpus.iloc[idx], cantidad, anthropic.Anthropic(api_key=clave))
+    return gtr.generar_para_train(corpus.iloc[idx], cantidad, anthropic.Anthropic(api_key=clave), lote=lote)
 
 
 def combinar_con_vigente(P_nuevo: pd.DataFrame, tecnica: str) -> pd.DataFrame:
     """Los 12 experimentos: los de la evaluacion vigente, con las filas de `tecnica` reemplazadas por las nuevas."""
     vigente = pd.read_csv(EVALUACION_RESULTADOS / "validacion_cruzada_predicciones_sin_puntuacion.csv")
     return pd.concat([vigente[vigente["tecnica"] != tecnica], P_nuevo], ignore_index=True)
+
+
+def combinar_sin_duplicados(partes: list[pd.DataFrame], claves_excluir: set) -> pd.DataFrame:
+    """Une varios lotes/sorteos y quita las filas repetidas (misma categoria y mismo texto normalizado) y las
+    que copian una oracion de `claves_excluir`. Solo se usa cuando hay mas de un lote o sorteo."""
+    g = pd.concat(partes, ignore_index=True)
+    claves = g["shiwilu"].map(_normalizar_estricto)
+    repetida = pd.Series(list(zip(g["intencion"], claves))).duplicated().to_numpy()
+    copia = claves.isin(claves_excluir).to_numpy()
+    print(f"  al unir {len(partes)} partes ({len(g)} filas) se descartan {int(repetida.sum())} repetidas y {int((copia & ~repetida).sum())} copias de oraciones reales")
+    g = g[~(repetida | copia)].reset_index(drop=True)
+    if "id" in g.columns:
+        g["id"] = [f"GTR_{i:04d}" for i in range(len(g))]
+    return g
 
 
 def con_cache(ruta: Path, generar) -> pd.DataFrame:
@@ -125,7 +148,13 @@ def main() -> int:
     ap.add_argument("--folds", nargs="+", type=int, default=None, help="Subconjunto de folds (por defecto, los 5).")
     ap.add_argument("--checkpoint", type=Path, default=None, help="(retrotraduccion) checkpoint NLLB+LoRA de F. Prado.")
     ap.add_argument("--repo-nmt", type=Path, default=NMT_REPO_EXTERNO, help="(retrotraduccion) repo clonado de F. Prado.")
-    ap.add_argument("--cantidad", type=int, default=20, help="(generate_then_refine) oraciones por categoria y etapa.")
+    ap.add_argument("--cantidad", type=int, default=20,
+                     help="(generate_then_refine) oraciones por categoria y etapa. Se piden en lotes de 20 (una llamada "
+                          "por lote, con ejemplos few-shot rotados); 40 = 2 lotes, 80 = 4... El lote 0 es el de siempre "
+                          "(fold<N>_<etapa>.csv) y se reutiliza de la cache; los demas, fold<N>_<etapa>_l<j>.csv.")
+    ap.add_argument("--multiplicador", type=int, default=1,
+                     help="(retrotraduccion) parafrasis por oracion de origen: 1 = la de siempre (fold<N>_pool.csv); "
+                          "k >= 2 agrega sorteos extra (fold<N>_pool_s<j>.csv) con otra semilla del muestreo.")
     ap.add_argument("--semilla-aumento", type=int, default=0, help="Se suma a la semilla de Mixup (0 = la vigente).")
     ap.add_argument("--cache", type=Path, default=AUMENTO_SALIDA / "en_linea", help="Carpeta de la cache de lo generado.")
     ap.add_argument("--etiqueta", default="", help="Texto que se agrega al nombre de los CSV de salida.")
@@ -133,6 +162,8 @@ def main() -> int:
     tecnica = args.tecnica
     if tecnica == "retrotraduccion" and args.checkpoint is None:
         raise SystemExit("--checkpoint es obligatorio para retrotraduccion.")
+    if args.cantidad < 1 or args.multiplicador < 1:
+        raise SystemExit("--cantidad y --multiplicador deben ser >= 1.")
 
     corpus = cargar_corpus()
     assert corpus.index.equals(pd.RangeIndex(len(corpus))), "se asume indice 0..n-1 (id_origen = posicion)"
@@ -151,7 +182,7 @@ def main() -> int:
     E_orig = {m: extraer_embeddings(textos_orig, m) for m in modelos_emb}
     print(f"{n} oraciones; folds {lista_folds}; tecnica {tecnica}; modelos {args.modelos}")
 
-    predicciones = []
+    predicciones, volumen = [], []
     for f in lista_folds:
         idx_test, idx_pool, idx_dev, idx_core = vc.particionar_fold(folds, y, claves, f)
         claves_test = np.unique(claves[idx_test])
@@ -159,23 +190,36 @@ def main() -> int:
         carpeta_cache = args.cache / tecnica
 
         if tecnica == "retrotraduccion":
-            gen = con_cache(carpeta_cache / f"fold{f}_pool.csv",
-                            lambda: generar_retro(corpus, idx_pool, f, args.checkpoint, args.repo_nmt))
+            sorteos = []
+            for k in range(args.multiplicador):
+                nombre = f"fold{f}_pool.csv" if k == 0 else f"fold{f}_pool_s{k}.csv"
+                sorteos.append(con_cache(carpeta_cache / nombre,
+                                         lambda k=k: generar_retro(corpus, idx_pool, f, args.checkpoint, args.repo_nmt, k)))
+            gen = sorteos[0] if len(sorteos) == 1 else combinar_sin_duplicados(sorteos, set())
             E_gen = {m: extraer_embeddings([tx(t) for t in gen["shiwilu"]], m) for m in modelos_emb}
             copia = np.isin(gen["shiwilu"].map(_normalizar_estricto).to_numpy(), claves_test)
             ok_core = vc.filtrar_catalogo_retro(gen, E_orig["labse"], E_gen["labse"], y, idx_core) & ~copia
             ok_pool = vc.filtrar_catalogo_retro(gen, E_orig["labse"], E_gen["labse"], y, idx_pool) & ~copia
             y_gen = gen["intencion"].to_numpy()
+            volumen += [{"fold": f, "etapa": "core", "reales": len(idx_core), "sinteticos": int(ok_core.sum())},
+                        {"fold": f, "etapa": "pool", "reales": len(idx_pool), "sinteticos": int(ok_pool.sum())}]
             print(f"  retrotraduccion: {len(gen)} generadas; etapa core usa {int(ok_core.sum())}, etapa pool {int(ok_pool.sum())} "
                   f"({int((copia & (gen['id_origen'].isin(set(idx_pool)).to_numpy())).sum())} descartadas por copiar el test)")
         elif tecnica == "generate_then_refine":
             etapas = {}
             for etapa, idx_etapa in (("core", idx_core), ("pool", idx_pool)):
-                g = con_cache(carpeta_cache / f"fold{f}_{etapa}.csv", lambda: generar_gtr(corpus, idx_etapa, args.cantidad))
+                por_llamada = min(POR_LLAMADA, args.cantidad)
+                partes = []
+                for j in range(math.ceil(args.cantidad / por_llamada)):
+                    nombre = f"fold{f}_{etapa}.csv" if j == 0 else f"fold{f}_{etapa}_l{j}.csv"
+                    partes.append(con_cache(carpeta_cache / nombre,
+                                            lambda j=j, idx_etapa=idx_etapa: generar_gtr(corpus, idx_etapa, por_llamada, j)))
+                g = partes[0] if len(partes) == 1 else combinar_sin_duplicados(partes, set(claves[idx_etapa]))
                 aprobado = g[g["estado_filtro"] == "aprobado"].reset_index(drop=True)
                 copia = np.isin(aprobado["shiwilu"].map(_normalizar_estricto).to_numpy(), claves_test)
                 aprobado = aprobado[~copia].reset_index(drop=True)
                 etapas[etapa] = (aprobado, {m: extraer_embeddings([tx(t) for t in aprobado["shiwilu"]], m) for m in modelos_emb})
+                volumen.append({"fold": f, "etapa": etapa, "reales": len(idx_etapa), "sinteticos": len(aprobado)})
                 print(f"  generate_then_refine etapa {etapa}: {len(g)} generadas, {len(aprobado)} aprobadas y sin copiar el test")
 
         for modelo in args.modelos:
@@ -211,6 +255,12 @@ def main() -> int:
     sufijo = f"_sin_puntuacion_en_linea_{tecnica}" + (f"_{args.etiqueta}" if args.etiqueta else "")
     EVALUACION_RESULTADOS.mkdir(parents=True, exist_ok=True)
     P.to_csv(EVALUACION_RESULTADOS / f"validacion_cruzada_predicciones{sufijo}.csv", index=False, encoding="utf-8")
+    if volumen:
+        V = pd.DataFrame(volumen)
+        V["pct_de_los_reales"] = (100 * V["sinteticos"] / V["reales"]).round(1)
+        V.to_csv(EVALUACION_RESULTADOS / f"volumen_sintetico{sufijo}.csv", index=False, encoding="utf-8")
+        print("\nVolumen sintetico medio (% de las oraciones reales de la etapa):",
+              V.groupby("etapa")["pct_de_los_reales"].mean().round(1).to_dict())
     R = vc.resumir_predicciones(P)
     R.to_csv(EVALUACION_RESULTADOS / f"validacion_cruzada_resumen{sufijo}.csv", index=False, encoding="utf-8")
     print("\n" + R.round(4).to_string(index=False))

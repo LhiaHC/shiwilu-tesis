@@ -51,7 +51,7 @@ import anthropic
 import _ruta_raiz  # noqa: F401  (deja importable el paquete `shiwilu`)
 from shiwilu.rutas import (
     AUMENTO_SALIDA,
-    MARCADORES_CSV,
+    MARCADORES_FUENTES_CSV,
     PALABRAS_CARACTERISTICAS_CSV,
     SECUENCIAS_FINALES_CSV,
     SECUENCIAS_INICIALES_CSV,
@@ -85,19 +85,17 @@ def cargar_ejemplos_por_categoria(df: pd.DataFrame) -> dict[str, list[tuple[str,
 
 
 def cargar_marcadores_validados() -> dict[str, list[dict]]:
-    """Marcadores morfosintacticos ya contrastados con la literatura (R5)."""
-    df = pd.read_csv(MARCADORES_CSV)
-    df = df[df["documentacion"].isin(["documentada", "parcial"])]
+    """Marcadores que las fuentes afirman EXPLICITAMENTE (forma + funcion), con su patron de
+    busqueda: `analisis_intrinseco/marcadores_fuentes.csv`, solo las filas con usar == "si"."""
+    df = pd.read_csv(MARCADORES_FUENTES_CSV)
+    df = df[df["usar"] == "si"]
     por_categoria: dict[str, list[dict]] = {}
     for _, fila in df.iterrows():
-        categoria = fila.get("intencion_esperada")
-        if not isinstance(categoria, str) or categoria == "(n/a)":
-            continue
-        por_categoria.setdefault(categoria, []).append({
-            "forma": fila["forma_documentada"],
-            "tipo": fila["tipo"],
-            "funcion": fila["funcion_documentada"],
-            "fuente": fila["fuente"],
+        por_categoria.setdefault(fila["categoria"], []).append({
+            "forma": fila["forma"],
+            "funcion": fila["funcion"],
+            "fuente": fila["paginas"],
+            "patron": fila["patron"],
         })
     return por_categoria
 
@@ -130,7 +128,7 @@ def _bloque_marcadores(marcadores: list[dict]) -> str:
     if not marcadores:
         return "(sin marcadores documentados para esta categoria)"
     return "\n".join(
-        f"- \"{m['forma']}\" ({m['tipo']}): {m['funcion']} [{m['fuente']}]"
+        f"- \"{m['forma']}\": {m['funcion']} [{m['fuente']}]"
         for m in marcadores
     )
 
@@ -199,8 +197,13 @@ def generar_candidatos(
     marcadores_por_categoria: dict[str, list[dict]],
     candidatos_por_categoria: dict[str, dict[str, list[str]]],
     client: anthropic.Anthropic,
+    lote: int = 0,
 ) -> list[dict]:
-    ejemplos = ejemplos_por_categoria.get(categoria, [])[:N_EJEMPLOS_FEW_SHOT]
+    # lote 0: los primeros ejemplos (comportamiento original); lotes siguientes: la ventana de ejemplos
+    # rota, para que las llamadas repetidas no reciban siempre el mismo prompt y produzcan oraciones distintas
+    todos = ejemplos_por_categoria.get(categoria, [])
+    inicio = (lote * N_EJEMPLOS_FEW_SHOT) % len(todos) if (lote and todos) else 0
+    ejemplos = (todos[inicio:] + todos[:inicio])[:N_EJEMPLOS_FEW_SHOT]
     marcadores = marcadores_por_categoria.get(categoria, [])
 
     prompt_s, prompt_u = construir_prompt(categoria, cantidad, ejemplos, marcadores, candidatos_por_categoria)
@@ -220,11 +223,12 @@ def generar_candidatos(
 # ---------------------------------------------------------------------------
 
 def filtro_marcador(texto_shiwilu: str, marcadores: list[dict]) -> bool:
-    """True si pasa el filtro (o si la categoria no tiene marcadores que exigir)."""
+    """True si pasa el filtro (o si la categoria no tiene marcadores que exigir): el texto debe
+    coincidir con el patron de al menos un marcador de la categoria (marcadores_fuentes.csv)."""
     if not marcadores:
         return True
-    texto = texto_shiwilu.lower()
-    return any(m["forma"].lower() in texto for m in marcadores)
+    texto = re.sub("[\u2019\u02bc\u2018\u00b4`]", "'", texto_shiwilu.lower())
+    return any(re.search(m["patron"], texto) for m in marcadores)
 
 
 def filtro_idioma(texto_espanol: str, texto_shiwilu: str) -> bool:
@@ -301,6 +305,7 @@ def generar_para_train(
     cantidad: int,
     client: anthropic.Anthropic,
     categorias: list[str] = INTENCIONES,
+    lote: int = 0,
 ) -> pd.DataFrame:
     """Genera y refina oraciones para cada categoria usando SOLO `train` (columnas
     espanol, shiwilu, intencion) como ejemplos few-shot y como referencia del filtro
@@ -318,7 +323,7 @@ def generar_para_train(
         candidatos = generar_candidatos(
             categoria, cantidad,
             ejemplos_por_categoria, marcadores_por_categoria, candidatos_por_categoria,
-            client,
+            client, lote,
         )
         print(f"  {len(candidatos)} candidatos generados, refinando...")
 
