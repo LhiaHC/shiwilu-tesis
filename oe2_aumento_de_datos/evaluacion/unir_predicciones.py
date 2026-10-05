@@ -24,18 +24,21 @@ import validacion_cruzada as vc  # noqa: E402
 from shiwilu.rutas import CV_INTERNA_RESULTADOS  # noqa: E402
 
 
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--entradas", nargs="+", required=True, help="CSV de predicciones (nombres de archivo en evaluacion/resultados/cv_interna/).")
     ap.add_argument("--etiqueta", required=True, help="Se usa en el nombre de los CSV de salida.")
+    ap.add_argument("--carpeta", type=Path, default=CV_INTERNA_RESULTADOS,
+                    help="Carpeta de los CSV de entrada y de salida (por defecto, evaluacion/resultados/cv_interna/; p. ej. cv_interna_sin_DES/).")
     args = ap.parse_args()
 
-    P = pd.concat([pd.read_csv(CV_INTERNA_RESULTADOS / e) for e in args.entradas], ignore_index=True)
+    P = pd.concat([pd.read_csv(args.carpeta / e) for e in args.entradas], ignore_index=True)
     clave = ["modelo", "tecnica", "fold", "pos"]
     assert not P.duplicated(clave).any(), "hay predicciones repetidas para el mismo (modelo, tecnica, fold, pos)"
-    P.to_csv(CV_INTERNA_RESULTADOS / f"validacion_cruzada_predicciones_sin_puntuacion_{args.etiqueta}.csv", index=False, encoding="utf-8")
+    P.to_csv(args.carpeta / f"validacion_cruzada_predicciones_sin_puntuacion_{args.etiqueta}.csv", index=False, encoding="utf-8")
     R = vc.resumir_predicciones(P)
-    R.to_csv(CV_INTERNA_RESULTADOS / f"validacion_cruzada_resumen_sin_puntuacion_{args.etiqueta}.csv", index=False, encoding="utf-8")
+    R.to_csv(args.carpeta / f"validacion_cruzada_resumen_sin_puntuacion_{args.etiqueta}.csv", index=False, encoding="utf-8")
     print(R.round(4).to_string(index=False))
     return 0
 

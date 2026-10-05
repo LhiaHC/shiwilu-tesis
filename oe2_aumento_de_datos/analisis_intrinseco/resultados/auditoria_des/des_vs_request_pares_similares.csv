@@ -1,0 +1,101 @@
+id_des,espanol_des,shiwilu_des,id_request,espanol_request,shiwilu_request,similitud
+FL2_2176,Puedes entrar.,yennitulada'a'mak,FL2_0709,Puedes irte.,yennitula pa'a'masu',0.8254419565200806
+FL2_0757,Tiene vino.,vinu' a'ñapalli,FL2_0470,Trae vino.,kencher' vinu',0.803321897983551
+FL2_0737,Cuenta conmigo.,kua katu'pekchen,FL2_1348,Hazlo conmigo.,kualek nu'ter',0.755870521068573
+FL2_0688,Lo hicimos.,nu'tulek'wa',FL2_1502,Hagamos eso.,nu'tawa' nana,0.748335599899292
+FL2_0758,Es feliz.,musu' nuka'a,FL2_0466,Estate contento.,ñapaker' musu'kankantusu',0.7477273344993591
+FL2_2179,Deberías descansar.,neria'masu' ñapalli,FL2_1727,Necesito descansar.,luwantulek neriak,0.7455458641052246
+FL2_0748,Termine esto.,a'ta'wanter asu',FL2_0472,Lleva esto.,ekpa'ker' asu',0.7371615171432495
+FL2_0781,Tengo vino.,vinu' a'ñapalek,FL2_0470,Trae vino.,kencher' vinu',0.7160071730613708
+FL2_0763,Aquí estamos.,asek ñapallidek,FL2_1811,Comamos aquí.,weranwa' asek,0.7151002883911133
+FL2_0699,Estamos acá.,asek ñapallidek,FL2_1811,Comamos aquí.,weranwa' asek,0.7119419574737549
+FL2_0770,Puedo hacerlo.,yennitulek nu'tak,FL2_1002,¿Puede hacerlo?,¿yennitulek nu'tak?,0.7091275453567505
+FL2_0791,Los necesito.,luwantudek'lek,FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.6939385533332825
+FL2_0750,Terminen esto.,a'ta'wantuku' asu',FL2_2172,Anoten esto.,llinser'ku' nana,0.6744435429573059
+FL2_0690,Lo queremos.,tantenlek'wa',FL2_1502,Hagamos eso.,nu'tawa' nana,0.6723307371139526
+FL2_0785,Vivo aquí.,asek nanpipalek,FL2_0444,Espera aquí.,wa'tenter' asek,0.6721237301826477
+FL2_0009,¡Ayuda!,¡katu'pa'!,FL2_1324,Apóyame.,katu'pa'u,0.6650680899620056
+FL2_2181,Tú dormías.,kenma wichi'wina',FL2_1338,¿Puedes dormir?,¿yennitula wichi'a'mak?,0.6584834456443787
+FL2_0762,¡Aquí estamos!,¡asek ñapallidek!,FL2_1811,Comamos aquí.,weranwa' asek,0.654684841632843
+FL2_0024,¡Tengo!,¡a'ñapalek!,FL2_0013,¡Para!,¡ta'ituler'!,0.6533643007278442
+FL2_0011,¡Auxilio!,¡katu'pa'!,FL2_1324,Apóyame.,katu'pa'u,0.650409460067749
+FL2_2177,Puedes decírnoslo.,yennitula winta'mudek,FL2_1934,¿Puedes oírnos?,¿yennitula lauk'a'mudek?,0.6492551565170288
+FL2_0026,Él corrió.,nana tekaklli,FL2_0005,¡Corre!,tekker',0.6432546377182007
+FL2_0698,Terminamos.,a'ta'wantullidek,FL2_1502,Hagamos eso.,nu'tawa' nana,0.6412253379821777
+FL2_0788,Debo esconderme.,insek'kita'kasu'ñapalli,FL2_1727,Necesito descansar.,luwantulek neriak,0.6401033401489258
+FL2_0686,Nos reímos.,yamerlek'wa',FL2_0268,Vigílame.,luwuk'tu'u,0.638654351234436
+FL2_0799,Quiero este.,asu' luwantulek,FL2_0472,Lleva esto.,ekpa'ker' asu',0.6333320736885071
+FL2_0797,Quiero más.,a'pinta' luwantulek,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.6315350532531738
+FL2_0021,¡Al ataque!,¡paku' llipu'tudek'kunku'!,FL2_0013,¡Para!,¡ta'ituler'!,0.6277461647987366
+FL2_0769,Lo compré.,mapa'lek,FL2_1355,Dámelo.,enka'u,0.6112959384918213
+FL2_0697,Estamos ocupados.,a'ñapallidek dudimpu' nu'ta'kawa'su',FL2_0269,Obsérvame.,lli'u,0.6083517074584961
+FL2_0780,Tengo tiempo.,manennu'tapi'nek,FL2_1727,Necesito descansar.,luwantulek neriak,0.6082822680473328
+FL2_0819,Estoy saludable.,ñapalek mudinusu',FL2_1727,Necesito descansar.,luwantulek neriak,0.606736421585083
+FL2_0756,¡Ha venido!,¡wek'lli!,FL2_0013,¡Para!,¡ta'ituler'!,0.6064127683639526
+FL2_0008,¡Incendio!,¡ukeñan!,FL2_0005,¡Corre!,tekker',0.6056522727012634
+FL2_0782,Te oí.,lauk'llien,FL2_0270,Obsérvalos.,lli'dek'ku',0.6011559963226318
+FL2_0820,Me voy.,pa'echek,FL2_0235,Déjame.,tai'tula'u,0.5893609523773193
+FL2_0689,Debemos irnos.,pa'a'kawa'su' ñapalli,FL2_0709,Puedes irte.,yennitula pa'a'masu',0.5854790806770325
+FL2_0030,Salí.,yunsu'lek,FL2_0019,Sonríe.,yamer,0.5848318934440613
+FL2_0771,Puedo compartir.,yennitulek a'nañiak,FL2_1936,¿Pueden ayudarme?,¿yennitulama katupa'a'muk?,0.5810683965682983
+FL2_0687,Nos gusta.,iya'tulek'wa',FL2_0269,Obsérvame.,lli'u,0.5782255530357361
+FL2_0702,Estamos hartos.,perlli'llidek,FL2_0269,Obsérvame.,lli'u,0.5714706778526306
+FL2_0029,Me caí.,anu'lek,FL2_1348,Hazlo conmigo.,kualek nu'ter',0.5699577331542969
+FL2_0017,"¡Oh, no! (masculino)",¡shaw!,FL2_0298,¡No llores!,¡yawellekta!,0.569226086139679
+FL2_0787,Lo extrañaba.,lu'wanwinek,FL2_1796,Olvídalo ya.,ipa' pinanerker',0.5681520700454712
+FL2_0018,"¡Oh, no! (femenino)",¡asha!,FL2_0298,¡No llores!,¡yawellekta!,0.5669555068016052
+FL2_0691,Fracasaremos.,teka'per'aterwa',FL2_1502,Hagamos eso.,nu'tawa' nana,0.5641428232192993
+FL2_0816,Estoy comprometida.,ñapalek ala'sa' enmu'pinenlek,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.5622269511222839
+FL2_0817,Estoy emocionado.,ñapalek sakek'su',FL2_0466,Estate contento.,ñapaker' musu'kankantusu',0.561111330986023
+FL2_0805,Estaba equivocado.,pektunsu' ñapawinek,FL2_1779,No funcionó.,ku'la saka'chi'ñi,0.5573538541793823
+FL2_0778,Me enfadé.,yulek,FL2_0466,Estate contento.,ñapaker' musu'kankantusu',0.5543494820594788
+FL2_0016,¡He ganado!,¡kana'tulek!,FL2_0005,¡Corre!,tekker',0.5527248382568359
+FL2_0010,¡Socorro! ¡Auxilio!,¡katu'pa'! ¡katu'pa'!,FL2_0014,¡Espera!,¡wa'ten'ker'!,0.5523364543914795
+FL2_0786,La amaba.,tantenwinek,FL2_1796,Olvídalo ya.,ipa' pinanerker',0.5515652298927307
+FL2_0759,Le gustó.,iyatulli,FL2_0020,Sonrían.,yamerku',0.5490419864654541
+FL2_0700,Estamos perdidos.,wer'su' ñapallidek,FL2_0269,Obsérvame.,lli'u,0.5476730465888977
+FL2_0685,Nos divertimos.,sakeklekwa',FL2_1503,Comamos fuera.,adipi ka'awa',0.5474309325218201
+FL2_0684,Podemos ganar.,yennitulekwa' kana'tak,FL2_0709,Puedes irte.,yennitula pa'a'masu',0.5468258857727051
+FL2_0813,Soy mujer.,ku'aper nuka'ka,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.5408360958099365
+FL2_0777,Te encontré.,kaper'llien,FL2_1932,¿Puedes encontrarlo?,¿yennitula kanan'a'mak?,0.5396363139152527
+FL2_0800,Estaba despierto.,ñapawinek nanpiladasu',FL2_0020,Sonrían.,yamerku',0.5371460914611816
+FL2_0760,Está fingiendo.,intek apalli,FL2_0019,Sonríe.,yamer,0.5315293669700623
+FL2_2180,Deberían quedarse.,llia'a'mamasu' ñapalli,FL2_0446,Esperen aquí.,wa'tenku' asek,0.5307570695877075
+FL2_0804,Estaba cansado.,saka'tusu' ñapawinek,FL2_1727,Necesito descansar.,luwantulek neriak,0.5277911424636841
+FL2_0772,Confesé.,lunnek,FL2_0235,Déjame.,tai'tula'u,0.5275020003318787
+FL2_0779,Traigo noticias.,kera'pilellek la'la'lusa',FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.5218530893325806
+FL2_0683,Somos hombres.,enmu'pinen nuka'kudek,FL2_1502,Hagamos eso.,nu'tawa' nana,0.5206089019775391
+FL2_0814,Tengo curiosidad.,ñinchidinupalek,FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.5134872198104858
+FL2_0767,Estoy jodiendo.,a'perchapalek,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.5077342987060547
+FL2_0768,Estoy leseando.,si'lentapalek,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.5065625905990601
+FL2_0815,Estoy bailando.,lansa'palek,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.5061681866645813
+FL2_0783,Los conozco.,luwer'chapadeklek,FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.5004889965057373
+FL2_2174,Nos traicionaste.,wa'danpilapilundek,FL2_0269,Obsérvame.,lli'u,0.4967228174209595
+FL2_2173,Me traicionaste.,wa'danpilapilun,FL2_1348,Hazlo conmigo.,kualek nu'ter',0.49131327867507935
+FL2_0766,Soy cocinero.,kalu'tutek' nuka'ka,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.48897093534469604
+FL2_0809,Soy finlandés.,finlandis nuka'ka,FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.48374712467193604
+FL2_2211,Odia correr.,luyu'lli teka'ak,FL2_0005,¡Corre!,tekker',0.4805251955986023
+FL2_2178,Pareces triste.,lli'tula we'inutusu',FL2_0466,Estate contento.,ñapaker' musu'kankantusu',0.4752138555049896
+FL2_0755,Él envejeció.,nana taserpitulli,FL2_1796,Olvídalo ya.,ipa' pinanerker',0.4702298045158386
+FL2_0776,Tenía frío.,sanek'wantuwinek,FL2_0020,Sonrían.,yamerku',0.4684104919433594
+FL2_2175,Nos engañaste.,tumu'tulundek,FL2_0269,Obsérvame.,lli'u,0.4663679599761963
+FL2_0701,Somos pobres.,kulliker'wi'ñidek,FL2_0269,Obsérvame.,lli'u,0.46596166491508484
+FL2_0803,Estaba desnudo.,inanpilatek ñapawinek,FL2_1779,No funcionó.,ku'la saka'chi'ñi,0.4658925533294678
+FL2_0810,Soy turco.,turku nuka'ka,FL2_1726,Necesito respuestas.,luwantulek na'pia'musu',0.4633929133415222
+FL2_0801,Estaba mareado.,ñapawinek lupersu',FL2_0020,Sonrían.,yamerku',0.46332645416259766
+FL2_0703,Somos débiles.,saputek nuka'kudek,FL2_0269,Obsérvame.,lli'u,0.46100741624832153
+FL2_0818,Estoy ayunando.,weranpi'nek,FL2_1727,Necesito descansar.,luwantulek neriak,0.460666686296463
+FL2_0811,Soy turca.,turka nuka'ka,FL2_1727,Necesito descansar.,luwantulek neriak,0.44879651069641113
+FL2_0812,Soy panadero.,tanta' nu'tutek nuka'ka,FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.446413516998291
+FL2_0032,Perdí. (opuesto de ganar),wer'lliek,FL2_0023,Levanta. (pararse),yunsanker',0.44611358642578125
+FL2_0802,Me despidieron.,usu'lliner'ku,FL2_0235,Déjame.,tai'tula'u,0.4436575174331665
+FL2_2206,Escaparon todos.,iñer' chiyekllina',FL2_1008,¿Pueden andar?,¿yennitulama' dekkunta'mamak?,0.44259119033813477
+FL2_0676,Tom morirá.,tom chiminchu,FL2_1339,Venga mañana.,weker' eklli,0.43971431255340576
+FL2_0775,Como fruta.,ka'apalek wayupi,FL2_0470,Trae vino.,kencher' vinu',0.42497122287750244
+FL2_0677,Tom pagará.,tom panwilek'techu,FL2_1355,Dámelo.,enka'u,0.419417142868042
+FL2_0660,Tom saltó.,tom indek'lli,FL2_0023,Levanta. (pararse),yunsanker',0.41926565766334534
+FL2_0796,Huelo gas.,lanerapalek gas,FL2_0470,Trae vino.,kencher' vinu',0.4183453917503357
+FL2_0761,Está fingiendo comer.,intek weranpalli,FL2_1811,Comamos aquí.,weranwa' asek,0.41813433170318604
+FL2_0794,Leo labios.,ñinchitapalek ma'tapallinpa',FL2_1358,Deme esos.,enka'u nanalusa',0.3978177607059479
+FL2_0795,Vendo autos.,uku'latapalek wa'nateka'asu',FL2_1357,Dame algunos.,enka'u nu'unta'lusa',0.3854944407939911
+FL2_0774,Como pan.,ka'apalek tanta',FL2_1728,Necesito trabajar.,luwantulek saka'tak,0.3599240779876709

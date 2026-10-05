@@ -99,7 +99,7 @@ def generar_retro(corpus: pd.DataFrame, idx: np.ndarray, fold: int, checkpoint: 
     return df.reset_index(drop=True)
 
 
-def generar_gtr(corpus: pd.DataFrame, idx: np.ndarray, cantidad: int, lote: int = 0) -> pd.DataFrame:
+def generar_gtr(corpus: pd.DataFrame, idx: np.ndarray, cantidad: int, lote: int = 0, categorias: list[str] | None = None) -> pd.DataFrame:
     """Claude genera y refina `cantidad` oraciones por categoria usando como train SOLO las oraciones `idx`
     del corpus. `lote` >= 1 rota los ejemplos few-shot para obtener oraciones distintas a las del lote 0."""
     import anthropic
@@ -108,7 +108,8 @@ def generar_gtr(corpus: pd.DataFrame, idx: np.ndarray, cantidad: int, lote: int 
     clave = os.environ.get("ANTHROPIC_API_KEY", "")
     if not clave:
         raise SystemExit("Falta ANTHROPIC_API_KEY en el entorno (en Colab: Secretos).")
-    return gtr.generar_para_train(corpus.iloc[idx], cantidad, anthropic.Anthropic(api_key=clave), lote=lote)
+    extra = {"categorias": categorias} if categorias else {}   # por defecto, todas las intenciones
+    return gtr.generar_para_train(corpus.iloc[idx], cantidad, anthropic.Anthropic(api_key=clave), lote=lote, **extra)
 
 
 def combinar_con_vigente(P_nuevo: pd.DataFrame, tecnica: str) -> pd.DataFrame:

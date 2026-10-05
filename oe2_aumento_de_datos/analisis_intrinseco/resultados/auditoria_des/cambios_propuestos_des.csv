@@ -1,0 +1,34 @@
+id,espanol,shiwilu,intencion_original,intencion_propuesta,confianza,regla,aplicado
+FL2_0770,Puedo hacerlo.,yennitulek nu'tak,DES,AFI,media,"capacidad en primera persona (como 'Se correr', 'Se leer', ya AFI)",True
+FL2_0771,Puedo compartir.,yennitulek a'nañiak,DES,AFI,media,"capacidad en primera persona (como 'Se correr', 'Se leer', ya AFI)",True
+FL2_0778,Me enfadé.,yulek,DES,EMO,media,afecto en primera persona (como 'Me preocupa'),True
+FL2_0702,Estamos hartos.,perlli'llidek,DES,EMO,media,afecto en primera persona (como 'Me preocupa'),True
+FL2_0817,Estoy emocionado.,ñapalek sakek'su',DES,EMO,media,afecto en primera persona (como 'Me preocupa'),True
+FL2_0814,Tengo curiosidad.,ñinchidinupalek,DES,EMO,media,afecto en primera persona (como 'Me preocupa'),True
+FL2_0687,Nos gusta.,iya'tulek'wa',DES,EMO,media,"afecto en primera persona (como 'Me gustan', ya EMO)",True
+FL2_0786,La amaba.,tantenwinek,DES,EMO,media,afecto en primera persona ('La amaba'),True
+FL2_0787,Lo extrañaba.,lu'wanwinek,DES,EMO,media,afecto en primera persona ('Lo extrañaba'),True
+FL2_0017,"¡Oh, no! (masculino)",¡shaw!,DES,EMO,media,"interjeccion (como '¡Que horror!', ya EMO)",True
+FL2_0018,"¡Oh, no! (femenino)",¡asha!,DES,EMO,media,"interjeccion (como '¡Que horror!', ya EMO)",True
+FL2_0748,Termine esto.,a'ta'wanter asu',DES,REQUEST,alta,"imperativo explicito (como 'Lleva esto', 'Anoten esto')",True
+FL2_0750,Terminen esto.,a'ta'wantuku' asu',DES,REQUEST,alta,"imperativo explicito (como 'Lleva esto', 'Anoten esto')",True
+FL2_2179,Deberías descansar.,neria'masu' ñapalli,DES,REQUEST,media,consejo o exhortacion al interlocutor,True
+FL2_2180,Deberían quedarse.,llia'a'mamasu' ñapalli,DES,REQUEST,media,consejo o exhortacion al interlocutor,True
+FL2_2176,Puedes entrar.,yennitulada'a'mak,DES,REQUEST,media,"'Puedes + verbo' (como 'Puedes irte' y las 15 '¿Puedes...?', ya REQUEST)",True
+FL2_2177,Puedes decírnoslo.,yennitula winta'mudek,DES,REQUEST,media,"'Puedes + verbo' (como 'Puedes irte' y las 15 '¿Puedes...?', ya REQUEST)",True
+FL2_0797,Quiero más.,a'pinta' luwantulek,DES,REQUEST,media,"volitivo/necesidad (como 'Necesito descansar', ya REQUEST)",True
+FL2_0799,Quiero este.,asu' luwantulek,DES,REQUEST,media,"volitivo/necesidad (como 'Necesito descansar', ya REQUEST)",True
+FL2_0791,Los necesito.,luwantudek'lek,DES,REQUEST,media,"volitivo/necesidad (como 'Necesito respuestas', ya REQUEST)",True
+FL2_0009,¡Ayuda!,¡katu'pa'!,DES,REQUEST,media,"pedido de auxilio (como 'Apoyanos', ya REQUEST)",True
+FL2_0011,¡Auxilio!,¡katu'pa'!,DES,REQUEST,media,"pedido de auxilio (como 'Apoyanos', ya REQUEST)",True
+FL2_0010,¡Socorro! ¡Auxilio!,¡katu'pa'! ¡katu'pa'!,DES,REQUEST,media,"pedido de auxilio (como 'Apoyanos', ya REQUEST)",True
+FL2_0021,¡Al ataque!,¡paku' llipu'tudek'kunku'!,DES,REQUEST,media,exhortacion imperativa ('¡Al ataque!'),True
+FL2_0820,Me voy.,pa'echek,DES,SAL,media,"aviso de partida/despedida (como 'Nos vemos', 'Hasta luego')",True
+FL2_0737,Cuenta conmigo.,kua katu'pekchen,DES,AFI,baja,ofrecimiento ('Cuenta conmigo'); no encaja del todo en ninguna categoria,False
+FL2_0684,Podemos ganar.,yennitulekwa' kana'tak,DES,AFI,baja,posibilidad ('Podemos ganar'); es una declaracion de capacidad colectiva,False
+FL2_0772,Confesé.,lunnek,DES,AFI,baja,admision ('Confese'),False
+FL2_0008,¡Incendio!,¡ukeñan!,DES,EMO,baja,alerta exclamativa ('¡Incendio!'); tambien podria ser REQUEST o quedarse en DES,False
+FL2_0016,¡He ganado!,¡kana'tulek!,DES,EMO,baja,exclamacion de triunfo ('¡He ganado!'),False
+FL2_0759,Le gustó.,iyatulli,DES,EMO,baja,'Le gusto': afecto en tercera persona; por la regla seria DES,False
+FL2_0690,Lo queremos.,tantenlek'wa',DES,REQUEST,baja,"volitivo en plural ('Lo queremos'); es una declaracion, no un pedido claro",False
+FL2_0689,Debemos irnos.,pa'a'kawa'su' ñapalli,DES,REQUEST,baja,exhortacion ('Debemos irnos') o declaracion de obligacion,False
