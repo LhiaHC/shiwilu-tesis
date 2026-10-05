@@ -1,0 +1,101 @@
+id,espanol,shiwilu,fuente,errores_de_6,prediccion_mas_frecuente,a_request_en,indicios,labse_sin,mbert_sin,xlmr_sin,labse_con,mbert_con,xlmr_con
+FL2_0748,Termine esto.,a'ta'wanter asu',flashcards,6,REQUEST,6,,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST
+FL2_0802,Me despidieron.,usu'lliner'ku,flashcards,6,REQUEST,6,,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST
+FL2_0691,Fracasaremos.,teka'per'aterwa',flashcards,6,REQUEST,5,,SAL,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST
+FL2_0797,Quiero más.,a'pinta' luwantulek,flashcards,6,REQUEST,5,volitivo_necesidad,EMO,REQUEST,REQUEST,REQUEST,REQUEST,REQUEST
+FL2_2181,Tú dormías.,kenma wichi'wina',flashcards,6,REQUEST,4,,REQUEST,REQUEST,PRG,REQUEST,REQUEST,EMO
+FL2_2178,Pareces triste.,lli'tula we'inutusu',flashcards,6,NEG,2,emocion_valoracion,NEG,REQUEST,PRG,NEG,REQUEST,EMO
+FL2_2211,Odia correr.,luyu'lli teka'ak,flashcards,6,REQUEST,2,emocion_valoracion,PRG,REQUEST,SAL,NEG,REQUEST,SAL
+FL2_0737,Cuenta conmigo.,kua katu'pekchen,flashcards,6,SAL,1,,SAL,SAL,EMO,SAL,REQUEST,EMO
+FL2_2206,Escaparon todos.,iñer' chiyekllina',flashcards,6,SAL,1,,REQUEST,SAL,SAL,SAL,SAL,SAL
+FL2_0758,Es feliz.,musu' nuka'a,flashcards,6,AFI,0,emocion_valoracion,AFI,AFI,SAL,AFI,AFI,SAL
+FL2_0759,Le gustó.,iyatulli,flashcards,6,EMO,0,emocion_valoracion,EMO,EMO,PRG,EMO,EMO,NEG
+FL2_0760,Está fingiendo.,intek apalli,flashcards,6,AFI,0,,SAL,AFI,AFI,SAL,AFI,AFI
+FL2_0794,Leo labios.,ñinchitapalek ma'tapallinpa',flashcards,6,AFI,0,,NEG,AFI,AFI,NEG,AFI,AFI
+FL2_0818,Estoy ayunando.,weranpi'nek,flashcards,6,NEG,0,,NEG,NEG,NEG,NEG,NEG,NEG
+FL2_0820,Me voy.,pa'echek,flashcards,6,SAL,0,primera_persona_accion_inmediata,AFI,SAL,SAL,AFI,SAL,SAL
+FL2_2176,Puedes entrar.,yennitulada'a'mak,flashcards,5,REQUEST,5,modal_permiso_capacidad,REQUEST,REQUEST,REQUEST,DES,REQUEST,REQUEST
+FL2_0686,Nos reímos.,yamerlek'wa',flashcards,5,REQUEST,4,,REQUEST,REQUEST,DES,REQUEST,SAL,REQUEST
+FL2_0009,¡Ayuda!,¡katu'pa'!,flashcards,5,REQUEST,3,,PRG,DES,REQUEST,NEG,REQUEST,REQUEST
+FL2_0011,¡Auxilio!,¡katu'pa'!,flashcards,5,REQUEST,3,,PRG,DES,REQUEST,NEG,REQUEST,REQUEST
+FL2_0684,Podemos ganar.,yennitulekwa' kana'tak,flashcards,5,REQUEST,3,modal_permiso_capacidad,REQUEST,PRG,REQUEST,DES,EMO,REQUEST
+FL2_0008,¡Incendio!,¡ukeñan!,flashcards,5,EMO,2,,PRG,DES,EMO,REQUEST,REQUEST,EMO
+FL2_0026,Él corrió.,nana tekaklli,flashcards,5,AFI,0,,DES,AFI,AFI,AFI,AFI,AFI
+FL2_0030,Salí.,yunsu'lek,flashcards,5,AFI,0,primera_persona_accion_inmediata,AFI,EMO,AFI,AFI,EMO,DES
+FL2_0676,Tom morirá.,tom chiminchu,flashcards,5,PRG,0,,PRG,PRG,PRG,DES,AFI,AFI
+FL2_0701,Somos pobres.,kulliker'wi'ñidek,flashcards,5,NEG,0,,EMO,SAL,NEG,DES,SAL,NEG
+FL2_0755,Él envejeció.,nana taserpitulli,flashcards,5,AFI,0,,AFI,AFI,PRG,AFI,AFI,DES
+FL2_0770,Puedo hacerlo.,yennitulek nu'tak,flashcards,5,AFI,0,modal_permiso_capacidad,AFI,PRG,NEG,AFI,DES,NEG
+FL2_0813,Soy mujer.,ku'aper nuka'ka,flashcards,5,NEG,0,,NEG,DES,AFI,NEG,NEG,AFI
+FL2_2173,Me traicionaste.,wa'danpilapilun,flashcards,5,EMO,0,,PRG,PRG,NEG,EMO,DES,EMO
+FL2_2179,Deberías descansar.,neria'masu' ñapalli,flashcards,5,AFI,0,deber_obligacion,SAL,AFI,AFI,SAL,DES,AFI
+FL2_0016,¡He ganado!,¡kana'tulek!,flashcards,4,REQUEST,3,,PRG,DES,REQUEST,REQUEST,DES,REQUEST
+FL2_0750,Terminen esto.,a'ta'wantuku' asu',flashcards,4,REQUEST,3,,DES,REQUEST,REQUEST,DES,EMO,REQUEST
+FL2_0685,Nos divertimos.,sakeklekwa',flashcards,4,EMO,2,,EMO,DES,REQUEST,EMO,DES,REQUEST
+FL2_0777,Te encontré.,kaper'llien,flashcards,4,NEG,2,,NEG,REQUEST,DES,NEG,REQUEST,DES
+FL2_0017,"¡Oh, no! (masculino)",¡shaw!,flashcards,4,AFI,1,,PRG,DES,NEG,AFI,DES,REQUEST
+FL2_0756,¡Ha venido!,¡wek'lli!,flashcards,4,NEG,1,,DES,PRG,NEG,DES,REQUEST,NEG
+FL2_2175,Nos engañaste.,tumu'tulundek,flashcards,4,SAL,1,,DES,REQUEST,SAL,DES,EMO,SAL
+FL2_0021,¡Al ataque!,¡paku' llipu'tudek'kunku'!,flashcards,4,EMO,0,,EMO,DES,SAL,EMO,DES,SAL
+FL2_0698,Terminamos.,a'ta'wantullidek,flashcards,4,EMO,0,,EMO,PRG,DES,EMO,NEG,DES
+FL2_0702,Estamos hartos.,perlli'llidek,flashcards,4,NEG,0,,SAL,DES,NEG,SAL,DES,NEG
+FL2_0767,Estoy jodiendo.,a'perchapalek,flashcards,4,AFI,0,,EMO,DES,AFI,EMO,DES,AFI
+FL2_0768,Estoy leseando.,si'lentapalek,flashcards,4,AFI,0,,DES,AFI,PRG,DES,AFI,EMO
+FL2_0769,Lo compré.,mapa'lek,flashcards,4,EMO,0,,PRG,DES,EMO,AFI,DES,EMO
+FL2_0771,Puedo compartir.,yennitulek a'nañiak,flashcards,4,EMO,0,modal_permiso_capacidad,EMO,DES,NEG,EMO,DES,NEG
+FL2_0772,Confesé.,lunnek,flashcards,4,AFI,0,,AFI,DES,EMO,AFI,DES,EMO
+FL2_0776,Tenía frío.,sanek'wantuwinek,flashcards,4,NEG,0,,DES,NEG,NEG,DES,NEG,NEG
+FL2_0799,Quiero este.,asu' luwantulek,flashcards,4,AFI,0,volitivo_necesidad,DES,EMO,AFI,AFI,EMO,DES
+FL2_0814,Tengo curiosidad.,ñinchidinupalek,flashcards,4,NEG,0,,NEG,DES,NEG,NEG,DES,NEG
+FL2_0819,Estoy saludable.,ñapalek mudinusu',flashcards,4,NEG,0,,DES,SAL,NEG,DES,SAL,NEG
+FL2_2180,Deberían quedarse.,llia'a'mamasu' ñapalli,flashcards,4,EMO,0,,EMO,EMO,DES,EMO,EMO,DES
+FL2_0779,Traigo noticias.,kera'pilellek la'la'lusa',flashcards,3,REQUEST,3,,REQUEST,DES,REQUEST,DES,DES,REQUEST
+FL2_2177,Puedes decírnoslo.,yennitula winta'mudek,flashcards,3,REQUEST,3,modal_permiso_capacidad,REQUEST,DES,REQUEST,DES,DES,REQUEST
+FL2_0010,¡Socorro! ¡Auxilio!,¡katu'pa'! ¡katu'pa'!,flashcards,3,REQUEST,2,,REQUEST,DES,DES,REQUEST,NEG,DES
+FL2_0796,Huelo gas.,lanerapalek gas,flashcards,3,REQUEST,2,imperativo_con_clitico,PRG,DES,DES,REQUEST,DES,REQUEST
+FL2_0032,Perdí. (opuesto de ganar),wer'lliek,flashcards,3,SAL,1,,DES,DES,SAL,DES,REQUEST,SAL
+FL2_0018,"¡Oh, no! (femenino)",¡asha!,flashcards,3,AFI,0,,PRG,DES,AFI,DES,DES,AFI
+FL2_0660,Tom saltó.,tom indek'lli,flashcards,3,AFI,0,,PRG,AFI,DES,DES,AFI,DES
+FL2_0780,Tengo tiempo.,manennu'tapi'nek,flashcards,3,EMO,0,,PRG,EMO,DES,DES,EMO,DES
+FL2_0782,Te oí.,lauk'llien,flashcards,3,PRG,0,,PRG,DES,PRG,NEG,DES,DES
+FL2_0811,Soy turca.,turka nuka'ka,flashcards,3,AFI,0,,DES,DES,AFI,AFI,DES,AFI
+FL2_0687,Nos gusta.,iya'tulek'wa',flashcards,2,REQUEST,2,emocion_valoracion,REQUEST,DES,DES,REQUEST,DES,DES
+FL2_0688,Lo hicimos.,nu'tulek'wa',flashcards,2,REQUEST,2,,DES,DES,REQUEST,DES,DES,REQUEST
+FL2_0791,Los necesito.,luwantudek'lek,flashcards,2,REQUEST,2,volitivo_necesidad,DES,REQUEST,DES,DES,REQUEST,DES
+FL2_0683,Somos hombres.,enmu'pinen nuka'kudek,flashcards,2,EMO,1,,DES,DES,REQUEST,DES,DES,EMO
+FL2_0778,Me enfadé.,yulek,flashcards,2,EMO,1,,DES,DES,EMO,DES,DES,REQUEST
+FL2_0029,Me caí.,anu'lek,flashcards,2,AFI,0,,AFI,DES,DES,AFI,DES,DES
+FL2_0703,Somos débiles.,saputek nuka'kudek,flashcards,2,EMO,0,,EMO,DES,DES,EMO,DES,DES
+FL2_0757,Tiene vino.,vinu' a'ñapalli,flashcards,2,EMO,0,,DES,EMO,DES,DES,EMO,DES
+FL2_0766,Soy cocinero.,kalu'tutek' nuka'ka,flashcards,2,SAL,0,,SAL,DES,DES,SAL,DES,DES
+FL2_0774,Como pan.,ka'apalek tanta',flashcards,2,SAL,0,,DES,SAL,DES,DES,SAL,DES
+FL2_0775,Como fruta.,ka'apalek wayupi,flashcards,2,EMO,0,,EMO,DES,DES,EMO,DES,DES
+FL2_0783,Los conozco.,luwer'chapadeklek,flashcards,2,EMO,0,,PRG,DES,DES,DES,EMO,DES
+FL2_0786,La amaba.,tantenwinek,flashcards,2,EMO,0,emocion_valoracion,EMO,DES,DES,EMO,DES,DES
+FL2_0787,Lo extrañaba.,lu'wanwinek,flashcards,2,EMO,0,,EMO,DES,DES,EMO,DES,DES
+FL2_0788,Debo esconderme.,insek'kita'kasu'ñapalli,flashcards,2,EMO,0,deber_obligacion,EMO,DES,DES,EMO,DES,DES
+FL2_0815,Estoy bailando.,lansa'palek,flashcards,2,EMO,0,,PRG,DES,DES,DES,EMO,DES
+FL2_0816,Estoy comprometida.,ñapalek ala'sa' enmu'pinenlek,flashcards,2,EMO,0,,DES,DES,EMO,DES,DES,EMO
+FL2_0689,Debemos irnos.,pa'a'kawa'su' ñapalli,flashcards,1,PRG,0,deber_obligacion,DES,PRG,DES,DES,DES,DES
+FL2_0699,Estamos acá.,asek ñapallidek,flashcards,1,PRG,0,,DES,DES,PRG,DES,DES,DES
+FL2_0700,Estamos perdidos.,wer'su' ñapallidek,flashcards,1,AFI,0,,DES,DES,DES,DES,DES,AFI
+FL2_0762,¡Aquí estamos!,¡asek ñapallidek!,flashcards,1,PRG,0,,DES,DES,PRG,DES,DES,DES
+FL2_0763,Aquí estamos.,asek ñapallidek,flashcards,1,PRG,0,,DES,DES,PRG,DES,DES,DES
+FL2_0809,Soy finlandés.,finlandis nuka'ka,flashcards,1,PRG,0,,DES,DES,PRG,DES,DES,DES
+FL2_0810,Soy turco.,turku nuka'ka,flashcards,1,AFI,0,,DES,DES,AFI,DES,DES,DES
+FL2_0024,¡Tengo!,¡a'ñapalek!,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0677,Tom pagará.,tom panwilek'techu,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0690,Lo queremos.,tantenlek'wa',flashcards,0,,0,volitivo_necesidad,DES,DES,DES,DES,DES,DES
+FL2_0697,Estamos ocupados.,a'ñapallidek dudimpu' nu'ta'kawa'su',flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0761,Está fingiendo comer.,intek weranpalli,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0781,Tengo vino.,vinu' a'ñapalek,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0785,Vivo aquí.,asek nanpipalek,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0795,Vendo autos.,uku'latapalek wa'nateka'asu',flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0800,Estaba despierto.,ñapawinek nanpiladasu',flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0801,Estaba mareado.,ñapawinek lupersu',flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0803,Estaba desnudo.,inanpilatek ñapawinek,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0804,Estaba cansado.,saka'tusu' ñapawinek,flashcards,0,,0,emocion_valoracion,DES,DES,DES,DES,DES,DES
+FL2_0805,Estaba equivocado.,pektunsu' ñapawinek,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0812,Soy panadero.,tanta' nu'tutek nuka'ka,flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_0817,Estoy emocionado.,ñapalek sakek'su',flashcards,0,,0,,DES,DES,DES,DES,DES,DES
+FL2_2174,Nos traicionaste.,wa'danpilapilundek,flashcards,0,,0,,DES,DES,DES,DES,DES,DES

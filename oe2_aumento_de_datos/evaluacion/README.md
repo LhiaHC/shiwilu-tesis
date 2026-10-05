@@ -37,6 +37,13 @@ Retrotraducción ×1 de Colab) están en [`../historico/en_linea_protocolo_dev/`
 | Aumento al elegir `C` | generado una vez con todo el pool | generado dentro de cada partición, solo con su entrenamiento |
 | Estado | 12 experimentos completos | falta Generate-then-Refine (ver `../README.md`) |
 
+## Variante con signos de interrogación
+
+`validacion_cruzada_cv_interna.py --condicion con_interrogacion` repite el protocolo B conservando `¿` y `?` (como tokens aparte; el resto de la
+puntuación y las tildes se quitan igual). Escribe en `resultados/cv_interna_con_interrogacion/` y **no** reemplaza los resultados vigentes. Con esos signos el F1
+macro sube ~0.07-0.10, casi todo por PRG (F1 ≈ 1.00, porque el 100% de PRG lleva `¿?`) y AFI (se deja de confundir con PRG). Está calculada para sin aumento, Mixup y
+Retrotraducción; Generate-then-Refine no necesita regenerarse (sus oraciones de PRG ya traen `¿?`), solo reevaluarse con esta condición.
+
 ## Cómo correr el protocolo B completo
 
 Desde la raíz del repositorio:

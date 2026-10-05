@@ -76,6 +76,7 @@ from shiwilu.clasificacion import (  # noqa: E402
     cargar_folds,
     extraer_embeddings,
 )
+from shiwilu.taxonomia import INTENCIONES  # noqa: E402
 from shiwilu.rutas import AUMENTO_SALIDA, CV_INTERNA_RESULTADOS as CV_RESULTADOS_BASE, NMT_REPO_EXTERNO  # noqa: E402
 
 TECNICAS = ["sin_aumento", "mixup", "retrotraduccion", "generate_then_refine"]
@@ -93,8 +94,9 @@ def particiones_internas(idx_pool: np.ndarray, y: np.ndarray, claves: np.ndarray
 class Sinteticos:
     """Datos sinteticos de un fold para cualquier subconjunto de entrenamiento (`para`)."""
 
-    def __init__(self, tecnica, args, corpus, y, claves, E_orig, modelos_emb, tx, f):
+    def __init__(self, tecnica, args, corpus, y, claves, E_orig, modelos_emb, tx, f, mapa_pos=None):
         self.tecnica, self.args, self.corpus, self.y, self.claves = tecnica, args, corpus, y, claves
+        self.mapa_pos = mapa_pos
         self.E_orig, self.modelos_emb, self.tx, self.f = E_orig, modelos_emb, tx, f
         self.carpeta = args.cache / tecnica
         self.retro = None
@@ -108,6 +110,12 @@ class Sinteticos:
                                          lambda k=k: ven.generar_retro(self.corpus, idx_pool, self.f, self.args.checkpoint,
                                                                        self.args.repo_nmt, k)))
         gen = sorteos[0] if len(sorteos) == 1 else ven.combinar_sin_duplicados(sorteos, set())
+        if self.mapa_pos is not None:   # corpus sin algunas categorias: se descartan sus filas y se re-indexa el origen
+            gen = gen[~gen["intencion"].isin(self.args.excluir_categorias)].copy()
+            gen["id_origen"] = gen["id_origen"].map(self.mapa_pos)
+            assert gen["id_origen"].notna().all(), "filas del catalogo con origen excluido"
+            gen["id_origen"] = gen["id_origen"].astype(int)
+            gen = gen.reset_index(drop=True)
         E_gen = {m: extraer_embeddings([self.tx(t) for t in gen["shiwilu"]], m) for m in self.modelos_emb}
         self.retro = (gen, E_gen, gen["shiwilu"].map(_normalizar_estricto).to_numpy(), gen["intencion"].to_numpy())
 
@@ -129,10 +137,12 @@ class Sinteticos:
             return {m: (E_gen[m][ok], y_gen[ok]) for m in modelos}
         # generate_then_refine
         por_llamada = min(ven.POR_LLAMADA, self.args.cantidad)
+        categorias = [c for c in INTENCIONES if c in set(self.y)]   # sin las categorias excluidas
         partes = []
         for j in range(math.ceil(self.args.cantidad / por_llamada)):
             archivo = f"{nombre}.csv" if j == 0 else f"{nombre}_l{j}.csv"
-            partes.append(ven.con_cache(self.carpeta / archivo, lambda j=j: ven.generar_gtr(self.corpus, idx_train, por_llamada, j)))
+            partes.append(ven.con_cache(self.carpeta / archivo, lambda j=j: ven.generar_gtr(self.corpus, idx_train, por_llamada, j, categorias)))
+        partes = [x[x["intencion"].isin(categorias)].reset_index(drop=True) for x in partes]   # la pool sembrada puede traer categorias excluidas
         g = partes[0] if len(partes) == 1 else ven.combinar_sin_duplicados(partes, set(self.claves[idx_train]))
         aprobado = g[g["estado_filtro"] == "aprobado"].reset_index(drop=True)
         copia = np.isin(aprobado["shiwilu"].map(_normalizar_estricto).to_numpy(), list(excluir))
@@ -174,6 +184,14 @@ def main() -> int:
     ap.add_argument("--condicion", choices=["sin_puntuacion", "con_interrogacion"], default="sin_puntuacion",
                     help="Texto que ven los modelos: `sin_puntuacion` (vigente) o `con_interrogacion` (conserva ¿ ?). "
                          "La segunda escribe en evaluacion/resultados/cv_interna_con_interrogacion/.")
+    ap.add_argument("--corpus", type=Path, default=None,
+                    help="CSV de un corpus alternativo con los MISMOS textos y orden (p. ej. con etiquetas corregidas). "
+                         "Escribe en una carpeta aparte (cv_interna_<condicion>_<nombre del archivo>). Solo sin_aumento y mixup: "
+                         "las caches de Retrotraduccion y GtR llevan las etiquetas del corpus original.")
+    ap.add_argument("--excluir-categorias", nargs="+", default=[], metavar="CAT",
+                    help="Quita del corpus todas las oraciones de esas categorias (p. ej. DES) antes de evaluar. Sirve con sin_aumento, mixup y "
+                         "retrotraduccion (el catalogo se filtra y se re-indexa) y con generate_then_refine (solo se generan las demas categorias; "
+                         "las particiones internas se calculan con el corpus ya reducido, asi que la cache es PROPIA de esta configuracion).")
     ap.add_argument("--solo-generar", action="store_true",
                     help="(generate_then_refine) solo genera y guarda en la cache lo que falta (particiones internas y pool), "
                          "sin entrenar ni escribir resultados. Sirve para separar la parte que gasta tokens y retomarla si se corta.")
@@ -187,18 +205,24 @@ def main() -> int:
         raise SystemExit("--checkpoint es obligatorio para retrotraduccion (no se usa si el catalogo ya esta en la cache).")
     warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
-    corpus = cargar_corpus()
+    if args.corpus and tecnica in ("retrotraduccion", "generate_then_refine"):
+        raise SystemExit("--corpus solo se puede usar con sin_aumento y mixup: las caches de retrotraduccion y GtR llevan las etiquetas originales.")
+    corpus = cargar_corpus(args.corpus) if args.corpus else cargar_corpus()
+    mantener = ~corpus["intencion"].isin(args.excluir_categorias).to_numpy()
+    mapa_pos = {int(a): n for n, a in enumerate(np.where(mantener)[0])} if args.excluir_categorias else None   # posicion original -> nueva
+    corpus = corpus[mantener].reset_index(drop=True)
     assert corpus.index.equals(pd.RangeIndex(len(corpus))), "se asume indice 0..n-1 (id_origen = posicion)"
     y = corpus["intencion"].to_numpy()
     folds = cargar_folds(corpus)
     df = corpus.copy()
     if args.condicion == "sin_puntuacion":
-        df["shiwilu"] = cargar_corpus_normalizado()["shiwilu"].to_numpy()
+        df["shiwilu"] = cargar_corpus_normalizado()["shiwilu"].to_numpy()[mantener]
     # con_interrogacion parte del texto del corpus tal cual (minusculas, con signos): la condicion decide que se conserva
     claves = df["shiwilu"].map(_normalizar_estricto).to_numpy()
     tx = vc.CONDICIONES[args.condicion]
-    CV_INTERNA_RESULTADOS = CV_RESULTADOS_BASE if args.condicion == "sin_puntuacion" \
-        else CV_RESULTADOS_BASE.parent / f"cv_interna_{args.condicion}"
+    nombre_carpeta = "cv_interna" + ("" if args.condicion == "sin_puntuacion" else f"_{args.condicion}") \
+        + (f"_{args.corpus.stem}" if args.corpus else "")         + (f"_sin_{'_'.join(args.excluir_categorias)}" if args.excluir_categorias else "")
+    CV_INTERNA_RESULTADOS = CV_RESULTADOS_BASE if nombre_carpeta == "cv_interna" else CV_RESULTADOS_BASE.parent / nombre_carpeta
     lista_folds = args.folds if args.folds is not None else sorted(set(folds.tolist()))
     modelos_emb = list(args.modelos) if tecnica in ("sin_aumento", "mixup") else ["labse"] + [m for m in args.modelos if m != "labse"]
     E_orig = {m: extraer_embeddings([tx(t) for t in df["shiwilu"]], m) for m in modelos_emb}
@@ -211,7 +235,7 @@ def main() -> int:
         claves_test = set(claves[idx_test])
         particiones = particiones_internas(idx_pool, y, claves, f, args.k_interno)
         print(f"\n=== fold {f}: test={len(idx_test)} pool={len(idx_pool)}; particiones internas {[len(b) for _, b in particiones]} ===")
-        S = Sinteticos(tecnica, args, corpus, y, claves, E_orig, modelos_emb, tx, f)
+        S = Sinteticos(tecnica, args, corpus, y, claves, E_orig, modelos_emb, tx, f, mapa_pos)
         if tecnica == "retrotraduccion":
             S.cargar_retro(idx_pool)
             gen = S.retro[0]
