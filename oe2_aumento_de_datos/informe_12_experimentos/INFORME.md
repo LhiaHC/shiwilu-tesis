@@ -1,7 +1,7 @@
 # Los 12 experimentos del OE2: conclusiones y su sustento
 
 Todo lo que se afirma aquí sale de resultados que están en el repositorio; las figuras se regeneran con [`generar_figuras.py`](generar_figuras.py).
-Cada conclusión indica **qué evidencia la sostiene y qué tan fuerte es**.
+Cada conclusión indica **qué evidencia la sostiene y qué tan fuerte es**. La sección 11 y [`docs/informe/evidencias_informe.md`](../../docs/informe/evidencias_informe.md) listan, con rutas completas, el archivo de cada afirmación y distinguen lo vigente de lo histórico.
 
 ## 0. Resumen
 
@@ -256,12 +256,20 @@ Redacción sugerida: *«El aumento de datos con Generate-then-Refine mejora de f
 
 ## 11. Dónde está cada evidencia
 
-| Evidencia | Ruta |
-|---|---|
-| 12 experimentos, pareadas, ROC | `evaluacion/resultados/cv_interna/` (archivos `*_c120.csv`) |
-| Curva de aprendizaje real, utilidad de lo sintético, dosis, n-gramas | `evaluacion/diagnostico_baseline/` |
-| Curva por régimen | `evaluacion/resultados/curva_regimen/` y `tecnicas_aumento/salidas/regimenes/` |
-| Estancamiento con la cantidad de sintético (sección 5.5) | `evaluacion/diagnostico_baseline/por_que_se_estanca.py` y `resultados/E_*.csv` |
-| Silueta y F1 por pooling | `../oe3_caracterizacion_embeddings/` |
-| Auditoría de DES | `analisis_intrinseco/resultados/auditoria_des/` |
-| Variantes de selección de GtR (sección 5.6) | `evaluacion/variantes_gtr.py`, `evaluacion/notebooks/variantes_gtr.ipynb` y `evaluacion/resultados/variantes_gtr/` |
+Todas las rutas son desde la raíz del repositorio. El índice completo, con una fila por afirmación (archivo fuente, figura, sección y nivel de evidencia), está en
+[`docs/informe/evidencias_informe.md`](../../docs/informe/evidencias_informe.md).
+
+**Vigente:** protocolo B (CV interna K=5), 7 clases, corpus original, texto sin `¿?`. **Anterior o histórico** (se conserva, no se usa como resultado principal): protocolo A, versión de 9 experimentos, split único, atajos de texto crudo y zips de Colab.
+
+| Evidencia | Estado | Ruta |
+|---|---|---|
+| 12 experimentos, pareadas, ROC | Vigente | `oe2_aumento_de_datos/evaluacion/resultados/cv_interna/` (archivos `*_c120.csv`) |
+| Curva de aprendizaje real, utilidad de lo sintético, dosis, n-gramas | Diagnóstico | `oe2_aumento_de_datos/evaluacion/diagnostico_baseline/` |
+| Curva por régimen | Vigente | `oe2_aumento_de_datos/evaluacion/resultados/curva_regimen/` y `oe2_aumento_de_datos/tecnicas_aumento/salidas/regimenes/` |
+| Estancamiento con la cantidad de sintético (sección 5.5) | Diagnóstico | `oe2_aumento_de_datos/evaluacion/diagnostico_baseline/por_que_se_estanca.py` y `.../resultados/E_*.csv` |
+| Variantes de selección de GtR (sección 5.6) | Diagnóstico | `oe2_aumento_de_datos/evaluacion/variantes_gtr.py`, `oe2_aumento_de_datos/evaluacion/notebooks/variantes_gtr.ipynb` y `oe2_aumento_de_datos/evaluacion/resultados/variantes_gtr/` |
+| Silueta y F1 por pooling | Vigente | `oe3_caracterizacion_embeddings/resultados/` |
+| Auditoría de DES | Diagnóstico | `oe2_aumento_de_datos/analisis_intrinseco/resultados/auditoria_des/` |
+| Escenarios sin DES, con DES reetiquetado y con `¿?` | Escenario aparte | `oe2_aumento_de_datos/evaluacion/resultados/cv_interna_sin_DES/`, `.../cv_interna_corpus_shiwilu_propuesta_des/`, `.../cv_interna_con_interrogacion/` |
+| Protocolo A (C en ~90 oraciones) y 9 experimentos | Anterior | `oe2_aumento_de_datos/evaluacion/resultados/validacion_cruzada_resumen_sin_puntuacion.csv` y `.../cv_interna/_previo_sin_gtr/` |
+| Split único, atajos de texto crudo, zips de Colab | Histórico | `oe2_aumento_de_datos/historico/` y `oe3_caracterizacion_embeddings/resultados_anteriores/` |
