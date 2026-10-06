@@ -1,0 +1,11 @@
+variante,modelo,SAL,EMO,PRG,REQUEST,AFI,NEG,DES
+ref_sin_aumento,mbert,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+ref_gtr_completo,mbert,95.0,30.4,76.6,48.6,35.6,98.2,113.4
+v1_c40_bal,mbert,40.0,30.4,40.0,40.0,35.6,40.0,40.0
+v2_c40_bal_sim060,mbert,40.0,28.2,40.0,40.0,29.2,40.0,40.0
+v3_c40_bal_sim060_sinDES,mbert,40.0,28.2,40.0,40.0,29.2,40.0,0.0
+v4_c20_bal_sim060,mbert,20.0,20.0,20.0,20.0,20.0,20.0,20.0
+v5_c20_AFI_PRG_REQUEST_sim060,mbert,0.0,0.0,20.0,20.0,20.0,0.0,0.0
+v6_c40_bal_margen,mbert,12.2,0.2,5.4,6.2,4.2,26.4,1.6
+v7_c40_bal_margen_borde,mbert,39.0,15.2,40.0,35.6,15.2,36.4,40.0
+v8_c40_bal_sinDES,mbert,40.0,30.4,40.0,40.0,35.6,40.0,0.0
