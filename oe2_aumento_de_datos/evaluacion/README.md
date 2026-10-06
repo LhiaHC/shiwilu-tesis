@@ -20,6 +20,7 @@ evaluacion/
 │   ├── sensibilidad_c_en_linea.py        lo mismo para GtR (20-120) y Retrotraducción desde la caché
 │   ├── comparacion_pareada_c_fijo.py     diferencias pareadas con el MISMO C fijo en ambas configuraciones
 │   └── resultados/
+├── diagnostico_baseline/              Por qué mBERT sin aumento es el mejor: fragmentación del texto y clasificador de n-gramas de caracteres
 └── resultados/
     ├── (raíz)                         Protocolo A: resumen, predicciones, comparación pareada y curvas ROC
     └── cv_interna/                    Protocolo B: lo mismo, por técnica y unido, más el F1 de la CV por C
@@ -35,7 +36,7 @@ Retrotraducción ×1 de Colab) están en [`../historico/en_linea_protocolo_dev/`
 | Elección de `C` | un dev de ~90 oraciones (1/6 del pool) | CV interna: 5 particiones del pool, ~560 oraciones retenidas |
 | Grilla de `C` | 0.01, 0.1, 1, 3, 10 | 0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30 |
 | Aumento al elegir `C` | generado una vez con todo el pool | generado dentro de cada partición, solo con su entrenamiento |
-| Estado | 12 experimentos completos | falta Generate-then-Refine (ver `../README.md`) |
+| Estado | 12 experimentos completos | 12 experimentos completos (GtR con 120, 80 y 40 por categoría) |
 
 ## Variante con signos de interrogación
 
@@ -53,7 +54,7 @@ E=oe2_aumento_de_datos/evaluacion
 python $E/validacion_cruzada_cv_interna.py --tecnica sin_aumento
 python $E/validacion_cruzada_cv_interna.py --tecnica mixup
 python $E/validacion_cruzada_cv_interna.py --tecnica retrotraduccion --checkpoint x     # usa la caché; el checkpoint no se necesita
-python $E/validacion_cruzada_cv_interna.py --tecnica generate_then_refine --cantidad 120 --solo-generar   # pendiente: genera con Claude (ANTHROPIC_API_KEY); lo hace el cuaderno de Colab
+python $E/validacion_cruzada_cv_interna.py --tecnica generate_then_refine --cantidad 120 --solo-generar   # genera con Claude (ANTHROPIC_API_KEY); lo hizo el cuaderno de Colab
 python $E/validacion_cruzada_cv_interna.py --tecnica generate_then_refine --cantidad 120 --etiqueta c120   # evalua desde la cache
 
 python $E/unir_predicciones.py --etiqueta cv_interna --entradas \

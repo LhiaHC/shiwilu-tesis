@@ -41,12 +41,15 @@ las 7 categorías de intención del corpus.
   - `generate_then_refine` — original + filas `aprobado` de Generate-then-Refine.
 
   En ambas variantes se descartan las filas sintéticas idénticas a una oración real
-  (ignorando mayúsculas, puntuación y tildes): el NMT de F. Prado memorizó parte del corpus.
-  Las variantes aumentadas se construyen con `tecnicas_aumento/salidas/retrotraduccion.csv`
-  y `generate_then_refine.csv` (versiones del split único, generadas el 2026-09-24, antes de
-  la limpieza del corpus del 09-27). Como R7-R8 es un análisis intrínseco sin partición
-  train/test, no hay fuga que corregir; solo conviene saber que no son las mismas filas
-  sintéticas que usa la validación cruzada de OE2.
+  (ignorando mayúsculas, puntuación y tildes) y las repetidas entre sí. Desde 2026-10-05 usan los **mismos sintéticos que la
+  evaluación de OE2**:
+  - `retrotraduccion`: el catálogo `tecnicas_aumento/salidas/retrotraduccion_pool.csv` (601 filas; +480 oraciones nuevas).
+  - `generate_then_refine`: la caché de OE2 de 120 por categoría, con los marcadores de las fuentes, del **fold 0**
+    (`salidas/en_linea_marcadores_fuentes/generate_then_refine/fold0_pool*.csv`; +493 oraciones únicas aprobadas). Se usa un solo fold
+    para que el volumen sea parecido al de la retrotraducción (unir los 5 folds daría 2081 oraciones, el triple del corpus).
+  - Las versiones anteriores (archivos del split único del 2026-09-24, antes de la limpieza del corpus; +336 y +62 oraciones) siguen disponibles como
+    `--corpus retrotraduccion_split_unico` y `--corpus generate_then_refine_split_unico`; sus resultados están en `resultados/*_split_unico/`.
+    Una copia completa de todos los resultados previos al cambio está en `resultados_anteriores/`.
 
   **Mixup queda fuera:** no genera oraciones en shiwilu, interpola vectores
   ya extraídos de un modelo específico (ver
@@ -115,22 +118,40 @@ apóstrofo** (oclusiva glotal, un fonema real del shiwilu, ej. `pante'chek`) en
 cualquier posición de la palabra — solo se quitan signos de puntuación reales
 (`¿ ? ¡ ! . , ; :`), mayúsculas y tildes/ñ.
 
-### Efecto del aumento de datos (R6) sobre la calidad intrínseca
+### Las 36 evaluaciones (3 modelos × 3 corpus × 4 estrategias): silueta (coseno)
 
-Correr `caracterizacion.py` sobre los corpus aumentados por las 2 técnicas de texto
-(se descartan las filas sintéticas que copian una oración real) casi no cambia la
-silueta: las diferencias son de ≤ 0.01 en valor absoluto, o sea, prácticamente cero.
+Corpus sin aumento / con retrotraducción actual / con GtR actual (resultados en `resultados/<corpus>/metricas_intrinsecas.csv`):
 
-| Modelo | Técnica | Silueta original | Silueta aumentada | Delta |
+| Modelo | Estrategia | Sin aumento | Retrotraducción | GtR |
 |---|---|---|---|---|
-| LaBSE | retrotraducción | -0.0254 | -0.0335 | -0.0081 |
-| mBERT | retrotraducción | -0.0096 | -0.0126 | -0.0029 |
-| XLM-R | retrotraducción | -0.0387 | -0.0295 | +0.0092 |
-| LaBSE | generate_then_refine | -0.0254 | -0.0229 | +0.0025 |
-| mBERT | generate_then_refine | -0.0096 | -0.0080 | +0.0017 |
-| XLM-R | generate_then_refine | -0.0387 | -0.0352 | +0.0035 |
+| LaBSE | CLS | -0.0317 | -0.0310 | -0.0017 |
+| LaBSE | Mean pooling | -0.0296 | -0.0323 | +0.0012 |
+| LaBSE | Max pooling | -0.0366 | -0.0413 | -0.0059 |
+| LaBSE | Combinación de capas | -0.0254 | -0.0301 | +0.0051 |
+| mBERT | CLS | -0.0183 | -0.0252 | +0.0027 |
+| mBERT | Mean pooling | -0.0096 | -0.0126 | +0.0181 |
+| mBERT | Max pooling | -0.0124 | -0.0161 | +0.0136 |
+| mBERT | Combinación de capas | -0.0113 | -0.0106 | +0.0138 |
+| XLM-R | CLS | -0.0513 | -0.0475 | -0.0253 |
+| XLM-R | Mean pooling | -0.0510 | -0.0499 | -0.0220 |
+| XLM-R | Max pooling | -0.0387 | -0.0356 | -0.0138 |
+| XLM-R | Combinación de capas | -0.0567 | -0.0611 | -0.0269 |
 
-Como el punto de partida es ≈ 0 en todos los casos, no se puede afirmar que el
-aumento mejore ni empeore la organización intrínseca de los embeddings. La
-síntesis con el resultado extrínseco está en
-[`oe4_sintesis/README.md`](../oe4_sintesis/README.md).
+- **Retrotraducción:** no cambia la silueta de forma apreciable (diferencias entre -0.007 y +0.004); Davies-Bouldin empeora de ~7.3 a ~8.3.
+- **GtR:** la silueta sube entre +0.021 y +0.031 en las 12 combinaciones, Davies-Bouldin baja de ~7.3 a ~5.8 y Calinski-Harabasz sube de ~6 a ~15.
+  mBERT pasa a valores positivos (hasta +0.018). **Pero no significa que las oraciones reales queden mejor organizadas:** al separar la silueta por tipo de punto
+  (`resultados/silueta_real_vs_sintetico.csv`, mean pooling), las sintéticas de GtR tienen silueta positiva por sí solas y las reales casi no cambian:
+
+| Modelo | Original (700) | Aumentado, solo reales | Aumentado, solo sintéticas GtR |
+|---|---|---|---|
+| LaBSE | -0.0296 | -0.0268 | **+0.0409** |
+| mBERT | -0.0096 | -0.0045 | **+0.0503** |
+| XLM-R | -0.0510 | -0.0566 | **+0.0272** |
+
+  Es decir, lo que sube es la silueta de las propias oraciones sintéticas (muy "típicas" de su categoría, coherente con que en OE2 sus etiquetas coinciden con las de un clasificador real el 85% de las veces), no la de las reales.
+  Con retrotraducción, las sintéticas están tan mal agrupadas como las reales (-0.017 a -0.055).
+- **Ranking:** el orden de los modelos no cambia en ningún corpus (mBERT > LaBSE > XLM-R); la mejor estrategia por modelo es la misma (LaBSE: combinación de capas, XLM-R: max pooling; mBERT: mean pooling, o combinación de capas con retrotraducción).
+- **Con los sintéticos antiguos** (split único) el efecto era ≤ 0.01 en todos los casos, porque GtR solo agregaba 62 oraciones; el cambio de ahora se debe al mayor volumen y a los filtros corregidos de GtR.
+- Todas las siluetas siguen siendo ≈ 0 o negativas salvo las de GtR con sus propios puntos sintéticos: ningún modelo agrupa por intención las oraciones reales.
+
+La síntesis con el resultado extrínseco está en [`oe4_sintesis/README.md`](../oe4_sintesis/README.md) (todavía usa el protocolo A de OE2 y las cifras antiguas de OE3).

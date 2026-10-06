@@ -138,7 +138,9 @@ def con_cache(ruta: Path, generar) -> pd.DataFrame:
         return pd.read_csv(ruta)
     df = generar()
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(ruta, index=False, encoding="utf-8")
+    temporal = ruta.with_name(ruta.name + ".tmp")   # se escribe aparte y se renombra: un corte a mitad no deja un CSV incompleto
+    df.to_csv(temporal, index=False, encoding="utf-8")
+    os.replace(temporal, ruta)
     return df
 
 

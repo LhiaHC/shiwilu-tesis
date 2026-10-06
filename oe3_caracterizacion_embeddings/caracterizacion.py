@@ -94,10 +94,17 @@ N_CAPAS_COMBINACION = 4   # ultimas N capas para "combinacion de capas"
 
 # Corpus de texto aumentados por tecnicas de R6 compatibles con este script
 # (generan oraciones en shiwilu; Mixup no, ver docstring del modulo).
+# Fuentes VIGENTES (las mismas tecnicas y datos que la evaluacion de OE2) y, aparte, las del split unico (2026-09-24):
 VARIANTES_TEXTO = {
-    "retrotraduccion": AUMENTO_SALIDA / "retrotraduccion.csv",
-    "generate_then_refine": AUMENTO_SALIDA / "generate_then_refine.csv",
+    # catalogo de retrotraduccion que alimenta la validacion cruzada de OE2 (601 filas)
+    "retrotraduccion": AUMENTO_SALIDA / "retrotraduccion_pool.csv",
+    # cache de GtR de OE2 (120 por categoria, ya refiltrada con los marcadores de las fuentes): se usa el aumento del fold FOLD_GTR
+    "generate_then_refine": AUMENTO_SALIDA / "en_linea_marcadores_fuentes" / "generate_then_refine",
+    # versiones antiguas, solo para reproducir los resultados previos
+    "retrotraduccion_split_unico": AUMENTO_SALIDA / "retrotraduccion.csv",
+    "generate_then_refine_split_unico": AUMENTO_SALIDA / "generate_then_refine.csv",
 }
+FOLD_GTR = 0   # un solo fold de GtR (~490 oraciones unicas), para que el volumen sea parecido al de la retrotraduccion y al de OE2
 
 
 def _pooling_todas_las_estrategias(salida_modelo, attention_mask: torch.Tensor) -> dict[str, torch.Tensor]:
@@ -169,8 +176,22 @@ def cargar_corpus_variante(variante: str) -> pd.DataFrame:
     ruta = VARIANTES_TEXTO[variante]
     if not ruta.exists():
         raise SystemExit(f"No se encontro {ruta}. Corre primero la tecnica correspondiente.")
-    aumento = pd.read_csv(ruta)
-    aprobado = aumento[aumento["estado_filtro"] == "aprobado"][["shiwilu", "intencion"]]
+    if variante == "retrotraduccion":
+        # el catalogo no trae `estado_filtro`: el unico filtro que rechaza algo es el de idioma (shiwilu distinto del español)
+        aumento = pd.read_csv(ruta)
+        distinto = aumento["shiwilu"].astype(str).str.strip().str.lower() != aumento["espanol"].astype(str).str.strip().str.lower()
+        aprobado = aumento[distinto][["shiwilu", "intencion"]]
+    elif variante == "generate_then_refine":
+        archivos = sorted(ruta.glob(f"fold{FOLD_GTR}_pool*.csv"))   # lotes 0-5 del pool del fold elegido
+        if not archivos:
+            raise SystemExit(f"No se encontraron {ruta}/fold{FOLD_GTR}_pool*.csv. Corre primero Generate-then-Refine.")
+        aumento = pd.concat([pd.read_csv(a) for a in archivos], ignore_index=True)
+        aprobado = aumento[aumento["estado_filtro"] == "aprobado"][["shiwilu", "intencion"]]
+    else:   # *_split_unico
+        aumento = pd.read_csv(ruta)
+        aprobado = aumento[aumento["estado_filtro"] == "aprobado"][["shiwilu", "intencion"]]
+    # varios lotes (o paráfrasis) pueden repetir la misma oracion: se conserva una por (categoria, texto normalizado)
+    aprobado = aprobado.assign(_k=aprobado["shiwilu"].map(_normalizar_estricto)).drop_duplicates(["intencion", "_k"]).drop(columns="_k")
     # Una fila sintetica identica a una oracion real (ignorando mayusculas, puntuacion y
     # tildes) no agrega informacion nueva: el NMT de F. Prado memorizo parte del corpus
     # y a veces la reproduce. Se descarta para no duplicar oraciones reales.

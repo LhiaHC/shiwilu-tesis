@@ -114,49 +114,39 @@ en negrita, las que tienen IC95% que no incluye 0:
   mejora la capacidad de separar las categorías. mBERT sin aumento tiene el AUC más
   alto (0.894); Mixup lo reduce a 0.882.
 
-## Resultados con el protocolo B (CV interna): estado del avance
+## Resultados con el protocolo B (CV interna K=5): los 12 experimentos
 
-F1 macro sobre las 700 predicciones, con `C` elegido por validación cruzada interna
-([`evaluacion/resultados/cv_interna/`](evaluacion/resultados/cv_interna/)). **Generate-then-Refine
-queda pendiente** (ver más abajo): sus sintéticos deben generarse de nuevo dentro de cada partición interna.
+F1 macro sobre las 700 predicciones, con `C` elegido por validación cruzada interna (5 particiones del pool, ~560 oraciones retenidas, grilla 0.01-30), corpus original (7 intenciones)
+y texto normalizado sin signos. Resultados en [`evaluacion/resultados/cv_interna/`](evaluacion/resultados/cv_interna/). Generate-then-Refine (GtR) se generó con Claude dentro de cada
+partición interna (120 por categoría; los niveles 80 y 40 usan los primeros lotes).
 
-| Modelo | Sin aumento | Mixup | Retrotraducción | Generate-then-Refine |
-|---|---|---|---|---|
-| mBERT | **0.665** [0.630, 0.698] | 0.629 | 0.631 | pendiente |
-| LaBSE | 0.587 [0.547, 0.624] | 0.587 | 0.582 | pendiente |
-| XLM-R | 0.570 [0.534, 0.602] | 0.546 | 0.551 | pendiente |
+| Modelo | Sin aumento | Mixup (100%) | Retrotraducción (~83%) | **GtR 120** (~89%) | GtR 80 (~59%) | GtR 40 (~30%) |
+|---|---|---|---|---|---|---|
+| mBERT | **0.665** [0.629, 0.698] | 0.629 | 0.631 | 0.652 [0.616, 0.684] | 0.650 | 0.650 |
+| LaBSE | 0.587 [0.547, 0.623] | 0.587 | 0.581 | 0.593 [0.558, 0.626] | 0.583 | 0.595 |
+| XLM-R | 0.570 [0.534, 0.602] | 0.546 | 0.551 | 0.589 [0.550, 0.624] | 0.583 | 0.595 |
 
-Diferencia pareada frente a `sin_aumento` (en negrita, IC95% que no incluye 0):
+Diferencia pareada de F1 frente a `sin_aumento` (en negrita, IC95% que no incluye 0):
 
 | Técnica | LaBSE | mBERT | XLM-R |
 |---|---|---|---|
 | Mixup | 0.000 | **-0.036** | **-0.024** |
 | Retrotraducción | -0.006 | **-0.034** | -0.019 |
+| GtR 120 | +0.006 | -0.013 | +0.018 |
+| GtR 80 | -0.004 | -0.015 | +0.012 |
+| GtR 40 | +0.008 | -0.015 | **+0.025** |
 
-- Con una elección de `C` más confiable el baseline de XLM-R sube de 0.548 a 0.570, y la ventaja
-  aparente de Mixup y Retrotraducción en ese modelo desaparece.
-- Ninguna técnica evaluada hasta ahora supera al baseline; Mixup y Retrotraducción empeoran a mBERT.
-- AUC macro (curvas ROC en `cv_interna/curvas_roc_cv_interna/`): mBERT sin aumento 0.899, Mixup 0.887,
-  Retrotraducción 0.883; LaBSE 0.868 / 0.873 / 0.867; XLM-R 0.853 / 0.846 / 0.856.
-- Volumen sintético: Mixup 100% de las reales, Retrotraducción ~83%.
+- **Ninguna técnica mejora al baseline de forma consistente.** La única diferencia positiva distinguible (GtR 40 en XLM-R, +0.025) es 1 de 9 comparaciones de GtR y no se repite en 80 ni en 120.
+- **GtR es la técnica menos mala:** no empeora a ningún modelo de forma distinguible, mientras Mixup y Retrotraducción empeoran a mBERT (y Mixup a XLM-R). Su AUC macro es el más alto en los tres modelos
+  (mBERT 0.907 contra 0.899 sin aumento; LaBSE 0.878 contra 0.868; XLM-R 0.868 contra 0.853), sin prueba de significancia.
+- **Más volumen no ayuda:** de 40 a 120 por categoría el F1 de GtR queda plano (mBERT 0.650/0.650/0.652).
+- **mBERT sin aumento es el mejor de los 18 resultados** y supera a LaBSE (+0.078) y XLM-R (+0.095) de forma distinguible. Ver [`evaluacion/diagnostico_baseline/`](evaluacion/diagnostico_baseline/) para el análisis de por qué.
+- **Lo sintético de GtR queda desbalanceado**: por fold, aprobadas únicas DES 118, SAL 106, NEG 100, PRG 77, REQUEST 51, AFI 44, EMO 31 (frente a ~80 reales por categoría): los filtros de marcador dejan pasar casi
+  todo DES y SAL y rechazan mucho EMO, AFI y REQUEST. Su calidad no fue verificada por un hablante.
+- Respecto del protocolo A, la ventaja aparente de GtR en XLM-R (+0.037) se reduce a +0.018 y deja de ser distinguible: parte venía de un baseline con `C` mal elegido.
 
-## Pendiente: Generate-then-Refine con CV interna (K=5) y nivel 120
-
-Es la única técnica que falta para cerrar el protocolo B. Con K=5 hay que pedirle a Claude, **dentro de
-cada partición interna**, 120 oraciones por categoría (6 lotes de 20), usando solo las oraciones de entrenamiento
-de esa partición: 5 folds x 5 particiones x 7 categorías x 6 lotes ≈ **1050 llamadas** (~US$7-10 con
-`claude-sonnet-4-6`), más ~35 si se regenera el lote 0 del pool con el prompt actual. Los lotes son acumulativos,
-así que al generar 120 también se pueden evaluar 40 y 80 (`--cantidad`). Pasos:
-
-1. Cerrar antes lo que invalidaría lo generado: el prompt, los folds, K y el modelo de Claude (los filtros se pueden
-   cambiar después con `tecnicas_aumento/refiltrar_marcadores.py`, sin costo).
-2. Hacer `git push` de lo nuevo y correr en Colab el cuaderno
-   [`tecnicas_aumento/colab/colab_generate_then_refine_cv_interna.ipynb`](tecnicas_aumento/colab/colab_generate_then_refine_cv_interna.ipynb)
-   (ya está hecho y probado con un generador simulado): genera con Claude lo que falta (paso 4a, retomable si Colab se desconecta),
-   evalúa los niveles 120, 80 y 40, une con las otras tres técnicas, saca pareadas y ROC, y entrega un solo `.zip`.
-3. Traer el `.zip` al repositorio: `cv_interna/` a `evaluacion/resultados/cv_interna/` y `generate_then_refine/` a
-   `tecnicas_aumento/salidas/en_linea_marcadores_fuentes/generate_then_refine/`.
-4. Actualizar la tabla del protocolo B de este README con la fila de Generate-then-Refine.
+Versión anterior de estos resultados (9 de 12 experimentos, sin GtR): [`evaluacion/resultados/cv_interna/_previo_sin_gtr/`](evaluacion/resultados/cv_interna/_previo_sin_gtr/). El lote 0 del pool de GtR que había
+antes de regenerarlo con el prompt actual está en `tecnicas_aumento/salidas/historico/lote0_pool_prompt_anterior/`.
 
 ## Verificaciones y limitaciones conocidas
 
