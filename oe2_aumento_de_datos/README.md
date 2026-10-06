@@ -28,6 +28,7 @@ oe2_aumento_de_datos/
 │   ├── unir_predicciones.py, comparacion_pareada.py, curvas_roc.py
 │   ├── diagnostico_c/                   sensibilidad del F1 al hiperparámetro C (scripts + resultados)
 │   └── resultados/                      protocolo A (raíz) y protocolo B (cv_interna/)
+├── analisis_resultados/    notebook que analiza los resultados y regenera las 10 figuras (figuras/)
 └── historico/              Etapas cerradas, no se tocan (ver su README): split único, texto crudo,
                             generación en línea con dev (niveles 20-120) y zips de Colab
 ```
