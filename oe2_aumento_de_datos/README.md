@@ -148,6 +148,45 @@ Diferencia pareada de F1 frente a `sin_aumento` (en negrita, IC95% que no incluy
 Versión anterior de estos resultados (9 de 12 experimentos, sin GtR): [`evaluacion/resultados/cv_interna/_previo_sin_gtr/`](evaluacion/resultados/cv_interna/_previo_sin_gtr/). El lote 0 del pool de GtR que había
 antes de regenerarlo con el prompt actual está en `tecnicas_aumento/salidas/historico/lote0_pool_prompt_anterior/`.
 
+## Curva de aprendizaje por régimen de datos (10, 25, 50 y 80 ejemplos reales por clase)
+
+Repite los experimentos reduciendo los datos reales de entrenamiento (80 = todo el pool de entrenamiento de cada fold, que equivale a "100" porque en la validación cruzada la clase tiene ~80 oraciones de entrenamiento y ~20 de test).
+Script: [`evaluacion/curva_regimen.py`](evaluacion/curva_regimen.py); resultados y figura en `evaluacion/resultados/curva_regimen/`. El aumento se genera **solo con la muestra de cada régimen** (GtR se generó de nuevo con Claude usando como ejemplos solo esas oraciones: 20, 40 y 80 por categoría para 10, 25 y 50;
+caché en `tecnicas_aumento/salidas/regimenes/`, unas 245 llamadas). Se usa el mismo C en las cuatro técnicas, elegido por CV interna sobre las reales de la muestra. Baseline, Mixup y Retrotraducción: media de 3 muestras aleatorias; GtR: 1 muestra (la misma que la semilla 0 de las demás, comparación pareada).
+
+F1 macro:
+
+| Modelo | Técnica | 10 | 25 | 50 | 80 |
+|---|---|---|---|---|---|
+| mBERT | Sin aumento | 0.431 | 0.527 | 0.600 | 0.665 |
+| mBERT | Mixup | 0.432 | 0.524 | 0.604 | 0.648 |
+| mBERT | Retrotraducción | 0.426 | 0.510 | 0.579 | 0.633 |
+| mBERT | **GtR** | **0.503** | **0.599** | 0.632 | 0.656 |
+| LaBSE | Sin aumento | 0.383 | 0.495 | 0.570 | 0.587 |
+| LaBSE | Mixup | 0.379 | 0.490 | 0.559 | 0.590 |
+| LaBSE | Retrotraducción | 0.382 | 0.469 | 0.555 | 0.591 |
+| LaBSE | **GtR** | **0.432** | **0.523** | 0.584 | 0.580 |
+| XLM-R | Sin aumento | 0.372 | 0.464 | 0.531 | 0.570 |
+| XLM-R | Mixup | 0.360 | 0.459 | 0.531 | 0.562 |
+| XLM-R | Retrotraducción | 0.382 | 0.456 | 0.526 | 0.549 |
+| XLM-R | **GtR** | **0.423** | **0.519** | 0.544 | 0.589 |
+
+Diferencia pareada frente a sin aumento (`*` = IC95% no incluye 0):
+
+| Técnica | Modelo | 10 | 25 | 50 | 80 |
+|---|---|---|---|---|---|
+| GtR | mBERT | **+0.054*** | **+0.042*** | +0.022 | -0.009 |
+| GtR | LaBSE | **+0.038*** | **+0.040*** | +0.016 | -0.007 |
+| GtR | XLM-R | **+0.044*** | **+0.029*** | +0.024 | +0.018 |
+| Mixup | mBERT / LaBSE / XLM-R | +0.001 / -0.004 / -0.012* | -0.003 / -0.005 / -0.005 | +0.004 / -0.011* / 0.000 | -0.018* / +0.003 / -0.008 |
+| Retrotraducción | mBERT / LaBSE / XLM-R | -0.005 / -0.001 / +0.010 | -0.017 / -0.026* / -0.008 | -0.022* / -0.015 / -0.005 | -0.033* / +0.004 / -0.021 |
+
+- **GtR ayuda de forma distinguible con 10 y 25 ejemplos reales por clase en los tres modelos (+0.03 a +0.05), la ventaja se reduce con 50 (+0.02, no distinguible) y desaparece con 80.** Es el resultado esperado: el aumento sirve en el escenario de recursos extremos.
+- **Mixup y Retrotraducción no ayudan en ningún régimen**; Retrotraducción empeora, sobre todo con más datos.
+- **El F1 sin aumento sigue subiendo con los datos reales** (mBERT 0.431, 0.527, 0.600, 0.665: +0.065 entre 50 y 80), mientras la contribución de GtR se achica: lo sintético aporta menos información por oración que lo real
+  (interpolando, ~14 sintéticas por clase con 10 reales equivalen a ~11 reales; ~26 con 25 reales, a ~25; ~49 con 50 reales, a ~14). Es consistente con que su calidad, no la cantidad, es lo que limita.
+- Limitaciones: GtR usa una sola muestra de reales por régimen (el baseline varía hasta ±0.046 entre muestras con 10 por clase, en mBERT); el C común se elige con las reales (puede favorecer ligeramente al baseline); la interpolación de equivalencias es aproximada.
+
 ## Verificaciones y limitaciones conocidas
 
 Verificado al reorganizar el repositorio (2026-10):

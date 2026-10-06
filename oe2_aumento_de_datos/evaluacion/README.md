@@ -20,6 +20,8 @@ evaluacion/
 │   ├── sensibilidad_c_en_linea.py        lo mismo para GtR (20-120) y Retrotraducción desde la caché
 │   ├── comparacion_pareada_c_fijo.py     diferencias pareadas con el MISMO C fijo en ambas configuraciones
 │   └── resultados/
+├── variantes_gtr.py                   Variantes de selección del sintético de GtR (balanceo, filtros de similitud/centroides, sin DES); no usa la API
+├── notebooks/variantes_gtr.ipynb      Notebook que lo ejecuta igual en local y en Colab (resultados en resultados/variantes_gtr/)
 ├── diagnostico_baseline/              Por qué mBERT sin aumento es el mejor: fragmentación del texto y clasificador de n-gramas de caracteres
 └── resultados/
     ├── (raíz)                         Protocolo A: resumen, predicciones, comparación pareada y curvas ROC

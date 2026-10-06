@@ -155,3 +155,30 @@ Corpus sin aumento / con retrotraducción actual / con GtR actual (resultados en
 - Todas las siluetas siguen siendo ≈ 0 o negativas salvo las de GtR con sus propios puntos sintéticos: ningún modelo agrupa por intención las oraciones reales.
 
 La síntesis con el resultado extrínseco está en [`oe4_sintesis/README.md`](../oe4_sintesis/README.md) (todavía usa el protocolo A de OE2 y las cifras antiguas de OE3).
+
+
+### F1 de clasificación de las 36 combinaciones
+
+Para poder comparar la silueta con el F1, `f1_por_pooling.py` entrena el clasificador del protocolo B de OE2 (Regresión Logística, `C` por CV interna K=5, 5 folds congelados, sintéticos generados solo con el entrenamiento de cada partición)
+sobre los embeddings de cada estrategia de pooling. Resultados en `resultados/f1_por_pooling.csv` (con IC95%) y, por corrida, en `../oe2_aumento_de_datos/evaluacion/resultados/cv_interna_pooling/`. F1 macro (silueta entre paréntesis):
+
+| Modelo | Pooling | Sin aumento | Retrotraducción | GtR 120 |
+|---|---|---|---|---|
+| mBERT | CLS | 0.617 (-0.018) | 0.601 (-0.025) | 0.636 (+0.003) |
+| mBERT | Mean pooling | **0.667** (-0.010) | 0.616 (-0.013) | 0.657 (+0.018) |
+| mBERT | Max pooling | 0.658 (-0.012) | 0.626 (-0.016) | 0.663 (+0.014) |
+| mBERT | Combinación de capas | 0.646 (-0.011) | 0.638 (-0.011) | 0.660 (+0.014) |
+| LaBSE | CLS | 0.591 (-0.032) | 0.585 (-0.031) | 0.588 (-0.002) |
+| LaBSE | Mean pooling | 0.596 (-0.030) | 0.589 (-0.032) | 0.608 (+0.001) |
+| LaBSE | Max pooling | 0.622 (-0.037) | 0.606 (-0.041) | 0.622 (-0.006) |
+| LaBSE | Combinación de capas | 0.615 (-0.025) | 0.594 (-0.030) | 0.623 (+0.005) |
+| XLM-R | CLS | 0.544 (-0.051) | 0.524 (-0.047) | 0.573 (-0.025) |
+| XLM-R | Mean pooling | 0.573 (-0.051) | 0.550 (-0.050) | 0.586 (-0.022) |
+| XLM-R | Max pooling | 0.592 (-0.039) | 0.557 (-0.036) | 0.608 (-0.014) |
+| XLM-R | Combinación de capas | 0.600 (-0.057) | 0.563 (-0.061) | 0.625 (-0.027) |
+
+- **El mejor de las 36 es mBERT + mean pooling + sin aumento (F1 0.667 [0.631, 0.699])**, que reproduce el 0.665 de OE2; los seis mejores son todos de mBERT.
+- **Silueta y F1 se relacionan, pero no lo suficiente para elegir el pooling:** Spearman 0.75 entre las 36; 0.74 dentro de mBERT, pero solo 0.27 en LaBSE y 0.39 en XLM-R. El mejor pooling sin aumento por F1 es mean (mBERT), max (LaBSE) y combinación de capas (XLM-R);
+  por silueta es mean (mBERT), combinación de capas (LaBSE) y max (XLM-R).
+- **El pooling importa:** en LaBSE y XLM-R la extracción "de fábrica" de OE2 no es la mejor (LaBSE 0.587 contra 0.622 con max pooling; XLM-R 0.570 contra 0.600 con combinación de capas), lo que reduce la brecha con mBERT (0.667 a 0.045 y 0.067). Elegir el mejor de 4 poolings sobre el mismo test es optimista.
+- **Aumento (media de los 4 poolings):** Retrotraducción baja el F1 en los tres modelos (-0.013 a -0.029); GtR lo deja igual o algo mejor (+0.007 mBERT, +0.004 LaBSE, +0.020 XLM-R), sin prueba de significancia.
