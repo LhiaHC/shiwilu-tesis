@@ -1,0 +1,7 @@
+variante,modelo,silueta_original_700,silueta_aumentado_todas,silueta_aumentado_solo_reales,silueta_aumentado_solo_sinteticas
+generate_then_refine,labse,-0.0296,0.0012,-0.0268,0.0409
+generate_then_refine,mbert,-0.0096,0.0181,-0.0045,0.0503
+generate_then_refine,xlmr,-0.051,-0.022,-0.0566,0.0272
+retrotraduccion,labse,-0.0296,-0.0323,-0.0301,-0.0356
+retrotraduccion,mbert,-0.0096,-0.0126,-0.0096,-0.017
+retrotraduccion,xlmr,-0.051,-0.0499,-0.0466,-0.0547

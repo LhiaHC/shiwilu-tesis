@@ -18,7 +18,7 @@ historico/
 │   └── resultados/           Generate-then-Refine 20, 40, 80 y 120 por categoría, Retrotraducción ×1
 │                              (predicciones, resumen, pareadas, ROC y volumen). Ver su README
 │
-├── colab_zips/             Zips descargados de Colab (contienen lo generado y los resultados de arriba)
+├── colab_zips/             Descargas de Colab tal cual: niveles 20-120 con dev (zip) y GtR con CV interna (carpeta salida_gtr_cv_interna)
 │
 └── atajos_texto_crudo/     Validación cruzada con el texto tal cual (con signos y mayúsculas)
     ├── validacion_cruzada_{predicciones,resumen}*.csv   condiciones: texto crudo, solo
