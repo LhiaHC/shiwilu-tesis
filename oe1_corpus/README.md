@@ -61,3 +61,5 @@ comportamiento del pipeline no depende de si alguien corrió o no la Etapa 0.
 
 Detalle completo de las técnicas de prompting, la taxonomía y los criterios de
 anotación en [`docs/metodologia_construccion_corpus.md`](../docs/metodologia_construccion_corpus.md).
+El documento completo de la taxonomía (definición, criterio de inclusión y ejemplos de cada una de las siete categorías) está en
+[`docs/Documento_de_Taxonomia.pdf`](../docs/Documento_de_Taxonomia.pdf).

@@ -52,7 +52,7 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 │   ├── clasificacion.py               Corpus normalizado, folds, embeddings y Regresión Logística (OE2-OE3)
 │   └── rutas.py                       Todas las rutas del proyecto, ancladas a la raíz
 │
-├── docs/                            Metodología de construcción del corpus
+├── docs/                            Metodología de construcción del corpus y documento de taxonomía (PDF)
 ├── requirements/                    Dependencias por fase y versiones usadas (versiones_usadas.txt)
 ├── REPRODUCIBILIDAD.md              ★ Cómo repetir todos los experimentos y verificar los resultados
 └── tests/                           Pruebas de las reglas de anotación
