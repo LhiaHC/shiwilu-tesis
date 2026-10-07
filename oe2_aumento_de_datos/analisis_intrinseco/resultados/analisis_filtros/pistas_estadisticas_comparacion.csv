@@ -1,0 +1,15 @@
+tipo,intencion,en_el_prompt_(70%),recalculado_(700),coinciden
+palabras,SAL,7,6,5
+palabras,EMO,6,6,6
+palabras,PRG,3,2,2
+palabras,REQUEST,1,3,1
+palabras,AFI,8,8,7
+palabras,NEG,5,4,3
+palabras,DES,3,2,2
+terminaciones,SAL,8,8,7
+terminaciones,EMO,8,8,7
+terminaciones,PRG,8,8,7
+terminaciones,REQUEST,8,8,8
+terminaciones,AFI,8,8,8
+terminaciones,NEG,8,8,7
+terminaciones,DES,8,8,7

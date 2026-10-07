@@ -1,0 +1,18 @@
+id,intencion,forma,nivel,usar,oraciones_con_la_forma,en_su_intencion,cobertura_en_su_intencion,cobertura_en_el_resto,log_odds,cobertura_min_por_fold,cobertura_max_por_fold
+NEG-01,NEG,i'n,A,si,81,62,0.62,0.032,3.88,0.45,0.682
+NEG-02,NEG,-inpu',A,si,13,12,0.12,0.002,4.03,0.045,0.2
+PRG-01,PRG,a'cha,A,si,10,10,0.1,0.0,4.94,0.048,0.15
+PRG-02,PRG,a'ta',A,si,6,1,0.01,0.008,0.49,0.0,0.043
+PRG-03,PRG,eñnupa,B,no,1,1,0.01,0.0,2.9,0.0,0.053
+PRG-04,PRG,ma'pu'si'pa',B,no,0,0,0.0,0.0,1.79,0.0,0.0
+PRG-05,PRG,ma'nen / ma'lusa',B,no,3,2,0.02,0.002,2.32,0.0,0.059
+REQ-01,REQUEST,-(k)er',A,si,57,30,0.3,0.045,2.2,0.261,0.391
+REQ-02,REQUEST,enchuku',B,no,0,0,0.0,0.0,1.79,0.0,0.0
+EMO-01,EMO,chi,A,si,0,0,0.0,0.0,1.79,0.0,0.0
+EMO-02,EMO,ten,A,si,0,0,0.0,0.0,1.79,0.0,0.0
+EMO-03,EMO,-sha,C,no,13,1,0.01,0.02,-0.34,0.0,0.056
+AFI-01,AFI,ajá,A,si,28,28,0.28,0.0,6.16,0.217,0.35
+AFI-02,AFI,ahã,A,si,0,0,0.0,0.0,1.79,0.0,0.0
+AFI-03,AFI,untana,A,si,0,0,0.0,0.0,1.79,0.0,0.0
+AFI-04,AFI,i'na,C,no,0,0,0.0,0.0,1.79,0.0,0.0
+AFI-05,AFI,-sa',C,no,14,0,0.0,0.023,-1.6,0.0,0.0

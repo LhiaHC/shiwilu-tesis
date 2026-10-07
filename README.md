@@ -33,9 +33,13 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 │
 ├── oe2_aumento_de_datos/            ◆ OE2 (R4-R6) — baselines, análisis y aumento de datos
 │   ├── particiones/                   Folds congelados + corpus normalizado
-│   ├── analisis_intrinseco/           R5: notebooks y tablas del análisis del corpus
-│   ├── tecnicas_aumento/              R6: Mixup, Retrotraducción, Generate-then-Refine y sus salidas
-│   ├── evaluacion/                    R4+R6: validación cruzada (protocolo A y B), comparaciones pareadas, curvas ROC
+│   ├── analisis_intrinseco/           R5: notebooks y tablas del análisis del corpus; auditoría de la categoría DES
+│   ├── tecnicas_aumento/              R6: Mixup, Retrotraducción, Generate-then-Refine, sus salidas y cachés (permiten reproducir sin API)
+│   ├── evaluacion/                    R4+R6: validación cruzada (protocolo A y B), pareadas, ROC, regímenes de pocos datos,
+│   │                                  variantes de selección, diagnósticos de causa y sensibilidad al hiperparámetro C
+│   ├── analisis_resultados/           Notebook que analiza los resultados y regenera las 10 figuras (figuras/)
+│   ├── reproducir_oe2.py              Plan y ejecución ordenada de TODOS los experimentos del OE2
+│   ├── verificar_resultados.py        Compara las salidas con valores_de_referencia.csv (258 cifras, incluye R5)
 │   └── historico/                     Etapas cerradas: split único, texto crudo, generación en línea con dev, zips de Colab
 │
 ├── oe3_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — 4 estrategias de pooling x 3 modelos,
@@ -49,6 +53,8 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 │   └── rutas.py                       Todas las rutas del proyecto, ancladas a la raíz
 │
 ├── docs/                            Metodología de construcción del corpus
+├── requirements/                    Dependencias por fase y versiones usadas (versiones_usadas.txt)
+├── REPRODUCIBILIDAD.md              ★ Cómo repetir todos los experimentos y verificar los resultados
 └── tests/                           Pruebas de las reglas de anotación
 ```
 
@@ -114,12 +120,14 @@ repositorio por su cuenta. Instalarlo hace los imports más limpios.
 cp .env.example .env      # y colocar la clave real
 ```
 
-Los baselines (OE2/R4) y el análisis intrínseco no requieren clave ni GPU —
-corren en CPU en minutos. Retrotraducción sí requiere GPU para entrenar el
-checkpoint NMT una vez (ver su propio README).
+Los experimentos del OE2 (baselines, técnicas de aumento, análisis de causas) **no requieren clave ni GPU**: lo generado con Claude y con el traductor de
+F. Prado está guardado en cachés dentro del repositorio (ver [`REPRODUCIBILIDAD.md`](REPRODUCIBILIDAD.md)). Solo volver a *generar* texto sintético desde cero
+requiere la clave de API (Generate-then-Refine) o una GPU (checkpoint NMT de Retrotraducción).
 
 ## Uso
 
+- **Reproducir los experimentos del OE2 y comprobar sus resultados → [`REPRODUCIBILIDAD.md`](REPRODUCIBILIDAD.md)**
+  (comandos, entradas, salidas, valores esperados y conclusiones con su evidencia; no requiere API ni GPU)
 - Reproducir la construcción del corpus (OE1) → [`oe1_corpus/README.md`](oe1_corpus/README.md)
 - Ver el protocolo, los resultados y cómo correr OE2 (baselines, aumento de datos, evaluación) → [`oe2_aumento_de_datos/README.md`](oe2_aumento_de_datos/README.md)
   - Análisis intrínseco (R5) → [`analisis_intrinseco/README.md`](oe2_aumento_de_datos/analisis_intrinseco/README.md)
