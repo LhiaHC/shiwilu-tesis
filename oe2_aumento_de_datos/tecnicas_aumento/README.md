@@ -121,9 +121,10 @@ F1 es de ±0.09. Por eso la evaluación principal es una **validación cruzada d
 las 700 oraciones se usa como test una vez (folds agrupados por texto shiwilu
 normalizado —mayúsculas, puntuación, espacios, tildes y ñ— y estratificados,
 congelados en `particiones/folds_fijos.csv`), y el aumento de cada fold se genera
-**solo a partir de su train**. El intervalo de confianza resulta ~2.8 veces más
-angosto (±0.031 en promedio), y un análisis con 30 splits aleatorios
-confirmó que no está inflado.
+**solo a partir de su train**. El intervalo de confianza resulta ~2.4 veces más
+angosto (la mitad del IC95%: ±0.088 en promedio con el split único, de
+`historico/split_unico/intervalos_confianza.csv`, frente a ±0.036 con la validación
+cruzada del protocolo B, de `evaluacion/resultados/cv_interna/`).
 
 ### Condición de texto: normalizado, sin excepción (decisión 2026-09-27)
 
@@ -214,10 +215,12 @@ Cómo se genera el aumento para la validación cruzada:
   categoría), no corregida.
 
 ### Otras comprobaciones ([`../historico/atajos_texto_crudo/auditoria_optimismo.py`](../historico/atajos_texto_crudo/auditoria_optimismo.py))
-- 30 splits aleatorios 70/15/15 dan un F1 promedio de 0.751-0.760, igual que la
-  validación cruzada con puntuación. El split único (semilla 42) fue una tirada
-  difícil (percentil 7-20; su baseline por palabras, 0.383, quedó por debajo de los
-  30 splits).
+- 30 splits aleatorios 70/15/15 muestran cuánto cambia el F1 de un mismo modelo según qué
+  oraciones queden de prueba. **Cifras de la corrida del 2026-10-06 con el corpus actual (en minúsculas)**:
+  media 0.68-0.71 y desviación estándar 0.04-0.06 entre splits (mínimo 0.575, máximo 0.798); el split
+  único (semilla 42) quedó en los percentiles 37 a 87, es decir, no fue una tirada especialmente difícil.
+  (Una versión anterior de este párrafo daba 0.751-0.760 y percentil 7-20, obtenidos con el corpus
+  cuando aún tenía mayúsculas; esas cifras ya no se reproducen y no se usan.)
 - Cuando una oración de test no comparte ninguna palabra con el train (37% de los
   casos), la exactitud baja a ~0.65 (0.79-0.81 con solapamiento parcial, ~0.95 con
   solapamiento alto).
