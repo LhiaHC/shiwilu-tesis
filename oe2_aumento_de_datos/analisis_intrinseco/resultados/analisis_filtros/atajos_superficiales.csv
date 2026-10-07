@@ -1,0 +1,29 @@
+rasgo,intencion,cobertura_en_su_intencion,cobertura_en_el_resto,riesgo
+tiene ¿ o ?,SAL,0.0,0.197,insignificante
+tiene ¿ o ?,EMO,0.0,0.197,insignificante
+tiene ¿ o ?,PRG,1.0,0.03,ALTO
+tiene ¿ o ?,REQUEST,0.18,0.167,insignificante
+tiene ¿ o ?,AFI,0.0,0.197,insignificante
+tiene ¿ o ?,NEG,0.0,0.197,insignificante
+tiene ¿ o ?,DES,0.0,0.197,insignificante
+tiene ¡ o !,SAL,0.05,0.062,insignificante
+tiene ¡ o !,EMO,0.17,0.042,BAJO
+tiene ¡ o !,PRG,0.0,0.07,insignificante
+tiene ¡ o !,REQUEST,0.08,0.057,insignificante
+tiene ¡ o !,AFI,0.0,0.07,insignificante
+tiene ¡ o !,NEG,0.01,0.068,insignificante
+tiene ¡ o !,DES,0.11,0.052,insignificante
+tiene alguna mayúscula,SAL,0.0,0.0,insignificante
+tiene alguna mayúscula,EMO,0.0,0.0,insignificante
+tiene alguna mayúscula,PRG,0.0,0.0,insignificante
+tiene alguna mayúscula,REQUEST,0.0,0.0,insignificante
+tiene alguna mayúscula,AFI,0.0,0.0,insignificante
+tiene alguna mayúscula,NEG,0.0,0.0,insignificante
+tiene alguna mayúscula,DES,0.0,0.0,insignificante
+tiene una sola palabra,SAL,0.29,0.39,insignificante
+tiene una sola palabra,EMO,0.37,0.377,insignificante
+tiene una sola palabra,PRG,0.47,0.36,insignificante
+tiene una sola palabra,REQUEST,0.38,0.375,insignificante
+tiene una sola palabra,AFI,0.3,0.388,insignificante
+tiene una sola palabra,NEG,0.38,0.375,insignificante
+tiene una sola palabra,DES,0.44,0.365,insignificante

@@ -26,9 +26,15 @@ oe2_aumento_de_datos/
 │   ├── validacion_cruzada_cv_interna.py PROTOCOLO B: C elegido por CV interna (K=5); el que cerrará el OE2
 │   ├── validacion_cruzada_en_linea.py   apoyo: genera el aumento dentro de cada fold y lo guarda en caché (lo importa el B)
 │   ├── unir_predicciones.py, comparacion_pareada.py, curvas_roc.py
+│   ├── curva_regimen.py                 R6: 10, 25, 50 y 80 ejemplos reales por categoría (resultados/curva_regimen/)
+│   ├── variantes_gtr.py                 R6: ocho variantes de selección del sintético de GtR (+ notebooks/variantes_gtr.ipynb)
+│   ├── diagnostico_baseline/            por qué gana mBERT y por qué el aumento no mejora ni se estanca (referencias, n-gramas, causas)
 │   ├── diagnostico_c/                   sensibilidad del F1 al hiperparámetro C (scripts + resultados)
-│   └── resultados/                      protocolo A (raíz) y protocolo B (cv_interna/)
+│   └── resultados/                      protocolo A (raíz), protocolo B (cv_interna/) y escenarios (sin DES, con ¿?, DES reetiquetado)
 ├── analisis_resultados/    notebook que analiza los resultados y regenera las 10 figuras (figuras/)
+├── reproducir_oe2.py       plan y ejecución ordenada de todos los experimentos (por defecto solo imprime)
+├── verificar_resultados.py compara las salidas con valores_de_referencia.csv (258 cifras, incluye R5)
+├── valores_de_referencia.csv  cifras con las que se sacaron las conclusiones
 └── historico/              Etapas cerradas, no se tocan (ver su README): split único, texto crudo,
                             generación en línea con dev (niveles 20-120) y zips de Colab
 ```
@@ -64,7 +70,11 @@ Regresión Logística) está en [`../shiwilu/clasificacion.py`](../shiwilu/clasi
 
 ## Cómo correr
 
-Desde la raíz del repositorio, en este orden (los pasos 1-2 ya están hechos y sus
+**Guía completa y verificación:** [`../REPRODUCIBILIDAD.md`](../REPRODUCIBILIDAD.md). `reproducir_oe2.py` imprime (o ejecuta con `--ejecutar`) el plan de los 51 pasos
+(los 12 experimentos, diagnósticos, regímenes, variantes, DES y OE3) y `verificar_resultados.py` compara las salidas con `valores_de_referencia.csv`.
+Lo generado con Claude y con el traductor de F. Prado ya está en cachés versionadas, así que no hace falta API ni GPU.
+
+Comandos principales, desde la raíz del repositorio, en este orden (los pasos 1-2 ya están hechos y sus
 salidas versionadas):
 
 ```bash
@@ -142,7 +152,7 @@ Diferencia pareada de F1 frente a `sin_aumento` (en negrita, IC95% que no incluy
   (mBERT 0.907 contra 0.899 sin aumento; LaBSE 0.878 contra 0.868; XLM-R 0.868 contra 0.853), sin prueba de significancia.
 - **Más volumen no ayuda:** de 40 a 120 por categoría el F1 de GtR queda plano (mBERT 0.650/0.650/0.652).
 - **mBERT sin aumento es el mejor de los 18 resultados** y supera a LaBSE (+0.078) y XLM-R (+0.095) de forma distinguible. Ver [`evaluacion/diagnostico_baseline/`](evaluacion/diagnostico_baseline/) para el análisis de por qué.
-- **Lo sintético de GtR queda desbalanceado**: por fold, aprobadas únicas DES 118, SAL 106, NEG 100, PRG 77, REQUEST 51, AFI 44, EMO 31 (frente a ~80 reales por categoría): los filtros de marcador dejan pasar casi
+- **Lo sintético de GtR queda desbalanceado**: por fold, aprobadas únicas (media de los 5 folds) DES 114, SAL 103, NEG 100, PRG 77, REQUEST 50, AFI 42, EMO 30 (frente a ~80 reales por categoría): los filtros de marcador dejan pasar casi
   todo DES y SAL y rechazan mucho EMO, AFI y REQUEST. Su calidad no fue verificada por un hablante.
 - Respecto del protocolo A, la ventaja aparente de GtR en XLM-R (+0.037) se reduce a +0.018 y deja de ser distinguible: parte venía de un baseline con `C` mal elegido.
 

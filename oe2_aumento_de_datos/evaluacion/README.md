@@ -20,12 +20,18 @@ evaluacion/
 │   ├── sensibilidad_c_en_linea.py        lo mismo para GtR (20-120) y Retrotraducción desde la caché
 │   ├── comparacion_pareada_c_fijo.py     diferencias pareadas con el MISMO C fijo en ambas configuraciones
 │   └── resultados/
+├── curva_regimen.py                   Curva por régimen de datos reales (10, 25, 50 y 80 por categoría); nunca usa la API sin --permitir-api
 ├── variantes_gtr.py                   Variantes de selección del sintético de GtR (balanceo, filtros de similitud/centroides, sin DES); no usa la API
 ├── notebooks/variantes_gtr.ipynb      Notebook que lo ejecuta igual en local y en Colab (resultados en resultados/variantes_gtr/)
-├── diagnostico_baseline/              Por qué mBERT sin aumento es el mejor: fragmentación del texto y clasificador de n-gramas de caracteres
+├── diagnostico_baseline/              Por qué mBERT sin aumento es el mejor y por qué el aumento no mejora ni se estanca:
+│                                      referencias simples, fragmentación, n-gramas, curva de aprendizaje, calidad del sintético, dosis, lotes
 └── resultados/
     ├── (raíz)                         Protocolo A: resumen, predicciones, comparación pareada y curvas ROC
-    └── cv_interna/                    Protocolo B: lo mismo, por técnica y unido, más el F1 de la CV por C
+    ├── cv_interna/                    Protocolo B: lo mismo, por técnica y unido, más el F1 de la CV por C
+    ├── cv_interna_sin_DES/, cv_interna_corpus_shiwilu_propuesta_des/, cv_interna_con_interrogacion*/   escenarios (DES y signos ¿?)
+    ├── cv_interna_pooling/            F1 por estrategia de pooling (lo produce oe3_caracterizacion_embeddings/f1_por_pooling.py)
+    ├── curva_regimen/                 curva por régimen de datos reales
+    └── variantes_gtr/                 variantes de selección del sintético
 ```
 
 Las corridas anteriores de generación en línea con dev (niveles 20, 40, 80 y 120 de Generate-then-Refine,
@@ -70,15 +76,16 @@ python $E/comparacion_pareada.py --entrada $R/validacion_cruzada_predicciones_si
 python $E/curvas_roc.py --entrada $R/validacion_cruzada_predicciones_sin_puntuacion_cv_interna.csv --etiqueta cv_interna --carpeta $R
 ```
 
-`comparacion_pareada.py` y `curvas_roc.py` toleran que falte una técnica (hoy, Generate-then-Refine) y trabajan
-con las que haya.
+`comparacion_pareada.py` y `curvas_roc.py` toleran que falte una técnica y trabajan con las que haya. Para repetir el resto de
+experimentos (volumen 80 y 40 de GtR, escenarios de DES y de `¿?`, regímenes, variantes y diagnósticos) ver
+[`../../REPRODUCIBILIDAD.md`](../../REPRODUCIBILIDAD.md) y [`../reproducir_oe2.py`](../reproducir_oe2.py).
 
 ## Cachés que usa el protocolo B
 
 `--cache` (por defecto, [`../tecnicas_aumento/salidas/en_linea_marcadores_fuentes/`](../tecnicas_aumento/salidas/en_linea_marcadores_fuentes/)):
 
 - `generate_then_refine/fold<N>_pool[_l<j>].csv`: lo generado con todo el pool de cada fold (lotes 0-5), ya refiltrado con
-  los marcadores de las fuentes. **Faltan** los `fold<N>_in<k>[_l<j>].csv` (uno por partición interna) que se generan en Colab.
+  los marcadores de las fuentes, y los `fold<N>_in<k>[_l<j>].csv` (uno por partición interna), generados en Colab y ya integrados en el repositorio.
 - `retrotraduccion/fold<N>_pool.csv`: catálogo de paráfrasis y traducciones; cada partición interna usa las filas cuyo origen
   está en su entrenamiento, así que no hay que regenerar nada.
 

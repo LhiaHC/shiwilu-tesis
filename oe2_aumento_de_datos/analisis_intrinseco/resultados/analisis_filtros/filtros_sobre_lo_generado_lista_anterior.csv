@@ -1,0 +1,8 @@
+intencion,generadas,aprobadas_%,rechazo_marcador_%,rechazo_idioma_%,rechazo_semantico_%
+SAL,597,100.0,0.0,0.0,0.0
+EMO,596,29.2,70.8,0.0,0.0
+PRG,600,65.7,34.3,0.0,0.0
+REQUEST,599,38.6,61.4,0.0,0.0
+AFI,596,60.4,39.6,0.0,0.0
+NEG,599,76.6,23.4,0.0,0.0
+DES,598,100.0,0.0,0.0,0.0

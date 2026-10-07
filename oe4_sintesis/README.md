@@ -1,5 +1,10 @@
 # Síntesis comparativa final (OE4, R9)
 
+> **Estado (2026-10-06): pendiente de actualizar.** Esta síntesis se calculó con el **protocolo A** (F1 de mBERT 0.6575, etc.) y con los resultados de OE3 de una versión
+> anterior. El resultado vigente del OE2 es el del **protocolo B** (mBERT 0.665; ver [`../REPRODUCIBILIDAD.md`](../REPRODUCIBILIDAD.md)) y OE3 ya se recalculó con las fuentes
+> sintéticas actuales (`oe3_caracterizacion_embeddings/resultados/`, `f1_por_pooling.csv`). Las conclusiones cualitativas de abajo se mantienen (mBERT gana en ambos ejes), pero las
+> cifras deben rehacerse con `sintesis.py` apuntando a `evaluacion/resultados/cv_interna/` cuando se desarrolle el OE4.
+
 No entrena ni mide nada nuevo: **cruza dos evaluaciones que ya existen por
 separado** para responder la pregunta de R9, "cuál es la configuración
 óptima", desde dos ángulos que podrían no coincidir (y que, con el texto
