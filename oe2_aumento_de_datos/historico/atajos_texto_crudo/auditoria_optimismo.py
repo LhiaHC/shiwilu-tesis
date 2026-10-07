@@ -1,9 +1,9 @@
 """
 Auditoria de optimismo de los resultados (evidencia para interpretar el F1).
 
-  A. Distribucion del F1 bajo 30 splits aleatorios 70/15/15 agrupados: muestra
-     que el split unico (semilla 42) fue una tirada dificil y que la validacion
-     cruzada NO esta inflada.
+  A. Distribucion del F1 bajo 30 splits aleatorios 70/15/15 agrupados: muestra cuanto cambia el F1
+     segun que oraciones queden de prueba (corrida del 2026-10-06 con el corpus actual: sd 0.04-0.06,
+     rango 0.575-0.798; el split unico, semilla 42, quedo en los percentiles 37 a 87).
   B. F1 segun cuanto se parece cada oracion de test a alguna de train
      (solapamiento de palabras): cuanto depende del vocabulario ya visto.
   C. F1 por categoria (PRG ~0.97 delata un atajo).
