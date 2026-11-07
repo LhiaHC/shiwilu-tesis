@@ -1,0 +1,101 @@
+pos,espanol,shiwilu,fallan_todos,intencion_mas_votada,acierta_baseline mBERT,acierta_n-gramas,acierta_mbert fine-tuning,acierta_labse fine-tuning
+199,Odia correr.,luyu'lli teka'ak,True,PRG,0.0,0.0,0.0,0.0
+192,Puedes entrar.,yennitulada'a'mak,True,REQUEST,0.0,0.0,0.0,0.0
+173,Me despidieron.,usu'lliner'ku,True,REQUEST,0.0,0.0,0.0,0.0
+136,¡Ha venido!,¡wek'lli!,True,PRG,0.0,0.0,0.0,0.0
+138,Es feliz.,musu' nuka'a,True,AFI,0.0,0.0,0.0,0.0
+139,Le gustó.,iyatulli,True,EMO,0.0,0.0,0.0,0.0
+129,Somos pobres.,kulliker'wi'ñidek,True,NEG,0.0,0.0,0.0,0.0
+188,Me voy.,pa'echek,True,SAL,0.0,0.0,0.0,0.0
+186,Estoy ayunando.,weranpi'nek,True,NEG,0.0,0.0,0.0,0.0
+157,Tengo tiempo.,manennu'tapi'nek,True,NEG,0.0,0.0,0.0,0.0
+194,Pareces triste.,lli'tula we'inutusu',True,REQUEST,0.0,0.0,0.0,0.0
+197,Tú dormías.,kenma wichi'wina',True,REQUEST,0.0,0.0,0.0,0.0
+158,Tengo vino.,vinu' a'ñapalek,False,DES,1.0,1.0,1.0,1.0
+165,Los necesito.,luwantudek'lek,False,DES,0.0,1.0,0.3333333333333333,1.0
+154,Te encontré.,kaper'llien,False,DES,0.0,1.0,1.0,0.0
+170,Quiero este.,asu' luwantulek,False,DES,0.0,0.0,0.6666666666666666,1.0
+169,Quiero más.,a'pinta' luwantulek,False,DES,0.0,0.0,1.0,0.6666666666666666
+168,Huelo gas.,lanerapalek gas,False,DES,1.0,1.0,0.6666666666666666,1.0
+167,Vendo autos.,uku'latapalek wa'nateka'asu',False,DES,1.0,1.0,1.0,1.0
+166,Leo labios.,ñinchitapalek ma'tapallinpa',False,AFI,0.0,0.0,0.3333333333333333,0.0
+155,Me enfadé.,yulek,False,DES,1.0,1.0,1.0,0.3333333333333333
+159,Te oí.,lauk'llien,False,DES,1.0,0.0,0.6666666666666666,0.3333333333333333
+156,Traigo noticias.,kera'pilellek la'la'lusa',False,DES,1.0,0.0,0.3333333333333333,1.0
+164,Debo esconderme.,insek'kita'kasu'ñapalli,False,DES,1.0,0.0,1.0,0.3333333333333333
+163,Lo extrañaba.,lu'wanwinek,False,DES,1.0,1.0,1.0,0.6666666666666666
+162,La amaba.,tantenwinek,False,DES,1.0,1.0,0.6666666666666666,0.0
+161,Vivo aquí.,asek nanpipalek,False,DES,1.0,1.0,1.0,1.0
+160,Los conozco.,luwer'chapadeklek,False,DES,1.0,0.0,0.3333333333333333,0.6666666666666666
+171,Estaba despierto.,ñapawinek nanpiladasu',False,DES,1.0,1.0,1.0,1.0
+174,Estaba desnudo.,inanpilatek ñapawinek,False,DES,1.0,1.0,1.0,1.0
+172,Estaba mareado.,ñapawinek lupersu',False,DES,1.0,1.0,1.0,1.0
+152,Como fruta.,ka'apalek wayupi,False,DES,1.0,1.0,1.0,0.3333333333333333
+198,Escaparon todos.,iñer' chiyekllina',False,SAL,0.0,0.0,0.0,0.3333333333333333
+196,Deberían quedarse.,llia'a'mamasu' ñapalli,False,DES,0.0,0.0,0.6666666666666666,0.6666666666666666
+195,Deberías descansar.,neria'masu' ñapalli,False,PRG,0.0,1.0,0.3333333333333333,0.0
+193,Puedes decírnoslo.,yennitula winta'mudek,False,REQUEST,1.0,0.0,0.0,0.0
+191,Nos engañaste.,tumu'tulundek,False,AFI,0.0,0.0,0.0,1.0
+190,Nos traicionaste.,wa'danpilapilundek,False,DES,1.0,1.0,1.0,1.0
+189,Me traicionaste.,wa'danpilapilun,False,DES,0.0,1.0,0.6666666666666666,0.0
+187,Estoy saludable.,ñapalek mudinusu',False,DES,0.0,1.0,1.0,1.0
+185,Estoy emocionado.,ñapalek sakek'su',False,DES,1.0,0.0,0.3333333333333333,0.6666666666666666
+184,Estoy comprometida.,ñapalek ala'sa' enmu'pinenlek,False,DES,1.0,1.0,0.6666666666666666,1.0
+183,Estoy bailando.,lansa'palek,False,DES,1.0,1.0,1.0,0.6666666666666666
+182,Tengo curiosidad.,ñinchidinupalek,False,AFI,1.0,0.0,0.3333333333333333,0.3333333333333333
+181,Soy mujer.,ku'aper nuka'ka,False,DES,1.0,1.0,1.0,0.3333333333333333
+180,Soy panadero.,tanta' nu'tutek nuka'ka,False,DES,1.0,1.0,1.0,1.0
+179,Soy turca.,turka nuka'ka,False,DES,1.0,1.0,1.0,1.0
+178,Soy turco.,turku nuka'ka,False,DES,1.0,1.0,1.0,1.0
+177,Soy finlandés.,finlandis nuka'ka,False,DES,1.0,1.0,1.0,1.0
+176,Estaba equivocado.,pektunsu' ñapawinek,False,DES,1.0,1.0,0.6666666666666666,1.0
+175,Estaba cansado.,saka'tusu' ñapawinek,False,DES,1.0,1.0,1.0,1.0
+153,Tenía frío.,sanek'wantuwinek,False,DES,0.0,1.0,1.0,1.0
+100,¡Incendio!,¡ukeñan!,False,DES,1.0,0.0,0.0,0.6666666666666666
+151,Como pan.,ka'apalek tanta',False,DES,0.0,1.0,1.0,1.0
+112,Perdí. (opuesto de ganar),wer'lliek,False,DES,1.0,1.0,1.0,1.0
+121,Lo hicimos.,nu'tulek'wa',False,DES,1.0,1.0,0.6666666666666666,0.3333333333333333
+120,Nos gusta.,iya'tulek'wa',False,DES,1.0,1.0,0.6666666666666666,1.0
+119,Nos reímos.,yamerlek'wa',False,REQUEST,0.0,0.0,0.3333333333333333,0.6666666666666666
+118,Nos divertimos.,sakeklekwa',False,EMO,1.0,0.0,0.0,0.0
+117,Podemos ganar.,yennitulekwa' kana'tak,False,DES,0.0,0.0,1.0,0.0
+116,Somos hombres.,enmu'pinen nuka'kudek,False,DES,1.0,1.0,1.0,0.6666666666666666
+115,Tom pagará.,tom panwilek'techu,False,DES,1.0,0.0,1.0,1.0
+114,Tom morirá.,tom chiminchu,False,PRG,0.0,0.0,0.0,0.6666666666666666
+113,Tom saltó.,tom indek'lli,False,PRG,0.0,1.0,0.0,0.0
+111,Salí.,yunsu'lek,False,DES,0.0,1.0,0.3333333333333333,0.3333333333333333
+123,Lo queremos.,tantenlek'wa',False,DES,1.0,1.0,1.0,0.6666666666666666
+110,Me caí.,anu'lek,False,DES,1.0,1.0,0.3333333333333333,0.3333333333333333
+109,Él corrió.,nana tekaklli,False,AFI,0.0,0.0,0.3333333333333333,0.6666666666666666
+108,¡Tengo!,¡a'ñapalek!,False,DES,1.0,1.0,1.0,1.0
+107,¡Al ataque!,¡paku' llipu'tudek'kunku'!,False,DES,1.0,0.0,0.3333333333333333,0.6666666666666666
+106,"¡Oh, no! (femenino)",¡asha!,False,PRG,1.0,0.0,0.6666666666666666,0.0
+105,"¡Oh, no! (masculino)",¡shaw!,False,PRG,1.0,0.0,0.3333333333333333,0.0
+104,¡He ganado!,¡kana'tulek!,False,DES,1.0,0.0,0.3333333333333333,0.6666666666666666
+103,¡Auxilio!,¡katu'pa'!,False,REQUEST,1.0,0.0,0.0,0.0
+102,¡Socorro! ¡Auxilio!,¡katu'pa'! ¡katu'pa'!,False,REQUEST,1.0,0.0,0.0,0.0
+122,Debemos irnos.,pa'a'kawa'su' ñapalli,False,DES,0.0,0.0,0.6666666666666666,0.6666666666666666
+124,Fracasaremos.,teka'per'aterwa',False,REQUEST,0.0,0.0,0.6666666666666666,0.0
+101,¡Ayuda!,¡katu'pa'!,False,REQUEST,1.0,0.0,0.0,0.0
+140,Está fingiendo.,intek apalli,False,DES,0.0,1.0,0.3333333333333333,0.3333333333333333
+149,Puedo compartir.,yennitulek a'nañiak,False,DES,1.0,0.0,0.6666666666666666,0.6666666666666666
+148,Puedo hacerlo.,yennitulek nu'tak,False,REQUEST,0.0,0.0,1.0,0.0
+147,Lo compré.,mapa'lek,False,DES,1.0,1.0,1.0,0.3333333333333333
+146,Estoy leseando.,si'lentapalek,False,DES,0.0,1.0,0.6666666666666666,1.0
+145,Estoy jodiendo.,a'perchapalek,False,DES,1.0,1.0,1.0,0.3333333333333333
+144,Soy cocinero.,kalu'tutek' nuka'ka,False,DES,1.0,1.0,1.0,1.0
+143,Aquí estamos.,asek ñapallidek,False,DES,1.0,1.0,0.3333333333333333,0.3333333333333333
+142,¡Aquí estamos!,¡asek ñapallidek!,False,DES,1.0,1.0,0.3333333333333333,0.3333333333333333
+141,Está fingiendo comer.,intek weranpalli,False,DES,1.0,1.0,1.0,0.6666666666666666
+137,Tiene vino.,vinu' a'ñapalli,False,DES,0.0,1.0,0.6666666666666666,1.0
+125,Estamos ocupados.,a'ñapallidek dudimpu' nu'ta'kawa'su',False,DES,1.0,1.0,0.6666666666666666,1.0
+135,Él envejeció.,nana taserpitulli,False,AFI,0.0,0.0,0.3333333333333333,0.0
+134,Terminen esto.,a'ta'wantuku' asu',False,DES,0.0,1.0,1.0,0.6666666666666666
+133,Termine esto.,a'ta'wanter asu',False,DES,0.0,1.0,0.6666666666666666,0.3333333333333333
+132,Cuenta conmigo.,kua katu'pekchen,False,REQUEST,0.0,0.0,0.0,0.3333333333333333
+131,Somos débiles.,saputek nuka'kudek,False,DES,1.0,1.0,1.0,1.0
+130,Estamos hartos.,perlli'llidek,False,DES,1.0,1.0,0.0,0.6666666666666666
+128,Estamos perdidos.,wer'su' ñapallidek,False,DES,1.0,1.0,1.0,1.0
+127,Estamos acá.,asek ñapallidek,False,DES,1.0,1.0,0.3333333333333333,0.3333333333333333
+126,Terminamos.,a'ta'wantullidek,False,DES,0.0,1.0,0.6666666666666666,1.0
+150,Confesé.,lunnek,False,DES,1.0,1.0,0.6666666666666666,1.0

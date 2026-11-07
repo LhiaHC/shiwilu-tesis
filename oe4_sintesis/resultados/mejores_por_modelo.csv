@@ -1,0 +1,4 @@
+modelo,mejor_pooling_por_f1,f1_mejor,mejor_pooling_por_silueta,silueta_mejor,coinciden,f1_baseline_oe2
+mbert,mean_pooling,0.6665678490020607,mean_pooling,-0.009646519087255,True,0.6654128309003031
+labse,max_pooling,0.6220159750525527,combinacion_capas,-0.0253892764449119,False,0.5871693780212032
+xlmr,combinacion_capas,0.5996964259880988,max_pooling,-0.0387291349470615,False,0.5704151017145488
