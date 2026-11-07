@@ -1,0 +1,16 @@
+ambito,metrica_intrinseca,n,spearman_con_f1
+las 36,silueta_coseno,36,0.7472329472329473
+las 36,davies_bouldin,36,-0.545945945945946
+las 36,calinski_harabasz,36,0.05173745173745174
+solo sin aumento (12),silueta_coseno,12,0.7902097902097903
+solo sin aumento (12),davies_bouldin,12,-0.7902097902097903
+solo sin aumento (12),calinski_harabasz,12,-0.2027972027972028
+solo mBERT (12),silueta_coseno,12,0.7412587412587414
+solo mBERT (12),davies_bouldin,12,-0.6783216783216784
+solo mBERT (12),calinski_harabasz,12,0.04195804195804196
+solo LaBSE (12),silueta_coseno,12,0.2657342657342658
+solo LaBSE (12),davies_bouldin,12,-0.5034965034965035
+solo LaBSE (12),calinski_harabasz,12,0.06993006993006995
+solo XLM-R (12),silueta_coseno,12,0.3916083916083916
+solo XLM-R (12),davies_bouldin,12,-0.6643356643356644
+solo XLM-R (12),calinski_harabasz,12,0.2657342657342658
