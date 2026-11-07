@@ -23,6 +23,10 @@ No cambia ningún resultado del OE2 ni del OE3. Usa los mismos datos y se compar
 3. El avance se guarda en tu Drive (`shiwilu_finetuning/`); si Colab se desconecta, vuelve a correr desde la celda de configuración.
 4. Al final se descarga `finetuning_resultados.zip`. Cópialo a `oe4_sintesis/finetuning/resultados/` cuando lo hayas revisado.
 
+## Resultados
+
+Los resultados ya corridos están en [`resultados/`](resultados/README.md): reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan y se acercan al clasificador de n-gramas de letras; XLM-R mejora con una rejilla corregida (+0.057) pero es inestable. Ver el resumen y las limitaciones (borde de la rejilla) en ese archivo.
+
 ## Salidas
 
 - `finetuning_vs_baseline.csv`: F1 macro de cada variante (media de semillas, desviación, IC 95%) y diferencia pareada contra el baseline.

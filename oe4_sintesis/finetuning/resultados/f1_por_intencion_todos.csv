@@ -1,0 +1,8 @@
+intencion,mbert congelado,mbert fine-tuning completo,labse congelado,labse fine-tuning completo,xlmr congelado,xlmr fine-tuning completo (rejilla comun),xlmr fine-tuning completo (rejilla corregida),n-gramas de letras
+AFI,0.5882,0.738,0.6169,0.7304,0.5297,0.5097,0.6224,0.7839
+DES,0.5446,0.5468,0.4145,0.5388,0.3805,0.302,0.4168,0.5392
+EMO,0.6947,0.7555,0.6207,0.7519,0.6462,0.6006,0.6658,0.7879
+NEG,0.84,0.8572,0.6667,0.8497,0.6948,0.6882,0.7627,0.8878
+PRG,0.6087,0.671,0.5427,0.6708,0.5685,0.4988,0.5973,0.6702
+REQUEST,0.6341,0.7236,0.6051,0.7428,0.5,0.5039,0.6137,0.7393
+SAL,0.7475,0.8318,0.6436,0.7998,0.6732,0.5787,0.7135,0.8458
