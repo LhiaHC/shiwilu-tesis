@@ -1,111 +1,84 @@
 # Síntesis comparativa final (OE4, R9)
 
-> **Estado (2026-10-06): pendiente de actualizar.** Esta síntesis se calculó con el **protocolo A** (F1 de mBERT 0.6575, etc.) y con los resultados de OE3 de una versión
-> anterior. El resultado vigente del OE2 es el del **protocolo B** (mBERT 0.665; ver [`../REPRODUCIBILIDAD.md`](../REPRODUCIBILIDAD.md)) y OE3 ya se recalculó con las fuentes
-> sintéticas actuales (`oe3_caracterizacion_embeddings/resultados/`, `f1_por_pooling.csv`). Las conclusiones cualitativas de abajo se mantienen (mBERT gana en ambos ejes), pero las
-> cifras deben rehacerse con `sintesis.py` apuntando a `evaluacion/resultados/cv_interna/` cuando se desarrolle el OE4.
+Reúne en tablas y figuras todo lo evaluado en OE2 (aumento de datos), OE3 (estrategias de pooling y métricas intrínsecas) y el fine-tuning, para responder la pregunta de R9: **cuál es la configuración óptima** y qué tan lejos queda de una referencia sin modelos de lenguaje (n-gramas de letras).
 
-No entrena ni mide nada nuevo: **cruza dos evaluaciones que ya existen por
-separado** para responder la pregunta de R9, "cuál es la configuración
-óptima", desde dos ángulos que podrían no coincidir (y que, con el texto
-crudo, parecían no coincidir — ver más abajo por qué era un artefacto).
+No entrena modelos ni usa la API de Claude: `sintesis.py` lee predicciones ya generadas. Lo único que calcula si no está en caché es el clasificador de n-gramas, que guarda en `resultados/ngramas_predicciones.csv`.
 
-- **Extrínseco** (R4-R6,
-  [`oe2_aumento_de_datos/evaluacion/resultados/validacion_cruzada_resumen_sin_puntuacion.csv`](../oe2_aumento_de_datos/evaluacion/resultados/validacion_cruzada_resumen_sin_puntuacion.csv)):
-  qué tan bien clasifica un modelo de embeddings + Regresión Logística, con
-  o sin cada técnica de aumento de datos. Métrica: F1 macro sobre las 700 predicciones de una validación cruzada de 5 folds.
-- **Intrínseco** (R7-R8,
-  [`oe3_caracterizacion_embeddings/resultados/`](../oe3_caracterizacion_embeddings/README.md)):
-  qué tan bien separan las categorías los embeddings crudos, sin
-  clasificador, con cada una de las 4 estrategias de pooling. Métrica:
-  coeficiente de silueta (distancia coseno), sobre el corpus original en texto normalizado (minúsculas, sin puntuación).
+Todo usa el **protocolo B** (parámetro `C` de la Regresión Logística elegido por validación cruzada interna, K=5), texto normalizado, las 5 particiones congeladas
+(`oe2_aumento_de_datos/particiones/folds_fijos.csv`) y la misma métrica en todos lados: **F1 macro agrupado** de las 700 predicciones, con IC 95% bootstrap y diferencias pareadas.
 
 ## Uso
 
+Desde la raíz del repositorio:
+
 ```bash
 python oe4_sintesis/sintesis.py
+python oe4_sintesis/sintesis.py --recalcular-ngramas   # opcional: recalcula los n-gramas en vez de leer la caché
 ```
 
-Requiere haber corrido antes `oe2_aumento_de_datos/evaluacion/validacion_cruzada.py`
-y `oe3_caracterizacion_embeddings/caracterizacion.py` (al menos con
-`--corpus original`; si además se corrió con `--corpus retrotraduccion` y/o
-`--corpus generate_then_refine`, la síntesis incluye también el efecto del
-aumento de datos sobre la calidad intrínseca).
+Requiere que existan las entradas listadas en el encabezado de [`sintesis.py`](sintesis.py): las predicciones de OE2 (`evaluacion/resultados/cv_interna/` y `cv_interna_pooling/`),
+las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas están en el repositorio, así que se puede ejecutar sin correr nada más.
 
-## Salida
+## Contenido
 
-`oe4_sintesis/resultados/`
-- `sintesis_extrinseco_vs_intrinseco.csv` — una fila por modelo, con su
-  mejor configuración extrínseca (técnica + F1) y su mejor estrategia
-  intrínseca (pooling + silueta), y el ranking de cada modelo en ambos ejes.
-- `efecto_aumento_en_intrinseco.csv` — silueta antes/después de agregar
-  cada técnica de aumento de texto, por modelo.
+| Carpeta | Qué hay |
+|---|---|
+| [`sintesis.py`](sintesis.py) | Script que genera todas las tablas y figuras de `resultados/` |
+| [`resultados/`](resultados/) | Salidas de la síntesis (tabla siguiente) |
+| [`finetuning/`](finetuning/README.md) | Cuadernos de Colab del fine-tuning de mBERT, LaBSE y XLM-R y sus resultados ya corridos |
+| `resultados/historico_protocolo_A/` | Tablas de la versión anterior (protocolo A y cifras antiguas de OE3), conservadas solo como historial. **No usar para reportar** |
 
-## Resultado (ya ejecutado)
+### Salidas de `resultados/`
 
-*Actualizado 2026-09-27 — versión definitiva, sobre el corpus ya limpio (ver nota
-de metodología en
-[`../oe2_aumento_de_datos/tecnicas_aumento/README.md`](../oe2_aumento_de_datos/tecnicas_aumento/README.md)).
-**Texto normalizado** (minúsculas, sin puntuación, sin distinguir tildes/ñ, con
-el apóstrofo de oclusiva glotal siempre preservado) es la única condición que se
-corre y se mantiene, en los dos ejes: el corpus tiene atajos superficiales (los
-signos `¿?` delatan PRG; las mayúsculas, 100% en DES/PRG/REQUEST) que no son
-señal real. El eje extrínseco es la validación cruzada de 5 folds en esa
-condición
-([`../oe2_aumento_de_datos/evaluacion/validacion_cruzada.py`](../oe2_aumento_de_datos/evaluacion/validacion_cruzada.py));
-el eje intrínseco, [`oe3_caracterizacion_embeddings/caracterizacion.py`](../oe3_caracterizacion_embeddings/caracterizacion.py),
-ya normaliza el texto por defecto. La tabla con texto crudo (más abajo) queda
-congelada solo como evidencia histórica de por qué se descartó esa condición.*
+| Archivo | Contenido |
+|---|---|
+| `tabla_36_combinaciones.csv` | Las 36 combinaciones (3 modelos × 3 corpus × 4 poolings): F1 macro con IC 95%, F1 ponderado, exactitud, F1 por intención, métricas intrínsecas y diferencias pareadas |
+| `mejores_por_modelo.csv` | Mejor pooling por F1 y por silueta, para cada modelo sin aumento |
+| `top_configuraciones_vs_mejor.csv` | Las mejores configuraciones congeladas frente a la mejor (diferencia pareada) |
+| `correlaciones_intrinseco_extrinseco.csv` | Spearman entre cada métrica intrínseca (silueta, Davies-Bouldin, Calinski-Harabasz) y el F1 |
+| `enfoques_f1.csv` | F1 con IC 95% de todos los enfoques: congelado, mejor pooling, + Generate-then-Refine, fine-tuning y n-gramas |
+| `finetuning_vs_congelado.csv` | Fine-tuning de cada modelo frente a su baseline congelado y frente a los n-gramas |
+| `f1_por_intencion_enfoques.csv` | F1 por intención de cada enfoque |
+| `matriz_confusion_*.csv` | Matrices de confusión de la mejor configuración congelada y del fine-tuning de mBERT |
+| `des_oraciones_dificiles.csv` | Las 100 oraciones de DES con el acierto de cada método; `fallan_todos` marca las que ninguno acierta |
+| `ngramas_predicciones.csv` | Predicciones del clasificador de n-gramas (caché) |
+| `figuras/fig_oe4_*.png` | Siete figuras de la síntesis |
 
-| Modelo | F1 sin aumento | Mejor config. | F1 mejor config | Rank extr. | Mejor estrategia intrínseca | Silueta | Rank intr. |
-|---|---|---|---|---|---|---|---|
-| mBERT | **0.6575** | sin aumento | 0.6575 | 1 | Mean pooling | **-0.0096** | 1 |
-| LaBSE | 0.5873 | generate_then_refine | 0.5952 | 2 | Combinación de capas | -0.0254 | 2 |
-| XLM-R | 0.5481 | generate_then_refine | 0.5798 | 3 | Max pooling | -0.0387 | 3 |
+## Resultados principales
 
-### Conclusión
+| Enfoque | F1 macro [IC 95%] |
+|---|---|
+| N-gramas de letras (referencia, sin modelo de lenguaje) | 0.751 [0.719, 0.780] |
+| mBERT congelado (baseline OE2) | 0.665 [0.630, 0.698] |
+| mBERT congelado, mejor pooling (mean) | 0.667 [0.631, 0.700] |
+| LaBSE congelado: baseline / mejor pooling (max) | 0.587 / 0.622 |
+| XLM-R congelado: baseline / mejor pooling (combinación de capas) | 0.570 / 0.600 |
+| mBERT fine-tuning completo | 0.732 [0.703, 0.759] |
+| LaBSE fine-tuning completo | 0.726 [0.697, 0.753] |
+| XLM-R fine-tuning (rejilla corregida; inestable) | 0.627 [0.598, 0.654] |
+| mBERT LoRA (no concluyente) | 0.604 |
 
-- **Los dos ejes coinciden, sin excepción: mBERT gana en los dos.** Tiene el mejor
-  F1 (0.6575 sin aumento — ninguna técnica lo mejora; Mixup y Retrotraducción lo
-  **empeoran** de forma significativa) y la mejor silueta (-0.0096, la menos
-  negativa de las 12 combinaciones). El margen es real: mBERT es
-  significativamente mejor que **ambos** otros modelos en F1 (mBERT − XLM-R =
-  +0.109, IC95% [+0.071, +0.148]; mBERT − LaBSE = +0.070, IC95% [+0.031,
-  +0.108]); XLM-R vs. LaBSE no es distinguible de cero (-0.039, IC95% [-0.081,
-  +0.001]). En intrínseco, mBERT ocupa las 4 primeras posiciones de las 12 (ver
-  [`oe3_caracterizacion_embeddings/README.md`](../oe3_caracterizacion_embeddings/README.md)).
-- **Los embeddings crudos no organizan las categorías por sí solos.** La silueta de
-  las 12 combinaciones es ≈ 0 o negativa (entre -0.057 y -0.010), y el mejor
-  clasificador (mBERT, ~560 oraciones de train por fold) solo llega a F1 = 0.6575,
-  unos 0.15 por encima del baseline por palabras (0.50, sin ningún embedding). Es
-  una señal real pero débil.
-- **La "divergencia" que aparecía con el texto crudo era un artefacto de los
-  atajos**, no un hallazgo sobre los embeddings. Con texto crudo, LaBSE + CLS
-  ganaba en silueta (+0.049, por los `¿?`/mayúsculas) y XLM-R en F1 (por el mismo
-  motivo), sugiriendo que "un embedding bien organizado no clasifica mejor". Al
-  normalizar el texto, ambos ejes coinciden en el mismo modelo. Tabla histórica
-  (texto crudo, **no se vuelve a correr**):
+### Lectura
 
-| Modelo | F1 sin aumento | Mejor config. | F1 mejor config | Rank extr. | Mejor estrategia intrínseca* | Silueta* | Rank intr.* |
-|---|---|---|---|---|---|---|---|
-| XLM-R | 0.7583 | generate_then_refine | 0.7685 | 1 | Max pooling | -0.0387 | 3 |
-| mBERT | 0.7577 | generate_then_refine | 0.7623 | 2 | Mean pooling | -0.0096 | 1 |
-| LaBSE | 0.7451 | sin aumento | 0.7451 | 3 | Combinación de capas | -0.0254 | 2 |
+- **Con embeddings congelados, mBERT es el mejor modelo** y ninguna técnica de aumento lo mejora. La mejor configuración (mBERT + mean pooling, sin aumento, 0.667) no se distingue de otras cinco de mBERT.
+- **Aumento de datos con el corpus completo:** ninguna técnica mejora su baseline; Mixup (mBERT −0.036, XLM-R −0.024) y Retrotraducción (mBERT −0.034) lo empeoran de forma distinguible. Generate-then-Refine ayuda solo con muy pocos datos reales (10 a 25 por intención).
+- **Pooling:** cambiar la forma de extraer el vector mejora a LaBSE (0.587 → 0.622) y a XLM-R (0.570 → 0.600), pero no a mBERT.
+- **Métricas intrínsecas:** las siluetas son ≈ 0 o negativas en todas las combinaciones; los embeddings crudos no agrupan por intención. Silueta y Davies-Bouldin se relacionan con el F1 (Spearman 0.75 y −0.55 sobre las 36), Calinski-Harabasz no (0.05).
+- **Fine-tuning:** reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan entre sí y no se distinguen de los n-gramas (0.751).
+- **Referencia sin modelos:** los n-gramas de letras superan a los tres modelos congelados, lo que indica que en este corpus la intención se reconoce sobre todo por la forma de las palabras.
+- **DES** rinde bajo con todos los métodos (≈ 0.54 en los mejores); de las 100 oraciones de DES, 12 las falla todo método comparado (columna `fallan_todos` de `des_oraciones_dificiles.csv`).
 
-  \* La silueta de esta fila es la del texto normalizado (siempre se corrió así);
-  se repite para que la tabla se lea de un vistazo, pero **no es un par válido**
-  con el F1 de texto crudo de la misma fila.
+### Configuración óptima propuesta
 
-- **Solo una técnica ayuda de forma distinguible: Generate-then-Refine en XLM-R**
-  (+0.032, IC95% [+0.012, +0.052]) — ver
-  [`comparacion_pareada`](../oe2_aumento_de_datos/tecnicas_aumento/README.md).
-  No alcanza para que XLM-R le gane a mBERT. Mixup y Retrotraducción
-  **empeoran** de forma significativa a mBERT (-0.023 y -0.036). El efecto de
-  ambas técnicas en la silueta es pequeño (≤ 0.009 en valor absoluto).
+| Situación | Configuración |
+|---|---|
+| Embeddings congelados (sin reentrenar) | mBERT + mean pooling, sin aumento (0.667) |
+| Se permite reentrenar | mBERT con fine-tuning (0.732), equivalente a LaBSE (0.726) |
+| Muy pocos datos reales (10 a 25 por intención) | mBERT + Generate-then-Refine |
 
-**Recomendación práctica:** **mBERT** es la configuración recomendada en ambos
-ejes, con diferencia estadísticamente significativa frente a los otros dos
-modelos, y ninguna técnica de aumento la mejora ni la cambia (dos incluso la
-empeoran). Presentar el resultado con cautela: la señal es real pero modesta
-(F1 ≈ 0.66 sobre un piso de 0.50 sin ningún embedding), y solo se sostiene por
-haber eliminado los atajos superficiales del corpus.
+## Limitaciones
+
+- Las oraciones sintéticas **no están validadas por un hablante** de shiwilu.
+- Muchas diferencias son menores que el margen de error: se interpretan por dirección y solo cuando el IC 95% de la diferencia pareada excluye el cero. Diferencias menores a ≈ 0.01 no se interpretan.
+- El fine-tuning usó rejillas pequeñas y varias corridas eligieron el borde de la rejilla; LoRA y la primera corrida de XLM-R no son concluyentes (ver [`finetuning/resultados/README.md`](finetuning/resultados/README.md)).
+- Se compararon muchas configuraciones sin corrección por comparaciones múltiples.

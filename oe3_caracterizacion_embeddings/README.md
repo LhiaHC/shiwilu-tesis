@@ -154,7 +154,7 @@ Corpus sin aumento / con retrotraducción actual / con GtR actual (resultados en
 - **Con los sintéticos antiguos** (split único) el efecto era ≤ 0.01 en todos los casos, porque GtR solo agregaba 62 oraciones; el cambio de ahora se debe al mayor volumen y a los filtros corregidos de GtR.
 - Todas las siluetas siguen siendo ≈ 0 o negativas salvo las de GtR con sus propios puntos sintéticos: ningún modelo agrupa por intención las oraciones reales.
 
-La síntesis con el resultado extrínseco está en [`oe4_sintesis/README.md`](../oe4_sintesis/README.md) (todavía usa el protocolo A de OE2 y las cifras antiguas de OE3).
+La síntesis con el resultado extrínseco está en [`oe4_sintesis/README.md`](../oe4_sintesis/README.md), con el protocolo B de OE2, las 36 combinaciones de OE3 y el fine-tuning.
 
 
 ### F1 de clasificación de las 36 combinaciones

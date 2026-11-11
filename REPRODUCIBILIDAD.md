@@ -300,7 +300,7 @@ También se conservan `oe3_caracterizacion_embeddings/resultados_anteriores/` (O
 
 ## 10. Pendientes y limitaciones
 
-- **OE4 (`oe4_sintesis/`)** aún usa el protocolo A y los resultados antiguos de OE3; se actualizará con los resultados del protocolo B en su etapa.
+- **OE4 (`oe4_sintesis/`)** se reproduce con `python oe4_sintesis/sintesis.py` (protocolo B, sin API). El fine-tuning se corrió en Google Colab (GPU) y sus predicciones están guardadas en `oe4_sintesis/finetuning/resultados/`; no se vuelve a correr localmente.
 - Las oraciones sintéticas **no están validadas por un hablante** de shiwilu.
 - Cada régimen de pocos datos se evaluó con **una sola muestra** de oraciones reales (GtR solo se generó para la semilla 0).
 - Las pruebas de causa y las variantes de selección se hicieron con **C fijo** y, en el caso de las variantes, solo con mBERT.

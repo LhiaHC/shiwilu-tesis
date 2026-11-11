@@ -45,7 +45,8 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 ├── oe3_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — 4 estrategias de pooling x 3 modelos,
 │                                      métricas intrínsecas y proyecciones t-SNE/UMAP
 │
-├── oe4_sintesis/                    ◆ OE4 (R9) — cruza lo extrínseco (OE2) con lo intrínseco (OE3)
+├── oe4_sintesis/                    ◆ OE4 (R9) — síntesis: cruza OE2 y OE3, fine-tuning y n-gramas
+│   └── finetuning/                    Cuadernos de Colab (mBERT, LaBSE, XLM-R) y sus resultados
 │
 ├── shiwilu/                         Núcleo compartido (código)
 │   ├── taxonomia.py, anotacion.py, dominios.py, excel.py   OE1
@@ -68,7 +69,7 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 | `oe2_aumento_de_datos/tecnicas_aumento/` | `corpus/`, `analisis_intrinseco/resultados/`, `particiones/`, `shiwilu/` | `salidas/` únicamente |
 | `oe2_aumento_de_datos/evaluacion/` | `corpus/`, `particiones/`, `tecnicas_aumento/salidas/`, `shiwilu/` | `resultados/` únicamente |
 | `oe3_caracterizacion_embeddings/` | `corpus/`, `tecnicas_aumento/salidas/`, `shiwilu/` | `resultados/` únicamente |
-| `oe4_sintesis/` | `evaluacion/resultados/`, `oe3_.../resultados/` | `resultados/` únicamente (no entrena ni mide nada nuevo) |
+| `oe4_sintesis/` | `evaluacion/resultados/`, `oe3_.../resultados/`, `finetuning/resultados/` | `resultados/` únicamente (no entrena ni usa la API) |
 | `shiwilu/` | — | nada (es solo código) |
 
 Esa separación mantiene el corpus estable y citable, y permite borrar y
