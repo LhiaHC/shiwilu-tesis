@@ -1,0 +1,21 @@
+ambito,metrica,n,spearman_con_f1_macro
+15 enfoques,exactitud,15,0.999106743903916
+15 enfoques,precision_macro,15,0.9928571428571428
+15 enfoques,recall_macro,15,1.0
+15 enfoques,f1_ponderado,15,1.0
+15 enfoques,kappa,15,0.999106743903916
+15 enfoques,mcc,15,1.0
+15 enfoques,auc_macro,9,0.7999999999999999
+15 enfoques,top2,9,0.7615129419677079
+15 enfoques,top3,9,0.5666666666666667
+15 enfoques,log_loss,9,-0.5166666666666667
+36 combinaciones + Mixup,exactitud,39,0.9969624147006892
+36 combinaciones + Mixup,precision_macro,39,0.9973684210526318
+36 combinaciones + Mixup,recall_macro,39,0.9970131745361894
+36 combinaciones + Mixup,f1_ponderado,39,1.0
+36 combinaciones + Mixup,kappa,39,0.9969624147006892
+36 combinaciones + Mixup,mcc,39,0.9959514170040487
+36 combinaciones + Mixup,auc_macro,39,0.9374493927125506
+36 combinaciones + Mixup,top2,39,0.8911735359015913
+36 combinaciones + Mixup,top3,39,0.8033240373517597
+36 combinaciones + Mixup,log_loss,39,-0.6904858299595142

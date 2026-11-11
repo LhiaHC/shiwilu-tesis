@@ -24,6 +24,7 @@ las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas está
 | Carpeta | Qué hay |
 |---|---|
 | [`sintesis.py`](sintesis.py) | Script que genera todas las tablas y figuras de `resultados/` |
+| [`otras_metricas.py`](otras_metricas.py) | Calcula otras métricas de clasificación además del F1 macro (ver sección más abajo); salidas en `resultados/otras_metricas/` |
 | [`resultados/`](resultados/) | Salidas de la síntesis (tabla siguiente) |
 | [`finetuning/`](finetuning/README.md) | Cuadernos de Colab del fine-tuning de mBERT, LaBSE y XLM-R y sus resultados ya corridos |
 | `resultados/historico_protocolo_A/` | Tablas de la versión anterior (protocolo A y cifras antiguas de OE3), conservadas solo como historial. **No usar para reportar** |
@@ -75,6 +76,15 @@ las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas está
 | Embeddings congelados (sin reentrenar) | mBERT + mean pooling, sin aumento (0.667) |
 | Se permite reentrenar | mBERT con fine-tuning (0.732), equivalente a LaBSE (0.726) |
 | Muy pocos datos reales (10 a 25 por intención) | mBERT + Generate-then-Refine |
+
+## Otras métricas además del F1 macro
+
+`python oe4_sintesis/otras_metricas.py` recalcula, con las mismas predicciones y el mismo bootstrap, siete métricas a partir de las etiquetas (F1 macro, exactitud, exactitud balanceada, precisión y recall macro, F1 ponderado, kappa de Cohen, MCC) y, para los modelos congelados, cuatro a partir de las probabilidades (AUC macro, top-2, top-3, log-loss). No usa la API. Salidas en `resultados/otras_metricas/`: `metricas_por_enfoque.csv`, `metricas_36_combinaciones.csv`, `cambia_la_conclusion.csv` (los 12 experimentos centrales frente a su baseline en cada métrica), `precision_recall_por_intencion.csv` y `concordancia_entre_metricas.csv`.
+
+- El corpus está balanceado (100 oraciones por intención), por eso exactitud, exactitud balanceada, recall macro y F1 ponderado coinciden con el F1 macro (diferencias ≤ 0.005) y ordenan los enfoques igual (Spearman ≥ 0.99). El F1 macro **no castiga más** que la exactitud en este corpus.
+- Kappa y MCC dan valores más bajos que la exactitud porque descuentan el azar (1/7), pero ordenan igual y no cambian ninguna conclusión de los 12 experimentos centrales.
+- AUC macro y top-2/top-3 sí miden otra cosa (qué tan bien ordena el modelo las intenciones, no solo cuál elige primero): mBERT baseline AUC 0.898, correcta entre las 2 más probables en 79.9%. Con AUC, Generate-then-Refine mejora a los tres modelos (+0.009 a +0.015), aunque no mejora el F1. Mixup y Retrotraducción siguen empeorando a mBERT.
+- El log-loss depende de la calibración (del `C` elegido) y no de la separación entre intenciones; no se usa para comparar técnicas.
 
 ## Limitaciones
 
