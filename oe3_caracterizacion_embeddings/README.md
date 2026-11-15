@@ -157,6 +157,16 @@ Corpus sin aumento / con retrotraducción actual / con GtR actual (resultados en
 La síntesis con el resultado extrínseco está en [`oe4_sintesis/README.md`](../oe4_sintesis/README.md), con el protocolo B de OE2, las 36 combinaciones de OE3 y el fine-tuning.
 
 
+### Geometría de los embeddings: transformaciones antes de medir (complemento, pendiente de correr)
+
+Con los embeddings crudos la silueta es ≈ 0. El cuaderno [`colab_geometria_embeddings.ipynb`](colab_geometria_embeddings.ipynb) (Colab, GPU T4, sin API) y el módulo
+[`transformaciones_embeddings.py`](transformaciones_embeddings.py) comprueban si eso se debe a defectos geométricos conocidos de los embeddings (anisotropía, dimensiones dominantes)
+y no a falta de información de la intención. Extraen los embeddings una vez (con la extracción de este mismo OE3) y recalculan silueta, Davies-Bouldin y Calinski-Harabasz tras
+**7 transformaciones no supervisadas fijadas de antemano** (crudo, centrado, estandarizado, sin 1 componente principal, sin 7, PCA 50, PCA 50 blanqueado), con dos controles:
+la silueta con **etiquetas permutadas al azar** (para saber qué significa «cerca de 0» en cada espacio) y las mismas métricas sobre el vector **TF-IDF de n-gramas de letras** (sin modelo de lenguaje).
+También mide si la silueta transformada se relaciona mejor con el F1 del OE4. Los resultados irán en `resultados/transformaciones/` una vez corrido el cuaderno; las transformaciones
+se reportan todas, mejoren o no la silueta. Los embeddings (`.npz`) se guardan solo en Drive, no en el repositorio.
+
 ### F1 de clasificación de las 36 combinaciones
 
 Para poder comparar la silueta con el F1, `f1_por_pooling.py` entrena el clasificador del protocolo B de OE2 (Regresión Logística, `C` por CV interna K=5, 5 folds congelados, sintéticos generados solo con el entrenamiento de cada partición)
