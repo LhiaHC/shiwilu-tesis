@@ -23,6 +23,21 @@ No cambia ningún resultado del OE2 ni del OE3. Usa los mismos datos y se compar
 3. El avance se guarda en tu Drive (`shiwilu_finetuning/`); si Colab se desconecta, vuelve a correr desde la celda de configuración.
 4. Al final se descarga `finetuning_resultados.zip`. Cópialo a `oe4_sintesis/finetuning/resultados/` cuando lo hayas revisado.
 
+## Segunda tanda: mejoras al fine-tuning (cuadernos por modelo)
+
+Tres cuadernos independientes, uno por modelo, para correr en paralelo en sesiones de Colab distintas (cada uno guarda en su propia carpeta de Drive):
+[`colab_finetuning_v2_mbert.ipynb`](colab_finetuning_v2_mbert.ipynb), [`colab_finetuning_v2_labse.ipynb`](colab_finetuning_v2_labse.ipynb) y [`colab_finetuning_v2_xlmr.ipynb`](colab_finetuning_v2_xlmr.ipynb).
+Responden a la sugerencia del asesor de combinar el fine-tuning con el aumento de datos y a que varias corridas anteriores eligieron el borde de la rejilla. Cada uno corre, en orden:
+
+| Variante | Qué cambia | Hiperparámetros |
+|---|---|---|
+| `ampliada` | Datos reales, rejilla ampliada (más épocas y tasas). Se reutilizan los puntajes de validación de las 6 combinaciones ya probadas y solo se entrenan las nuevas | Validación interna (nunca la prueba) |
+| `gtr` | Reales + Generate-then-Refine, armado igual que en el OE2 (cachés, sin API; el cuaderno comprueba que el volumen coincide con el del OE2) | Los elegidos por `ampliada` para esa semilla y partición |
+| `pooling` | Cabeza con el pooling que mejor funcionó congelado en el OE3 (mBERT mean, LaBSE max, XLM-R combinación de capas) en vez de [CLS] | Los elegidos por `ampliada` |
+
+Mismas particiones, 3 semillas, F1 macro agrupado, IC 95% y diferencias pareadas (contra el fine-tuning anterior, el baseline congelado y los n-gramas). No usa la API de Claude.
+Tiempo estimado en T4 (no medido): mBERT ~2.2 h, LaBSE y XLM-R ~3.5 h cada uno. Los resultados se copian a `resultados/` con nombres `predicciones_<modelo>_<variante>.csv`; **estado: pendiente de correr**.
+
 ## Resultados
 
 Los resultados ya corridos están en [`resultados/`](resultados/README.md): reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan y se acercan al clasificador de n-gramas de letras; XLM-R mejora con una rejilla corregida (+0.057) pero es inestable. Ver el resumen y las limitaciones (borde de la rejilla) en ese archivo.
