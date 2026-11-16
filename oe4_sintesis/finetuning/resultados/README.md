@@ -29,6 +29,25 @@ Se subieron tal como salieron de Colab, reorganizados con nombres uniformes (`<m
 Comparaciones entre los reentrenados: mBERT − LaBSE = +0.006 [−0.014, +0.027] (empatan); ambos superan a XLM-R en ≈ 0.10; frente al clasificador de n-gramas (0.751)
 mBERT queda en −0.019 [−0.043, +0.007] y LaBSE en −0.024 [−0.050, +0.003] (no distinguibles).
 
+## Segunda tanda: rejilla ampliada, + Generate-then-Refine y pooling del OE3
+
+Cuadernos [`colab_finetuning_v2_<modelo>.ipynb`](../). Misma metodología (corpus, 5 particiones, 3 semillas, F1 macro agrupado, IC 95% y diferencias pareadas). Las tres variantes por modelo:
+`ampliada` (rejilla ampliada con los puntajes de validación previos reutilizados), `gtr` (reales + Generate-then-Refine del OE2, con los hiperparámetros de `ampliada`) y `pooling` (cabeza sobre el pooling del OE3, con los hiperparámetros de `ampliada`).
+Archivos nuevos: `predicciones_<modelo>_<variante>.csv` y `seleccion_hiperparametros_<modelo>_ampliada.csv` (los puntajes marcados `origen = previo` son los reutilizados de la primera tanda). Las comparaciones se calculan en
+[`../../resultados/finetuning_v2_comparaciones.csv`](../../resultados/finetuning_v2_comparaciones.csv).
+
+| Modelo | Anterior | `ampliada` | `gtr` | `pooling` |
+|---|---|---|---|---|
+| mBERT | 0.732 | 0.725 | 0.727 | 0.719 |
+| LaBSE | 0.726 | 0.733 | 0.732 | 0.740 |
+| XLM-R (rejilla corregida) | 0.627 | 0.680 | 0.714 | 0.721 |
+
+- **mBERT y LaBSE:** ninguna variante mejora de forma distinguible al fine-tuning anterior ni a `ampliada` (todas las diferencias con IC 95% que incluye el 0); meseta de 0.72 a 0.74. Frente a los n-gramas (0.751), ninguna de LaBSE se distingue; en mBERT, `ampliada` (−0.025) y `pooling` (−0.031) quedan por debajo, aunque `gtr` (−0.023) no.
+- **XLM-R:** mejora frente al fine-tuning anterior en las tres variantes. Generate-then-Refine ayuda (+0.034 frente a `ampliada`; +0.040 sin la partición 0). La ventaja de `pooling` sobre `ampliada` (+0.040) no se sostiene sin la partición 0 (+0.011, no distinguible): proviene del colapso de `ampliada`.
+- **Colapsos de XLM-R:** `ampliada` semilla 1 partición 0 (F1 de la partición 0.129, lr 5e-5, 20 épocas) y `gtr` semilla 2 partición 0 (0.038, lr 3e-5, 20 épocas), con validación interna normal (0.69 y 0.72). Se reportan incluidos; el análisis sin la partición 0 está en `finetuning_v2_comparaciones.csv`. No se repitieron: una regla de detección sin etiquetas («menos de 3 intenciones predichas») habría detectado solo uno de los dos.
+- **Borde de la rejilla ampliada:** el máximo de épocas probado (20) se eligió en 13 de 15 particiones de XLM-R, el par (1e-4, 20 épocas) en 6 de 15 de LaBSE y el máximo de 20 épocas en 4 de 15 de mBERT. En mBERT hay meseta; XLM-R sigue sin techo establecido.
+- Varias variantes se compararon sin corrección por comparaciones múltiples: se leen por dirección, no por centésimas. `gtr` y `pooling` no tuvieron búsqueda propia de hiperparámetros.
+
 ## Rejillas de hiperparámetros
 
 - Común (mBERT y LaBSE completo, y XLM-R, rejilla 1): tasa de aprendizaje 2e-5, 5e-5 y 1e-4; épocas 5 y 10.

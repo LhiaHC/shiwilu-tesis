@@ -36,7 +36,7 @@ Responden a la sugerencia del asesor de combinar el fine-tuning con el aumento d
 | `pooling` | Cabeza con el pooling que mejor funcionó congelado en el OE3 (mBERT mean, LaBSE max, XLM-R combinación de capas) en vez de [CLS] | Los elegidos por `ampliada` |
 
 Mismas particiones, 3 semillas, F1 macro agrupado, IC 95% y diferencias pareadas (contra el fine-tuning anterior, el baseline congelado y los n-gramas). No usa la API de Claude.
-Tiempo estimado en T4 (no medido): mBERT ~2.2 h, LaBSE y XLM-R ~3.5 h cada uno. Los resultados se copian a `resultados/` con nombres `predicciones_<modelo>_<variante>.csv`; **estado: pendiente de correr**.
+Tiempo estimado en T4 (no medido): mBERT ~2.2 h, LaBSE y XLM-R ~3.5 h cada uno. Resultados en [`resultados/README.md`](resultados/README.md): mBERT y LaBSE no mejoran de forma distinguible (meseta de 0.72 a 0.74); solo mejora XLM-R, donde Generate-then-Refine ayuda. **Corrido** (mBERT ~3 h, LaBSE ~6 h en T4: más de lo estimado).
 
 ## Resultados
 

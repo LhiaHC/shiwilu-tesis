@@ -66,6 +66,10 @@ POOL_RESULTADOS = EVALUACION_RESULTADOS / "cv_interna_pooling"
 FT_RESULTADOS = SINTESIS_RESULTADOS.parent / "finetuning" / "resultados"
 FIGURAS = SINTESIS_RESULTADOS / "figuras"
 SEMILLA_BOOTSTRAP = 42
+VARIANTES_V2 = ["ampliada", "gtr", "pooling"]
+NOM_VARIANTE_V2 = {"ampliada": "rejilla ampliada", "gtr": "+ GtR", "pooling": "pooling"}
+POOLING_V2 = {"mbert": "mean_pooling", "labse": "max_pooling", "xlmr": "combinacion_capas"}
+ANTERIOR_V2 = {"mbert": ("mbert", "completo"), "labse": ("labse", "completo"), "xlmr": ("xlmr_rejilla2", "completo")}   # fine-tuning del que se parte
 
 plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False, "figure.dpi": 130})
 
@@ -275,6 +279,24 @@ def fig_enfoques(E):
     guardar(fig, "fig_oe4_4_enfoques.png")
 
 
+def fig_finetuning_v2(T2):
+    fig, ejes = plt.subplots(1, 3, figsize=(12, 3.8), sharey=True)
+    nombres = {"anterior": "anterior", "ampliada": "rejilla ampliada", "gtr": "+ GtR", "pooling": "pooling"}
+    for ax, m in zip(ejes, MODELOS):
+        sub = T2[T2.modelo == m].reset_index(drop=True)
+        for i, r in sub.iterrows():
+            ax.bar(i, r.f1_macro, color=COLOR[m], alpha=0.45 if r.variante == "anterior" else 0.95, width=0.65)
+            ax.errorbar(i, r.f1_macro, yerr=[[r.f1_macro - r.ic95_bajo], [r.ic95_alto - r.f1_macro]], color="k", capsize=3, lw=0.9)
+            ax.text(i, r.ic95_alto + 0.006, f"{r.f1_macro:.3f}" + ("†" if r.particiones_con_f1_menor_0_3 else ""), ha="center", fontsize=8)
+        ax.set_xticks(range(len(sub))); ax.set_xticklabels([nombres[v] for v in sub.variante], fontsize=8)
+        ax.axhline(P_NG_F1, color="#6a1b9a", ls="--", lw=1, label=f"n-gramas ({P_NG_F1:.3f})")
+        ax.set_title(NOM[m]); ax.set_ylim(0.5, 0.82); ax.grid(axis="y", alpha=0.25)
+    ejes[0].set_ylabel("F1 macro (IC 95% bootstrap)")
+    ejes[0].legend(loc="lower left", fontsize=8, frameon=False)
+    fig.suptitle("Fine-tuning: segunda tanda frente al fine-tuning anterior   (†: incluye entrenamientos finales colapsados, F1 de la particion < 0.3)", fontsize=9, y=1.0)
+    guardar(fig, "fig_oe4_7_finetuning_v2.png")
+
+
 def fig_por_intencion(P):
     fig, ax = plt.subplots(figsize=(0.95 * len(P.columns) + 1.5, 3.8))
     im = ax.imshow(P.values, cmap="viridis", vmin=0.3, vmax=0.9, aspect="auto")
@@ -306,6 +328,9 @@ def fig_confusion(cm, titulo, nombre):
     guardar(fig, nombre)
 
 
+P_NG_F1 = 0.751   # F1 macro del clasificador de n-gramas (se actualiza en main con el valor calculado)
+
+
 # --------------------------------------------------------------------------------------------------- principal
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -317,6 +342,9 @@ def main() -> int:
     SINTESIS_RESULTADOS.mkdir(parents=True, exist_ok=True)
 
     oe2, pool, ft = cargar_oe2(), cargar_pooling(), cargar_finetuning()
+    ft_v2 = {k: v for k, v in ft.items() if k[1] in VARIANTES_V2}           # segunda tanda (rejilla ampliada, + GtR, pooling)
+    ft = {k: v for k, v in ft.items() if k[1] not in VARIANTES_V2}          # corridas anteriores (completo, LoRA)
+    rng2 = np.random.default_rng(SEMILLA_BOOTSTRAP + 1)                      # flujo aparte: no cambia ninguna cifra de lo anterior
     base_df = oe2[("mbert", "sin_aumento")]
     y_txt = base_df["real"].to_numpy()
     y = a_indices(y_txt)
@@ -324,6 +352,8 @@ def main() -> int:
     for g in list(oe2.values()) + list(pool.values()):
         assert (g["real"].to_numpy() == y_txt).all(), "las predicciones no estan alineadas con el corpus"
     P_NG = ngramas_de_letras(y_txt, args.recalcular_ngramas)
+    global P_NG_F1
+    P_NG_F1 = f1_macro(y, P_NG)
 
     # ---------------------------------------------------------------- baselines de OE2 (extraccion de fabrica, sin aumento)
     P_BASE = {m: a_indices(oe2[(m, "sin_aumento")]["prediccion"]) for m in MODELOS}
@@ -389,9 +419,9 @@ def main() -> int:
     # ---------------------------------------------------------------- todos los enfoques en una tabla
     enfoques = []   # (nombre, color, predicciones (semillas x 700), grupo)
 
-    def agregar(nombre, color, preds, grupo):
+    def agregar(nombre, color, preds, grupo, r=None):
         P = np.atleast_2d(preds)
-        lo, hi = ic_f1(y, P, rng, R)
+        lo, hi = ic_f1(y, P, rng if r is None else r, R)
         enfoques.append({"enfoque": nombre, "grupo": grupo, "color": color, "f1_macro": float(np.mean([f1_macro(y, p) for p in P])), "ic95_bajo": lo, "ic95_alto": hi,
                          "semillas": len(P), "_P": P})
 
@@ -408,6 +438,11 @@ def main() -> int:
                    ("xlmr_rejilla2", "completo"): "XLM-R fine-tuning (rejilla corregida)", ("mbert", "lora"): "mBERT LoRA (no concluyente)"}
     for clave, P in ft.items():
         agregar(etiqueta_ft.get(clave, f"{clave[0]} {clave[1]}"), COLOR[clave[0].split("_")[0]], P, "fine_tuning")
+    for m in MODELOS:
+        for v in VARIANTES_V2:
+            if (m, v) in ft_v2:
+                nombre_v = f"pooling {NOM_POOL[POOLING_V2[m]]}" if v == "pooling" else NOM_VARIANTE_V2[v]
+                agregar(f"{NOM[m]} fine-tuning, {nombre_v}", COLOR[m], ft_v2[(m, v)], "fine_tuning_v2", r=rng2)
     E = pd.DataFrame(enfoques)
     E.drop(columns=["_P", "color"]).to_csv(SINTESIS_RESULTADOS / "enfoques_f1.csv", index=False, encoding="utf-8")
 
@@ -424,14 +459,51 @@ def main() -> int:
                          "dif_vs_ngramas": d_n[0], "dif_ngramas_ic95_bajo": d_n[1], "dif_ngramas_ic95_alto": d_n[2], "distinguible_vs_ngramas": d_n[3]})
     pd.DataFrame(filas_ft).to_csv(SINTESIS_RESULTADOS / "finetuning_vs_congelado.csv", index=False, encoding="utf-8")
 
+    # ---------------------------------------------------------------- segunda tanda de fine-tuning (rejilla ampliada, + GtR, pooling)
+    T2 = pd.DataFrame()
+    if len(ft_v2):
+        from shiwilu.clasificacion import cargar_corpus as _cc, cargar_folds as _cf
+        folds_arr = np.asarray(_cf(_cc()))
+        resto = np.where(folds_arr != 0)[0]          # sensibilidad: sin la particion 0 (en XLM-R ahi colapsaron dos entrenamientos finales)
+        filas2 = []
+        for m in MODELOS:
+            prev = ft[ANTERIOR_V2[m]]
+            for v in ["anterior"] + VARIANTES_V2:
+                P = prev if v == "anterior" else ft_v2.get((m, v))
+                if P is None:
+                    continue
+                f1s = [f1_macro(y, p) for p in P]
+                lo, hi = ic_f1(y, P, rng2, R)
+                f1_part = [f1_macro(y[folds_arr == f], p[folds_arr == f]) for p in P for f in range(5)]
+                fila = {"modelo": m, "variante": v, "semillas": len(P), "f1_macro": float(np.mean(f1s)), "ic95_bajo": lo, "ic95_alto": hi,
+                        "f1_por_semilla": ";".join(f"{x:.3f}" for x in f1s), "particiones_con_f1_menor_0_3": int(sum(x < 0.3 for x in f1_part)),
+                        "f1_sin_particion0": float(np.mean([f1_macro(y[resto], p[resto]) for p in P]))}
+                if v != "anterior":
+                    for nombre, ref in (("anterior", prev), ("baseline_congelado", P_BASE[m][None, :]), ("ngramas", P_NG[None, :]), ("ampliada", ft_v2.get((m, "ampliada")))):
+                        if ref is None or (nombre == "ampliada" and v == "ampliada"):
+                            continue
+                        d = dif_pareada(y, P, ref, rng2, R)
+                        fila.update({f"dif_vs_{nombre}": d[0], f"dif_vs_{nombre}_ic95_bajo": d[1], f"dif_vs_{nombre}_ic95_alto": d[2], f"distinguible_vs_{nombre}": d[3]})
+                    for nombre, ref in (("anterior", prev), ("ampliada", ft_v2.get((m, "ampliada")))):
+                        if ref is None or (nombre == "ampliada" and v == "ampliada"):
+                            continue
+                        d = dif_pareada(y[resto], P[:, resto], ref[:, resto], rng2, R)
+                        fila.update({f"dif_vs_{nombre}_sin_particion0": d[0], f"dif_vs_{nombre}_sin_particion0_ic95_bajo": d[1],
+                                     f"dif_vs_{nombre}_sin_particion0_ic95_alto": d[2], f"distinguible_vs_{nombre}_sin_particion0": d[3]})
+                filas2.append(fila)
+        T2 = pd.DataFrame(filas2)
+        T2.to_csv(SINTESIS_RESULTADOS / "finetuning_v2_comparaciones.csv", index=False, encoding="utf-8")
+        print("finetuning_v2_comparaciones.csv")
+
     # ---------------------------------------------------------------- F1 por intencion
     PI = {}
     for _, r in E.iterrows():
-        if r.grupo in ("referencia", "congelado", "fine_tuning"):
+        if r.grupo in ("referencia", "congelado", "fine_tuning", "fine_tuning_v2"):
             PI[r.enfoque] = np.mean([f1_por_clase(y, p) for p in r["_P"]], axis=0)
     P_INT = pd.DataFrame(PI, index=CLASES)
     P_INT.index.name = "intencion"
     P_INT.to_csv(SINTESIS_RESULTADOS / "f1_por_intencion_enfoques.csv", encoding="utf-8")
+    P_INT_FIG = P_INT[[c for c in P_INT.columns if c in set(E[E.grupo != "fine_tuning_v2"].enfoque)]]   # la figura 5 conserva las columnas de antes
 
     # ---------------------------------------------------------------- matrices de confusion
     cm_cong = matriz_confusion(y, PRED[mejor_cong])
@@ -464,7 +536,9 @@ def main() -> int:
     fig_diferencias(T)
     fig_intrinseco(T)
     fig_enfoques(E[E.grupo.isin(["referencia", "congelado", "congelado_mejor_pooling", "fine_tuning"])].reset_index(drop=True))
-    fig_por_intencion(P_INT)
+    if len(ft_v2):
+        fig_finetuning_v2(T2)
+    fig_por_intencion(P_INT_FIG)
     fig_confusion(cm_cong, f"Matriz de confusion: {nombre_cong} (mejor configuracion congelada)", "fig_oe4_6a_confusion_mejor_congelada.png")
     if cm_ft is not None:
         fig_confusion(cm_ft, "Matriz de confusion: mBERT con fine-tuning (promedio de 3 semillas)", "fig_oe4_6b_confusion_mbert_finetuning.png")
