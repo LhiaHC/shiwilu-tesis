@@ -38,6 +38,10 @@ Responden a la sugerencia del asesor de combinar el fine-tuning con el aumento d
 Mismas particiones, 3 semillas, F1 macro agrupado, IC 95% y diferencias pareadas (contra el fine-tuning anterior, el baseline congelado y los n-gramas). No usa la API de Claude.
 Tiempo estimado en T4 (no medido): mBERT ~2.2 h, LaBSE y XLM-R ~3.5 h cada uno. Resultados en [`resultados/README.md`](resultados/README.md): mBERT y LaBSE no mejoran de forma distinguible (meseta de 0.72 a 0.74); solo mejora XLM-R, donde Generate-then-Refine ayuda. **Corrido** (mBERT ~3 h, LaBSE ~6 h en T4: más de lo estimado).
 
+### Tercera tanda: XLM-R estabilizado
+
+[`colab_finetuning_v3_xlmr_estable.ipynb`](colab_finetuning_v3_xlmr_estable.ipynb) repite el XLM-R de la segunda tanda con un procedimiento estabilizado, porque ese modelo tuvo entrenamientos que colapsaron (≈ 7% de los entrenamientos, con la tasa 5e-5 mucho más). Cambios, fijados antes de ver resultados: tasas de aprendizaje 2e-5 y 3e-5, épocas 15, 20 y 25, calentamiento del 20%, y **detección de colapso** con reinicio (si la pérdida de entrenamiento sigue en el nivel del azar, ≥ 1.85, al 30% de las épocas, se repite con otra semilla, hasta 2 veces; solo mira la pérdida de entrenamiento). Registra la pérdida por época de cada entrenamiento. Todas las combinaciones se recalculan (no se reutilizan puntajes previos). Se reporta junto a la segunda tanda, no en su lugar. Tiempo estimado en T4: unas 5 a 6 horas. **Estado: pendiente de correr.**
+
 ## Resultados
 
 Los resultados ya corridos están en [`resultados/`](resultados/README.md): reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan y se acercan al clasificador de n-gramas de letras; XLM-R mejora con una rejilla corregida (+0.057) pero es inestable. Ver el resumen y las limitaciones (borde de la rejilla) en ese archivo.
