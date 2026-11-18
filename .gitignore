@@ -18,6 +18,9 @@ dist/
 # Notebooks
 .ipynb_checkpoints/
 
+# Embeddings guardados en Drive/Colab (pesan mucho y se regeneran)
+*.npz
+
 # Materiales fuente de terceros (no redistribuibles)
 oe1_corpus/datos/II_TEXTOS_SHIWILU.pdf
 

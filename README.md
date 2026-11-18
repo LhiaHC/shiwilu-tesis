@@ -109,7 +109,7 @@ git clone <url-del-repositorio>
 cd <nombre-del-repositorio>
 
 pip install -e .                        # deja importable el paquete `shiwilu`
-pip install -r requirements.txt          # o solo requirements/fase1.txt / fase2.txt / fase3.txt
+pip install -r requirements.txt          # o solo una fase, por ejemplo requirements/fase6.txt
 ```
 
 `pip install -e .` es opcional: los scripts y notebooks localizan la raíz del
