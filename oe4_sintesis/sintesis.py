@@ -55,8 +55,8 @@ warnings.filterwarnings("ignore")
 CLASES = sorted(INTENCIONES)                     # AFI, DES, EMO, NEG, PRG, REQUEST, SAL (el orden de las columnas prob_<clase>)
 K = len(CLASES)
 MODELOS = ["mbert", "labse", "xlmr"]
-NOM = {"mbert": "mBERT", "labse": "LaBSE", "xlmr": "XLM-R"}
-COLOR = {"mbert": "#1976d2", "labse": "#f57c00", "xlmr": "#2e7d32"}
+NOM = {"mbert": "mBERT", "labse": "LaBSE", "xlmr": "XLM-R", "xlmr_estable": "XLM-R estabilizado"}
+COLOR = {"mbert": "#1976d2", "labse": "#f57c00", "xlmr": "#2e7d32", "xlmr_estable": "#1b5e20"}
 POOLINGS = ["cls", "mean_pooling", "max_pooling", "combinacion_capas"]
 NOM_POOL = {"cls": "CLS", "mean_pooling": "Mean", "max_pooling": "Max", "combinacion_capas": "Comb. capas"}
 CORPUS = {"sin_aumento": "sin aumento", "retrotraduccion": "Retrotraduccion", "generate_then_refine": "GtR"}
@@ -68,8 +68,10 @@ FIGURAS = SINTESIS_RESULTADOS / "figuras"
 SEMILLA_BOOTSTRAP = 42
 VARIANTES_V2 = ["ampliada", "gtr", "pooling"]
 NOM_VARIANTE_V2 = {"ampliada": "rejilla ampliada", "gtr": "+ GtR", "pooling": "pooling"}
-POOLING_V2 = {"mbert": "mean_pooling", "labse": "max_pooling", "xlmr": "combinacion_capas"}
-ANTERIOR_V2 = {"mbert": ("mbert", "completo"), "labse": ("labse", "completo"), "xlmr": ("xlmr_rejilla2", "completo")}   # fine-tuning del que se parte
+POOLING_V2 = {"mbert": "mean_pooling", "labse": "max_pooling", "xlmr": "combinacion_capas", "xlmr_estable": "combinacion_capas"}
+ANTERIOR_V2 = {"mbert": ("mbert", "completo"), "labse": ("labse", "completo"), "xlmr": ("xlmr_rejilla2", "completo"),
+               "xlmr_estable": ("xlmr_rejilla2", "completo")}   # fine-tuning del que se parte
+MODELOS_V2 = MODELOS + ["xlmr_estable"]          # xlmr_estable = XLM-R con el procedimiento estabilizado (tercera tanda)
 
 plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False, "figure.dpi": 130})
 
@@ -280,9 +282,9 @@ def fig_enfoques(E):
 
 
 def fig_finetuning_v2(T2):
-    fig, ejes = plt.subplots(1, 3, figsize=(12, 3.8), sharey=True)
+    fig, ejes = plt.subplots(1, 4, figsize=(15.5, 3.8), sharey=True)
     nombres = {"anterior": "anterior", "ampliada": "rejilla ampliada", "gtr": "+ GtR", "pooling": "pooling"}
-    for ax, m in zip(ejes, MODELOS):
+    for ax, m in zip(ejes, MODELOS_V2):
         sub = T2[T2.modelo == m].reset_index(drop=True)
         for i, r in sub.iterrows():
             ax.bar(i, r.f1_macro, color=COLOR[m], alpha=0.45 if r.variante == "anterior" else 0.95, width=0.65)
@@ -293,7 +295,7 @@ def fig_finetuning_v2(T2):
         ax.set_title(NOM[m]); ax.set_ylim(0.5, 0.82); ax.grid(axis="y", alpha=0.25)
     ejes[0].set_ylabel("F1 macro (IC 95% bootstrap)")
     ejes[0].legend(loc="lower left", fontsize=8, frameon=False)
-    fig.suptitle("Fine-tuning: segunda tanda frente al fine-tuning anterior   (†: incluye entrenamientos finales colapsados, F1 de la particion < 0.3)", fontsize=9, y=1.0)
+    fig.suptitle("Fine-tuning: segunda tanda (y XLM-R estabilizado, tercera) frente al fine-tuning anterior   (†: incluye entrenamientos finales colapsados, F1 de la particion < 0.3)", fontsize=9, y=1.0)
     guardar(fig, "fig_oe4_7_finetuning_v2.png")
 
 
@@ -344,6 +346,7 @@ def main() -> int:
     oe2, pool, ft = cargar_oe2(), cargar_pooling(), cargar_finetuning()
     ft_v2 = {k: v for k, v in ft.items() if k[1] in VARIANTES_V2}           # segunda tanda (rejilla ampliada, + GtR, pooling)
     ft = {k: v for k, v in ft.items() if k[1] not in VARIANTES_V2}          # corridas anteriores (completo, LoRA)
+    rng3 = np.random.default_rng(SEMILLA_BOOTSTRAP + 2)                      # flujo aparte para XLM-R estabilizado (tercera tanda)
     rng2 = np.random.default_rng(SEMILLA_BOOTSTRAP + 1)                      # flujo aparte: no cambia ninguna cifra de lo anterior
     base_df = oe2[("mbert", "sin_aumento")]
     y_txt = base_df["real"].to_numpy()
@@ -438,11 +441,11 @@ def main() -> int:
                    ("xlmr_rejilla2", "completo"): "XLM-R fine-tuning (rejilla corregida)", ("mbert", "lora"): "mBERT LoRA (no concluyente)"}
     for clave, P in ft.items():
         agregar(etiqueta_ft.get(clave, f"{clave[0]} {clave[1]}"), COLOR[clave[0].split("_")[0]], P, "fine_tuning")
-    for m in MODELOS:
+    for m in MODELOS_V2:
         for v in VARIANTES_V2:
             if (m, v) in ft_v2:
                 nombre_v = f"pooling {NOM_POOL[POOLING_V2[m]]}" if v == "pooling" else NOM_VARIANTE_V2[v]
-                agregar(f"{NOM[m]} fine-tuning, {nombre_v}", COLOR[m], ft_v2[(m, v)], "fine_tuning_v2", r=rng2)
+                agregar(f"{NOM[m]} fine-tuning, {nombre_v}", COLOR[m], ft_v2[(m, v)], "fine_tuning_v2", r=(rng3 if m == "xlmr_estable" else rng2))
     E = pd.DataFrame(enfoques)
     E.drop(columns=["_P", "color"]).to_csv(SINTESIS_RESULTADOS / "enfoques_f1.csv", index=False, encoding="utf-8")
 
@@ -466,28 +469,30 @@ def main() -> int:
         folds_arr = np.asarray(_cf(_cc()))
         resto = np.where(folds_arr != 0)[0]          # sensibilidad: sin la particion 0 (en XLM-R ahi colapsaron dos entrenamientos finales)
         filas2 = []
-        for m in MODELOS:
+        for m in MODELOS_V2:
             prev = ft[ANTERIOR_V2[m]]
             for v in ["anterior"] + VARIANTES_V2:
                 P = prev if v == "anterior" else ft_v2.get((m, v))
                 if P is None:
                     continue
                 f1s = [f1_macro(y, p) for p in P]
-                lo, hi = ic_f1(y, P, rng2, R)
+                rr = rng3 if m == "xlmr_estable" else rng2
+                lo, hi = ic_f1(y, P, rr, R)
                 f1_part = [f1_macro(y[folds_arr == f], p[folds_arr == f]) for p in P for f in range(5)]
                 fila = {"modelo": m, "variante": v, "semillas": len(P), "f1_macro": float(np.mean(f1s)), "ic95_bajo": lo, "ic95_alto": hi,
                         "f1_por_semilla": ";".join(f"{x:.3f}" for x in f1s), "particiones_con_f1_menor_0_3": int(sum(x < 0.3 for x in f1_part)),
                         "f1_sin_particion0": float(np.mean([f1_macro(y[resto], p[resto]) for p in P]))}
                 if v != "anterior":
-                    for nombre, ref in (("anterior", prev), ("baseline_congelado", P_BASE[m][None, :]), ("ngramas", P_NG[None, :]), ("ampliada", ft_v2.get((m, "ampliada")))):
+                    for nombre, ref in (("anterior", prev), ("baseline_congelado", P_BASE[m.split("_")[0]][None, :]), ("ngramas", P_NG[None, :]), ("ampliada", ft_v2.get((m, "ampliada"))),
+                                        ("segunda_tanda", ft_v2.get(("xlmr", v)) if m == "xlmr_estable" else None)):
                         if ref is None or (nombre == "ampliada" and v == "ampliada"):
                             continue
-                        d = dif_pareada(y, P, ref, rng2, R)
+                        d = dif_pareada(y, P, ref, rr, R)
                         fila.update({f"dif_vs_{nombre}": d[0], f"dif_vs_{nombre}_ic95_bajo": d[1], f"dif_vs_{nombre}_ic95_alto": d[2], f"distinguible_vs_{nombre}": d[3]})
                     for nombre, ref in (("anterior", prev), ("ampliada", ft_v2.get((m, "ampliada")))):
                         if ref is None or (nombre == "ampliada" and v == "ampliada"):
                             continue
-                        d = dif_pareada(y[resto], P[:, resto], ref[:, resto], rng2, R)
+                        d = dif_pareada(y[resto], P[:, resto], ref[:, resto], rr, R)
                         fila.update({f"dif_vs_{nombre}_sin_particion0": d[0], f"dif_vs_{nombre}_sin_particion0_ic95_bajo": d[1],
                                      f"dif_vs_{nombre}_sin_particion0_ic95_alto": d[2], f"distinguible_vs_{nombre}_sin_particion0": d[3]})
                 filas2.append(fila)

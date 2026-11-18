@@ -48,6 +48,20 @@ Archivos nuevos: `predicciones_<modelo>_<variante>.csv` y `seleccion_hiperparame
 - **Borde de la rejilla ampliada:** el máximo de épocas probado (20) se eligió en 13 de 15 particiones de XLM-R, el par (1e-4, 20 épocas) en 6 de 15 de LaBSE y el máximo de 20 épocas en 4 de 15 de mBERT. En mBERT hay meseta; XLM-R sigue sin techo establecido.
 - Varias variantes se compararon sin corrección por comparaciones múltiples: se leen por dirección, no por centésimas. `gtr` y `pooling` no tuvieron búsqueda propia de hiperparámetros.
 
+## Tercera tanda: XLM-R estabilizado
+
+Cuaderno [`colab_finetuning_v3_xlmr_estable.ipynb`](../colab_finetuning_v3_xlmr_estable.ipynb). Mismo diseño que la segunda tanda para XLM-R (rejilla propia, + GtR, pooling), con un procedimiento estabilizado fijado antes de ver resultados: tasas 2e-5 y 3e-5, épocas 15, 20 y 25, calentamiento del 20%, y regla de detección de colapso (si la pérdida de entrenamiento sigue ≥ 1.85 al 30% de las épocas, se repite con otra semilla, hasta 2 veces). Archivos: `predicciones_xlmr_estable_<variante>.csv`, `seleccion_hiperparametros_xlmr_estable_ampliada.csv` y `registro_entrenamientos_xlmr_estable.csv` (pérdida por época de cada entrenamiento y reinicios).
+
+| Variante | F1 macro [IC 95%] | Frente a la 2.ª tanda | Frente a n-gramas |
+|---|---|---|---|
+| Rejilla propia | 0.722 [0.691, 0.748] | +0.041 [+0.023, +0.061] | −0.029 [−0.056, −0.002] |
+| + Generate-then-Refine | 0.746 [0.717, 0.773] | +0.031 [+0.015, +0.048] | −0.005 [−0.030, +0.020] |
+| Pooling | 0.728 [0.699, 0.755] | +0.007 [−0.006, +0.020] | −0.023 [−0.050, +0.004] |
+
+- Ningún entrenamiento final colapsó (partición con menor F1: 0.665); variación entre semillas de 0.003 a 0.008. Generate-then-Refine sigue ayudando a XLM-R (+0.024 sobre la rejilla propia [+0.008, +0.040]).
+- **La regla de detección se activó en 65 de 180 entrenamientos de validación (86 reinicios) y en ninguno de los 45 finales.** Los registros muestran que XLM-R permanece entre 5 y 7 épocas cerca de 1.95 (= ln 7) antes de empezar a aprender, por lo que con pocas épocas (revisión en la época 5) se reiniciaron también entrenamientos lentos: 38 de 60 con 15 épocas, 22 de 66 con 20 y 5 de 99 con 25. La estabilidad de los entrenamientos finales se debe sobre todo a los hiperparámetros, no a la regla.
+- Eligió 3e-5 con 25 épocas (el máximo) en 12 de 15 particiones: sigue sin alcanzar su techo. La tercera tanda cambia varias cosas a la vez, así que la mejora no se atribuye a una sola.
+
 ## Rejillas de hiperparámetros
 
 - Común (mBERT y LaBSE completo, y XLM-R, rejilla 1): tasa de aprendizaje 2e-5, 5e-5 y 1e-4; épocas 5 y 10.

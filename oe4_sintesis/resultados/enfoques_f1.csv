@@ -23,3 +23,6 @@ XLM-R fine-tuning (rejilla corregida),fine_tuning,0.6274527015374524,0.598126932
 "XLM-R fine-tuning, rejilla ampliada",fine_tuning_v2,0.6803846748928052,0.6513078456628265,0.7075893016971624,3
 "XLM-R fine-tuning, + GtR",fine_tuning_v2,0.7142914839189869,0.685250197216023,0.7404823991567583,3
 "XLM-R fine-tuning, pooling Comb. capas",fine_tuning_v2,0.7208055280782278,0.6911209531798658,0.7471919694553556,3
+"XLM-R estabilizado fine-tuning, rejilla ampliada",fine_tuning_v2,0.7216545518316488,0.6928468368476948,0.7493565763673131,3
+"XLM-R estabilizado fine-tuning, + GtR",fine_tuning_v2,0.7455662471747303,0.7159009413157229,0.7729237571364098,3
+"XLM-R estabilizado fine-tuning, pooling Comb. capas",fine_tuning_v2,0.7279334191962797,0.6982692092058945,0.7556016449667811,3

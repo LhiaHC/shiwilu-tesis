@@ -62,6 +62,7 @@ las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas está
 | Segunda tanda: mBERT (rejilla ampliada / + GtR / pooling) | 0.725 / 0.727 / 0.719 |
 | Segunda tanda: LaBSE (rejilla ampliada / + GtR / pooling) | 0.733 / 0.732 / **0.740** |
 | Segunda tanda: XLM-R (rejilla ampliada / + GtR / pooling)(*) | 0.680 / 0.714 / 0.721 |
+| Tercera tanda: XLM-R estabilizado (rejilla propia / + GtR / pooling) | 0.722 / **0.746** / 0.728 |
 
 (*) Incluye dos entrenamientos finales colapsados (ver Limitaciones). Sin la partición 0, donde ocurrieron: 0.706 / 0.746 / 0.717.
 
@@ -72,6 +73,7 @@ las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas está
 - **Pooling:** cambiar la forma de extraer el vector mejora a LaBSE (0.587 → 0.622) y a XLM-R (0.570 → 0.600), pero no a mBERT.
 - **Métricas intrínsecas:** las siluetas son ≈ 0 o negativas en todas las combinaciones; los embeddings crudos no agrupan por intención. Silueta y Davies-Bouldin se relacionan con el F1 (Spearman 0.75 y −0.55 sobre las 36), Calinski-Harabasz no (0.05).
 - **Fine-tuning:** reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan entre sí y no se distinguen de los n-gramas (0.751).
+- **XLM-R estabilizado (tercera tanda):** con tasas menores (2e-5 y 3e-5), más épocas (15, 20, 25), calentamiento del 20% y detección de colapso con reinicio no hubo colapsos finales (partición con menor F1: 0.665) y XLM-R sube a 0.722 / 0.746 / 0.728; con Generate-then-Refine queda a −0.005 de los n-gramas, sin distinguirse. Cautelas: la tercera tanda cambia varias cosas a la vez; la regla se activó en 65 de 180 entrenamientos de validación y en ninguno de los 45 finales, y los registros de pérdida (XLM-R permanece varias épocas cerca de ln 7 antes de aprender) sugieren que parte de esos reinicios fueron falsas alarmas, así que la estabilidad se debe sobre todo a los hiperparámetros; y eligió el máximo de épocas (25) en 12 de 15 particiones.
 - **Segunda tanda de fine-tuning** (sugerida por el asesor): una rejilla más amplia, agregar Generate-then-Refine al entrenamiento y cambiar el pooling **no mejoran de forma distinguible a mBERT ni a LaBSE** (diferencias entre −0.013 y +0.014; ninguna con IC 95% que excluya el 0), así que ambos están en una meseta de 0.72 a 0.74. Solo mejora XLM-R (0.627 → 0.68 a 0.72), cuyo resultado anterior estaba limitado por inestabilidad y rejilla; en él, Generate-then-Refine sí ayuda (+0.040 frente a la rejilla ampliada, también sin la partición 0), a diferencia de mBERT (+0.002) y LaBSE (−0.001). Ninguna variante supera a los n-gramas.
 - **Referencia sin modelos:** los n-gramas de letras superan a los tres modelos congelados, lo que indica que en este corpus la intención se reconoce sobre todo por la forma de las palabras.
 - **DES** rinde bajo con todos los métodos (≈ 0.54 en los mejores); de las 100 oraciones de DES, 12 las falla todo método comparado (columna `fallan_todos` de `des_oraciones_dificiles.csv`).
@@ -81,7 +83,7 @@ las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas está
 | Situación | Configuración |
 |---|---|
 | Embeddings congelados (sin reentrenar) | mBERT + mean pooling, sin aumento (0.667) |
-| Se permite reentrenar | mBERT con fine-tuning (0.732) o LaBSE (0.726; hasta 0.740 con pooling max): no se distinguen entre sí, de sus variantes de la segunda tanda ni de los n-gramas |
+| Se permite reentrenar | mBERT con fine-tuning (0.732), LaBSE (0.726; hasta 0.740 con pooling max) o XLM-R estabilizado con Generate-then-Refine (0.746): no se distinguen entre sí, de sus variantes ni de los n-gramas |
 | Muy pocos datos reales (10 a 25 por intención) | mBERT + Generate-then-Refine |
 
 ## Otras métricas además del F1 macro
