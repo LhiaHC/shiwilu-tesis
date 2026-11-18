@@ -1,27 +1,21 @@
 """
-Transformaciones de los embeddings antes de medir su agrupamiento por intencion (complemento del OE3).
+Transformaciones de los embeddings antes de medir su agrupamiento por intención.
 
-Contexto: con los embeddings crudos la silueta (coseno) es ~0 en las 36 combinaciones. Los embeddings de BERT y modelos
-parecidos tienen dos defectos geometricos conocidos que pueden aplanar esa metrica sin que falte informacion de la intencion:
-  - anisotropia: todos los vectores se concentran en un cono (cosenos altos entre cualquier par de oraciones);
-  - dimensiones dominantes: unas pocas dimensiones con valores enormes dominan la distancia.
-Este modulo aplica un conjunto FIJO de transformaciones NO supervisadas (no usan las etiquetas) y recalcula las mismas
-metricas del OE3 (silueta coseno, Davies-Bouldin, Calinski-Harabasz). Ademas calcula, para cada silueta, el valor que se
-obtiene con las etiquetas permutadas al azar, para saber que significa "cerca de 0" en cada espacio.
+Con los embeddings crudos la silueta (coseno) sale cerca de 0. Los embeddings de BERT y modelos parecidos tienen dos
+problemas conocidos que bajan esa métrica aunque la información esté: todos los vectores se concentran en un cono
+(anisotropía) y unas pocas dimensiones dominan las distancias. Este módulo aplica siete transformaciones que no usan
+las etiquetas, recalcula silueta, Davies-Bouldin y Calinski-Harabasz, y calcula la silueta que daría un reparto al
+azar de las intenciones, para saber qué significa "cerca de 0" en cada espacio.
 
-No entrena nada ni usa la API. Los calculos son de segundos sobre embeddings ya extraidos.
-
-TRANSFORMACIONES (fijadas ANTES de ver resultados; se reportan todas)
-  crudo               el embedding tal cual (replica de OE3)
-  centrado            se resta la media del conjunto (quita el desplazamiento comun del cono)
-  estandarizado       centrado y dividido por la desviacion de cada dimension (neutraliza dimensiones dominantes)
-  sin_1_componente    centrado y sin la 1.a componente principal
-  sin_7_componentes   centrado y sin las 7 primeras (d/100 con d=768, recomendacion de Mu y Viswanath, 2018: "all-but-the-top")
+Transformaciones (definidas antes de ver los resultados)
+  crudo               el embedding tal cual (igual que el OE3)
+  centrado            se resta la media de todos los vectores
+  estandarizado       centrado y dividido por la desviación de cada dimensión
+  sin_1_componente    centrado y sin la primera componente principal
+  sin_7_componentes   centrado y sin las 7 primeras (Mu y Viswanath, 2018)
   pca50               PCA a 50 componentes
-  pca50_blanqueado    PCA a 50 componentes con blanqueo (varianza 1 en cada componente)
-  (el blanqueo completo no es posible: hay menos oraciones que dimensiones y la covarianza no tiene rango completo)
-
-Todas se ajustan con el mismo conjunto de oraciones que se evalua (sin usar etiquetas).
+  pca50_blanqueado    PCA a 50 componentes con varianza 1 en cada una
+El blanqueo completo no se puede: hay menos oraciones que dimensiones.
 """
 
 from __future__ import annotations

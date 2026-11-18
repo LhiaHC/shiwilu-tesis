@@ -1,105 +1,101 @@
-# Síntesis comparativa final (OE4, R9)
+# OE4: comparación final y configuración óptima
 
-Reúne en tablas y figuras todo lo evaluado en OE2 (aumento de datos), OE3 (estrategias de pooling y métricas intrínsecas) y el fine-tuning, para responder la pregunta de R9: **cuál es la configuración óptima** y qué tan lejos queda de una referencia sin modelos de lenguaje (n-gramas de letras).
+Esta carpeta junta en tablas y figuras todo lo evaluado en el OE2 (aumento de datos), el OE3 (métodos de caracterización) y el fine-tuning, para responder cuál es la mejor configuración. No entrena modelos ni usa la API de Claude: `sintesis.py` lee predicciones que ya están guardadas.
 
-No entrena modelos ni usa la API de Claude: `sintesis.py` lee predicciones ya generadas. Lo único que calcula si no está en caché es el clasificador de n-gramas, que guarda en `resultados/ngramas_predicciones.csv`.
+Todo usa el protocolo B (el parámetro `C` de la Regresión Logística se elige con validación cruzada interna), el texto normalizado y las mismas 5 particiones (`oe2_aumento_de_datos/particiones/folds_fijos.csv`). La métrica es el F1 macro de las 700 predicciones juntas, con intervalo de confianza del 95% por bootstrap y diferencias pareadas.
 
-Todo usa el **protocolo B** (parámetro `C` de la Regresión Logística elegido por validación cruzada interna, K=5), texto normalizado, las 5 particiones congeladas
-(`oe2_aumento_de_datos/particiones/folds_fijos.csv`) y la misma métrica en todos lados: **F1 macro agrupado** de las 700 predicciones, con IC 95% bootstrap y diferencias pareadas.
-
-## Uso
+## Cómo correrlo
 
 Desde la raíz del repositorio:
 
 ```bash
 python oe4_sintesis/sintesis.py
-python oe4_sintesis/sintesis.py --recalcular-ngramas   # opcional: recalcula los n-gramas en vez de leer la caché
+python oe4_sintesis/otras_metricas.py
 ```
 
-Requiere que existan las entradas listadas en el encabezado de [`sintesis.py`](sintesis.py): las predicciones de OE2 (`evaluacion/resultados/cv_interna/` y `cv_interna_pooling/`),
-las métricas intrínsecas de OE3 y las predicciones de fine-tuning. Todas están en el repositorio, así que se puede ejecutar sin correr nada más.
+Las entradas ya están en el repositorio (ver el encabezado de [`sintesis.py`](sintesis.py)), así que no hace falta correr nada antes. Si se agrega `--recalcular-ngramas` a la primera, se vuelve a calcular el clasificador de n-gramas en vez de leerlo de `resultados/ngramas_predicciones.csv`.
 
-## Contenido
+## Qué hay en la carpeta
 
-| Carpeta | Qué hay |
+| Ruta | Contenido |
 |---|---|
-| [`sintesis.py`](sintesis.py) | Script que genera todas las tablas y figuras de `resultados/` |
-| [`otras_metricas.py`](otras_metricas.py) | Calcula otras métricas de clasificación además del F1 macro (ver sección más abajo); salidas en `resultados/otras_metricas/` |
-| [`resultados/`](resultados/) | Salidas de la síntesis (tabla siguiente) |
-| [`finetuning/`](finetuning/README.md) | Cuadernos de Colab del fine-tuning de mBERT, LaBSE y XLM-R y sus resultados ya corridos |
-| `resultados/historico_protocolo_A/` | Tablas de la versión anterior (protocolo A y cifras antiguas de OE3), conservadas solo como historial. **No usar para reportar** |
+| `sintesis.py` | Genera todas las tablas y figuras de `resultados/` |
+| `otras_metricas.py` | Calcula otras métricas además del F1 macro (sección más abajo) |
+| `finetuning/` | Cuadernos de Colab del fine-tuning y sus resultados ([README](finetuning/README.md)) |
+| `resultados/` | Tablas y figuras (detalle abajo) |
+| `resultados/historico_protocolo_A/` | Tablas de una versión anterior (protocolo A). Solo como historial, no usar para reportar |
 
-### Salidas de `resultados/`
+Dentro de `resultados/`:
 
 | Archivo | Contenido |
 |---|---|
-| `tabla_36_combinaciones.csv` | Las 36 combinaciones (3 modelos × 3 corpus × 4 poolings): F1 macro con IC 95%, F1 ponderado, exactitud, F1 por intención, métricas intrínsecas y diferencias pareadas |
-| `mejores_por_modelo.csv` | Mejor pooling por F1 y por silueta, para cada modelo sin aumento |
-| `top_configuraciones_vs_mejor.csv` | Las mejores configuraciones congeladas frente a la mejor (diferencia pareada) |
-| `correlaciones_intrinseco_extrinseco.csv` | Spearman entre cada métrica intrínseca (silueta, Davies-Bouldin, Calinski-Harabasz) y el F1 |
-| `enfoques_f1.csv` | F1 con IC 95% de todos los enfoques: congelado, mejor pooling, + Generate-then-Refine, fine-tuning y n-gramas |
-| `finetuning_vs_congelado.csv` | Fine-tuning de cada modelo (primera tanda) frente a su baseline congelado y frente a los n-gramas |
-| `finetuning_v2_comparaciones.csv` | Segunda tanda de fine-tuning (rejilla ampliada, + Generate-then-Refine, pooling del OE3): F1 con IC 95%, F1 por semilla, diferencias pareadas frente al fine-tuning anterior, al baseline congelado, a los n-gramas y entre variantes, número de particiones colapsadas y un análisis de sensibilidad sin la partición 0 |
+| `tabla_36_combinaciones.csv` | Las 36 combinaciones (3 modelos × 3 corpus × 4 poolings): F1, F1 ponderado, exactitud, F1 por intención, métricas intrínsecas y diferencias pareadas |
+| `mejores_por_modelo.csv` | Mejor pooling de cada modelo según F1 y según silueta |
+| `top_configuraciones_vs_mejor.csv` | Las mejores configuraciones congeladas comparadas con la mejor |
+| `correlaciones_intrinseco_extrinseco.csv` | Correlación (Spearman) de cada métrica intrínseca con el F1 |
+| `enfoques_f1.csv` | F1 de todos los enfoques: congelado, mejor pooling, con GtR, fine-tuning y n-gramas |
+| `finetuning_vs_congelado.csv` | Primera tanda de fine-tuning frente a su baseline congelado y a los n-gramas |
+| `finetuning_v2_comparaciones.csv` | Segunda tanda y XLM-R estabilizado: F1, diferencias pareadas, particiones colapsadas y un análisis sin la partición 0 |
 | `f1_por_intencion_enfoques.csv` | F1 por intención de cada enfoque |
-| `matriz_confusion_*.csv` | Matrices de confusión de la mejor configuración congelada y del fine-tuning de mBERT |
-| `des_oraciones_dificiles.csv` | Las 100 oraciones de DES con el acierto de cada método; `fallan_todos` marca las que ninguno acierta |
-| `ngramas_predicciones.csv` | Predicciones del clasificador de n-gramas (caché) |
-| `figuras/fig_oe4_*.png` | Ocho figuras de la síntesis (la 7 resume la segunda tanda de fine-tuning) |
+| `matriz_confusion_*.csv` | Matrices de confusión de la mejor configuración congelada y de mBERT con fine-tuning |
+| `des_oraciones_dificiles.csv` | Las 100 oraciones de DES y qué métodos las aciertan; `fallan_todos` marca las que ninguno acierta |
+| `otras_metricas/` | Salidas de `otras_metricas.py` |
+| `figuras/` | Ocho figuras (la 7 resume el fine-tuning) |
 
 ## Resultados principales
 
-| Enfoque | F1 macro [IC 95%] |
+| Enfoque | F1 macro |
 |---|---|
-| N-gramas de letras (referencia, sin modelo de lenguaje) | 0.751 [0.719, 0.780] |
-| mBERT congelado (baseline OE2) | 0.665 [0.630, 0.698] |
+| N-gramas de letras (sin modelo de lenguaje) | 0.751 [0.719, 0.780] |
+| mBERT congelado (baseline) | 0.665 [0.630, 0.698] |
 | mBERT congelado, mejor pooling (mean) | 0.667 [0.631, 0.700] |
 | LaBSE congelado: baseline / mejor pooling (max) | 0.587 / 0.622 |
 | XLM-R congelado: baseline / mejor pooling (combinación de capas) | 0.570 / 0.600 |
-| mBERT fine-tuning completo | 0.732 [0.703, 0.759] |
-| LaBSE fine-tuning completo | 0.726 [0.697, 0.753] |
-| XLM-R fine-tuning (rejilla corregida; inestable) | 0.627 [0.598, 0.654] |
-| mBERT LoRA (no concluyente) | 0.604 |
-| Segunda tanda: mBERT (rejilla ampliada / + GtR / pooling) | 0.725 / 0.727 / 0.719 |
-| Segunda tanda: LaBSE (rejilla ampliada / + GtR / pooling) | 0.733 / 0.732 / **0.740** |
-| Segunda tanda: XLM-R (rejilla ampliada / + GtR / pooling)(*) | 0.680 / 0.714 / 0.721 |
-| Tercera tanda: XLM-R estabilizado (rejilla propia / + GtR / pooling) | 0.722 / **0.746** / 0.728 |
+| mBERT con fine-tuning | 0.732 [0.703, 0.759] |
+| LaBSE con fine-tuning | 0.726 [0.697, 0.753] |
+| XLM-R con fine-tuning (rejilla corregida, inestable) | 0.627 [0.598, 0.654] |
+| mBERT con LoRA (no concluyente) | 0.604 |
+| Segunda tanda, mBERT (rejilla ampliada / + GtR / pooling) | 0.725 / 0.727 / 0.719 |
+| Segunda tanda, LaBSE (rejilla ampliada / + GtR / pooling) | 0.733 / 0.732 / 0.740 |
+| Segunda tanda, XLM-R (rejilla ampliada / + GtR / pooling) (*) | 0.680 / 0.714 / 0.721 |
+| XLM-R estabilizado (rejilla propia / + GtR / pooling) | 0.722 / 0.746 / 0.728 |
 
-(*) Incluye dos entrenamientos finales colapsados (ver Limitaciones). Sin la partición 0, donde ocurrieron: 0.706 / 0.746 / 0.717.
+(*) Incluye dos entrenamientos finales que colapsaron. Sin la partición 0, donde ocurrieron, quedan en 0.706 / 0.746 / 0.717.
 
 ### Lectura
 
-- **Con embeddings congelados, mBERT es el mejor modelo** y ninguna técnica de aumento lo mejora. La mejor configuración (mBERT + mean pooling, sin aumento, 0.667) no se distingue de otras cinco de mBERT.
-- **Aumento de datos con el corpus completo:** ninguna técnica mejora su baseline; Mixup (mBERT −0.036, XLM-R −0.024) y Retrotraducción (mBERT −0.034) lo empeoran de forma distinguible. Generate-then-Refine ayuda solo con muy pocos datos reales (10 a 25 por intención).
-- **Pooling:** cambiar la forma de extraer el vector mejora a LaBSE (0.587 → 0.622) y a XLM-R (0.570 → 0.600), pero no a mBERT.
-- **Métricas intrínsecas:** las siluetas son ≈ 0 o negativas en todas las combinaciones; los embeddings crudos no agrupan por intención. Silueta y Davies-Bouldin se relacionan con el F1 (Spearman 0.75 y −0.55 sobre las 36), Calinski-Harabasz no (0.05).
-- **Fine-tuning:** reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan entre sí y no se distinguen de los n-gramas (0.751).
-- **XLM-R estabilizado (tercera tanda):** con tasas menores (2e-5 y 3e-5), más épocas (15, 20, 25), calentamiento del 20% y detección de colapso con reinicio no hubo colapsos finales (partición con menor F1: 0.665) y XLM-R sube a 0.722 / 0.746 / 0.728; con Generate-then-Refine queda a −0.005 de los n-gramas, sin distinguirse. Cautelas: la tercera tanda cambia varias cosas a la vez; la regla se activó en 65 de 180 entrenamientos de validación y en ninguno de los 45 finales, y los registros de pérdida (XLM-R permanece varias épocas cerca de ln 7 antes de aprender) sugieren que parte de esos reinicios fueron falsas alarmas, así que la estabilidad se debe sobre todo a los hiperparámetros; y eligió el máximo de épocas (25) en 12 de 15 particiones.
-- **Segunda tanda de fine-tuning** (sugerida por el asesor): una rejilla más amplia, agregar Generate-then-Refine al entrenamiento y cambiar el pooling **no mejoran de forma distinguible a mBERT ni a LaBSE** (diferencias entre −0.013 y +0.014; ninguna con IC 95% que excluya el 0), así que ambos están en una meseta de 0.72 a 0.74. Solo mejora XLM-R (0.627 → 0.68 a 0.72), cuyo resultado anterior estaba limitado por inestabilidad y rejilla; en él, Generate-then-Refine sí ayuda (+0.040 frente a la rejilla ampliada, también sin la partición 0), a diferencia de mBERT (+0.002) y LaBSE (−0.001). Ninguna variante supera a los n-gramas.
-- **Referencia sin modelos:** los n-gramas de letras superan a los tres modelos congelados, lo que indica que en este corpus la intención se reconoce sobre todo por la forma de las palabras.
-- **DES** rinde bajo con todos los métodos (≈ 0.54 en los mejores); de las 100 oraciones de DES, 12 las falla todo método comparado (columna `fallan_todos` de `des_oraciones_dificiles.csv`).
+- Con embeddings congelados, mBERT es el mejor modelo y ninguna técnica de aumento lo mejora. La mejor configuración (mBERT, mean pooling, sin aumento, 0.667) no se distingue de otras cinco de mBERT.
+- Con el corpus completo, ninguna técnica de aumento mejora a su baseline. Mixup (mBERT −0.036, XLM-R −0.024) y Retrotraducción (mBERT −0.034) lo empeoran. Generate-then-Refine solo ayuda con 10 a 25 oraciones reales por intención (+0.029 a +0.054).
+- Cambiar el pooling mejora a LaBSE (0.587 a 0.622) y a XLM-R (0.570 a 0.600), no a mBERT.
+- Las siluetas son casi 0 o negativas en todas las combinaciones. Silueta y Davies-Bouldin se relacionan con el F1 (Spearman 0.75 y −0.55 en las 36), Calinski-Harabasz no (0.05).
+- Reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); después de reentrenar empatan entre sí y con los n-gramas.
+- Ampliar la rejilla, agregar Generate-then-Refine o cambiar el pooling no mejora de forma distinguible a mBERT ni a LaBSE (diferencias entre −0.013 y +0.014): están en una meseta de 0.72 a 0.74. Solo XLM-R sube, y ahí Generate-then-Refine sí ayuda (+0.040 sobre la rejilla ampliada, también sin la partición 0).
+- XLM-R estabilizado (tasas 2e-5 y 3e-5, 15 a 25 épocas, calentamiento del 20% y reinicio si el entrenamiento no aprende) no tuvo colapsos finales. Con Generate-then-Refine queda a −0.005 de los n-gramas, sin distinguirse. Dos cautelas: cambió varias cosas a la vez, y la regla de reinicio se activó en 65 de 180 entrenamientos de validación y en ninguno de los 45 finales. Los registros de pérdida sugieren que parte de esos reinicios fueron entrenamientos lentos y no colapsados, así que la estabilidad se debe sobre todo a los hiperparámetros. Además eligió el máximo de épocas (25) en 12 de 15 particiones.
+- Los n-gramas de letras superan a los tres modelos congelados: en este corpus la intención se reconoce sobre todo por la forma de las palabras.
+- DES rinde bajo con todos los métodos (cerca de 0.54). De sus 100 oraciones, 12 las falla todo método comparado.
 
-### Configuración óptima propuesta
+### Configuración recomendada
 
 | Situación | Configuración |
 |---|---|
-| Embeddings congelados (sin reentrenar) | mBERT + mean pooling, sin aumento (0.667) |
-| Se permite reentrenar | mBERT con fine-tuning (0.732), LaBSE (0.726; hasta 0.740 con pooling max) o XLM-R estabilizado con Generate-then-Refine (0.746): no se distinguen entre sí, de sus variantes ni de los n-gramas |
-| Muy pocos datos reales (10 a 25 por intención) | mBERT + Generate-then-Refine |
+| Embeddings congelados | mBERT con mean pooling, sin aumento (0.667) |
+| Se puede reentrenar | mBERT (0.732), LaBSE (0.726, hasta 0.740 con max pooling) o XLM-R estabilizado con Generate-then-Refine (0.746). No se distinguen entre sí ni de los n-gramas |
+| Muy pocos datos reales (10 a 25 por intención) | mBERT con Generate-then-Refine |
 
 ## Otras métricas además del F1 macro
 
-`python oe4_sintesis/otras_metricas.py` recalcula, con las mismas predicciones y el mismo bootstrap, siete métricas a partir de las etiquetas (F1 macro, exactitud, exactitud balanceada, precisión y recall macro, F1 ponderado, kappa de Cohen, MCC) y, para los modelos congelados, cuatro a partir de las probabilidades (AUC macro, top-2, top-3, log-loss). No usa la API. Salidas en `resultados/otras_metricas/`: `metricas_por_enfoque.csv`, `metricas_36_combinaciones.csv`, `cambia_la_conclusion.csv` (los 12 experimentos centrales frente a su baseline en cada métrica), `precision_recall_por_intencion.csv` y `concordancia_entre_metricas.csv`.
+`otras_metricas.py` calcula con las mismas predicciones: exactitud, exactitud balanceada, precisión y recall macro, F1 ponderado, kappa y MCC; y, para los modelos congelados (los únicos que guardaron probabilidades), AUC macro, top-2, top-3 y log-loss. Salidas en `resultados/otras_metricas/`.
 
-- El corpus está balanceado (100 oraciones por intención), por eso exactitud, exactitud balanceada, recall macro y F1 ponderado coinciden con el F1 macro (diferencias ≤ 0.005) y ordenan los enfoques igual (Spearman ≥ 0.99). El F1 macro **no castiga más** que la exactitud en este corpus.
-- Kappa y MCC dan valores más bajos que la exactitud porque descuentan el azar (1/7), pero ordenan igual y no cambian ninguna conclusión de los 12 experimentos centrales.
-- AUC macro y top-2/top-3 sí miden otra cosa (qué tan bien ordena el modelo las intenciones, no solo cuál elige primero): mBERT baseline AUC 0.898, correcta entre las 2 más probables en 79.9%. Con AUC, Generate-then-Refine mejora a los tres modelos (+0.009 a +0.015), aunque no mejora el F1. Mixup y Retrotraducción siguen empeorando a mBERT.
-- El log-loss depende de la calibración (del `C` elegido) y no de la separación entre intenciones; no se usa para comparar técnicas.
+- El corpus está balanceado (100 oraciones por intención), así que exactitud, recall macro y F1 ponderado dan casi lo mismo que el F1 macro (diferencia de 0.005 o menos) y ordenan los enfoques igual. El F1 macro no castiga más que ellas.
+- Kappa y MCC descuentan el azar (1/7) y dan valores más bajos, pero ordenan igual y no cambian ninguna conclusión de los 12 experimentos centrales.
+- El AUC y el top-2 miden otra cosa: qué tan bien ordena las intenciones el modelo. Con mBERT congelado el AUC es 0.898 y la intención correcta está entre las dos más probables el 80% de las veces. Con AUC, Generate-then-Refine mejora a los tres modelos (+0.009 a +0.015), aunque no mejora el F1.
+- El log-loss depende de la calibración y no sirve para comparar técnicas.
 
 ## Limitaciones
 
-- **XLM-R, segunda tanda:** dos entrenamientos finales colapsaron (F1 de la partición 0.129 en `ampliada`, semilla 1, y 0.038 en `gtr`, semilla 2, ambos con 20 épocas), aunque su validación interna fue normal. Se reportan incluidos y, aparte, sin la partición 0. No se repitieron para no elegir con el resultado a la vista. `ampliada` eligió el máximo de épocas (20) en 13 de 15 particiones, así que su resultado sigue siendo conservador.
-- `gtr` y `pooling` usan los hiperparámetros elegidos por `ampliada` (misma receta, un solo cambio), no una búsqueda propia.
-- Las oraciones sintéticas **no están validadas por un hablante** de shiwilu.
-- Muchas diferencias son menores que el margen de error: se interpretan por dirección y solo cuando el IC 95% de la diferencia pareada excluye el cero. Diferencias menores a ≈ 0.01 no se interpretan.
-- El fine-tuning usó rejillas pequeñas y varias corridas eligieron el borde de la rejilla; LoRA y la primera corrida de XLM-R no son concluyentes (ver [`finetuning/resultados/README.md`](finetuning/resultados/README.md)).
+- Las oraciones sintéticas no están revisadas por un hablante de shiwilu.
+- Muchas diferencias son menores que el margen de error. Se leen por su dirección y solo cuando el intervalo de la diferencia pareada excluye el cero; las menores a 0.01 no se interpretan.
 - Se compararon muchas configuraciones sin corrección por comparaciones múltiples.
+- El fine-tuning usó rejillas pequeñas y varias corridas eligieron el borde de la rejilla. LoRA y la primera corrida de XLM-R no son concluyentes (ver [`finetuning/resultados/README.md`](finetuning/resultados/README.md)).
+- En XLM-R hubo dos entrenamientos finales colapsados en la segunda tanda (F1 de la partición de 0.129 y 0.038, con validación interna normal). Se reportan incluidos y aparte sin la partición 0, y no se repitieron.
+- Las variantes con Generate-then-Refine y con otro pooling usan los hiperparámetros de la variante de rejilla ampliada, sin búsqueda propia.

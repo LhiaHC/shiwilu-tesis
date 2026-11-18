@@ -1,33 +1,18 @@
 """
-Otras metricas de clasificacion ademas del F1 macro (complemento del OE4, observacion del asesor).
+Otras métricas de clasificación además del F1 macro (el asesor preguntó si las conclusiones dependen de esa medida).
 
-Pregunta: el F1 macro, ¿castiga demasiado?, ¿cambian las conclusiones si se usa otra metrica?
-No entrena modelos ni usa la API: reutiliza las mismas predicciones que `sintesis.py` (protocolo B, 5 particiones congeladas,
-700 oraciones). Todas las metricas se calculan sobre las 700 predicciones agrupadas, con IC 95% bootstrap (mismas reglas que el F1).
+Usa las mismas predicciones que sintesis.py: no entrena nada ni usa la API. Todas se calculan sobre las 700
+predicciones juntas, con intervalo de confianza del 95% por bootstrap.
 
-METRICAS
-  Con las etiquetas predichas (todos los enfoques, incluidos fine-tuning y n-gramas)
-    f1_macro              promedio del F1 de las 7 intenciones (la metrica de la tesis)
-    exactitud             aciertos / 700 (= F1 micro)
-    exactitud_balanceada  recall macro (promedio del recall de cada intencion); con 100 oraciones por intencion = exactitud
-    precision_macro       promedio de la precision de cada intencion
-    recall_macro          igual a exactitud_balanceada
-    f1_ponderado          F1 por intencion ponderado por su soporte (100 c/u: = F1 macro)
-    kappa                 Cohen: acuerdo corregido por azar (0 = azar, 1 = perfecto)
-    mcc                   Matthews multiclase: correlacion entre real y predicho (0 = azar, 1 = perfecto)
-  Con las probabilidades (solo modelos congelados + Regresion Logistica; el fine-tuning y los n-gramas no las guardaron)
-    auc_macro             area bajo la curva ROC, uno-contra-resto, promedio de las 7 intenciones (0.5 = azar)
-    top2, top3            la intencion correcta esta entre las 2 (3) mas probables
-    log_loss              menor = mejor (azar entre 7 clases = 1.946)
+Con las etiquetas predichas (todos los enfoques): F1 macro, exactitud, exactitud balanceada, precisión y recall
+macro, F1 ponderado, kappa de Cohen y MCC multiclase.
+Con las probabilidades (solo los modelos congelados, los demás no las guardaron): AUC macro, top-2, top-3 y log-loss.
 
-SALIDAS (oe4_sintesis/resultados/otras_metricas/)
-  metricas_por_enfoque.csv          cada enfoque de `enfoques_f1.csv` con todas las metricas (IC 95%) y su ranking por metrica
-  metricas_36_combinaciones.csv     las 36 combinaciones (+ Mixup) con todas las metricas
-  cambia_la_conclusion.csv          los 12 experimentos centrales: diferencia pareada frente al baseline en cada metrica, con IC 95%
-  precision_recall_por_intencion.csv   precision y recall por intencion de los enfoques principales
-  concordancia_entre_metricas.csv   Spearman entre rankings de metricas (sobre los enfoques y sobre las 36 combinaciones)
+Salidas en oe4_sintesis/resultados/otras_metricas/
+  metricas_por_enfoque.csv, metricas_36_combinaciones.csv, cambia_la_conclusion.csv,
+  precision_recall_por_intencion.csv, concordancia_entre_metricas.csv
 
-Uso (desde la raiz del repositorio):
+Uso, desde la raíz del repositorio:
     python oe4_sintesis/otras_metricas.py
 """
 
@@ -131,6 +116,7 @@ def main() -> int:
     rng = np.random.default_rng(SEMILLA)
     SALIDA.mkdir(parents=True, exist_ok=True)
     oe2, pool, ft = S.cargar_oe2(), S.cargar_pooling(), S.cargar_finetuning()
+    ft = {k: v for k, v in ft.items() if k[1] in ("completo", "lora")}      # solo la primera tanda de fine-tuning (los 15 enfoques principales)
     y_txt = oe2[("mbert", "sin_aumento")]["real"].to_numpy(); y = a_indices(y_txt)
     P_NG = S.ngramas_de_letras(y_txt, False)
     T = pd.read_csv(S.SINTESIS_RESULTADOS / "tabla_36_combinaciones.csv")

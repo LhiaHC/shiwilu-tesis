@@ -1,33 +1,24 @@
 """
-Sintesis del OE4 (R9): reune en tablas (CSV) y figuras (PNG) todo lo evaluado en OE2, OE3 y el fine-tuning,
-con el protocolo B (C elegido por validacion cruzada interna, K=5), texto normalizado y las 5 particiones congeladas.
-No entrena modelos ni usa la API: lee predicciones ya generadas. Lo unico que calcula si no esta en cache es el
-clasificador de n-gramas de letras (referencia), que guarda en `resultados/ngramas_predicciones.csv`.
+Síntesis del OE4: junta en tablas (CSV) y figuras (PNG) lo evaluado en el OE2, el OE3 y el fine-tuning.
 
-ENTRADAS
-  OE2 (extrinseco, extraccion de fabrica)  oe2_aumento_de_datos/evaluacion/resultados/cv_interna/
-        validacion_cruzada_predicciones_sin_puntuacion_cv_interna_c120.csv   (3 modelos x sin aumento, Mixup, Retrotraduccion, GtR)
-  OE3 (4 estrategias de pooling)           oe2_aumento_de_datos/evaluacion/resultados/cv_interna_pooling/
-        validacion_cruzada_predicciones_sin_puntuacion_cv_interna_<tecnica>_<pooling>.csv   (3 modelos x 3 corpus x 4 poolings = 36)
-  OE3 (intrinseco)                         oe3_caracterizacion_embeddings/resultados/<corpus>/metricas_intrinsecas.csv
-  Fine-tuning                              oe4_sintesis/finetuning/resultados/predicciones_<modelo>_<variante>.csv
+Usa el protocolo B (C elegido por validación cruzada interna), el texto normalizado y las 5 particiones fijas.
+No entrena modelos ni usa la API: lee predicciones que ya existen. Lo único que calcula, si no está guardado,
+es el clasificador de n-gramas de letras (se guarda en resultados/ngramas_predicciones.csv).
 
-SALIDAS (oe4_sintesis/resultados/)
-  tabla_36_combinaciones.csv              F1 macro (IC 95%), F1 ponderado, exactitud, F1 por intencion, metricas intrinsecas y
-                                          diferencias pareadas (frente al baseline de OE2 y frente al mismo pooling sin aumento)
-  mejores_por_modelo.csv                  mejor pooling por F1 y por silueta, para cada modelo (sin aumento)
-  top_configuraciones_vs_mejor.csv        las mejores configuraciones congeladas frente a la mejor (diferencia pareada)
-  correlaciones_intrinseco_extrinseco.csv Spearman entre cada metrica intrinseca y el F1
-  enfoques_f1.csv                         F1 (IC 95%) de todos los enfoques: congelado, mejor pooling, +GtR, fine-tuning, n-gramas
-  finetuning_vs_congelado.csv             fine-tuning de cada modelo y variante frente a su baseline congelado y frente a los n-gramas
-  f1_por_intencion_enfoques.csv           F1 por intencion de cada enfoque
-  matriz_confusion_<enfoque>.csv          matrices de confusion (conteos) de la mejor configuracion congelada y del fine-tuning de mBERT
-  des_oraciones_dificiles.csv             oraciones de DES que ningun metodo clasifica bien
-  figuras/fig_oe4_*.png
+Entradas
+  OE2: oe2_aumento_de_datos/evaluacion/resultados/cv_interna/ y cv_interna_pooling/
+  OE3: oe3_caracterizacion_embeddings/resultados/<corpus>/metricas_intrinsecas.csv
+  Fine-tuning: oe4_sintesis/finetuning/resultados/predicciones_<modelo>_<variante>.csv
 
-Uso (desde la raiz del repositorio):
+Salidas (oe4_sintesis/resultados/)
+  tabla_36_combinaciones.csv, mejores_por_modelo.csv, top_configuraciones_vs_mejor.csv,
+  correlaciones_intrinseco_extrinseco.csv, enfoques_f1.csv, finetuning_vs_congelado.csv,
+  finetuning_v2_comparaciones.csv, f1_por_intencion_enfoques.csv, matriz_confusion_*.csv,
+  des_oraciones_dificiles.csv, ngramas_predicciones.csv y figuras/fig_oe4_*.png
+
+Uso, desde la raíz del repositorio:
     python oe4_sintesis/sintesis.py
-    python oe4_sintesis/sintesis.py --recalcular-ngramas     # vuelve a calcular los n-gramas en vez de leer la cache
+    python oe4_sintesis/sintesis.py --recalcular-ngramas
 """
 
 from __future__ import annotations

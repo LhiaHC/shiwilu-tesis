@@ -23,29 +23,29 @@ frontera explícita entre la construcción del corpus (OE1) y todo lo que se
 construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 
 ```
-├── corpus/                          ★ FRONTERA — salida de OE1, entrada del resto
+├── corpus/                          salida del OE1, entrada del resto
 │   └── corpus_shiwilu_final.csv
 │
-├── oe1_corpus/                      ◆ OE1 (R1-R3) — construir el corpus
+├── oe1_corpus/                      OE1 (R1-R3): construir el corpus
 │   ├── datos/                         Materiales fuente
 │   ├── pipeline/                      Etapas 0 a 3
 │   └── intermedios/                   Productos intermedios y logs de la API
 │
-├── oe2_aumento_de_datos/            ◆ OE2 (R4-R6) — baselines, análisis y aumento de datos
+├── oe2_aumento_de_datos/            OE2 (R4-R6): baselines, análisis y aumento de datos
 │   ├── particiones/                   Folds congelados + corpus normalizado
 │   ├── analisis_intrinseco/           R5: notebooks y tablas del análisis del corpus; auditoría de la categoría DES
 │   ├── tecnicas_aumento/              R6: Mixup, Retrotraducción, Generate-then-Refine, sus salidas y cachés (permiten reproducir sin API)
 │   ├── evaluacion/                    R4+R6: validación cruzada (protocolo A y B), pareadas, ROC, regímenes de pocos datos,
 │   │                                  variantes de selección, diagnósticos de causa y sensibilidad al hiperparámetro C
 │   ├── analisis_resultados/           Notebook que analiza los resultados y regenera las 10 figuras (figuras/)
-│   ├── reproducir_oe2.py              Plan y ejecución ordenada de TODOS los experimentos del OE2
+│   ├── reproducir_oe2.py              Plan y ejecución ordenada de los experimentos del OE2
 │   ├── verificar_resultados.py        Compara las salidas con valores_de_referencia.csv (258 cifras, incluye R5)
 │   └── historico/                     Etapas cerradas: split único, texto crudo, generación en línea con dev, zips de Colab
 │
-├── oe3_caracterizacion_embeddings/  ◆ OE3 (R7-R8) — 4 estrategias de pooling x 3 modelos,
+├── oe3_caracterizacion_embeddings/  OE3 (R7-R8): 4 métodos de caracterización x 3 modelos,
 │                                      métricas intrínsecas y proyecciones t-SNE/UMAP
 │
-├── oe4_sintesis/                    ◆ OE4 (R9) — síntesis: cruza OE2 y OE3, fine-tuning y n-gramas
+├── oe4_sintesis/                    OE4 (R9): comparación final con fine-tuning y n-gramas
 │   └── finetuning/                    Cuadernos de Colab (mBERT, LaBSE, XLM-R) y sus resultados
 │
 ├── shiwilu/                         Núcleo compartido (código)
@@ -55,7 +55,7 @@ construye sobre él (OE2-OE4). Cada carpeta tiene su propio `README.md`.
 │
 ├── docs/                            Metodología de construcción del corpus y documento de taxonomía (PDF)
 ├── requirements/                    Dependencias por fase y versiones usadas (versiones_usadas.txt)
-├── REPRODUCIBILIDAD.md              ★ Cómo repetir todos los experimentos y verificar los resultados
+├── REPRODUCIBILIDAD.md              Cómo repetir los experimentos y verificar los resultados
 └── tests/                           Pruebas de las reglas de anotación
 ```
 

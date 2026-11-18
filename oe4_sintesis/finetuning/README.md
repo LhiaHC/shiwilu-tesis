@@ -1,67 +1,52 @@
-# Fine-tuning de mBERT, LaBSE y XLM-R (complemento del OE4)
+# Fine-tuning de mBERT, LaBSE y XLM-R
 
-Experimento **exploratorio y separado** que responde: ¿reentrenar cada modelo con las oraciones reales del corpus mejora a su baseline del OE2
-(embeddings congelados + Regresión Logística, protocolo B; mBERT 0.665, LaBSE 0.587, XLM-R 0.570)? ¿Sigue ganando mBERT después de reentrenar?
+Complemento del OE4. La pregunta es si reentrenar cada modelo con las oraciones reales del corpus mejora su baseline del OE2 (embeddings congelados más Regresión Logística, protocolo B: mBERT 0.665, LaBSE 0.587, XLM-R 0.570) y si mBERT sigue ganando después de reentrenar. No cambia ningún resultado del OE2 ni del OE3.
 
-No cambia ningún resultado del OE2 ni del OE3. Usa los mismos datos y se compara con las mismas reglas.
+Todos los cuadernos se corren en Google Colab con GPU (T4), no usan la API de Claude y guardan su avance en Drive, así que si la sesión se corta se retoma volviendo a correr desde la celda de configuración. Con `PRUEBA = True` en esa celda se hace una comprobación rápida.
 
-| | |
+Lo que no cambia entre cuadernos: 700 oraciones con texto normalizado, las 5 particiones de `oe2_aumento_de_datos/particiones/folds_fijos.csv`, 3 semillas, hiperparámetros elegidos con validación interna del entrenamiento (nunca con la prueba), F1 macro de las 700 predicciones juntas con intervalo de confianza del 95% y diferencias pareadas.
+
+## Cuadernos
+
+| Cuaderno | Qué hace |
 |---|---|
-| Cuadernos | [`colab_finetuning_modelos.ipynb`](colab_finetuning_modelos.ipynb): **vigente**, corre mBERT, LaBSE y XLM-R con el mismo protocolo y compara los modelos reentrenados entre sí (reutiliza lo ya guardado de mBERT). [`colab_finetuning_mbert.ipynb`](colab_finetuning_mbert.ipynb): primera versión, solo mBERT. Ambos se corren en Google Colab con GPU T4 |
-| Datos | Corpus de 700 oraciones, 7 intenciones, texto normalizado (el mismo de los 12 experimentos) |
-| Particiones | Las 5 particiones congeladas de `oe2_aumento_de_datos/particiones/folds_fijos.csv` |
-| Modelos | `bert-base-multilingual-cased` (mBERT), `sentence-transformers/LaBSE` y `xlm-roberta-base`, los mismos del OE2; variante `completo` (todos los pesos). LoRA se probó solo con mBERT y no fue concluyente (la rejilla quedó corta) |
-| Hiperparámetros | Tasa de aprendizaje y épocas, elegidos con validación interna del entrenamiento de cada partición (nunca con la prueba) |
-| Repeticiones | 3 semillas por defecto |
-| Comparación | F1 macro agrupado de las 700 predicciones, IC 95% bootstrap y diferencia pareada contra el baseline |
-| Costo | No usa la API de Claude. ~60 minutos en una T4 para la variante `completo` |
+| `colab_finetuning_mbert.ipynb` | Primera versión, solo mBERT |
+| `colab_finetuning_modelos.ipynb` | Primera tanda: mBERT, LaBSE y XLM-R (y LoRA en mBERT) con la misma rejilla (tasas 2e-5, 5e-5 y 1e-4; 5 y 10 épocas) |
+| `colab_finetuning_v2_<modelo>.ipynb` | Segunda tanda, un cuaderno por modelo para correrlos en paralelo |
+| `colab_finetuning_v3_xlmr_estable.ipynb` | Tercera tanda: XLM-R con un procedimiento estabilizado |
 
-## Cómo correrlo
+### Segunda tanda
 
-1. Sube el cuaderno a Colab (Archivo → Subir cuaderno) y elige GPU (Entorno de ejecución → Cambiar tipo de entorno).
-2. Corre las celdas en orden. Con `PRUEBA = True` en la celda de configuración se hace una comprobación rápida.
-3. El avance se guarda en tu Drive (`shiwilu_finetuning/`); si Colab se desconecta, vuelve a correr desde la celda de configuración.
-4. Al final se descarga `finetuning_resultados.zip`. Cópialo a `oe4_sintesis/finetuning/resultados/` cuando lo hayas revisado.
-
-## Segunda tanda: mejoras al fine-tuning (cuadernos por modelo)
-
-Tres cuadernos independientes, uno por modelo, para correr en paralelo en sesiones de Colab distintas (cada uno guarda en su propia carpeta de Drive):
-[`colab_finetuning_v2_mbert.ipynb`](colab_finetuning_v2_mbert.ipynb), [`colab_finetuning_v2_labse.ipynb`](colab_finetuning_v2_labse.ipynb) y [`colab_finetuning_v2_xlmr.ipynb`](colab_finetuning_v2_xlmr.ipynb).
-Responden a la sugerencia del asesor de combinar el fine-tuning con el aumento de datos y a que varias corridas anteriores eligieron el borde de la rejilla. Cada uno corre, en orden:
+Responde a que varias corridas de la primera tanda eligieron el borde de la rejilla y a la sugerencia de combinar el reentrenamiento con las técnicas del estudio. Cada cuaderno corre tres variantes:
 
 | Variante | Qué cambia | Hiperparámetros |
 |---|---|---|
-| `ampliada` | Datos reales, rejilla ampliada (más épocas y tasas). Se reutilizan los puntajes de validación de las 6 combinaciones ya probadas y solo se entrenan las nuevas | Validación interna (nunca la prueba) |
-| `gtr` | Reales + Generate-then-Refine, armado igual que en el OE2 (cachés, sin API; el cuaderno comprueba que el volumen coincide con el del OE2) | Los elegidos por `ampliada` para esa semilla y partición |
-| `pooling` | Cabeza con el pooling que mejor funcionó congelado en el OE3 (mBERT mean, LaBSE max, XLM-R combinación de capas) en vez de [CLS] | Los elegidos por `ampliada` |
+| `ampliada` | Datos reales con más épocas y tasas. Reutiliza los puntajes de validación de las 6 combinaciones ya probadas | Validación interna |
+| `gtr` | Se agrega Generate-then-Refine al entrenamiento, armado como en el OE2 (el cuaderno comprueba que el volumen coincide) | Los que eligió `ampliada` en esa semilla y partición |
+| `pooling` | La capa de clasificación usa el pooling que mejor funcionó congelado (mBERT mean, LaBSE max, XLM-R combinación de capas) en lugar del vector `[CLS]` | Los que eligió `ampliada` |
 
-Mismas particiones, 3 semillas, F1 macro agrupado, IC 95% y diferencias pareadas (contra el fine-tuning anterior, el baseline congelado y los n-gramas). No usa la API de Claude.
-Tiempo estimado en T4 (no medido): mBERT ~2.2 h, LaBSE y XLM-R ~3.5 h cada uno. Resultados en [`resultados/README.md`](resultados/README.md): mBERT y LaBSE no mejoran de forma distinguible (meseta de 0.72 a 0.74); solo mejora XLM-R, donde Generate-then-Refine ayuda. **Corrido** (mBERT ~3 h, LaBSE ~6 h en T4: más de lo estimado).
+Tomó unas 3 horas para mBERT y unas 6 para LaBSE. mBERT y LaBSE no mejoran de forma distinguible (meseta de 0.72 a 0.74); XLM-R sí mejora, y ahí Generate-then-Refine ayuda.
 
 ### Tercera tanda: XLM-R estabilizado
 
-[`colab_finetuning_v3_xlmr_estable.ipynb`](colab_finetuning_v3_xlmr_estable.ipynb) repite el XLM-R de la segunda tanda con un procedimiento estabilizado, porque ese modelo tuvo entrenamientos que colapsaron (4 de 75 entrenamientos finales y 11 de 150 de validación interna, con la tasa 5e-5 mucho más). Cambios, fijados antes de ver resultados: tasas de aprendizaje 2e-5 y 3e-5, épocas 15, 20 y 25, calentamiento del 20%, y **detección de colapso** con reinicio (si la pérdida de entrenamiento sigue en el nivel del azar, ≥ 1.85, al 30% de las épocas, se repite con otra semilla, hasta 2 veces; solo mira la pérdida de entrenamiento). Registra la pérdida por época de cada entrenamiento. Todas las combinaciones se recalculan (no se reutilizan puntajes previos). Se reporta junto a la segunda tanda, no en su lugar. **Corrido:** sin colapsos finales (XLM-R 0.722, 0.746 con Generate-then-Refine y 0.728 con pooling); la regla de detección se activó en 65 de 180 entrenamientos de validación y en ninguno de los 45 finales, y la estabilidad se debe sobre todo a los hiperparámetros (ver `resultados/README.md`).
+En la segunda tanda, XLM-R tuvo entrenamientos que colapsaron (el modelo terminó prediciendo una sola intención): 4 de 75 entrenamientos finales y 11 de 150 de validación, y mucho más con la tasa 5e-5. Este cuaderno repite XLM-R con cambios fijados antes de ver los resultados:
 
-## Resultados
+- tasas de aprendizaje 2e-5 y 3e-5, y 15, 20 y 25 épocas;
+- calentamiento del 20% de los pasos (antes 10%);
+- si al 30% de las épocas la pérdida de entrenamiento sigue en el nivel del azar (1.85 o más), se descarta ese entrenamiento y se repite con otra semilla, hasta 2 veces;
+- se guarda la pérdida de cada época de cada entrenamiento;
+- todas las combinaciones se recalculan, sin reutilizar puntajes anteriores.
 
-Los resultados ya corridos están en [`resultados/`](resultados/README.md): reentrenar mejora a mBERT (+0.067) y a LaBSE (+0.139); tras reentrenar empatan y se acercan al clasificador de n-gramas de letras; XLM-R mejora con una rejilla corregida (+0.057) pero es inestable. Ver el resumen y las limitaciones (borde de la rejilla) en ese archivo.
+Se reporta junto a la segunda tanda, no en su lugar. No hubo colapsos en los entrenamientos finales (XLM-R 0.722; 0.746 con Generate-then-Refine; 0.728 con pooling). La regla de reinicio se activó en 65 de 180 entrenamientos de validación y en ninguno de los 45 finales; como XLM-R tarda varias épocas en empezar a aprender, parte de esos reinicios fueron falsas alarmas, así que la estabilidad se debe sobre todo a los hiperparámetros. Más detalle en [`resultados/README.md`](resultados/README.md).
 
-## Salidas
+## Cómo leer los resultados
 
-- `finetuning_vs_baseline.csv`: F1 macro de cada variante (media de semillas, desviación, IC 95%) y diferencia pareada contra el baseline.
-- `f1_por_intencion.csv`: F1 por intención (en particular DES, la más débil del baseline).
-- `predicciones_<variante>.csv`: predicciones de las 700 oraciones por semilla y partición.
-- `seleccion_hiperparametros_<variante>.csv`: combinaciones probadas y su F1 de validación interna.
+- Una diferencia es distinguible de cero solo si su intervalo de confianza no incluye el 0. Diferencias menores a 0.01 no se interpretan.
+- Si la desviación entre semillas supera 0.02, el entrenamiento es inestable y el promedio se lee con cautela.
+- Se copian a `resultados/` los archivos que descarga cada cuaderno (`predicciones_*.csv`, `seleccion_hiperparametros_*.csv`) y luego se corre `oe4_sintesis/sintesis.py`.
 
-## Cómo leerlo
+## Limitaciones
 
-- Una diferencia es *distinguible de cero* solo si su intervalo de confianza no incluye el 0.
-- Diferencias menores a unos 0.01 no se interpretan, como en el resto de la tesis.
-- Si la desviación entre semillas es grande (por ejemplo más de 0.02), el fine-tuning es inestable y el promedio debe leerse con cautela.
-- Es un complemento: el resultado principal del OE2 sigue siendo el de embeddings congelados.
-
-## Alcance y limitaciones
-
-- Solo datos reales (sin texto sintético).
-- Una sola rejilla pequeña de hiperparámetros.
-- No concluye que el modelo «entienda» el shiwilu: compara dos formas de usar mBERT sobre este corpus.
+- Rejillas pequeñas; varias corridas eligieron su borde.
+- Usa solo datos reales, salvo la variante `gtr`.
+- Compara formas de usar los modelos sobre este corpus; no prueba que el modelo entienda el shiwilu.

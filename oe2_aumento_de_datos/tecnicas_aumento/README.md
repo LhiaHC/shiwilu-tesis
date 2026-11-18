@@ -6,9 +6,9 @@ contra ellos.
 
 | Técnica | Generador | Estado |
 |---|---|---|
-| **Mixup** | Ninguno — interpola embeddings de oraciones shiwilu existentes de la misma categoría | ✅ Probado — [`mixup.py`](mixup.py) |
-| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | ✅ Probado (138 oraciones, 81 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
-| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | ✅ Probado (429 oraciones, 421 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
+| **Mixup** | Ninguno — interpola embeddings de oraciones shiwilu existentes de la misma categoría | Probado — [`mixup.py`](mixup.py) |
+| **Generate-then-Refine** | Claude (LLM), sin ajuste fino | Probado (138 oraciones, 81 aprobadas) — [`generate_then_refine.py`](generate_then_refine.py) |
+| **Retrotraducción** | Helsinki-NLP (paráfrasis en español) + NMT de F. Prado (traduce a shiwilu) | Probado (429 oraciones, 421 aprobadas; checkpoint chrF++=43.19) — [`retrotraduccion.py`](retrotraduccion.py) |
 
 ### Contenido de esta carpeta
 
@@ -81,7 +81,7 @@ Los resultados de cada técnica con el split único (histórico) están en
 [`../historico/split_unico/resultados_tecnicas/`](../historico/split_unico/resultados_tecnicas/);
 la evaluación vigente, en [`../evaluacion/`](../evaluacion/).
 
-**Notas de metodología (2026-09-21/22):**
+**Notas de metodología:**
 - Generate-then-Refine y Retrotraducción usaban ejemplos few-shot y el
   centroide del filtro semántico calculados sobre el corpus **completo**
   (train+dev+test), lo que dejaba que información de dev/test influyera en
@@ -132,9 +132,8 @@ El corpus tiene **atajos superficiales** que no son señal lingüística real: l
 signos de puntuación (los `¿?` delatan la categoría PRG), las mayúsculas (las
 oraciones de DES, PRG y REQUEST están 100% TODAS EN MAYÚSCULAS; las otras
 categorías, 10-21%) y algunas tildes que solo distinguen variantes de una misma
-oración. Por eso **desde ahora todos los experimentos —Mixup, Generate-then-Refine,
-Retrotraducción, OE3, curvas, lo que siga— se corren únicamente sobre texto
-normalizado**: minúsculas, sin puntuación y sin distinguir tildes/ñ
+oración. Por eso todos los experimentos (Mixup, Generate-then-Refine, Retrotraducción,
+OE3 y curvas) se corren únicamente sobre texto normalizado: minúsculas, sin puntuación y sin distinguir tildes/ñ
 (`shiwilu.clasificacion.quitar_puntuacion(..., quitar_tildes=True)`, la condición `sin_puntuacion`
 de [`../evaluacion/validacion_cruzada.py`](../evaluacion/validacion_cruzada.py)).
 
